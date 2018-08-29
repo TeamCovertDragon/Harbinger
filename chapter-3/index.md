@@ -1,6 +1,7 @@
 ### 物品概论
 
 #### 你的第一个物品
+
 ````java
 public class ExampleItem extends Item {
     public ExampleItem() {
@@ -12,9 +13,11 @@ public class ExampleItem extends Item {
     }
 }
 ````
+
 完。
 
 #### 呃？我看不到我的物品啊？
+
 啊不好意思，忘记注册了。注册的话要走事件。
 
 ````java
@@ -52,6 +55,7 @@ public static Item yourItem = new ExampleItem().setCreativeTab(EXAMPLE_CREATIVE_
 ````
 
 #### 呃... 这物品名字不对...
+
 你可能会发现你得到的东西的名字叫 `item.null.name`。这...
 
 ````java
@@ -68,12 +72,15 @@ yourItem.setUnlocalizedName("example_mod" + "." + "example_item");
  1. 在 `resources` 下新建 `assets` 文件夹
  2. 在 `assets` 下新建文件夹，名字和你的 modid 相同
  3. 在以你的modid命名的文件夹下新建 `lang` 文件夹
- 4. 在 `lang` 文件夹下新建 `en_us.lang`：  
+ 4. 在 `lang` 文件夹下新建 `en_us.lang`： 
+
     ````
     item.example_mod.example_item.name=Example Item
     ````
+
  5. 等等，如果没理解错，这是英文（美国）的 Locale 啊？  
     OK。然后还是`lang`文件夹，新建`zh_cn.lang`：  
+
     ````
     item.example_mod.example_item.name=示例物品
     ````
@@ -87,8 +94,8 @@ yourItem.setUnlocalizedName("example_mod" + "." + "example_item");
 
 你应该注意到了，`Item` 是没有数量的概念的。它实际上只是一个物品种类的标记而已。想想看：
 
-   * 一颗钻石和一组钻石都是钻石，只是数量不同。
-   * 一块铁锭和一块金锭的数量相同，但它们不是同一种物品。
+* 一颗钻石和一组钻石都是钻石，只是数量不同。
+* 一块铁锭和一块金锭的数量相同，但它们不是同一种物品。
 
 `Item` 代表了物品的“类型”。两颗钻石因为“都是钻石”所以能叠加在一起。两块不同的金属锭因为类型不同所以不能叠加在一起。
 有数量概念的是 `ItemStack`，一个 `ItemStack` 的实例代表了“一堆特定物品，数量不定”。

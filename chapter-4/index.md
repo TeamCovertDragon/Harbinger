@@ -1,6 +1,7 @@
 ### 方块概论
 
 #### 你的第一个方块
+
 ````java
 public class ExampleBlock extends Block {
     public ExampleBlock(Material material) {
@@ -29,7 +30,6 @@ public final class BlockLoader {
 ````
 
 完。
-
 
 #### `ItemBlock`
 
