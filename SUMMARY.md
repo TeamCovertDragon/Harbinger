@@ -13,7 +13,7 @@
   * [方块及物品模型](chapter-6/vanilla/index.md)
     * [染色](chapter-6/vanilla/tint.md)
   * [Forge 的扩展](chapter-6/foreg-extension/index.md)
-    * [Forge BlockState V1](chapter-6/forge-extension/index.md)
+    * [Forge BlockState V1](chapter-6/forge-extension/forge-v1.md)
     * [其他格式的模型](chapter-6/forge-extension/other-format.md)
   * [自定义模型](chapter-6/custom-model/index.md)
     * [`IBakedModel`](chapter-6/custom-model/index.md#Baked%20Model)
