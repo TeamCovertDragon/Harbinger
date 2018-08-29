@@ -99,7 +99,7 @@ yourItem.setUnlocalizedName("example_mod" + "." + "example_item");
 
 `Item` 代表了物品的“类型”。两颗钻石因为“都是钻石”所以能叠加在一起。两块不同的金属锭因为类型不同所以不能叠加在一起。
 有数量概念的是 `ItemStack`，一个 `ItemStack` 的实例代表了“一堆特定物品，数量不定”。
-Minecraft 中玩家背包里的东西都是 `ItemStack`。玩家手持的也是 `ItemStack`，// TODO(SJ): 难道有逻辑是在ItemStack里实现的？？？~~只是一部分具体的逻辑是写进 `Item` 里的~~。Minecraft 在这里采用了享元的概念：一种特定物品只对应一个 `Item` 实例。换言之，在 Minecraft 中，在Modding的过程中我们可以直接通过 `==` 来判断两个物品是否为同一个种类。
+Minecraft 中玩家背包里的东西都是 `ItemStack`。玩家手持的也是 `ItemStack`，// TODO(SJ): 难道有逻辑是在ItemStack里实现的？？？~~只是一部分具体的逻辑是写进 `Item` 里的~~。Minecraft 在这里采用了享元的概念：一种特定物品只对应一个 `Item` 实例。换言之，在Modding的过程中，我们可以直接通过 `==` 来判断两个物品是否为同一个种类。
 
 #### 对于物品 `Item` 类更深入的理解
 
