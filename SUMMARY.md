@@ -5,6 +5,7 @@
 * [1. 一切的开始](chapter-1/index.md)
 * [2. 事件](chapter-2/index.md)
 * [3. 物品](chapter-3/index.md)
+  * [3.1 物品进阶](chapter-3/advanced-item.md)
 * [4. 方块](chapter-4/index.md)
   * [4.1 方块状态](chapter-4/block-state.md)
   * [4.2 掉落概论](chapter-4/block-drop.md)
