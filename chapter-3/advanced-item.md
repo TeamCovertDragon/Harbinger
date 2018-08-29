@@ -124,10 +124,43 @@ public class MyCloth extends ItemArmor implements ISpecialArmor {
 
 #### 可以右击丢出去的东西（例如雪球）
 
-这个涉及到一点实体的内容。关于实体的细节会在后面的章节中讲到，这里先用雪球做示范吧。
+这个涉及到一点实体的内容。关于实体的细节会在后面的章节中讲到，这里先用原版的雪球讲解吧。
 
 ````java
-// 待补全
+public class ItemSnowball extends Item
+{
+    public ItemSnowball()
+    {
+    	//字面意思
+        this.maxStackSize = 16;
+        this.setCreativeTab(CreativeTabs.MISC);
+    }
+	//当玩家拿着雪球右键的时候我们应该做的事情
+    public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn)
+    {
+    	//通过EntityPlayer::getHeldItem 方法，我们可以获得当前玩家手持的物品——这里当然是雪球，对应的ItemStack实例
+        ItemStack itemstack = playerIn.getHeldItem(handIn);
+		//如果玩家不是创造模式那么先让物品的数量减少1
+        if (!playerIn.capabilities.isCreativeMode)
+        {
+            itemstack.shrink(1);
+        }
+		//播放雪球被抛出去的声音——这个会在以后详细解释
+        worldIn.playSound((EntityPlayer)null, playerIn.posX, playerIn.posY, playerIn.posZ, SoundEvents.ENTITY_SNOWBALL_THROW, SoundCategory.NEUTRAL, 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
+		//world.isRemote用于判断是服务端还是客户端，这里我们要做的逻辑显然应该只在服务端执行
+        if (!worldIn.isRemote)
+        {
+        	//生成雪球实体——以后会详细解释
+            EntitySnowball entitysnowball = new EntitySnowball(worldIn, playerIn);
+            entitysnowball.shoot(playerIn, playerIn.rotationPitch, playerIn.rotationYaw, 0.0F, 1.5F, 1.0F);
+            worldIn.spawnEntity(entitysnowball);
+        }
+		//TODO 这是啥我也不知道
+        playerIn.addStat(StatList.getObjectUseStats(this));
+        //互动成功，返回EnumActionResult.SUCCESS，itemstack是互动结束以后的itemstack(这里是数量减去1以后的itemstack)
+        return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, itemstack);
+    }
+}
 ````
 
 #### 工具、武器、任何有耐久的东西
