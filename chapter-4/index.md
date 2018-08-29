@@ -33,4 +33,4 @@ public final class BlockLoader {
 
 #### `ItemBlock`
 
-如上一章所述，玩家背包里的都是 `ItemStack`。既然如此，方块也不会例外。它们基本都在使用 `ItemBlock` 这个类。
+如上一章所述，玩家背包里的都是 `ItemStack`。既然如此，方块也不会例外。只不过方块对应物品的 `Item` 类基本都继承了 `ItemBlock` 这个类。
