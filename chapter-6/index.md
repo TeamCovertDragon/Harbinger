@@ -33,7 +33,35 @@ public static void onModelRegistration(ModelRegistryEvent event) {
 
 ### 方块模型
 
-方块模型一般方块状态定义文件中来指定的。前文中提到了最基本的方块状态的写法。
+现在物品不是紫黑块了，但方块还是。方块模型一般是在方块状态定义文件中指定的。实际上方块状态定义文件更像是一个建立方块状态和方块模型之间的映射的文件，通过这个文件，Minecraft 可以知道这个方块在某个状态下应该使用什么模型。  
+所有的方块状态定义都应放在 `assets/[modid]/blockstates` 目录下。在这个目录下新建一个 `example_block.json`，注意文件名和方块的注册名一致：
+
+```json
+{
+	"vairants": {
+		"default": "example_mod:example_block_model"
+	}
+}
+```
+
+因为这个方块没什么特别的所以它只有一种状态：`default`。对于那些有各种奇怪状态的方块，这里会稍微麻烦一些，但这是后话。和物品的模型类似，方块模型统一放在 `assets/[modid]/models/block` 目录下。也就是说，上面我们给出的 `example_mod:example_block_model` 代表 Minecraft 会去寻找 `assets/example_mod/models/block/example_block_model.json` 这个文件。切换到目标目录下新建这个文件：
+
+```json
+{
+	"parent": "block/cube",
+    "textures": {
+      "up": "example_mod:blocks/example_block_texture_up",
+      "down": "example_mod:blocks/example_block_texture_down",
+      "west": "example_mod:blocks/example_block_texture_west",
+      "north": "example_mod:blocks/example_block_texture_north",
+      "east": "example_mod:blocks/example_block_texture_east",
+      "south": "example_mod:blocks/example_block_texture_south"
+    }
+}
+```
+
+和物品模型类似，这里指定的纹理会去 `assets/[moodid]/textures/blocks` 下查找，要求有 `.png` 后缀，且是 PNG 格式的。是的，这里为了示范，使用的文件名很长——但实际上只要不带大写字母的文件名就可以了，随便什么 `foo`、`bar` 这样的都可以。  
+一切准备就绪后，重启游戏，此时方块应当不再是紫黑块了。
 
 ### 附加篇：空模型
 定义一个完全透明啥都没有的空模型其实也不是难事：
