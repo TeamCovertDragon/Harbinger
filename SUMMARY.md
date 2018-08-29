@@ -6,12 +6,15 @@
 * [2. 事件](chapter-2/index.md)
 * [3. 物品](chapter-3/index.md)
 * [4. 方块](chapter-4/index.md)
+  * [方块状态](chapter-4/block-state.md)
   * [掉落概论](chapter-4/block-drop.md)
 * [5. 注册表](chapter-5/index.md)
 * [6. 模型](chapter-6/index.md)
-  * [方块及物品模型](chapter-6/vanilla-model/index.md)
-    * [`IBlockColor`](chapter-6/vanilla-model/tint.md#Block)
-    * [`IItemColor`](chapter-6/vanilla-model/tint.md#Item)
+  * [方块及物品模型](chapter-6/vanilla/index.md)
+    * [染色](chapter-6/vanilla/tint.md)
+  * [Forge 的扩展](chapter-6/foreg-extension/index.md)
+    * [Forge BlockState V1](chapter-6/forge-extension/index.md)
+    * [其他格式的模型](chapter-6/forge-extension/other-format.md)
   * [自定义模型](chapter-6/custom-model/index.md)
     * [`IBakedModel`](chapter-6/custom-model/index.md#Baked%20Model)
     * [`IModel`](chapter-6/custom-model/forge-extension.md)
@@ -21,7 +24,9 @@
 * [10. 方块实体（TileEntity）](chapter-10/index.md)
 * [11. 特种模型](chapter-11/index.md)
   * [TESR](chapter-11/tesr/index.md)
-    * [Forge 的扩展：`FastTESR`](chapter-11/tesr/fast-tesr.md)
+  * [Forge 的扩展](chapter-11/forge-extension/index.md)
+    * [FastTESR](chapter-11/forge-extension/fast-tesr.md)
+    * [Animation State Machine](chapter-11/forge-extension/animation.md)
     * [`TEISR`](chapter-11/tesr/teisr.md)
   * [实体模型](chapter-11/entity-model/index.md)
 * [12. 用户交互界面（GUI）](chapter-12/index.md)
@@ -77,6 +82,10 @@
 2.键盘及鼠标输入
  - 热键注册
  - 如何追踪鼠标位置？
+
+3. 数据迁移
+ - 注册表系统自带的重映射（RegistryEvent.MissingMapping<T>)
+ - 原版的 DataFix 及 Forge 的扩展
  -->
 
 ### 实战
