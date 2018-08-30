@@ -12,7 +12,7 @@
 * [6. 模型](chapter-6/index.md)
   * [6.1 方块及物品模型](chapter-6/vanilla/index.md)
     * [6.1.1 染色](chapter-6/vanilla/tint.md)
-  * [6.2 Forge 的扩展](chapter-6/foreg-extension/index.md)
+  * [6.2 Forge 的扩展](chapter-6/forge-extension/index.md)
     * [6.2.1 Forge BlockState V1](chapter-6/forge-extension/forge-v1.md)
     * [6.2.2 其他格式的模型](chapter-6/forge-extension/other-format.md)
   * [6.3 自定义模型](chapter-6/custom-model/index.md)

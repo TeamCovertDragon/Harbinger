@@ -49,19 +49,38 @@ public static void onModelRegistration(ModelRegistryEvent event) {
 ```json
 {
 	"parent": "block/cube",
-    "textures": {
-      "up": "example_mod:blocks/example_block_texture_up",
-      "down": "example_mod:blocks/example_block_texture_down",
-      "west": "example_mod:blocks/example_block_texture_west",
-      "north": "example_mod:blocks/example_block_texture_north",
-      "east": "example_mod:blocks/example_block_texture_east",
-      "south": "example_mod:blocks/example_block_texture_south"
-    }
+	"textures": {
+		"up": "example_mod:blocks/example_block_texture_up",
+		"down": "example_mod:blocks/example_block_texture_down",
+		"west": "example_mod:blocks/example_block_texture_west",
+		"north": "example_mod:blocks/example_block_texture_north",
+		"east": "example_mod:blocks/example_block_texture_east",
+		"south": "example_mod:blocks/example_block_texture_south"
+	}
 }
 ```
 
-和物品模型类似，这里指定的纹理会去 `assets/[moodid]/textures/blocks` 下查找，要求有 `.png` 后缀，且是 PNG 格式的。是的，这里为了示范，使用的文件名很长——但实际上只要不带大写字母的文件名就可以了，随便什么 `foo`、`bar` 这样的都可以。  
+和物品模型类似，这里指定的纹理会去 `assets/[moodid]/textures/blocks` 下查找，要求有 `.png` 后缀，且是 PNG 格式的。是的，这里为了示范，使用的文件名很长——但实际上只要不带大写字母的文件名就可以了，随便什么 `foo`、`bar` 这样的都可以。能分清楚就行。加一堆目录来整理也可以。  
 一切准备就绪后，重启游戏，此时方块应当不再是紫黑块了。
+
+### 方块的物品
+
+但这个时候方块的物品可能还是紫黑块。毕竟方块的物品形式终究是个物品，和普通的物品没有本质上的区别。它的处理方式和普通物品模型的处理方式没有太大差别，但 `ModelLoader.setCustomModelResourceLocation` 只接受物品，需要通过某种方式拿到方块的物品形式才行。
+
+```java
+Item.getItemFromBlock(myBlock);
+```
+
+其实，注册方块的物品形式的时候，如果你自己保留了一个对它的引用的字段，那你可以直接用那个引用。  
+然后就是模型了。这里可以走一个捷径，因为物品模型可以直接套用方块模型：
+
+```json
+{
+	"parent": "example_mod:block/example_block_model"
+}
+```
+
+这样就够了。事实上，任何物品都可以用这样的方式拥有一个方块的模型，对于那些设定上外观是方块的合成用物品来说这样做相当省事。
 
 ### 附加篇：空模型
 定义一个完全透明啥都没有的空模型其实也不是难事：
