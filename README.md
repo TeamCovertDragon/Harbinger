@@ -137,7 +137,8 @@ _Yes, that's it. 拒绝拖泥带水，我们开始吧。_
     * 事实上也的确停止开发了。如果你真的很在意跨 Minecraft 版本的兼容性，Sponge。
 * 代码要保持整洁、高效。
 
-最后，本教程基于 Minecraft 1.12.2 Release 和足够新的 Forge。**如无特殊说明，均以 Forge 14.23.4.2750 为准，MCP Mapping 版本使用 `stable_39`。本教程原则上不涉及任何旧版内容。**
+最后，本教程基于 Minecraft 1.12.2 Release 和足够新的 Forge。**如无特殊说明，均以 Forge 14.23.4.2750 为准，MCP Mapping 版本使用 `stable_39`。本教程原则上不涉及任何旧版内容。**  
+此外，本教程使用的目录分隔符（directory separator）统一为 `/`。
 
 另外，几个建议：
 * 请务必时常关注 MinecraftForge/MinecraftForge 的 commit 以及 Pull Requests。这是你获得第一手信息的最简单还最可靠的方式（更何况，如果你在国内，别的方式对你来说，不仅是奢望，效率还不怎么高）。

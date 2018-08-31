@@ -3,6 +3,7 @@
 ### 正文
 
 * [1. 一切的开始](chapter-1/index.md)
+  * [1.1 Mod 元数据](chapter-1/metadata.md)
 * [2. 事件](chapter-2/index.md)
 * [3. 物品](chapter-3/index.md)
   * [3.1 物品进阶](chapter-3/advanced-item.md)
