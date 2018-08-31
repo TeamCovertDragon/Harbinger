@@ -92,7 +92,7 @@ _MinecraftForge 在 GitHub 上的仓库的简介写到："Modifications to the M
 也许你对历史没什么了解。FML 的全称是 Forge Mod Loader。想当初 Mod 安装的流程基本都是“解压你下载到的 zip，然后把文件拖入 minecraft.jar 中”。这样一来，两个 Mod 就会因为同时修改一个文件而无法安装到一起。直到有了像是 Risugami 和 SDK 这样的 Mod 加载器，这时 Mod 开发者们只需要在这样的加载器的基础上开发 Mod 就可以了。
 正因有 MinecraftFogre 和 FML，以及它的前辈——Risugami's ModLoader、SDK Loader、et alias，的存在，Modded Minecraft 社区才得以有了今天的样子。Behold, the Feed The Beast! Behold, the Technic! Behold, the ATLauncher!  
 扯远了。但，不是 API 就意味着它的稳定性不如一个抽象化的 API 好。没有了稳定性的保证，MinecraftForge 就不得不面临一个问题：没有稳定的 Documentation。  
-哎。可怜那些硬啃 Minecraft 反编译结果的 Modder。是先人的努力造就了今天的 MCP Mapping，也是先人们的努力造就了今天的社区_
+哎。可怜那些硬啃 Minecraft 反编译结果的 Modder。是先人的努力造就了今天的 MCP Mapping，也是先人们的努力造就了今天的社区。你看现在的 Forge，有很多东西都是社区互相妥协的结果。矿物词典、流体系统、如此种种。It is always about compatibility, and to a certain extent, "correctness". It was. It is. It will be._
 
 原来如此。换言之，我们今天所拥有的一切，都是踩在先辈们的肩膀上才得到的吗。
 
