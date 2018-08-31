@@ -134,7 +134,7 @@ _Yes, that's it. 拒绝拖泥带水，我们开始吧。_
   * 不要有任何怀疑，Forge 的设计是“只保持某个 Minecraft 主要版本内的二进制兼容”，跨版本兼容是不可能的。Minecraft 更新一次实际上就是 Forge 进行 Breaking change 的窗口，而且这个窗口开放的时间往往也很短。你要知道，MinecraftForge/FAIL 已经停止了。
     * FAIL 是 Forge Abstraction Interpertation Layer（Forge 抽象与解释层）的首字母缩略词。
     * FAIL 这个单词本身的含义是“失败”。某种意义上的自嘲。
-    * 事实上也的确停止开发了。如果你真的很在意跨 Minecraft 版本的兼容性，Sponge。
+    * 事实上也的确停止开发了。如果你真的很在意跨 Minecraft 版本的兼容性，[Sponge](https://docs.spongepowered.org/stable/zh-CN/)。
 * 代码要保持整洁、高效。
 
 最后，本教程基于 Minecraft 1.12.2 Release 和足够新的 Forge。**如无特殊说明，均以 Forge 14.23.4.2750 为准，MCP Mapping 版本使用 `stable_39`。本教程原则上不涉及任何旧版内容。**  
