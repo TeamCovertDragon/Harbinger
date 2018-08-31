@@ -9,7 +9,7 @@
    * 如果你有 Gradle：`gradle setupDecompWorkspace`
    * 如果你没有 Gradle：
      - Windows：`gradlew.bat setupDecompWorkspace`
-     - 某种 Linux 发行版，或 macOS：`gradlew setupDecompWorkspace`
+     - 某种 Linux 发行版，或 macOS：`./gradlew setupDecompWorkspace`
      - 其他系统：很抱歉，Minecraft 所依赖的 LWJGL 只有针对 Windows、macOS 和 Linux 三类系统的 native lib。
    * 如果你是 maven 用户：不好意思，笔者不是很确定你能不能只用 maven 来开发基于 MinecraftForge 的 Mod。
  4. 根据你使用的IDE不同：
