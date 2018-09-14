@@ -89,6 +89,13 @@
 3. 数据迁移
  - 注册表系统自带的重映射（RegistryEvent.MissingMapping<T>)
  - 原版的 DataFix 及 Forge 的扩展
+
+4. ForgeGradle
+  - minecraft {}
+    - version
+    - mapping
+    - useDepAt
+  - deobfCompile, deobfProvided
  -->
 
 ### 实战

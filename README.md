@@ -134,14 +134,17 @@ _Yes, that's it. 拒绝拖泥带水，我们开始吧。_
   * 不要有任何怀疑，Forge 的设计是“只保持某个 Minecraft 主要版本内的二进制兼容”，跨版本兼容是不可能的。Minecraft 更新一次实际上就是 Forge 进行 Breaking change 的窗口，而且这个窗口开放的时间往往也很短。你要知道，MinecraftForge/FAIL 已经停止了。
     * FAIL 是 Forge Abstraction Interpertation Layer（Forge 抽象与解释层）的首字母缩略词。
     * FAIL 这个单词本身的含义是“失败”。某种意义上的自嘲。
-    * 事实上也的确停止开发了。如果你真的很在意跨 Minecraft 版本的兼容性，[Sponge](https://docs.spongepowered.org/stable/zh-CN/)。
+    * [事实上也的确停止开发了][ref-fail-status]。如果你真的很在意跨 Minecraft 版本的兼容性，[Sponge][ref-sponge-docs]。
 * 代码要保持整洁、高效。
 
-最后，本教程基于 Minecraft 1.12.2 Release 和足够新的 Forge。**如无特殊说明，均以 Forge 14.23.4.2750 为准，MCP Mapping 版本使用 `stable_39`。本教程原则上不涉及任何旧版内容。**  
+[ref-fail-status]: https://gist.github.com/xt9/55a04226728cebe729fe37cc7aa9d10f#fail-forge-abstraction-layer
+[ref-sponge-docs]: https://docs.spongepowered.org/stable/zh-CN/
+
+最后，本教程基于 Minecraft 1.12.2 Release 和足够新的 Forge。**如无特殊说明，均以 Forge 14.23.4.2750 为准，MCP Mapping 版本使用 `stable_39`。本教程原则上不涉及任何旧版内容。**（关于 MCP Mapping 的相关内容可直接阅读第二十九章的内容）
 此外，本教程使用的目录分隔符（directory separator）统一为 `/`。
 
 另外，几个建议：
-* 请务必时常关注 MinecraftForge/MinecraftForge 的 commit 以及 Pull Requests。这是你获得第一手信息的最简单还最可靠的方式（更何况，如果你在国内，别的方式对你来说，不仅是奢望，效率还不怎么高）。
+* 请务必时常关注 GitHub 上 MinecraftForge/MinecraftForge 的 commit 以及 Pull Requests。这是你获得第一手信息的最简单还最可靠的方式（更何况，如果你在国内，别的方式对你来说，不仅是奢望，效率还不怎么高）。
 * 请务必时常关注 http://mcforge.readthedocs.io/en/latest/ 。有能力的读者，请务必考虑协助他们补全文档（位于 MinecraftForge/Documentation）。
   * 非正式的中文翻译：http://mcforge-cn.readthedocs.io/zh/latest/ ——更新不一定及时。
 * 欧美社区的 Modder 很多都常驻在一些 Discord 服务器中，比如 Minecraft Mod Development，在这些 Discord 服务器里问他们问题通常都能得到详尽的解答。
