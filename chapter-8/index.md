@@ -15,6 +15,7 @@ public class MyNewPotion extends Potion {
 因为药水也是注册表管理的，所以我们用和方块、物品注册差不多的方式注册：
 
 ```java
+@SubscribeEvent
 public static void onPotionRegistration(RegistryEvent.Register<Potion> event) {
     event.getRegistry().registerAll(new MyNewPotion().setRegistryName("example_mod", "my_potion"));
 }
