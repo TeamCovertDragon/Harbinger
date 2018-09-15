@@ -72,7 +72,7 @@ yourItem.setUnlocalizedName("example_mod" + "." + "example_item");
  1. 在 `resources` 下新建 `assets` 文件夹
  2. 在 `assets` 下新建文件夹，名字和你的 modid 相同
  3. 在以你的modid命名的文件夹下新建 `lang` 文件夹
- 4. 在 `lang` 文件夹下新建 `en_us.lang`： 
+ 4. 在 `lang` 文件夹下新建 `en_us.lang`：
 
     ````
     item.example_mod.example_item.name=Example Item
@@ -98,8 +98,8 @@ yourItem.setUnlocalizedName("example_mod" + "." + "example_item");
 * 一块铁锭和一块金锭的数量相同，但它们不是同一种物品。
 
 `Item` 代表了物品的“类型”。两颗钻石因为“都是钻石”所以能叠加在一起。两块不同的金属锭因为类型不同所以不能叠加在一起。
-有数量概念的是 `ItemStack`，一个 `ItemStack` 的实例代表了“一堆特定物品，数量不定”。
-Minecraft 中玩家背包里的东西都是 `ItemStack`。玩家手持的也是 `ItemStack`，// TODO(SJ): 难道有逻辑是在ItemStack里实现的？？？~~只是一部分具体的逻辑是写进 `Item` 里的~~。Minecraft 在这里采用了享元的概念：一种特定物品只对应一个 `Item` 实例。换言之，在Modding的过程中，我们可以直接通过 `==` 来判断两个物品是否为同一个种类。
+有数量概念的是 `ItemStack`，一个 `ItemStack` 的实例代表了“一堆特定物品，数量不定”。Minecraft 中玩家背包里的东西都是 `ItemStack`。玩家手持的也是 `ItemStack`。  
+Minecraft 在这里采用了享元的概念：一种特定物品只对应一个 `Item` 实例。换言之，在 Modding 的过程中，我们可以直接通过 `==` 来判断两个物品是否为同一个种类。
 
 #### 对于物品 `Item` 类更深入的理解
 
@@ -126,20 +126,3 @@ Minecraft 中玩家背包里的东西都是 `ItemStack`。玩家手持的也是 
 其实，通过复写这些方法，读者当然可以实现绝大部分自己想要的功能——但是十分麻烦，而且对其他mod的兼容性也会受影响(其实就是在造轮子)。
 
 在 3.1 中，笔者将会介绍一些 `Item` 类的子类以及 `Item` 类其他的一些特性，以进一步阐述如何实现 `Item` 类。不过在此之前，请读者确保自己已经对上面所说的东西充分理解了。
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
