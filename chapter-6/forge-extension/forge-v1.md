@@ -42,7 +42,7 @@
 ```
 
 `forge_marker` 用来标记该 JSON 使用 Forge 的格式，并给出使用的格式的版本号。目前这个格式只有 V1 这一个版本，所以这里自然写了 1。然后就是不一样的地方了：`facing` 属性只定义了绕 Y 轴的旋转角度，而模型则只由 `status` 属性的值决定。Forge 会将这些属性反复组合起来生成所有可能的模型（其实就是个求笛卡尔积的过程）。  
-Forge BlockState V1 格式保留了一定程度上的对原版格式的兼容；那个 `y` 的行为和原版的一致。自然，原版的绕 X 轴以 90 度为单位旋转在 Forge BlockState V1 中也可以使用。甚至最开始那个原版格式的 JSON 加上 `"forge_marker": 1` 也可以被 Forge 正常解析。
+Forge BlockState V1 格式保留了一定程度上的对原版格式的兼容；那个 `y` 的行为和原版的一致。自然，原版的绕 X 轴以 90 度为单位旋转在 Forge BlockState V1 中也可以使用。甚至最开始那个原版格式的 JSON 加上 `"forge_marker": 1` 也符合 Forge BlockState V1 格式。
 
 #### 默认属性
 
@@ -96,11 +96,12 @@ Forge BlockState V1 格式允许你使用若干子模型，换言之可以把好
 }
 ```
 
-这样一来，这个设备工作的时候就会“长”出点东西。`part1` 在这里只是起到一个命名的作用；如果你需要多个子模型，你大可以在 `submodel` 里塞 `part2`、`part3`、……
+这样一来，这个设备工作的时候就会“长”出点东西。`part1` 在这里只是起到一个命名的作用；如果你需要多个子模型，你大可以在 `submodel` 里塞 `part2`、`part3`、……  
+唯一的遗憾是子模型似乎不能在 `defaults` 中使用，原因未知。
 
 #### TRSRTransformation 与仿射变换
 
-Forge BlockState V1 格式还允许你对模型（自然也包括子模型）做仿射变换。为简单起见，这里不给出完整的 JSON。
+Forge BlockState V1 格式还允许你对模型（自然也包括子模型）做仿射变换。为简明起见，从这里开始，本文不给出完整的 BlockState JSON。
 
 ```json
 {
@@ -118,7 +119,9 @@ Forge BlockState V1 格式还允许你对模型（自然也包括子模型）做
 ```
 
 最右边的 column 用于 translation。左侧的 3x3 矩阵不多解释。  
-但是这样写起来的可读性多数时候并不好。所以还有另一种形式的写法可用：TRSRTransformation。
+但是这样写起来的可读性多数时候并不好。所以还有另一种形式的写法可用：TRSRTransformation。[TRSR 是 "translation, rotation, scale, rotation" 的首字母缩略词。][citation-trsr]
+
+[citation-trsr]: https://github.com/SlimeKnights/Mantle/blob/13695e8464b1f110c47f06fb141021ce3118f143/src/main/java/slimeknights/mantle/client/model/TRSRBakedModel.java#L30
 
 ```json
 {
@@ -140,12 +143,12 @@ Forge BlockState V1 格式还允许你对模型（自然也包括子模型）做
 
   - 所有字段都是可选的，不需要的变换都可以直接省略。
   - `rotation` 和 `post-rotation` 字段可使用四元数 `[ x, y, z, w ]`
-  - `rotation` 和 `post-rotation` 字段亦可直接赋值为类似 `{ "x": 0 }` 的形式，表示只在一个轴上转。
+  - `rotation` 和 `post-rotation` 字段亦可直接赋值为类似 `{ "x": 0 }` 的形式，表示只在唯一一个指定的轴上转。
   - `scale` 可直接赋值为一个数，表示 uniform scale。使用 `[ 1, 1, 1]` 形式则表示在对应的轴上缩放（x、y、z）。
 
 #### 预设的变换模版
 
-上文中提到的  `transform` 字段其实还可以直接赋值为 String，此时 Forge 会寻找对应的预设对模型进行变换。
+上文中提到的  `transform` 字段其实还可以直接赋值为 String，此时 Forge 会使用对应的预设模板对模型进行变换。
 
 ```json
 {
@@ -158,4 +161,4 @@ Forge BlockState V1 格式还允许你对模型（自然也包括子模型）做
 }
 ```
 
-`identity` 自然是返回模型它本身的变换。其他可用的变换还有 `forge:default-block`（用于方块）、`forge:default-item`（用于一般物品）和 `forge:default-tool`（用于镐、斧这样的工具）。
+`identity` 自然是返回模型它本身的单位变换。其他可用的变换还有 `forge:default-block`（用于方块及 `ItemBlock`）、`forge:default-item`（用于一般物品）和 `forge:default-tool`（用于镐、斧这样的工具）。
