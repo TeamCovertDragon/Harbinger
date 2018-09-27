@@ -21,7 +21,7 @@ assert I18n.format("我想要什么键就可以有什么键.我说过这是真�
 
 #### `zh_CN.lang` vs `zh_cn.lang`
 
-1.11 开始，资源包格式版本号更新到了 3。自此，资源包中所有文件名强制使用小写字母（正则表达式 `[a-z0-9_]+`）。
+1.11 开始，资源包格式版本号更新到了 3。自此，资源包中所有文件名强制使用小写字母（正则表达式 `[a-z0-9_]+`）。所以你应该使用的是 `zh_cn.lang`。
 
 |资源包格式版本 |文件名       |Minecraft 版本|
 |:------      |:------     |:------      |
@@ -33,6 +33,19 @@ assert I18n.format("我想要什么键就可以有什么键.我说过这是真�
 |3            |`zh_cn.lang`|1.11         |
 |3            |`zh_cn.lang`|1.12         |
 |4            |`zh_cn.lang`|1.13         |
+
+这里有一个小坑。所有的 Forge Mod 都相当于一个资源包，所以在 resource 目录下可以有一个 `pack.mcmeta`。但 FML 会在找不到这个文件（`java.io.FileNotFoundException`）的时候直接补充一个 `pack_format` 是 `2` 的 `pack.mcmeta` 上去，然后 1.12 的 Minecraft 底层中居然还有对 `pack_format == 2` 的资源包的向后兼容（`LegacyV2Adapter`，Notch 名 `ceq`）。于是——你有可能会发现 `zh_cn.lang` 加载不出来。解决方法是把下面这个覆盖 `resource/pack.mcmeta` 里的所有内容（记得把 `description` 字段里的内容换一下）：
+
+```json
+{
+    "pack": {
+        "pack_format": 3,
+        "description": "Resources used by My Mod"
+    }
+}
+```
+
+不过为什么不直接用 `zh_CN.lang`？因为 1.13 没这个向后兼容了。为了以后着想，请用 `zh_cn.lang`。
 
 #### 两个 `I18n`
 
