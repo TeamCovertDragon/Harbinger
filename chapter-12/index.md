@@ -1,100 +1,21 @@
-### 图形化用户交互界面
+## 特种模型
 
-````java
-public class MyContainer extends Container {
-}
+Minecraft 中有那么一些东西看上去并不是一般的方块模型能做到的。比如附魔台上的那本悬浮的书，你靠近的时候就一定会面朝你打开。再比如箱子有开关的动画效果。还有旗帜的图案。自然也包括所有实体的模型。  
+这些模型有一个共同特点：它们都在某种意义上靠近底层。箱子、附魔台和旗帜使用了名为 `TileEntitySpecialRenderer` 的原版类（很多人直呼这个叫 `TESR`，本指南中也会大量使用这个称呼）。所有实体的模型则都基于名为 `Render` 的类。两者都直接使用 `GlStateManager` 来进行绘制。`GlStateManager` 中封装了大量来自 `GL1X` 系列 API 的方法，这也是为什么说“它们靠近底层”的原因。
 
-public class MyGui extends GuiContainer {
-}
-````
+### 关于性能
 
-这就是 Minecraft 自己使用的 GUI 系统的基础：一个客户端显示的 `GuiContainer`（准确地说，应该是 `GuiScreen`），以及可选的 `Container`，用于逻辑服务器。
+是的，有一个很常见的说法是 TESR 对性能影响巨大。毕竟 TESR 和 TileEntity 的刷新频率是一样的（一秒最多 20 次），服务器上 TileEntity tick 一次，客户端这边对应的 `TESR`（如果有的话）也得重新绘制一次。这样的东西一多，后果自不必说。更何况 TESR 还挺常见的——比如原版箱子就有一个。堆满箱子的游戏后期存档应该是原版玩家的日常吧……
 
-### 第一步：为什么要有 Container？
-当且仅当你需要和服务器打交道时。
+### Necessary Evil 和 Forge 的应对
 
-比方说一个工作台。你可以用这个 GUI 合成东西！所以必须有服务器端的业务逻辑，不然你合成的物品全是客户端特效你骗谁呢你。
+但 TESR 的确有它存在的意义。箱子、末影箱、附魔台的动画效果自不必说，它们不可能用有限数量的方块状态枚举出来。还有一个应用场景是储物桶：很多 Mod 的储物桶都会在桶上渲染一个当前内容物的图标，这个更不可能只用方块状态枚举出来。它们必须“动态地”渲染出来，而非利用方块状态，将所有的可能性与一个固定的模型联系在一起。  
+Forge 自然是有应对方案的：[`FastTESR`][ref-0710bdf3]。类如其名，一个比原版 TESR 快的 TESR。快的原理和它的处理方式有关：
 
-就 Container 和 GuiContainer 之间的关系，ustc-zzzz 有一张图很好的对其进行了解释：
+>   \* TESRs can now be batched - look at TESR.renderTileEntityFast + TE.hasFastRenderer.  
+> \- RainWarrior (fry)
 
-![我是图](https://fmltutor.ustc-zzzz.net/resources/gui_analysis.png)
+简单来说，在 Forge patch 后的实现中，它用了一个独立的 `Tessellator` 用于存放渲染数据。`renderTileEntityFast` 的实际意义也只是将需要渲染的数据丢进那个 `Tessellator` 的 `BufferBuilder` 中，然后交由 `RenderGlobal` 一次性全部绘制。同样的理由，`FastTESR` 中的 `render` 方法有 `final` 修饰符，有 `abstract` 的是 `renderTileEntityFast`。  
+这个思路实际上和原版的方块模型的渲染有点类似。
 
-（屏幕前的读者你要是直接看 Markdown 源文件的话你就会发现这图直接来自他教程… 准确地说是3.4.1的第一张插图。）  
-虽然你完全可以直接看 zzzz 的教程，但我还是再用自己的理解复述一遍吧：
-
-* 序号 1 是指客户端的操作发包至服务器。
-* 序号 2 是指客户端对 Slot 的操作由客户端侧的 Container 实例代理。
-* 序号 3 是指 Container 操作它控制的 Slot……
-* 序号 4 是指 Slot 的操作结果返回给 Container。
-* 序号 5 是指服务器端的业务发信（乱七八糟诸如物品和“进度条”这种）给客户端。
-* 序号 6 是指客户端的操作都会通知服务器端。
-* 实线是 Mojang 用它的黑魔法帮你搞定了。
-* 虚线是 Mojang 表示这个你要自己来。
-
-````java
-public class MyContainer extends Container {
-    // 此方法必须覆写，因为父类里这是个抽象方法。
-    @Override
-    public boolean canPlayerInteractWith(EntityPlayer player) {
-        return true;
-        // 返回 false 的时候会给你关掉 GUI。
-    }
-}
-````
-
-### 且慢！我不需要和服务器打交道啊！
-那就直奔 `GuiContainer` 好了。想想看，一本游戏内置的手册多数时候不需要服务器端有什么操作吧……
-
-### 组成GUI的元件 (Components)
-说是这么说，其实能称得上 Components 的东西真的不多。
-#### 背景
-#### 文本框
-`GuiTextField`
-#### 按钮
-`GuiButton`
-#### 滚动菜单
-#### 滑块
-#### 勾选框是啥来着？
-你可以使用按钮来模拟勾选框。
-
-### 那如果我的 GUI 里还要和服务器打交道呢？
-
-你需要一个 `Container`。不需要的话也许也可以，但是很多事情就需要重新从零开始写。
-
-### 等等！我怎么打开GUI？
-````java
-import javax.annotation.Nullable;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.world.World;
-import net.minecraftforge.fml.common.network.IGuiHandler;
-
-public enum MyGUIHandler implements IGuiHandler {
-    INSTANCE;
-
-    private MyGUIHandler() {
-        NetworkRegistry.INSTANCE.registerGuiHandler(ExampleMod.instance, this);
-    }
-
-    @Nullable //感谢 mezz 的 MinecraftForge/MinecraftForge#3550
-    @Override
-    public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
-        return null;
-    }
-    @Nullable //感谢 mezz 的 MinecraftForge/MinecraftForge#3550
-    @Override
-    public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
-        return null;
-    }
-}
-````
-
-以及发挥点想象力。并非只有ID可以存储数据，最后的三个 `x`、`y`、`z` 并非总是坐标——它们也是可以拿来存储数据的。换言之，你在返回对应的 GUI 对象时最多可以用到 4 个整数的信息（总长度128 bit）来确定应该打开哪个 GUI…… [参考MinecraftForge/MinecraftForge#3228](https://github.com/MinecraftForge/MinecraftForge/issues/3228)。  
-最后只需要在有 EntityPlayer 的地方这么做：
-
-````java
-//playerIn是个EntityPlayer
-//5不是arbitary number，是上面IGuiHandler中的id，具体含义由实现决定
-//worldIn是个World
-//最后的三个xyz没有强制要求是坐标，可用于传入别的数据
-playerIn.openGui(ExampleMod.instance, 5, worldIn, pos.getX(), pos.getY(), pos.getZ());
-````
+[ref-0710bdf3]: https://github.com/MinecraftForge/MinecraftForge/commit/0710bdf3f5a64e5fe1c725a30421b2c7523dca44
