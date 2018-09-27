@@ -41,7 +41,7 @@
 }
 ```
 
-`forge_marker` 用来标记该 JSON 使用 Forge 的格式，并给出使用的格式的版本号。目前这个格式只有 V1 这一个版本，所以这里自然写了 1。然后就是不一样的地方了：`facing` 属性只定义了绕 Y 轴的旋转角度，而模型则只由 `status` 属性的值决定。Forge 会将这些属性反复组合起来生成所有可能的模型（其实就是个求笛卡尔积的过程）。  
+`forge_marker` 用来标记该 JSON 使用 Forge 的格式，并给出使用的格式的版本号。目前这个格式只有 V1 这一个版本，所以这里自然写了 1。然后就是不一样的地方了：`facing` 属性只定义了绕 Y 轴的旋转角度，而模型则只由 `status` 属性的值决定。Forge 会将这些属性反复组合起来生成所有可能的模型（其实就是个对这些属性求笛卡尔积的过程）。  
 Forge BlockState V1 格式保留了一定程度上的对原版格式的兼容；那个 `y` 的行为和原版的一致。自然，原版的绕 X 轴以 90 度为单位旋转在 Forge BlockState V1 中也可以使用。甚至最开始那个原版格式的 JSON 加上 `"forge_marker": 1` 也符合 Forge BlockState V1 格式。
 
 #### 默认属性
@@ -118,7 +118,18 @@ Forge BlockState V1 格式还允许你对模型（自然也包括子模型）做
 }
 ```
 
-最右边的 column 用于 translation。左侧的 3x3 矩阵不多解释。  
+最右边的 column 用于 translation。左侧的 3x3 矩阵不多解释。也可以写成这样：
+
+```json
+"transform": {
+    "matrix": [
+        [ 1, 0, 0, 0 ],
+        [ 0, 1, 0, 0 ],
+        [ 0, 0, 1, 0 ]
+    ]
+}
+```
+
 但是这样写起来的可读性多数时候并不好。所以还有另一种形式的写法可用：TRSRTransformation。[TRSR 是 "translation, rotation, scale, rotation" 的首字母缩略词。][citation-trsr]
 
 [citation-trsr]: https://github.com/SlimeKnights/Mantle/blob/13695e8464b1f110c47f06fb141021ce3118f143/src/main/java/slimeknights/mantle/client/model/TRSRBakedModel.java#L30
@@ -144,7 +155,34 @@ Forge BlockState V1 格式还允许你对模型（自然也包括子模型）做
   - 所有字段都是可选的，不需要的变换都可以直接省略。
   - `rotation` 和 `post-rotation` 字段可使用四元数 `[ x, y, z, w ]`
   - `rotation` 和 `post-rotation` 字段亦可直接赋值为类似 `{ "x": 0 }` 的形式，表示只在唯一一个指定的轴上转。
-  - `scale` 可直接赋值为一个数，表示 uniform scale。使用 `[ 1, 1, 1]` 形式则表示在对应的轴上缩放（x、y、z）。
+  - `scale` 可直接赋值为一个数，表示 uniform scale。使用 `[ 1, 1, 1 ]` 形式则表示在对应的轴上缩放（x、y、z）。
+
+#### 不同视角下的变换
+
+`transform` 字段可以定义不同视角下需要应用的不同变换；这个特性类似于原版方块模型中的 `display` 字段，但相比原版方块模型，Forge BlockState V1 的版本可以使用仿射变换或 TRSRTransformation。
+
+```json
+{
+    "...": "...",
+    "transform": {
+        "thirdperson": { "matrix": "..." },
+        "thirdperson_lefthand": { "matrix": "..." },
+        "thirdperson_righthand": { "matrix": "..." },
+        "firstperson": { "matrix": "..." },
+        "firstperson_lefthand": { "matrix": "..." },
+        "firstperson_righthand": { "matrix": "..." },
+        "head": { "matrix": "..." },
+        "gui": { "matrix": "..." },
+        "ground": { "matrix": "..." },
+        "fixed": { "matrix": "..." }
+    },
+    "...": "..."
+}
+```
+
+其中 `thirdperson` 是 `thirdperson_righthand` 的 shortcut，`firstperson` 是 `firstperson_righthand` 的 shortcut，剩余字段的含义可直接对照 [Minecraft Wiki 上的说明][ref-transform-type]来理解。
+
+[ref-transform-type]: https://minecraft-zh.gamepedia.com/%E6%A8%A1%E5%9E%8B#.E6.96.B9.E5.9D.97.E6.A8.A1.E5.9E.8B
 
 #### 预设的变换模版
 
@@ -162,3 +200,39 @@ Forge BlockState V1 格式还允许你对模型（自然也包括子模型）做
 ```
 
 `identity` 自然是返回模型它本身的单位变换。其他可用的变换还有 `forge:default-block`（用于方块及 `ItemBlock`）、`forge:default-item`（用于一般物品）和 `forge:default-tool`（用于镐、斧这样的工具）。
+
+#### 物品模型使用 Forge BlockState V1
+
+没错，四种可用的变换模板里的 `forge:default-item` 实际上是可以给物品用的。具体来说，是这样操作的：
+
+```java
+ModelLoader.setCustomModelResourceLocation(myItem, 0, new ModelResourceLocation(new ResourceLocation("example_mod", "example_item_model"), "inventory"));
+```
+
+实际上这个 `ModelResourceLocation` 也可以代表一个 BlockState JSON 的位置。比如上面这个例子中的 `ModelResourceLocation` 也可以指向 `assets/example_mod/blockstates/example_item_model.json` 中定义的 `variants.inventory`。事实上，Minecraft/Forge 也的确是会搜索这里的。  
+但这里有一个坑：`variants` 同时也包含了所有方块状态中的属性列表，直接声明成这样会有歧义：
+
+```json
+{
+    "...": "...",
+    "variants": {
+        "inventory": { "...": "...", "transform": "forge:default-item" }
+    }
+}
+```
+
+这究竟是一个完整的 variants，还是一个方块状态中的特定属性？Forge BlockState V1 没有解决这个问题，但这个问题有一个 workaround：
+
+```json
+{
+    "...": "...",
+    "variants": {
+        "inventory": [{
+            "...": "...",
+            "transform": "forge:default-item"
+        }]
+    }
+}
+```
+
+注意到数组的声明。在原版的 BlockState JSON 格式中这代表从数组中随机抽一个出来作为实际使用的模型。因为某些原因，使用这样的声明要求对应的键必须是完整的 variant 名，因此这样写可以消去歧义。
