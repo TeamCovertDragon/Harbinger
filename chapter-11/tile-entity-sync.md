@@ -29,7 +29,8 @@ public void onDataPacket(NetworkManager manager, SPacketUpdateTileEntity packet)
 }
 ```
 
-值得注意的是，Minecraft 本身只会在 TileEntity 所在方块有更新时才同步 TileEntity。因此你需要 `World::notifyBlockUpdate`（`func_184138_a`）方法来告知 Minecraft 方块需要更新了。请按需控制更新！频繁更新只会浪费带宽资源。
+值得注意的是，Minecraft 本身只会在 TileEntity 所在方块有更新时才同步 TileEntity。因此你需要 `World::notifyBlockUpdate`（`func_184138_a`）方法来告知 Minecraft 方块需要更新了。请按需控制更新！频繁更新只会浪费带宽资源。  
+另外，`notifyBlockUpdate` 方法的第二和第三个参数分别代表旧方块状态和新方块状态。如果只是 TileEntity 有变化，大可把同一个方块状态传给第二和第三个参数。
 
 ### `getUpdateTag`
 

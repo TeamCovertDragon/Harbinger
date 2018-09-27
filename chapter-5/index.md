@@ -1,6 +1,6 @@
 ### 注册表
 
-Minecraft 是一个处处充满了注册的游戏...... 没办法谁让游戏系统那么复杂。
+Minecraft 是一个处处充满了注册的游戏，因为…… 这个游戏里充满了各种各样奇奇怪怪的对象。
 
 #### 事件驱动的注册
 
@@ -30,8 +30,10 @@ public void onRegistry(RegistryEvent.Register<Block> regBlock) {
  * 声音事件 (SoundEvent)
  * 村民的职业（VillagerProfession）
  * 实体（以 EntityEntry 的形式出现）
+ * ~~原版工作台合成（IRecipe）~~
 
- 这些东西会在后面的章节中一一讲到。
+ 这些东西会在后面的章节中一一讲到。  
+ 原版工作台合成的确也是受注册表控制的，但大多数时候你不应该通过这个方式注册原版工作台合成，而是写 JSON。相关细节在第二十章中有详细阐述。
 
 #### 结束了？
 非也。还有一个十分有趣的注解： `@GameRegistry.ObjectHodler`。
@@ -75,7 +77,7 @@ public class MyStuffHolder2 {
 }
 ````
 
-一个细节：虽然注册事件的触发顺序是未定义的，但有一个例外：根据 ForgeDocs，方块注册总是在物品注册之前。目前 MinecraftForge 本身所有的 test 都可以印证此约定。
+虽然注册事件的触发顺序是未定义的，但有一个例外：根据 ForgeDocs，方块注册总是在物品注册之前。目前 MinecraftForge 本身所有的 test 都可以印证此约定。
 
 #### 复用注册表
 
