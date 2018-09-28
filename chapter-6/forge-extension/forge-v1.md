@@ -221,7 +221,9 @@ ModelLoader.setCustomModelResourceLocation(myItem, 0, new ModelResourceLocation(
 }
 ```
 
-这究竟是一个完整的 variants，还是一个方块状态中的特定属性？Forge BlockState V1 没有解决这个问题，但这个问题有一个 workaround：
+这究竟是一个完整的 variants，还是一个方块状态中的特定属性？[Forge BlockState V1 没有解决这个问题][ref-forge-4797]，但这个问题有一个 workaround：
+
+[ref-forge-4797]: https://github.com/MinecraftForge/MinecraftForge/issues/4797
 
 ```json
 {
