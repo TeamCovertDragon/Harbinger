@@ -99,7 +99,7 @@ Forge BlockState V1 格式允许你使用若干子模型，换言之可以把好
 这样一来，这个设备工作的时候就会“长”出点东西。`part1` 在这里只是起到一个命名的作用；如果你需要多个子模型，你大可以在 `submodel` 里塞 `part2`、`part3`、……  
 唯一的遗憾是子模型似乎不能在 `defaults` 中使用，原因未知。
 
-#### TRSRTransformation 与仿射变换
+#### TRSRTransformation 与仿射变换（Affine Transformation）
 
 Forge BlockState V1 格式还允许你对模型（自然也包括子模型）做仿射变换。为简明起见，从这里开始，本文不给出完整的 BlockState JSON。
 
@@ -199,7 +199,8 @@ Forge BlockState V1 格式还允许你对模型（自然也包括子模型）做
 }
 ```
 
-`identity` 自然是返回模型它本身的单位变换。其他可用的变换还有 `forge:default-block`（用于方块及 `ItemBlock`）、`forge:default-item`（用于一般物品）和 `forge:default-tool`（用于镐、斧这样的工具）。
+`identity` 自然是返回模型它本身的单位变换。其他可用的变换还有 `forge:default-block`（用于方块及 `ItemBlock`）、`forge:default-item`（用于一般物品）和 `forge:default-tool`（用于镐、斧这样的工具）。  
+有一点需要注意：`forge:default-block`、`forge:default-item` 和 `forge:default-tool` 已经完整定义了 `thirdperson`、`firstperson`、`head`、 `ground`、`gui`、`fixed` 等等场景下的变换，所以上文中提到的“不同视角下的变换”是不能用这三个模板的，只有 `identity` 可用。想想看也能知道允许的话会显得十分奇怪。
 
 #### 物品模型使用 Forge BlockState V1
 
