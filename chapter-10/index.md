@@ -1,14 +1,33 @@
-### TileEntity
+## TileEntity
 
 Tile 这个单词的本意是“瓷砖”或“瓦砖”。实际上这里它和 Block 是一个意思。所以它是一个给方块用的概念。  
 
-#### 为什么要有 TileEntity？
+### 为什么要有 TileEntity？
 定义TileEntity：可以存储一个NBT标签的方块。  
 这意味着你可以在一个方块中存储超过4bits的数据。  
 TileEntity的另一个意义是它不仅像Entity一样能保存一个NBT标签，还**可以**有每秒刷新20次的能力。  
 可以说，绝大部分看上去功能异常强大的方块都是基于TileEntity的。
 
-#### 逻辑
+### 起点：声明该 Block 持有 TileEntity
+
+```java
+public class MyMachineBlock extends Block {
+    @Override
+    public boolean hasTileEntity(IBlockState state) {
+        return true;
+    }
+
+    @Override
+    public TileEntity createTileEntity(World world, IBlockState state) {
+        return new MyMachine();
+    }
+}
+```
+
+### 逻辑
+
+然后就是要补全那个 `MyMachine` 类了。
+
 ````java
 public class MyMachine extends TileEntity {
     //注意，虽然TileEntity本身是abstract，但它并没有任何抽象方法。
@@ -56,7 +75,7 @@ public class MyMachine extends TileEntity {
 }
 ````
 
-#### `ITickable`
+### `ITickable`
 
 TileEntity 的刷新功能由 `ITickable` 接口提供。TileEntity 默认是没有刷新功能的，你必须实现 `ITickable` 接口方能获得1秒20次的刷新能力。
 
