@@ -2,24 +2,24 @@
 
 ### 为什么？
 不为什么。  
-从 1.3 开始，Minecraft 的单人游戏的实现变成了模拟一台地址是 127.0.0.1 的 Minecraft 服务器，说白了就是你电脑兼职开服，于是乎你不网络 IO 也得网络 IO 了。  
-事情是这样，客户端是绝对不知道服务器发生什么的，反之亦然。比如说，TileEntity 在服务器上的业务逻辑，客户端对此是一无所知的；同样，玩家按下了 TA 键盘上的一个键，服务器也是对此毫不知情的。唯一能让客户端（或者服务器）知道发生了什么的方法，就是网络通信。
+从 1.3 开始，Minecraft 的单人游戏的实现变成了模拟一台地址是 127.0.0.1（或者说 localhost）的 Minecraft 服务器，说白了就是你电脑兼职开服，于是乎你不网络 IO 也得网络 IO 了。  
+事情是这样，客户端是绝对不知道服务器发生什么的，反之亦然。比如说，TileEntity 在服务器上的业务逻辑，客户端对此是一无所知的；同样，玩家按下了键盘上的一个键，服务器也是对此毫不知情的。唯一能让两者互相知道发生了什么的方法，就是网络通信。
 
 ### 业务端判定
 原版很多地方的业务逻辑，服务器和客户端是耦合在一起的...（也许这个词笔者用错了，但暂时先这样），举个例子，方块右击的时候给玩家发一句话，在实际游戏中你会发现显示了两次——这时再加上 `FMLCommonHandler` 的 `getEffectiveSide` 的输出就能见真相了：一次来自服务器，一次来自客户端。  
-怎么破呢。其实刚才提到了一个解决办法就是 `FMLCommonHandler`。这个方法其实是不推荐的——它实际上是个 hack，此前是通过检查线程名判定是服务器端还是客户端；现在 Forge 预留了两个 ThreadGroup 的实例，分别对应客户端和服务器，这才使这个方法显得不那么 hack 了。  
+怎么办呢。其实刚才提到了一个解决办法就是 `FMLCommonHandler.getEffectiveSide`。这个方法其实是不推荐的——它实际上是个 hack，此前是通过检查线程名判定是服务器端还是客户端；现在 Forge 预留了两个 ThreadGroup 的实例，分别对应客户端和服务器，这才使这个方法显得不那么 hack 了，但也只是让它显得不 hack 了而已。  
 最稳妥的办法，从1.6.4到1.10.2，就没有变过——检查 `World` 实例的 `isRemote`：
 
 ````java
-                        //                     Last Remote
+                        // Last Remote
 world.isRemote == true  //   客户端，意即“这个世界是被遥控的”
 world.isRemote == false // 服务器端，意即“这个世界不是被遥控的”
 ````
 
 ### 关于Server和Client那些不得不说的事情：SideOnly
-就这个问题，LambdaInnovation 的 WeAthFold 曾经有一篇文章做过详细阐述，但他博客搬过好几次，博文随之没了（非也。他居然在 MCBBS 上发过... http://www.mcbbs.net/thread-579069-1-1.html）...
-MinecraftForge自己的文档[讲得也很不错](http://mcforge.readthedocs.io/en/latest/concepts/sides/)，可惜不是中文的。  
-所以笔者就再讲一遍好了- -看得懂英文的大可不管笔者码的字，直接看Forge自己的Doc。  
+就这个问题，LambdaInnovation 的 WeAthFold 曾经有一篇文章做过详细阐述，但他博客搬过好几次，博文随之没了（非也。[他居然在 MCBBS 上发过……](http://www.mcbbs.net/thread-579069-1-1.html)）
+MinecraftForge [自己的文档](http://mcforge.readthedocs.io/en/latest/concepts/sides/)讲得也很好，可惜不是中文的。  
+所以笔者就再讲一遍好了- -看得懂英文的大可不管笔者码的字，直接看上文给的 ForgeDocs。  
 
 `@SideOnly` 是一个给 MCP 用的注解，用于在合并 Minecraft 的客户端和服务器的代码为一个 jar 后能正确区分来源。  
 它的真正含义，在笔者看来是这样的：“此方法仅在指定业务端出现，若当前生产环境与给定业务端不匹配，则移除此方法”。业务端由此元注解下的 `value` 给出，为枚举型 `Side`，有效值为 `SERVER` 和 `CLIENT`。  

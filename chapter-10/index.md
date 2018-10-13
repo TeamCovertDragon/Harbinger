@@ -40,21 +40,6 @@ public class MyMachine extends TileEntity {
     }
 
     @Override
-    public void invalidate() {
-        //无效化。
-        //呃，怎么说呢，区块不是时刻都在加载，
-        //所以TileEntity也不是时刻都在刷新。
-        //当区块被卸载时此方法触发。
-    }
-
-    @Override
-    public void validate() {
-        //有效化。
-        //区块突然被加载的那一瞬间，
-        //会对区块内所有的TileEntity都调用一次这个方法。
-    }
-
-    @Override
     public void readFromNBT(NBTTagCompound tagCompound) {
         //从NBT标签中读数据。
         //TileEntity被反序列化的关键一环
