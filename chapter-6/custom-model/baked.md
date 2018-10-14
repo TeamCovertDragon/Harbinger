@@ -1,6 +1,6 @@
 ## `IBakedModel`
 
-`IBakedModel` 是 Minecraft 中所有方块和物品模型的基础。它的核心在于一个获取 `List<BakedQuad>` 的方法，而这个 `List<BakedQuad` 则代表了一系列已经准备就绪，丢给显卡就可以渲染的 Quad 数据。
+`IBakedModel` 是 Minecraft 中所有方块和物品模型的基础。它的核心在于一个获取 `List<BakedQuad>` 的方法，而这个 `List<BakedQuad>` 则代表了一系列已经准备就绪，丢给显卡就可以渲染的 Quad 数据。
 
 ```java
 public class BakedBrandNewModel implements IBakedModel {
@@ -16,7 +16,7 @@ public class BakedBrandNewModel implements IBakedModel {
     @Override
     public boolean isAmbientOcclusion()
     {
-        // 平滑光照。
+        // 平滑光照/环境光遮蔽。
         return true;
     }
 
@@ -48,6 +48,7 @@ public class BakedBrandNewModel implements IBakedModel {
     public ItemOverrideList getOverrides()
     {
         // 获取该模型的物品 Override 列表，详见对 ItemOverrideList 的介绍。
+        // 一般情况下只需要返回 ItemOverrideList.NONE。
         return ItemOverrideList.NONE;
     }
 }
