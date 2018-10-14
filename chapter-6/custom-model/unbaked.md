@@ -1,6 +1,6 @@
 ## `IModel`
 
-`IModel` 代表了一个模型的最初形态。这个模型还没有经过处理（即所谓的“bake”（烘培）过程），其具体细节（UV 锁、平滑光照/ambient occlusion、GUI 中是否有 3D 效果、使用的纹理、`IModelState`/仿射变换状态等等）都有可能发送变化。
+`IModel` 代表了一个模型的最初形态。这个模型还没有经过处理（即所谓的“bake”（烘培）过程），其具体细节（UV 锁、平滑光照/ambient occlusion、GUI 中是否有 3D 效果、使用的纹理、`IModelState`/仿射变换状态等等）都有可能发生变化。
 
 ```java
 public class ABrandNewModel implements IModel {
