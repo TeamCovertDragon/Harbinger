@@ -6,7 +6,12 @@
   * [1.1 Mod 元数据](chapter-1/metadata.md)
 * [2. 事件](chapter-2/index.md)
 * [3. 物品](chapter-3/index.md)
-  * [3.1 物品进阶](chapter-3/advanced-item.md)
+  * [3.1 物品进阶](chapter-3/advanced/index.md)
+    * [3.1.1 Meta-hack](chapter-3/advanced/meta-hack.md)
+    * [3.1.2 食物](chapter-3/advanced/food.md)
+    * [3.1.3 工具及武器等](chapter-3/advanced/tool.md)
+    * [3.1.4 护甲](chapter-3/advanced/armor.md)
+    * [3.1.5 投掷物](chapter-3/advanced/throwable.md)
 * [4. 方块](chapter-4/index.md)
   * [4.1 方块状态](chapter-4/block-state.md)
   * 4.2 高级的方块
