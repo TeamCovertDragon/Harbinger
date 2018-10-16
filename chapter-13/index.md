@@ -32,7 +32,9 @@ assert I18n.format("我想要什么键就可以有什么键.我说过这是真�
 |2            |`zh_CN.lang`|1.10         |
 |3            |`zh_cn.lang`|1.11         |
 |3            |`zh_cn.lang`|1.12         |
-|4            |`zh_cn.lang`|1.13         |
+|4            |`zh_cn.json`|1.13         |
+
+<!-- Mojang 在 1.13 把这玩意改成了 json，笔者也很无奈啊 -->
 
 这里有一个小坑。所有的 Forge Mod 都相当于一个资源包，所以在 resource 目录下可以有一个 `pack.mcmeta`。但 FML 会在找不到这个文件（`java.io.FileNotFoundException`）的时候直接补充一个 `pack_format` 是 `2` 的 `pack.mcmeta` 上去，然后 1.12 的 Minecraft 底层中居然还有对 `pack_format == 2` 的资源包的向后兼容（`LegacyV2Adapter`，Notch 名 `ceq`）。于是——你有可能会发现 `zh_cn.lang` 加载不出来。解决方法是把下面这个覆盖 `resource/pack.mcmeta` 里的所有内容（记得把 `description` 字段里的内容换一下）：
 
