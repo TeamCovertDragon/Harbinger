@@ -1,17 +1,18 @@
 ## Meta Hack
 
-几乎所有的 Modder 都会使用这样的技巧来避免占用过多的物品 ID。下面是这个 hack 的具体实现。原版中也有类似的代码可以参考。  
-在 1.13 中，随着
+很多 Modder 都会使用这样的技巧来避免占用过多的物品 ID。下面是这个 hack 的具体实现。原版中也有类似的代码可以参考。  
+在 1.13 中，随着 metadata 的取消和工具耐久合并入 NBT 数据中，这个 hack 也将不再适用。因此，在使用这个 hack 前，请三思。
 
 ```java
 public class MultiMetaItem extends Item {
     public MultiMetaItem() {
         super();
         // 声明此物品有“子类型”，即有 Metadata 值。没错就是这么简单...
-        // 声明之后物品即拥有Meta值。最小为 0，最大是 Short.MAX_VALUE，即32767。
+        // 声明之后物品即拥有 Meta 值。最小为 0，最大是 Short.MAX_VALUE，即 32767。
         // 最大值同时也有一个特殊含义，将在讲到合成表及 OreDictionary 时解释。
         // 在范围内的 Meta 都是允许的。通常所谓的“非法 metadata”都与某些涉及 metadata
-        // 有效性的假定有关（比如直接使用 metadata 当作数组下标访问数组内元素）。
+        // 有效性的假定有关（比如直接使用 metadata 当作数组下标访问数组内元素，此时可能会
+        // 出现下标越界的情况）。
         setHasSubtype(true);
         //将最大损害值设定为0，避免一些奇妙的“修复物品的设备”产生的刷物品 Bug。
         setMaxDamage(0);
@@ -26,6 +27,8 @@ public class MultiMetaItem extends Item {
     }
 
     // 让带合适 Meta 的物品显示在创造模式物品栏里。
+    // 实际上这个方法控制该物品在创造模式物品栏中显示的所有具体物品。
+    // 比方说你可以用这个来显示一个没电的电钻和一个充满电的电钻（参考 IC2）。
     @SideOnly(Side.CLIENT) //这个的解释在后面的章节中会讲到
     @Override
     public void getSubItems(Item item, CreativeTabs tabs, List<ItemStack> list) {
