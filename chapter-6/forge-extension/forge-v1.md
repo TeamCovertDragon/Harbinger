@@ -202,6 +202,10 @@ Forge BlockState V1 格式还允许你对模型（自然也包括子模型）做
 `identity` 自然是返回模型它本身的单位变换。其他可用的变换还有 `forge:default-block`（用于方块及 `ItemBlock`）、`forge:default-item`（用于一般物品）和 `forge:default-tool`（用于镐、斧这样的工具）。  
 有一点需要注意：`forge:default-block`、`forge:default-item` 和 `forge:default-tool` 已经完整定义了 `thirdperson`、`firstperson`、`head`、 `ground`、`gui`、`fixed` 等等场景下的变换，所以上文中提到的“不同视角下的变换”是不能用这三个模板的，只有 `identity` 可用。想想看也能知道允许的话会显得十分奇怪。
 
+##### `ForgeBlockStateV1.Transforms`
+
+14.23.5.2772 中你可以通过 `ForgeBlockStateV1.Transforms` 的 `get` 方法拿到上文中提到的 `forge:default-block`、`forge:default-item` 和 `forge:default-tool` 三个模板对应的 `IModelState` 对象。如此一来，可以通过 `IModelState` 的 `apply` 方法拿到不同视角下的 `TRSRTransformation`（封装在一个 `Optional` 中，因为的确有可能不存在），在某些时候这个数据相当有用。
+
 #### 物品模型使用 Forge BlockState V1
 
 没错，四种可用的变换模板里的 `forge:default-item` 实际上是可以给物品用的。具体来说，是这样操作的：
