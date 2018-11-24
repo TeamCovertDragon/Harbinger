@@ -36,6 +36,7 @@
     * [6.3.4 `ItemOverrideList`](chapter-6/custom-model/item-override.md)
 * [7. 实体](chapter-7/index.md)
 * [8. 药水与状态效果](chapter-8/index.md)
+  * [8.1 药水与属性修饰符](chapter-8/attributes-modifier.md)
 * [9. 附魔](chapter-9/index.md)
 * [10. 方块实体（TileEntity）](chapter-10/index.md)
 * [11. 网络 IO](chapter-11/index.md)
