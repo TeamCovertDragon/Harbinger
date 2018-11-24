@@ -74,6 +74,7 @@
   * [Forge 的扩展：`CommandTreeBase`](chapter-23/command-tree.md)
 * [24. Forge 权限系统](chapter-24/index.md)
 * [25. Forge 配置文件系统](chapter-25/index.md)
+  * [25.1 Forge 可视化配置文件编辑界面](chapter-25/config-gui.md)
 * [26. Forge 流体系统](chapter-26/index.md)
 * [27. Forge Capability 系统](chapter-27/index.md)
   * [27.1 Forge 内建的 Capability](chapter-27/built-in/index.md)
