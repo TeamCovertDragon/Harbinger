@@ -9,6 +9,7 @@ public class MyTool extends ItemTool {
 ```
 
 ### 附加篇：你持盾吗
+
 从 https://github.com/MinecraftForge/MinecraftForge/pull/4126 合并之后，我们可以自定义盾牌了。
 
 ```java

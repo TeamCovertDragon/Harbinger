@@ -10,6 +10,7 @@ public class MyFood extends ItemFood {
         // this.setAlwaysEdible();
     }
 
+    @Override
     protected void onFoodEaten(ItemStack stack, World world, EntityPlayer player) {
         // 会在玩家食用之后被调用，原版金苹果在这里追加多种药水效果
     }

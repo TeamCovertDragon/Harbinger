@@ -6,12 +6,14 @@
 public class MyCrop extends BlockCrops {
     // SRG func_149866_i
     @Nonnull
+    @override
     protected Item getSeed() {
         return MyModItems.MY_CROP_SEED;
     }
 
     // SRG func_149865_P
     @Nonnull
+    @override
     protected Item getCrop() {
         return MyModItems.MY_CROP_ITEM;
     }

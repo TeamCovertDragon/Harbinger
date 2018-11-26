@@ -15,6 +15,7 @@ public class MetaBlock extends Block {
         super(m, c);
     }
 
+    @Override
     public BlockStateContainer createBlockState() {
         return new BlockStateContainer(this, TYPE); // var-args
     }
