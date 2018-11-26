@@ -39,18 +39,18 @@ public final class ItemLoader {
 好了注册了，但是... 创造物品栏里没有你的新物品。当然你可以用 `/give <玩家名> <registry name>` 获得你的新物品，但你不觉得显示在创造模式物品栏里更方便么。
 
 ````java
-//我们需要一个CreativeTabs的实例，当然那个类下面就有原版的10个，可以直接拿来用，但是你不觉得有一个自己的更方便嘛...
-//一般是使用匿名内部类，就像这样。
+// 我们需要一个 CreativeTabs 的实例，当然那个类下面就有原版的 10 个，可以直接拿来用，
+// 但是你不觉得有一个自己的更方便吗……
+// 一般是使用匿名内部类，就像这样。
 public static final CreativeTabs EXAMPLE_CREATIVE_TAB = new CreativeTabs("example_tab") {
-    //根据Item获得对应的标签图标。
-    //当然，如果需要Metadata甚至NBT等数据的话，还有另一个方法可以用
-    public Item getIconItem() {
-        return Items.DIAMOND;
+    // 获得用作标签图标的 ItemStack。你大可以往里面塞各种奇奇怪怪的数据。
+    public ItemStack createIcon() {
+        return new ItemStack(Items.DIAMOND);
     }
 };
 
-//然后这样就可以了。
-//你可以考虑把下面这个东西塞进构造器里
+// 然后这样就可以了。
+// 你可以考虑把下面这个东西塞进构造器里
 public static Item yourItem = new ExampleItem().setCreativeTab(EXAMPLE_CREATIVE_TAB);
 ````
 
