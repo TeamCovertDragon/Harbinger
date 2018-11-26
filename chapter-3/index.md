@@ -44,8 +44,9 @@ public final class ItemLoader {
 public static final CreativeTabs EXAMPLE_CREATIVE_TAB = new CreativeTabs("example_tab") {
     //根据Item获得对应的标签图标。
     //当然，如果需要Metadata甚至NBT等数据的话，还有另一个方法可以用
-    public Item getIconItem() {
-        return Items.DIAMOND;
+    @Override
+    public ItemStack getIconItem() {
+        return new ItemStack(Items.DIAMOND);
     }
 };
 
@@ -64,6 +65,7 @@ yourItem.setCreativeTab(EXAMPLE_CREATIVE_TAB);
 //注意此名字和 registry name 不是一个概念。
 //这个名字仅用于国际化支持。
 //这个方法也返回 Item。
+//这些也可以考虑塞进构造器里
 yourItem.setUnlocalizedName("example_mod" + "." + "example_item");
 ````
 
