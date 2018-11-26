@@ -19,7 +19,7 @@ studentRepresentative = teacher.getRepresentative();
 homeworkList = homework.content();
 for (entry : homeworkList) {
     if (!studentRepresentative.validate(singleHomework)) {
-        studentRepresentative.boardcast("This homework has problem, please notify {} to fix it!", teacher);
+        studentRepresentative.broadcast("This homework has problem, please notify {} to fix it!", teacher);
     }
 }
 ````
