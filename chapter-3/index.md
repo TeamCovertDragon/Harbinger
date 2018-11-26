@@ -123,8 +123,8 @@ Minecraft 在这里采用了享元的概念：一种特定物品只对应一个 
 
 所谓 `Item` ，其实是对所有玩家通过 `ItemStack` 互动行为处理机制的逻辑所存放的类。
 
-所有 `ItemStack` 在被实例化的时候必定指定了一个 `Item` 实例作为它的类型，相应的，该 `ItemStack` 的所有互动行为 (右键、挖掘方块、攻击实体、渲染..etc) 都会通过调用指定的 `Item` 类的方法 (`onItemRightClick`、`onItemUseFinish`、`hitEntity`、`onBlockDestroyed`、`canHarvestBlock` ...etc) 来实现。相应的，这其中绝大多数方法的参数中都会包含一个 (ItemStack) 实例——用于确定该物品的具体状态。
+所有 `ItemStack` 在被实例化的时候必定指定了一个 `Item` 实例作为它的**类型**，相应的，该 `ItemStack` 的所有互动行为 (右键、挖掘方块、攻击实体、渲染..etc) 都会通过调用指定的 `Item` 类的方法 (`onItemRightClick`、`onItemUseFinish`、`hitEntity`、`onBlockDestroyed`、`canHarvestBlock` ...etc) 来实现。因此，这其中绝大多数方法的参数中都会包含一个 (ItemStack) 实例——用于确定该物品的具体**状态**。
 
-其实，通过复写这些方法，读者当然可以实现绝大部分自己想要的功能——但是十分麻烦，而且对其他mod的兼容性也会受影响(其实就是在造轮子)。
+其实，通过覆写这些方法，读者当然可以实现绝大部分自己想要的功能——但是十分麻烦，而且对其他mod的兼容性也会受影响(其实就是在造轮子)。
 
 在 3.1 中，笔者将会介绍一些 `Item` 类的子类以及 `Item` 类其他的一些特性，以进一步阐述如何实现 `Item` 类。不过在此之前，请读者确保自己已经对上面所说的东西充分理解了。
