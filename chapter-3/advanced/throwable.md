@@ -9,6 +9,7 @@ public class ItemInfiniteSnowball extends Item {
     }
 
 	// 当玩家拿着这无限雪球右键的时候会调用这个方法。我们在这里实现丢雪球的效果。
+    @Override
     public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {
         ItemStack item = player.getHeldItem(hand);
 		// 播放雪球被抛出去的声音——这个会在后面的章节中详细解释

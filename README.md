@@ -40,13 +40,13 @@ _`void foo(List<String> bar)` 和 `void foo(List<Ingeter> bar)` 能否在一个�
 
 如前所述，Java 的泛型由类型擦除实现，所以不能。它们的方法签名均为 `foo(Ljava/util/List;)V`。
 
-_`boolean contains(E e) { for (E e1 : this.data) { if (e1.equals(e)) return true; } return false; }` 的时间复杂度？_
+_`boolean contains(E e) { for (E e1 : this.data) { if (e1.equals(e)) return true; } return false; }` 的上界时间复杂度？_
 
 O(n)。
 
 _通常所说的 Stack Overflow（栈溢）中的 Stack 是指？_
 
-程序的运行栈，通常是调用一个方法时，所有 local variable 的存放地点。因此栈溢是指在递归过深等情况下栈上存满数据导致的错误。
+程序的运行栈，通常是调用一个方法时，所有局部变量的存放地点。因此栈溢是指在递归过深等情况下栈上存满数据导致的错误。
 
 _试用一句话解释递归，不要求精确。_
 
