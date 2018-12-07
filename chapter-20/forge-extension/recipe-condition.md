@@ -8,6 +8,8 @@ Forge 在原版的 JSON 合成表的基础上提供的四种扩展功能之一�
 
 ```json
 {
+  "type": "minecraft:crafting_shapeless",
+  "group": "my_mod:example",
   "conditions": [
     {
       "type": "minecraft:item_exists",
@@ -18,8 +20,6 @@ Forge 在原版的 JSON 合成表的基础上提供的四种扩展功能之一�
     "item": "minecraft:diamond_block",
     "count": 64
   },
-  "group": "my_mod:example",
-  "type": "minecraft:crafting_shapeless",
   "ingredients": [
       { "item": "biomesoplenty:mud" },
       { "item": "biomesoplenty:mud" }
@@ -31,6 +31,8 @@ Forge 在原版的 JSON 合成表的基础上提供的四种扩展功能之一�
 
 ```json
 {
+  "type": "minecraft:crafting_shapeless",
+  "group": "my_mod:example",
   "conditions": [
     {
       "type": "forge:mod_loaded",
@@ -41,8 +43,6 @@ Forge 在原版的 JSON 合成表的基础上提供的四种扩展功能之一�
     "item": "minecraft:diamond_block",
     "count": 64
   },
-  "group": "my_mod:example",
-  "type": "minecraft:crafting_shapeless",
   "ingredients": [
       { "item": "biomesoplenty:mud" },
       { "item": "biomesoplenty:mud" }
@@ -78,7 +78,7 @@ Forge 在原版的 JSON 合成表的基础上提供的四种扩展功能之一�
       ]
   }
   ```
-5. `forge:or` - 下面的例子展示了“如何在有下列 Mod 中的任意一个时加载此合成”。
+5. `forge:or` - 逻辑或。下面的例子展示了“如何在有下列 Mod 中的任意一个时加载此合成”。
   ```json
   {
       "conditions": [
@@ -116,7 +116,7 @@ public class ConfigBackedRecipeCondition implements IConditionFactory {
 }
 ```
 
-然后，在 `assets/[modid]/recipes/` 目录下新建 `_factories.json` 的文件，这样 Forge 就会识别到：
+然后，在 `assets/[modid]/recipes/` 目录下新建 `_factories.json` 的文件，并按下列格式填入新的 Condition 的名称和对应的类的 Canonical name，这样 Forge 就会识别到：
 
 ```json
 {
@@ -126,10 +126,12 @@ public class ConfigBackedRecipeCondition implements IConditionFactory {
 }
 ```
 
-最后，你的合成改成这个样子：
+最后，你的合成改成这个样子，注意那个 `enable`：
 
 ```json
 {
+  "type": "minecraft:crafting_shapeless",
+  "group": "my_mod:example",
   "conditions": [
     {
       "type": "enable"
@@ -139,8 +141,6 @@ public class ConfigBackedRecipeCondition implements IConditionFactory {
     "item": "minecraft:diamond_block",
     "count": 64
   },
-  "group": "my_mod:example",
-  "type": "minecraft:crafting_shapeless",
   "ingredients": [
       { "item": "minecraft:dirt" },
       { "item": "minecraft:dirt" }

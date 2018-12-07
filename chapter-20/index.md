@@ -6,9 +6,9 @@ Minecraft 从 1.12 起引入了使用技术性 JSON 文件的原版工作台合�
 
 ```json
 {
-  "result": { "item": "minecraft:diamond_block", "count": 64 },
-  "group": "my_mod:example",
   "type": "minecraft:crafting_shapeless",
+  "group": "my_mod:example",
+  "result": { "item": "minecraft:diamond_block", "count": 64 },
   "ingredients": [
       { "item": "minecraft:dirt", "data": 0 },
       { "item": "minecraft:dirt", "data": 0 }

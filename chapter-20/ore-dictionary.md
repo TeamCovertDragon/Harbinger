@@ -16,9 +16,9 @@ OreDictionary.addOre(new ItemStack(MyItems.copperOre), "oreCopper");
 
 ```json
 {
-    "result": { "item": "minecraft:diamond" },
     "type": "forge:ore_shaped",
     "group": "my_mod:example",
+    "result": { "item": "minecraft:diamond" },
     "pattern": [
         "XYX",
         "YXY",
@@ -53,14 +53,14 @@ OreDictionary.addOre(new ItemStack(MyItems.copperOre), "oreCopper");
 
 ```json
 {
-  "result": { "item": "minecraft:beacon" },
+  "type": "forge:ore_shaped",
   "group": "my_mod:example",
+  "result": { "item": "minecraft:beacon" },
   "pattern": [
     "ABC",
     "DEF",
     "GGG"
   ],
-  "type": "forge:ore_shaped",
   "key": {
       "A": { "item": "minecraft:diamond_block" },
       "B": { "item": "minecraft:gold_block" },
