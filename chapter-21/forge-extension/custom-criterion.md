@@ -1,6 +1,6 @@
 ## 自定义进度触发条件
 
-进度触发条件（Criterion Trigger）代表了解锁进度的某一个具体条件。一个进度的解锁可能会需要满足一个触发条件，或是多个触发条件的组合。虽然原版提供了相当丰富的触发条件，但我们仍然会不可避免地遇到需要自定义触发条件的情况。不过，写一个新的触发条件其实并不简单。一个完整的 `ICriterionTrigger<? extends AbstractCriterionInstance>` 的实现大约长这样：
+进度触发条件（Criterion Trigger）代表了解锁进度的某一个具体条件。一个进度的解锁可能会需要满足一个触发条件，或是多个触发条件的组合。虽然原版提供了相当丰富的触发条件，但我们仍然会不可避免地遇到需要自定义触发条件的情况。不过，写一个新的触发条件其实并不简单。一个完整的 `ICriterionTrigger<? extends ICriterionInstance>` 的实现大约长这样：
 
 ```java
 import net.minecraft.advancements.ICriterionTrigger;
