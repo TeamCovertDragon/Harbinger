@@ -6,10 +6,6 @@
 public class ExampleBlock extends Block {
     public ExampleBlock(Material material) {
         super(material);
-        //同样是不能有大写字母，即 snake_case
-        //此方法的用途很快会提到。
-        //此方法返回 Block，可组成调用链。
-        this.setRegistryName("example_block");
     }
 }
 ````
@@ -20,10 +16,14 @@ public class ExampleBlock extends Block {
 @Mod.EventBusSubsriber(modid = "mymodid")
 public final class BlockLoader {
 
-    // 你不需要手动调用此方法！Forge 会自动调用它的。
     @SubscribeEvent
     public static void registerBlock(RegistryEvent.Register<Block> event) {
-        event.getRegistry().register(myItem);
+        // 一定要为每一个方块提供一个注册名。注册名要求符合 Resource Location 的一般约定，
+        // 即不能使用大写字母。
+        event.getRegistry().register(
+            new ExampleBlock(Material.ROCK)
+            .setRegistryName("my_mod:example_block")
+        );
     }
 
 }
