@@ -70,6 +70,7 @@
   * [20.3 重新实现 `IRecipe`](chapter-20/custom-recipe.md)
   * [20.4 扩展篇：熔炉配方及燃料值](chapter-20/vanilla-furnace.md)
 * [21. 进度（Advancement）](chapter-21/index.md)
+  * [21.1 自定义进度触发条件](chapter-21/forge-extension/custom-criterion.md)
 * [22. 战利品表（Loot Table）](chapter-22/index.md)
 * [23. 命令](chapter-23/index.md)
   * [Forge 的扩展：`CommandTreeBase`](chapter-23/command-tree.md)
