@@ -76,7 +76,7 @@ WTF？为什么要讲这个？只有一个例子不够吗？
 "requirements": [ [ "a", "b" ], "c" ]
 ```
 
-相当于 `(a ∨ b) ∧ c`，即“必须达成 `c`，`a` 和 `b` 至少达成一个”。  
+相当于 `(a ∨ b) ∧ c` 或者 `(a+b).c` 或者 `a.c+b.c`；换言之，即“必须达成 `c`，`a` 和 `b` 至少达成一个”。  
 `requirements` 字段是可选的。当没有 `requirements` 字段时，默认为 `criteria` 字段中定义的所有条件都必须完成，等价于写 `"requirements": [ "a", "b", "c", ... ]`（`a ∧ b ∧ c ∧ ...`）。
 
 ### 有哪些 Criterion 可用？
@@ -85,4 +85,4 @@ https://minecraft-zh.gamepedia.com/%E8%BF%9B%E5%BA%A6#.E8.A7.A6.E5.8F.91.E5.99.A
 
 ### 能自己写 Criterion 吗？
 
-当然可以。TODO
+当然可以。参考[“自定义进度触发条件”](forge-extension/custom-criterion.md)一节获得详细信息。
