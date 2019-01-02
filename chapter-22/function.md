@@ -95,6 +95,7 @@ public final class Identity extends LootFunction {
         @Override
         public void serialize(JsonObject object, Identity functionObject, JsonSerializationContext context) {
             // 既然是 Identity，好像也没什么需要保存的信息。
+            // 值得一提的是……因为这样一个方法的存在，你可以自动生成 Loot Function 对应的 JSON，而不需要手写。
         }
 
         @Override
