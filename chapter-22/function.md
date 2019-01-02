@@ -40,12 +40,6 @@
 }).apply(lootItem);
 ```
 
-或者说这其实就是：
-
-```haskell
-apply :: (ItemStack -> ItemStack) -> ItemStack -> ItemStack
-```
-
 同样的道理我们可以给物品加上乱七八糟的 NBT 数据、属性（Attribute）等。
 
 ### 原版内建的战利品表函数
