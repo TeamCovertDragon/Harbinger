@@ -121,3 +121,7 @@ public final class CustomTrigger implements ICriterionTrigger<CustomTrigger.Inst
   ```
   2. 在适当的时候调用 `TRIGGER.trigger(player, ...)`，其中 `player` 是玩家实体，`...` 代表你需要的上下文信息。玩家实体的作用是提供 `PlayerAdvancements` 对象。上文中的示例代码使用了 `Context`——这是一个假想的 parameter object，在这里充当上下文的容器。
   3. `TRIGGER.trigger(player, ...)` 查表获得对应的 `Set<Listener<? extends ICriterionInstance>>`，若存在则遍历所有已知的 `ICriterionInstance`，并根据上下文过滤出所有满足触发条件的 `Listener<? extends ICriterionInstance>`。然后对所有满足条件的 `Listener<? extends ICriterionInstance>` 对象调用 `grantCriterion(PlayerAdvancements)` 方法。上文中示例代码之所以使用了单独的 `List` 是因为 Minecraft 会在 `grantCriterion` 被调用时清理不再使用的 `ICriterionInstance`，若处理不当，极易导致 `ConcurrentModificationException` 出现。<!-- TODO：照这么说那个 HashMap 可以改用 IdentityHashMap，直接使用 == 比较，绕开 Object.equals？-->
+
+### 真实案例：右击方块时触发的 criterion
+
+【施工中】
