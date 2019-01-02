@@ -21,21 +21,21 @@
 }
 ```
 
-与此同时它还追加了一个非常简单的自定义 Item Predicate 的系统。
+与此同时它还追加了一个非常简单的自定义 Item Predicate 的系统，可用于解决类似问题，免去重新造 Criterion 的麻烦。
 
 ```java
 import net.minecraft.advancements.critereon.ItemPredicate;
 import net.minecraftforge.advancements.critereon.ItemPredicates;
 
-public class CustomItemPredicate {
+public final class CustomItemPredicate {
     // 这个方法只需要在所有进度加载入游戏之前调用即可。
     public static void init() {
-        // 第二个参数接受的是 java.util.Function<JsonObject, ItemPredicate>
-        ItemPredicates.register(new ResourceLocation("my_mod", "custom"), CustomItemPredicate::fromJson)
+        // 第二个参数接受的是 java.util.function.Function<JsonObject, ItemPredicate>
+        ItemPredicates.register(new ResourceLocation("my_mod", "custom"), CustomItemPredicate::fromJson);
     }
 
     public static ItemPredicate fromJson(JsonObject json) {
-
+        return ...;
     }
 }
 ```

@@ -1,6 +1,8 @@
 ## 进度（Advancement）
 
-进度（Advancement）是 1.12 引入的，旨在取代旧版本中成就系统的新机制。既然是为取代成就而生，那么它的功能也就和成就基本一致了。不过它实际上功能要比成就强大，比如触发进度后的 callback（给予经验、执行指令等）。  
+进度（Advancement）是 1.12 引入的，旨在取代旧版本中成就系统的新机制。既然是为取代成就而生，那么它的功能也就和成就基本一致了。不过它实际上功能要比成就强大，比如触发进度后的 callback（给予经验、执行指令、从战利品表中抽奖等）、支持布尔逻辑组合的判据（Criteria）系统、自动生成的树状展示图等。
+
+> 插一句话，criteria 是 criterion 的复数形式。这个算是比较少见的一类不规则变化，和古典希腊语有关系。  
 
 ### 第一个进度
 
@@ -85,4 +87,4 @@ https://minecraft-zh.gamepedia.com/%E8%BF%9B%E5%BA%A6#.E8.A7.A6.E5.8F.91.E5.99.A
 
 ### 能自己写 Criterion 吗？
 
-当然可以。参考[“自定义进度触发条件”](forge-extension/custom-criterion.md)一节获得详细信息。
+当然可以。参考[“自定义进度触发条件”](forge-extension/custom-criterion.md)一节获得详细信息。同时，对于 `minecraft:inventory_changed` 等牵扯到物品判定的 criteria，还有一个 Forge patch 进去的[自定义 Item Predicate 的系统](forge-extension/custom-item-predicates.md)可用。
