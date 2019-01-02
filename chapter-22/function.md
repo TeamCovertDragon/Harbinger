@@ -53,7 +53,8 @@
   - `looting_enchant`：允许抢夺附魔影响抽到的物品数量。
   - `set_attributes`：给物品加属性（Attribute）。
   - `set_count`：无条件修改物品数量。可修改为某个固定数值，或随机修改为某个范围内的数值。
-  - `set_damage`：无条件修改物品损伤值。有鉴于第三章中提及的 metadata 和 damage 耦合的事实，这个也可以用于设定 metadata。和 `set_count` 一样，支持固定数值或随机数值范围。
+  - `set_damage`：无条件修改物品损伤值。不可和 `set_data` 互换。和 `set_count` 一样，支持固定数值或随机数值范围。
+  - `set_data`：无条件修改物品 metadata。不可和 `set_damage` 互换。和 `set_count` 一样，支持固定数值或随机数值范围。<!-- 为什么这个连 Minecraft Wiki 上都没有记载？！-->
   - `set_name`：无条件赋予物品显示名称。参考铁砧重命名。
   - `set_nbt`：无条件赋予物品 NBT 数据。这里的 NBT 数据需要写成 String 的形式。
 
@@ -101,6 +102,7 @@ public final class Identity extends LootFunction {
         @Override
         public Identity deserialize(JsonObject object, JsonDeserializationContext context, LootCondition[] conditions) {
             // 既然是 Identity，好像也没什么需要恢复的信息。那就直接把 conditions 传过去就好了。
+            // 这里传入的 conditions 颇有依赖注入的意思。
             return new Identity(conditions);
         }
     }
