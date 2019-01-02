@@ -1,6 +1,6 @@
 ### `IRecipeFactory`
 
-顾名思义，Forge 提供的 `IRecipe` 的工厂类，本质上是个反序列化器，用于从 JSON 中构建一个 `IRecipe` 实例。关于实现一个新的 `IRecipe` 的要求可参考[这一章](../custom-recipe.md)。
+Forge 在原版的 JSON 合成表的基础上提供的四种扩展功能之一。顾名思义，这个接口代表一个 `IRecipe` 的抽象工厂，本质上是个反序列化器，用于从 JSON 中构建一个 `IRecipe` 实例。关于实现一个新的 `IRecipe` 的要求可参考[这一章](../custom-recipe.md)。
 
 ```java
 package my_mod;
