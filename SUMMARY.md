@@ -63,7 +63,7 @@
 * [19. 新维度](chapter-19/index.md)
 * [20. 合成表](chapter-20/index.md)
   * [20.1 Forge 的扩展](chapter-20/forge-extension/index.md)
-    * [20.1.1 矿物词典（Ore Dictionary）](chapter-20/ore-dictionary.md)
+    * [20.1.1 矿物词典（Ore Dictionary）](chapter-20/forge-extension/ore-dictionary.md)
     * [20.1.2 `IConditionFactory`](chapter-20/forge-extension/condition.md)
     * [20.1.3 `IIngredientFactory`](chapter-20/forge-extension/ingredient-factory.md)
     * [20.1.4 `IRecipeFactory`](chapter-20/forge-extension/recipe-factory.md)
