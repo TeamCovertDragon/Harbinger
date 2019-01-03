@@ -1,6 +1,6 @@
 ### `IConditionFactory`
 
-Forge 在原版的 JSON 合成表的基础上提供的四种扩展功能之一。如名字所示，它可以根据 JSON 合成中给出的条件，产生一个 `BooleanSupplier` 对象，用来决定该 JSON 合成表是否应当注册。
+Forge 在原版的 JSON 合成表的基础上提供的五种扩展功能之一。如名字所示，它可以根据 JSON 合成中给出的条件，产生一个 `BooleanSupplier` 对象，用来决定是否使用某个 JSON 合成表或是某个命名常量。
 
 #### 为什么会有这么一个东西？
 
