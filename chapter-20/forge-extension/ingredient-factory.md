@@ -1,6 +1,6 @@
 ### `IIngredientFactory`
 
-Forge 在原版的 JSON 合成表的基础上提供的四种扩展功能之一。如名字所示，它是个将 JSON 转化为 `Ingredient` 实例的抽象工厂，本质上是 JSON 的反序列化器。
+Forge 在原版的 JSON 合成表的基础上提供的五种扩展功能之一。如名字所示，它是个将 JSON 转化为 `Ingredient` 实例的抽象工厂，本质上是 JSON 的反序列化器。
 
 ```java
 package my_mod;
