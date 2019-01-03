@@ -56,7 +56,7 @@ Forge 在原版的 JSON 合成表的基础上提供的四种扩展功能之一�
   ```json
   { "conditions": [ { "type": "minecraft:item_exists", "item": "my_another_mod:awesome_item" } ] }
   ```
-2. `forge:mod_loaded` - 在有指定 Mod 使允许注册此合成。`modid` 字段填入对应 Mod 的 mod id。
+2. `forge:mod_loaded` - 在有指定 Mod 时允许注册此合成。`modid` 字段填入对应 Mod 的 mod id。
   ```json
   { "conditions": [ { "type": "forge:mod_loaded", "modid": "my_another_mod" } ] }
   ```
