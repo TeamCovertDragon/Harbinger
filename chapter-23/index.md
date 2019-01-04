@@ -5,7 +5,7 @@ Minecraft 有一个命令系统。这个系统的功能就是它的字面意思�
 
 ### 一个 Hello, world 风格的命令
 
-一个具体的命令代表了一个 `ICommand` 的实现。所以首先要实现 `ICommand` 接口：
+一个 `ICommand` 的实现代表了一个具体的命令。所以首先要实现 `ICommand` 接口：
 
 ````java
 // 我们选择直接继承 CommandBase，因为从头实现 ICommand 是个很费劲的事情。
