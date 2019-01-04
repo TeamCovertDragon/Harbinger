@@ -70,7 +70,7 @@ WTF？为什么要讲这个？只有一个例子不够吗？
 对比第一个进度 JSON，可以发现第二个进度 JSON 没有 `display.background`。那个字段是给根进度准备的，用于决定整个进度标签页的背景纹理。  
 同时第一个进度 JSON 中没有 `requirements` 字段。这实际上有一点布尔逻辑在里面。
 
-### 布尔逻辑
+#### 布尔逻辑
 
 `requirements` 字段定义了进度的具体触发条件。
 
@@ -81,10 +81,19 @@ WTF？为什么要讲这个？只有一个例子不够吗？
 上述 JSON 相当于 `(a || b) && c`（`(a ∨ b) ∧ c`、`(a+b).c` 或者 `a.c+b.c`）；换言之，即“必须达成 `c`，对于 `a` 和 `b` 则任选一个达成即可”。  
 `requirements` 字段是可选的。当没有 `requirements` 字段时，默认为 `criteria` 字段中定义的所有条件都必须完成，等价于写 `"requirements": [ "a", "b", "c", ... ]`（`a ∧ b ∧ c ∧ ...`）。
 
-### 有哪些 Criterion 可用？
+#### 有哪些 Criterion 可用？
 
 https://minecraft-zh.gamepedia.com/%E8%BF%9B%E5%BA%A6#.E8.A7.A6.E5.8F.91.E5.99.A8.E5.88.97.E8.A1.A8
 
-### 能自己写 Criterion 吗？
+#### 能自己写 Criterion 吗？
 
 当然可以。参考[“自定义进度触发条件”](forge-extension/custom-criterion.md)一节获得详细信息。同时，对于 `minecraft:inventory_changed` 等牵扯到物品判定的 criteria，还有一个 Forge patch 进去的[自定义 Item Predicate 的系统](forge-extension/custom-item-predicates.md)可用。
+
+#### 奖励？
+
+不幸的是，进度只有四种奖励可用，且 Forge 暂未提供任何扩展：
+
+  - `experience` - 经验值，即直接给予玩家经验值
+  - `recipes` - 原版工作台合成，即直接为玩家解锁该合成配方
+  - `loot` - 战利品表，即从指定表中抽取物品作为奖励
+  - `function` - [函数](../chapter-23/function.md)，即直接以玩家身份执行此函数。
