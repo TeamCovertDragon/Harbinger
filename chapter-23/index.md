@@ -1,7 +1,7 @@
 ## 命令
 
-Minecraft 有一个命令系统。这个系统的功能就是它的字面意思：给 Minecraft 这个程序下达奇奇怪怪的命令，要求其完成。  
-对大多数玩家来说，命令系统的入口就是普通的聊天窗口。所有以 `/` 开头的输入都会被视作是一条命令。关于原版命令的内容在 [Minecraft Wiki](https://minecraft-zh.gamepedia.com/%E5%91%BD%E4%BB%A4) 上已有详细介绍，这里不做赘述。
+Minecraft 有一个命令系统。这个系统的功能就是它的字面意思：以纯文本的形式给 Minecraft 这个程序下达奇奇怪怪的命令，要求其完成。  
+因为是纯文本，对大多数玩家来说，命令系统的入口就是普通的聊天窗口。所有以 `/` 开头的输入都会被视作是一条命令。关于原版命令的内容在 [Minecraft Wiki](https://minecraft-zh.gamepedia.com/%E5%91%BD%E4%BB%A4) 上已有详细介绍，这里不做赘述。
 
 ### 一个 Hello, world 风格的命令
 
@@ -58,14 +58,15 @@ public class MyCommand extends CommandBase {
 
 是不是快晕过去了？实际上你不需要在意 `ICommandSender` 的具体类型。举个例子，你调用 `sendMessage` 方法，如果这个 `ICommandSender` 根本没可能看到这个消息的话，这个方法也就会是 no-op，无需对 `ICommandSender` 的类型有任何猜测。
 
-### 关于目标选择器 `@p`、`@r`、`@a`、`@e`、`@s`
+### 关于[目标选择器][ref-target-selector] `@p`、`@r`、`@a`、`@e`、`@s`
 
-你不需要在 `execute` 中处理这些东西，因为这些东西都会被 Minecraft 提前展开成真正的 `ICommandSender` 对象，然后对所有选中的对象都执行一遍命令，你只需要关心 `ICommandSender` 即可。  
-实际上，你也无法通过 `execute` 方法的 `args` 参数拿到这些东西，正如前文所说，Minecraft 会把目标选择器展开成真正的 `ICommandSender` 对象，此后 Minecraft 就不会再把这些东西作为命令的参数传入具体的 `ICommand` 的 `execute` 方法中了。
+你不需要在 `execute` 中处理这些东西，因为这些东西都会被 Minecraft 提前帮你展开好。具体来说，是 Minecraft 首先会根据目标选择器获取一个符合要求的 `List<Entity>`，然后，对于你收到的参数来说，原本是目标选择器的地方会变成一个字符串形式的 UUID，这个 UUID 代表了一个确定的实体。这个 UUID 即是 `Entity.getUniqueID`（`func_110124_au`）的返回值；Forge 对 `Entity` 类的 patch 中也有一个历史遗留的 `getPersistentID` 方法会返回这个 UUID。不过你不需要手动写根据 UUID 查 `Entity` 的方法——`CommandBase.getEntity`（`func_184884_a`）就可以搞定这个问题了。
+
+[ref-target-selector]: https://minecraft-zh.gamepedia.com/%E5%91%BD%E4%BB%A4#.E7.9B.AE.E6.A0.87.E9.80.89.E6.8B.A9.E5.99.A8
 
 ### 注册
 
-实际上命令是纯服务器端的东西，这也是为什么服务器端插件的功能很多都是围绕命令展开的原因——它只需要客户端发送命令即可。
+实际上命令是纯服务器端的东西，这也是为什么服务器端插件的功能很多都是围绕命令展开的原因——它只需要客户端把命令当作一般聊天消息发送即可。
 
 ```java
 // 一般的命令需要这样注册。请注意，这个事件是基于逻辑服务器的。
