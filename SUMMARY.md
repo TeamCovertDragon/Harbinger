@@ -47,8 +47,9 @@
   * [11.1 TileEntity 内建的解决方案](chapter-11/tile-entity-sync.md)
   * [11.2 Container 内建的解决方案](chapter-11/container-sync.md)
   * [11.3 实体的解决方案](chapter-11/entity-sync.md)
-  * [11.4 `SimpleNetworkWrapper`](chapter-11/built-in-solution/simple-network-wrapper.md)
-  * [11.5 `FMLEventChannel`](chapter-11/built-in-solution/fml-event-channel.md)
+  * 11.4 Forge 的扩展
+    * [11.4.1 `SimpleNetworkWrapper`](chapter-11/forge-extension/simple-network-wrapper.md)
+    * [11.4.2 `FMLEventChannel`](chapter-11/forge-extension/fml-event-channel.md)
 * [12. 特种模型](chapter-12/index.md)
   * [12.1 TESR](chapter-12/tesr.md)
   * [12.2 Forge 的扩展](chapter-12/forge-extension/index.md)
