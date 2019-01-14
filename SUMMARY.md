@@ -104,7 +104,7 @@
   * [27.2 属于你自己的第一个 Capability](chapter-27/custom.md)
 * [28. 跨 Mod 兼容及 Add-on 制作](chapter-28/index.md)
   * [28.1 跨 Mod 通信（Inter-Mod Communication，IMC）](chapter-28/imc.md)
-  * [28.2 使用第三方 Capability](chapter-28/3rd-party-cap.md)
+  * [28.2 使用第三方 Capability](chapter-28/foreign-capabilities.md)
 * [29. MCP](chapter-29/index.md)
 
 <!--
