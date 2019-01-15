@@ -144,7 +144,7 @@ _Yes, that's it. 拒绝拖泥带水，我们开始吧。_
 [ref-fail-status]: https://gist.github.com/xt9/55a04226728cebe729fe37cc7aa9d10f#fail-forge-abstraction-layer
 [ref-sponge-docs]: https://docs.spongepowered.org/stable/zh-CN/
 
-最后，本教程基于 Minecraft 1.12.2 Release 和足够新的 Forge。**如无特殊说明，本教程基于 Minecraft 1.12.2 Release 和 Forge 14.23.4.2772，MCP Mapping 版本使用 `stable_39`。本教程原则上不涉及任何旧版内容。**（关于 MCP Mapping 的说明可在[第二十九章](chapter-29/index.md)找到）
+最后，本教程基于 Minecraft 1.12.2 Release 和足够新的 Forge。**如无特殊说明，本教程基于 Minecraft 1.12.2 Release 和 Forge 14.23.5.2772，MCP Mapping 版本使用 `stable_39`。本教程原则上不涉及任何旧版内容。**（关于 MCP Mapping 的说明可在[第二十九章](chapter-29/index.md)找到）  
 此外，本教程使用的目录分隔符（directory separator）统一为 `/`。
 
 另外，几个建议：
