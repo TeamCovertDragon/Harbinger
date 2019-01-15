@@ -8,9 +8,9 @@
 
 ```groovy
 dependencies {
-    deobfCompile "net.mezz:jei:3.1.3.13:api"
+    deobfCompile "mezz.jei:jei_1.12.2:4.13.1.220"
 
-    runtime "net.mezz:jei:3.1.3.13"
+    runtime group: 'mezz.jei', name: 'jei_1.12.2', version: '4.13.1.220'
 }
 ```
 
@@ -18,18 +18,33 @@ dependencies {
 
 ### 那我想添加对某某 Mod 的兼容！怎么做！
 
-不好意思没有定式。这种东西应该直接读对应的文档。  
-唯一一件有定式的事是：如何正确声明对某个 Mod 的依赖关系。
+不好意思没有定式。这种东西应该直接读对应的文档。
 
-```
-dependencies = "required-after:mod_a;after:mod_b;before:mod_c;required-client:mod_d"
+### 正确声明依赖
+
+虽然跨 Mod 兼容没有定式，但 FML 依然允许你指定你自己的 Mod 的加载顺序。
+
+```java
+@Mod(
+        modid = "my_mod",
+        name = "Example Mod",
+        version = "0.1.0",
+        dependencies = "required-after:mod_a;after:mod_b;before:mod_c;required-client:mod_d"
+)
 ```
 
-<!-- TODO 解释这串字符串的含义-->
+<!-- https://github.com/MinecraftForge/MinecraftForge/pull/4403 -->
+<!-- TODO 这样解释未免太粗暴了 -->
+
+|Directive|含义|
+|:------|:------|
+|`required`|声明对指定 Mod 的硬依赖。缺失对应 Mod 时 FML 会提示缺失 Mod。|
+|`after`|声明在指定 Mod 之后加载。若声明了 Mod 的版本范围，则会在 Mod 版本不对时提示缺失 Mod。不安装对应 Mod 时不会提示错误。|
+|`before`|声明在指定 Mod 之前加载。若声明了 Mod 的版本范围，则会在 Mod 版本不对时提示缺失 Mod。不安装对应 Mod 时不会提示错误。|
+|`server`|声明只在物理服务器端使用此依赖项。|
+|`client`|声明只在物理客户端使用此依赖项。|
 
 ### 一些不成文的规矩
-
-漫长的岁月里社区居然进化出一堆不成文的规矩...比如
 
   * 矿物词典名一定形如 `ingotIron`、`gemDiamond`，即把形态放前面，物质类别放后面，小写驼峰。
   * 在 `PostInitializationEvent` 中处理跨 Mod 兼容。实际上这个的意义不是特别大了，但在少数情况下还是相当有用的。
