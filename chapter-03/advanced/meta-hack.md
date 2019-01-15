@@ -29,16 +29,17 @@ public class MultiMetaItem extends Item {
     // 让带合适 Meta 的物品显示在创造模式物品栏里。
     // 实际上这个方法控制该物品在创造模式物品栏中显示的所有具体物品。
     // 比方说你可以用这个来显示一个没电的电钻和一个充满电的电钻（参考 IC2）。
-    @SideOnly(Side.CLIENT) //这个的解释在后面的章节中会讲到
     @Override
-    public void getSubItems(Item item, CreativeTabs tabs, List<ItemStack> list) {
-        // ItemStack表示“一堆数量若干的物品”。
-        // 构造器中，第一个参数可以是 Item 也可以是 Block（有对应的重载）
-        // 第二个参数是数量。第三个参数即是 meta 值。
-        // 若省略第三个参数则默认为 0。
-        // 若省略第二个参数则第三个参数也必须省略，默认为数量 1，meta 为 0。
-        list.add(new ItemStack(item, 1, 0));
-        list.add(new ItemStack(item, 1, 1));
+    public void getSubItems(CreativeTabs tabs, List<ItemStack> list) {
+        if (this.isInCreativeTab(tab)) {
+            // ItemStack表示“一堆数量若干的物品”。
+            // 构造器中，第一个参数可以是 Item 也可以是 Block（有对应的重载）
+            // 第二个参数是数量。第三个参数即是 meta 值。
+            // 若省略第三个参数则默认为 0。
+            // 若省略第二个参数则第三个参数也必须省略，默认为数量 1，meta 为 0。
+            list.add(new ItemStack(item, 1, 0));
+            list.add(new ItemStack(item, 1, 1));
+        }
     }
 }
 ```
