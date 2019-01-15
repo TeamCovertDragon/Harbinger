@@ -14,7 +14,7 @@ dependencies {
 }
 ```
 
-不，其实还是有一点小差别的：`deobfCompile` 和 `deobfProvided`。这两个 `configuration` 都是 ForgeGradle 提供的，它们的存在和 MCP 有关系，具体细节会在第二十九章（也就是下一章）讲到。
+不，其实还是有一点小差别的：`deobfCompile` 和 `deobfProvided`。这两个 `configuration` 都是 ForgeGradle 提供的，它们的存在和 MCP 有关系，具体细节会在[第二十九章](../chapter-29/index.md)讲到。
 
 ### 那我想添加对某某 Mod 的兼容！怎么做！
 
