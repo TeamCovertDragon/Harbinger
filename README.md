@@ -135,27 +135,31 @@ _Yes, that's it. 拒绝拖泥带水，我们开始吧。_
   * 这一条比较重要，如果有对面向对象的认识，甚至对 Java 这门编程语言的要求都可以降下来。
 * 你没有退路。要么一开始就不要做，要么一路走到黑，中途退出只会让你在新版本懵逼。
   * 对了，写多了 Minecraft 的 Mod 可能会有强烈的副作用，如果屏幕前的你打算以此入门编程，请三思。
-  * 不要有任何怀疑，Forge 的设计是“只保持某个 Minecraft 主要版本内的二进制兼容”，跨版本兼容是不可能的。Minecraft 更新一次实际上就是 Forge 进行 Breaking change 的窗口，而且这个窗口开放的时间往往也很短。你要知道，MinecraftForge/FAIL 已经停止了。
+  * 不要有任何怀疑，Forge 的设计是“只保持某个 Minecraft 主要版本内的二进制兼容”，跨版本兼容是不可能的。Minecraft 更新一次实际上就是 Forge 进行 Breaking change 的窗口，而且这个窗口开放的时间往往也很短。要知道 FAIL 已经停止开发了。<!-- FAIL 仓库的地址原本位于 https://github.com/MinecraftForge/FAIL -->
     * FAIL 是 Forge Abstraction Interpertation Layer（Forge 抽象与解释层）的首字母缩略词。
     * FAIL 这个单词本身的含义是“失败”。某种意义上的自嘲。
     * [事实上也的确停止开发了][ref-fail-status]。如果你真的很在意跨 Minecraft 版本的兼容性，[Sponge][ref-sponge-docs]。
 * 代码要保持整洁、高效。
-
-[ref-fail-status]: https://gist.github.com/xt9/55a04226728cebe729fe37cc7aa9d10f#fail-forge-abstraction-layer
-[ref-sponge-docs]: https://docs.spongepowered.org/stable/zh-CN/
 
 最后，本教程基于 Minecraft 1.12.2 Release 和足够新的 Forge。**如无特殊说明，本教程基于 Minecraft 1.12.2 Release 和 Forge 14.23.5.2772，MCP Mapping 版本使用 `stable_39`。本教程原则上不涉及任何旧版内容。**（关于 MCP Mapping 的说明可在[第二十九章](chapter-29/index.md)找到）  
 此外，本教程使用的目录分隔符（directory separator）统一为 `/`。
 
 另外，几个建议：
 * 请务必时常关注 GitHub 上 MinecraftForge/MinecraftForge 的 commit 以及 Pull Requests。这是你获得第一手信息的最简单还最可靠的方式（更何况，如果你在国内，别的方式对你来说，不仅是奢望，效率还不怎么高）。
-* 请务必时常关注 [Forge 自己的文档](http://mcforge.readthedocs.io/en/latest/)。有能力的读者，请务必考虑协助他们补全文档（位于 https://github.com/MinecraftForge/Documentation）。
-  * 非正式的中文翻译：http://mcforge-cn.readthedocs.io/zh/latest/ ——更新并不及时。
+* 请务必时常关注 [Forge 自己的文档][ref-forge-doc]。有能力的读者，请务必考虑协助他们补全文档（位于[这里][ref-forge-doc-src]）。
+  * 更新并不及时的[非正式中文翻译][ref-forge-doc-translation]，实在看不懂英语的话可以用来救急。
 * 欧美社区的 Modder 很多都常驻在一些 Discord 服务器中，比如 Minecraft Mod Development，在这些 Discord 服务器里问他们问题也许能得到详尽的解答。
   * 英语要求不需要强调第二次。
   * 注意不规则拼写，拿不定的时候放出声读一读。
   * 海量 meme 警告，可以考虑潜水收图。
   * 遵守一切频道相关的规定。发错频道的后果自负。huahuahuahua
   * 多数开发者的标准比较高（`With great power comes with great responsibility`），问问题时想清楚要问什么，不要拐弯抹角，直接把最开始的问题拿出来，而不是问“你觉得可行的方案如何去实现”。（即避免 XY 问题。）
-  * 善用各类粘贴箱（paste bin）。国内的话 https://paste.ubuntu.com/ 就可以。
+  * 善用各类粘贴箱（paste bin）。国内的话 [Ubuntu PasteBin][ref-ubuntu-paste-bin] 就可以。
   * 因为国内国外都有熊孩子和 troll，所以很多人可能并没有耐心。直接“Go to learn Java”的回复并不少见。
+
+[ref-fail-status]: https://gist.github.com/xt9/55a04226728cebe729fe37cc7aa9d10f#fail-forge-abstraction-layer
+[ref-sponge-docs]: https://docs.spongepowered.org/stable/zh-CN/
+[ref-forge-doc]: http://mcforge.readthedocs.io/en/latest/
+[ref-forge-doc-src]: https://github.com/MinecraftForge/Documentation
+[ref-forge-doc-translation]: http://mcforge-cn.readthedocs.io/zh/latest/
+[ref-ubuntu-paste-bin]: https://paste.ubuntu.com/
