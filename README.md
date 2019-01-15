@@ -80,28 +80,28 @@ Spigot 还在更新啊？
 
 _我不是指 API 本身，而是 API 的实现——CraftBukkit、Spigot、Cauldron、et al.——被打得不成样子。多亏 Spigot 力挽狂澜而得以有现在，但现在早已不再是 Bukkit 的黄金时代。一定要说的话，我会用“白银时代”来描述现在的 Bukkit。而 Sponge 呢，则还在苦苦 debug、补 Documentation、以及 **API Breaking Change**。_
 
-但是…… 隔壁还有一个 MinecraftForge 你怎么没提？
+但是…… 隔壁还有一个 Forge 你怎么没提？
 
-_啊不好意思忘记了。但有一个问题，MinecraftForge 是不是 API？  
-当然，不论是 MinecraftForge，还是 FML，都没完全承认过它自己是 API。任何类似于“Forge 是 Minecraft 的 API”的说法，都是从方便理解这个角度出发的。_  
+_啊不好意思忘记了。但有一个问题，Forge 是不是 API？  
+不论是 Forge，还是 FML，都没承认过它自己只是 API。任何类似于“Forge 是 Minecraft 的 API”的说法，都是从方便理解这个角度出发的。_  
 
-所以 MinecraftForge 是个什么呢？它是不是 Minecraft 的一个非正式 API？
+所以 Forge 是个什么呢？它是不是 Minecraft 的一个非正式 API？
 
-_就“Forge 是不是 API”这个问题，笔者回答是这样的：Forge 比 FML 更符合 API 的定义。Forge 由一些抽象层以及实用工具类组成；FML 则纯粹是负责 Mod 加载以及共存的。如果单讨论 MinecraftForge，同时抛开 FML 和 ForgeGradle 不谈，那么 MinecraftForge 它本身在某种程度上确实是一个 API。但是，通常语境中的 Forge 同时包含了 FML 和 MinecraftForge，而且 FML 在 1.8 的时候也合并入了 Forge（包名从 `cpw.mods.fml` 变为 `net.minecraftforge.fml`）。  
-总而言之，我们至少可以将 MinecraftForge 称之为“框架”。这个框架下有各种标准化的库，Mod 只要使用了这些标准化的库就能保证与其他 Mod 基本兼容。_  
+_就“Forge 是不是 API”这个问题，我是这样认为的：Forge 比 FML 更符合 API 的定义。Forge 由一些抽象层以及实用工具类组成；FML 则纯粹是负责 Mod 加载以及共存的。如果单讨论 Forge，同时抛开 FML 和 ForgeGradle 不谈，那么 Forge 它本身在某种程度上确实是一个 API。但是，通常语境中的 Forge 同时包含了 FML 和 Forge，而且 FML 在 1.8 的时候也合并入了 Forge，其包名也从 `cpw.mods.fml` 变为 `net.minecraftforge.fml`。是的，FML 和 Forge 最开始不是同一批人开发的，但后来两者合作逐渐加深，直到改包名。  
+总而言之，我们至少可以将 Forge 称之为“框架”。这个框架下有各种标准化的库，Mod 只要使用了这些标准化的库就能保证与其他 Mod 基本兼容。_  
 
 那 FML 是……？
 
-_MinecraftForge 在 GitHub 上的仓库的简介写到："Modifications to the Minecraft base files to assist in compatibility between mods." 这也就意味着，它是一个所谓的兼容层，即 Compatibility Layer。作为兼容层，MinecraftForge 的使命是：保证用户可以让各种各样的 Mod 安装在同一个游戏实例中，并能正常玩耍。通常，社区管这个游戏实例叫“整合包”，或者用欧美的说法，modpack。  
+_Forge 在 GitHub 上的仓库的简介写到："Modifications to the Minecraft base files to assist in compatibility between mods." 这也就意味着，它是一个所谓的兼容层，即 Compatibility Layer。作为兼容层，Forge 的使命是：保证用户可以让各种各样的 Mod 安装在同一个游戏实例中，并能正常玩耍。通常，社区管这个游戏实例叫“整合包”，或者用欧美的说法，modpack。  
 也许你对历史没什么了解。FML 的全称是 Forge Mod Loader。想当初 Mod 安装的流程基本都是“解压你下载到的 zip，然后把文件拖入 minecraft.jar 中”。这样一来，两个 Mod 就会因为同时修改一个文件而无法安装到一起。直到有了像是 Risugami 和 SDK 这样的 Mod 加载器，这时 Mod 开发者们只需要在这样的加载器的基础上开发 Mod 就可以了。
-正因有 MinecraftFogre 和 FML，以及它的前辈——Risugami's ModLoader、SDK Loader、et alias，的存在，Modded Minecraft 社区才得以有了今天的样子。Behold, the Feed The Beast! Behold, the Technic! Behold, the ATLauncher!  
+正因有 Fogre 和 FML，以及它的前辈——Risugami's ModLoader、SDK Loader、et alias，的存在，Modded Minecraft 社区才得以有了今天的样子。Behold, the Feed The Beast! Behold, the Technic! Behold, the ATLauncher!  
 扯远了。但，不是 API 就意味着它的稳定性不如一个抽象化的 API 好。没有了稳定性的保证，MinecraftForge 就不得不面临一个问题：没有稳定的 Documentation。  
 哎。可怜那些硬啃 Minecraft 反编译结果的 Modder。是先人的努力造就了今天的 MCP Mapping，也是先人们的努力造就了今天的社区。你看现在的 Forge，有很多东西都是社区互相妥协的结果。矿物词典、流体系统、如此种种。It is always about compatibility, and to a certain extent, "correctness". It was. It is. It will be._
 
 原来如此。换言之，我们今天所拥有的一切，都是踩在先辈们的肩膀上才得到的吗。
 
 _正是如此。  
-也正因此，摆在你眼前的这本册子，的存在意义——一个全面的，基于 MinecraftForge 的，中文 Minecraft Mod 开发指南——才得以成立。_
+也正因此，摆在你眼前的这本册子，的存在意义——一个全面的，基于 Forge 的，中文 Minecraft Mod 开发指南——才得以成立。_
 
 That's it.
 
@@ -110,7 +110,7 @@ _Yes, that's it. 拒绝拖泥带水，我们开始吧。_
 ……  
 ……  
 
-[CAUGHT EXCEPTION! java.lang.IOException: java.lang.EOFException: Unexpected EOF]  
+[EXCEPTION CAUGHT ! java.lang.IOException: java.lang.EOFException: Unexpected EOF]  
 [TERMINATING LISTENING THREAD...]  
 [RESTORING TO LAST NORMAL STATUS...]  
 [EXPUNGING ALL TRACE...]  
@@ -131,7 +131,7 @@ _Yes, that's it. 拒绝拖泥带水，我们开始吧。_
   > 来源：知乎  
   > 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处  
 
-* 要对面向对象的软件设计模式有一个粗略的认识。
+* 要对面向对象的软件设计模式有一定认识。
   * 这一条比较重要，如果有对面向对象的认识，甚至对 Java 这门编程语言的要求都可以降下来。
 * 你没有退路。要么一开始就不要做，要么一路走到黑，中途退出只会让你在新版本懵逼。
   * 对了，写多了 Minecraft 的 Mod 可能会有强烈的副作用，如果屏幕前的你打算以此入门编程，请三思。
@@ -144,16 +144,16 @@ _Yes, that's it. 拒绝拖泥带水，我们开始吧。_
 [ref-fail-status]: https://gist.github.com/xt9/55a04226728cebe729fe37cc7aa9d10f#fail-forge-abstraction-layer
 [ref-sponge-docs]: https://docs.spongepowered.org/stable/zh-CN/
 
-最后，本教程基于 Minecraft 1.12.2 Release 和足够新的 Forge。**如无特殊说明，均以 Forge 14.23.4.2772 为准，MCP Mapping 版本使用 `stable_39`。本教程原则上不涉及任何旧版内容。**（关于 MCP Mapping 的相关内容可直接阅读第二十九章的内容）
+最后，本教程基于 Minecraft 1.12.2 Release 和足够新的 Forge。**如无特殊说明，本教程基于 Minecraft 1.12.2 Release 和 Forge 14.23.4.2772，MCP Mapping 版本使用 `stable_39`。本教程原则上不涉及任何旧版内容。**（关于 MCP Mapping 的说明可在[第二十九章](chapter-29/index.md)找到）
 此外，本教程使用的目录分隔符（directory separator）统一为 `/`。
 
 另外，几个建议：
 * 请务必时常关注 GitHub 上 MinecraftForge/MinecraftForge 的 commit 以及 Pull Requests。这是你获得第一手信息的最简单还最可靠的方式（更何况，如果你在国内，别的方式对你来说，不仅是奢望，效率还不怎么高）。
-* 请务必时常关注 http://mcforge.readthedocs.io/en/latest/ 。有能力的读者，请务必考虑协助他们补全文档（位于 MinecraftForge/Documentation）。
-  * 非正式的中文翻译：http://mcforge-cn.readthedocs.io/zh/latest/ ——更新不一定及时。
-* 欧美社区的 Modder 很多都常驻在一些 Discord 服务器中，比如 Minecraft Mod Development，在这些 Discord 服务器里问他们问题通常都能得到详尽的解答。
+* 请务必时常关注 http://mcforge.readthedocs.io/en/latest/。有能力的读者，请务必考虑协助他们补全文档（位于 https://github.com/MinecraftForge/Documentation）。
+  * 非正式的中文翻译：http://mcforge-cn.readthedocs.io/zh/latest/ ——更新并不及时。
+* 欧美社区的 Modder 很多都常驻在一些 Discord 服务器中，比如 Minecraft Mod Development，在这些 Discord 服务器里问他们问题也许能得到详尽的解答。
   * 英语要求不需要强调第二次。
-  * 注意不规则拼写，拿不定的时候读一读。
+  * 注意不规则拼写，拿不定的时候放出声读一读。
   * 海量 meme 警告，可以考虑潜水收图。
   * 遵守一切频道相关的规定。发错频道的后果自负。huahuahuahua
   * 多数开发者的标准比较高（`With great power comes with great responsibility`），问问题时想清楚要问什么，不要拐弯抹角，直接把最开始的问题拿出来，而不是问“你觉得可行的方案如何去实现”。（即避免 XY 问题。）
