@@ -95,7 +95,7 @@ _就“Forge 是不是 API”这个问题，我是这样认为的：Forge 比 FM
 _Forge 在 GitHub 上的仓库的简介写到："Modifications to the Minecraft base files to assist in compatibility between mods." 这也就意味着，它是一个所谓的兼容层，即 Compatibility Layer。作为兼容层，Forge 的使命是：保证用户可以让各种各样的 Mod 安装在同一个游戏实例中，并能正常玩耍。通常，社区管这个游戏实例叫“整合包”，或者用欧美的说法，modpack。  
 也许你对历史没什么了解。FML 的全称是 Forge Mod Loader。想当初 Mod 安装的流程基本都是“解压你下载到的 zip，然后把文件拖入 minecraft.jar 中”。这样一来，两个 Mod 就会因为同时修改一个文件而无法安装到一起。直到有了像是 Risugami 和 SDK 这样的 Mod 加载器，这时 Mod 开发者们只需要在这样的加载器的基础上开发 Mod 就可以了。
 正因有 Fogre 和 FML，以及它的前辈——Risugami's ModLoader、SDK Loader、et alias，的存在，Modded Minecraft 社区才得以有了今天的样子。Behold, the Feed The Beast! Behold, the Technic! Behold, the ATLauncher!  
-扯远了。但，不是 API 就意味着它的稳定性不如一个抽象化的 API 好。没有了稳定性的保证，MinecraftForge 就不得不面临一个问题：没有稳定的 Documentation。  
+扯远了。但，不是 API 就意味着它的稳定性不如一个抽象化的 API 好。没有了稳定性的保证，Forge 就不得不面临一个问题：没有稳定的 Documentation。  
 哎。可怜那些硬啃 Minecraft 反编译结果的 Modder。是先人的努力造就了今天的 MCP Mapping，也是先人们的努力造就了今天的社区。你看现在的 Forge，有很多东西都是社区互相妥协的结果。矿物词典、流体系统、如此种种。It is always about compatibility, and to a certain extent, "correctness". It was. It is. It will be._
 
 原来如此。换言之，我们今天所拥有的一切，都是踩在先辈们的肩膀上才得到的吗。
@@ -119,7 +119,7 @@ _Yes, that's it. 拒绝拖泥带水，我们开始吧。_
 
 ------
 
-就是这样。一个全面的，基于 MinecraftForge 的，中文 Minecraft Mod 开发指南。
+就是这样。一个全面的，基于 Forge 的，中文 Minecraft Mod 开发指南。
 身为读者的你，需要记住以下事项：
 
 * 这里不是 Java 教程。你必须掌握至少一门基于 JVM 的编程语言。对零基础新人来说，Java 就可以，先去花点时间把 Java 学了。Scala 用户用 Scala 当然也是十分欢迎的，只是笔者不会 Scala。
@@ -149,7 +149,7 @@ _Yes, that's it. 拒绝拖泥带水，我们开始吧。_
 
 另外，几个建议：
 * 请务必时常关注 GitHub 上 MinecraftForge/MinecraftForge 的 commit 以及 Pull Requests。这是你获得第一手信息的最简单还最可靠的方式（更何况，如果你在国内，别的方式对你来说，不仅是奢望，效率还不怎么高）。
-* 请务必时常关注 http://mcforge.readthedocs.io/en/latest/。有能力的读者，请务必考虑协助他们补全文档（位于 https://github.com/MinecraftForge/Documentation）。
+* 请务必时常关注 [Forge 自己的文档](http://mcforge.readthedocs.io/en/latest/)。有能力的读者，请务必考虑协助他们补全文档（位于 https://github.com/MinecraftForge/Documentation）。
   * 非正式的中文翻译：http://mcforge-cn.readthedocs.io/zh/latest/ ——更新并不及时。
 * 欧美社区的 Modder 很多都常驻在一些 Discord 服务器中，比如 Minecraft Mod Development，在这些 Discord 服务器里问他们问题也许能得到详尽的解答。
   * 英语要求不需要强调第二次。
