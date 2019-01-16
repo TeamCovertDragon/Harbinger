@@ -44,3 +44,4 @@ public class MyInventory extends TileEntity {
                 super.getCapability(cap, direction);
     }
 }
+```
