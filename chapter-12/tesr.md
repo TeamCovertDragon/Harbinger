@@ -15,7 +15,7 @@ public class CrazyRenderer extends TileEntitySpecialRenderer<MyCrazyTileEntity> 
 }
 ```
 
-渲染的操作就是对固定管线，主要是 `GL11` 系列的固定管线，的操作了。搞不定的话请去参考相关资料。
+渲染的操作就是对固定管线（主要是 `GL11` 系列的固定管线）的操作了。搞不定的话请去参考相关资料。
 
 ### 为什么是固定管线？！
 
