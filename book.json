@@ -1,5 +1,16 @@
 {
     "title": "Harbinger",
     "description": "Just Another FMLTutor For Future",
-    "author": "https://github.com/TeamCovertDragon/Harbinger/graphs/contributors"
+    "author": "https://github.com/TeamCovertDragon/Harbinger/graphs/contributors",
+    "plugins": [
+        "katex",
+        "splitter",
+        "expandable-chapters",
+        "anchor-navigation-ex"
+	],
+    "pluginsConfig": {
+		"flow": {
+			"line-color": "red"
+		}
+	}
 }
