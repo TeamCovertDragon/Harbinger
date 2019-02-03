@@ -32,6 +32,27 @@ public void onDataPacket(NetworkManager manager, SPacketUpdateTileEntity packet)
 值得注意的是，Minecraft 本身只会在 TileEntity 所在方块有更新时才同步 TileEntity。因此你需要 `World::notifyBlockUpdate`（`func_184138_a`）方法来告知 Minecraft 方块需要更新了。请按需控制更新！频繁更新只会浪费带宽资源。  
 另外，`notifyBlockUpdate` 方法的第二和第三个参数分别代表旧方块状态和新方块状态。如果只是 TileEntity 有变化，大可把同一个方块状态传给第二和第三个参数。
 
+#### 复用 `SPacketUpdateTileEntity`
+
+如果你只是想同步 `TileEntity`，但 `notifyBlockUpdate` 显得太重量级了，那怎么办？其实我们可以复用原版的网络数据包。
+
+```java
+// 把这个丢进你的 TileEntity 里即可。
+public void syncToTrackingClients() {
+    if (!this.world.isRemote) {
+        SPacketUpdateTileEntity packet = this.getUpdatePacket();
+        // 获取当前正在“追踪”目标 TileEntity 所在区块的玩家。
+        // 之所以这么做，是因为在逻辑服务器上，不是所有的玩家都需要获得某个 TileEntity 更新的信息。
+        PlayerChunkMapEntry trackingEntry = ((WorldServer)this.world).getPlayerChunkMap().getEntry(this.pos.getX() >> 4, this.pos.getZ() >> 4);
+        if (trackingEntry != null) {
+            for (EntityPlayerMP player : trackingEntry.getWatchingPlayers()) {
+                player.connection.sendPacket(packet);
+            }
+        }
+    }
+}
+```
+
 ### `getUpdateTag`
 
 `getUpdateTag` 返回一个 `NBTTagCompound`。这个方法是在“区块刚刚被加载时”，同步 TileEntity 数据用的。对于那些不需要 `ITickable` 的 TileEntity，比如纯装饰性的 TileEntity 来说，使用它可以有效避免频繁更新 TileEntity 带来的开销。
