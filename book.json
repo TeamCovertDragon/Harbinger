@@ -7,10 +7,10 @@
         "splitter",
         "expandable-chapters",
         "anchor-navigation-ex"
-	],
+    ],
     "pluginsConfig": {
-		"flow": {
-			"line-color": "red"
-		}
-	}
+        "flow": {
+            "line-color": "red"
+        }
+    }
 }
