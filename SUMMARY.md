@@ -43,7 +43,7 @@
     * [10.1.1 箱子，或别的种类的物品容器](chapter-10/examples/inventory.md)
     * [10.1.2 流体储罐](chapter-10/examples/tank.md)
     * [10.1.3 打粉机](chapter-10/examples/grinder.md)
-* [11. 网络 IO](chapter-11/index.md)
+* [11. 物理端、逻辑端与网络 IO](chapter-11/index.md)
   * [11.1 TileEntity 内建的解决方案](chapter-11/tile-entity-sync.md)
   * [11.2 Container 内建的解决方案](chapter-11/container-sync.md)
   * [11.3 实体的解决方案](chapter-11/entity-sync.md)
