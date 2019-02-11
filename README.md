@@ -154,6 +154,8 @@ _Yes, that's it. 拒绝拖泥带水，我们开始吧。_
   * 海量 meme 警告，可以考虑潜水收图。
   * 遵守一切频道相关的规定。发错频道的后果自负。huahuahuahua
   * 多数开发者的标准比较高（`With great power comes with great responsibility`），问问题时想清楚要问什么，不要拐弯抹角，直接把最开始的问题拿出来，而不是问“你觉得可行的方案如何去实现”。（即避免 XY 问题。）
+  * http://sol.gfxile.net/dontask.html - 有问题直接问，不要问“在吗，我有一个问题想请教一下”。
+    * 但非常神奇的是，多数 Modder 对私信和 Ping 非常敏感，所以请不要这么做。
   * 善用各类粘贴箱（paste bin）。国内的话 [Ubuntu PasteBin][ref-ubuntu-paste-bin] 就可以。
   * 因为国内国外都有熊孩子和 troll，所以很多人可能并没有耐心。直接“Go to learn Java”的回复并不少见。
 
