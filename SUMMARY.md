@@ -62,10 +62,10 @@
 * [14. 用户交互界面（GUI）](chapter-14/index.md)
 * [15. 音效控制](chapter-15/index.md)
 * [16. 粒子效果](chapter-16/index.md)
-* [17. 世界生成](chapter-17/index.md)
+* [17. 键盘及鼠标输入](chapter-17/index.md)
   * [17.1 `IWorldGenerator`](chapter-17/fml-world-gen-interface.md)
-* [18. 结构生成](chapter-18/index.md)
-* [19. 新维度](chapter-19/index.md)
+* [18. 世界生成与新维度](chapter-18/index.md)
+* [19. 村庄](chapter-19/index.md)
 * [20. 合成表](chapter-20/index.md)
   * [20.1 Forge 的扩展](chapter-20/forge-extension/index.md)
     * [20.1.1 矿物词典（Ore Dictionary）](chapter-20/forge-extension/ore-dictionary.md)
@@ -116,29 +116,21 @@
  - Logger 的使用
  - Eclipse/IDEA 的调试器？
 
-2.键盘及鼠标输入
- - 热键注册及使用
- - 如何追踪鼠标位置？
-
-3. 数据迁移
+2. 数据迁移
  - 注册表系统自带的重映射（RegistryEvent.MissingMapping<T>)
  - 原版的 DataFix 及 Forge 的扩展
 
-4. ForgeGradle
+3. ForgeGradle
   - minecraft {}
     - version
     - mapping
     - useDepAt
   - deobfCompile, deobfProvided
 
-5. NBT
+4. NBT
   - 读写
   - 转字节流？
   - JSON <-> NBT？虽然那个格式并不是严格的 JSON。
-
-6. 村庄
-  - Profession 和 Career，以及新的村民交易
-  - 新的村庄建筑
  -->
 
 ### 实战
