@@ -37,8 +37,8 @@ public static final CreativeTabs EXAMPLE_CREATIVE_TAB = new CreativeTabs("exampl
     }
 };
 
-// 然后这样就可以了。
-// 你可以考虑把下面这个东西塞进构造器里
+// 然后这样我们就能让它显示在我们自己的创造标签页中。
+// 这个方法返回 Item。
 public static Item yourItem = new Item().setCreativeTab(EXAMPLE_CREATIVE_TAB);
 ````
 
@@ -49,8 +49,6 @@ public static Item yourItem = new Item().setCreativeTab(EXAMPLE_CREATIVE_TAB);
 
 ````java
 public static Item yourItem = new Item()
-    // 这样我们就能让它显示在我们自己的创造标签页中。
-    // 这个方法返回 Item。
     .setCreativeTab(EXAMPLE_CREATIVE_TAB)
     // 注意此名字和 registry name 不是一个概念。
     // 这个名字仅用于国际化支持。
