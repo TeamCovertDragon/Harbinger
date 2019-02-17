@@ -1,6 +1,8 @@
 ## 方块形式的物品容器
 
-很明显，普通的方块不可能有能力持有任意流体数据——所以你需要一个 `TileEntity`。
+很明显，普通的方块不可能有能力持有任意流体数据——所以你需要一个 `TileEntity`。  
+关于 TileEntity 的内容可参考[第十章的相关内容](../../chapter-10/index.md)。  
+关于 `IFluidHandler` 的细节可参考[第二十七章的相关内容](../../chapter-27/built-in/fluid.md)。
 
 ```java
 // WIP
@@ -17,8 +19,11 @@ public class MyFluidTank extends TileEntity {
     }
 
     public <T> T getCapability(Capability<T> capability, EnumFacing direction) {
-        return capability == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY ? this.tank
-            || super.getCapability(capability, direction);
+        if (capability == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY) {
+            return CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY.cast(this.tank);
+        } else {
+            super.getCapability(capability, direction);
+        }
     }
 }
 
