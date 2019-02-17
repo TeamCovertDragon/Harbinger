@@ -16,7 +16,7 @@ public final class ItemLoader {
         // 每一个物品都有一个对应的注册名，用于和其他物品区分开来。
         // 这个注册名不能含有大写字母。
         // 此方法返回 Item。
-        event.getRegistry().register(new ExampleItem().setRegistryName("my_mod:example_item"));
+        event.getRegistry().register(new Item().setRegistryName("my_mod:example_item"));
     }
 }
 ````
@@ -39,20 +39,23 @@ public static final CreativeTabs EXAMPLE_CREATIVE_TAB = new CreativeTabs("exampl
 
 // 然后这样就可以了。
 // 你可以考虑把下面这个东西塞进构造器里
-public static Item yourItem = new ExampleItem().setCreativeTab(EXAMPLE_CREATIVE_TAB);
+public static Item yourItem = new Item().setCreativeTab(EXAMPLE_CREATIVE_TAB);
 ````
 
-#### 呃... 这物品名字不对...
+#### 呃……这物品名字不对……
 
-你可能会发现你得到的东西的名字叫 `item.null.name`。这...
+你可能会发现你得到的东西的名字叫 `item.null.name`。这…… 总之我们需要给它一个正常点的名字。
+因为 Minecraft 是个面向全球的游戏，所以这个过程有些复杂。关于这部分内容的细节可参考[第十三章](../chapter-13/index.md)。
 
 ````java
-public static Item yourItem = new ExampleItem();
-yourItem.setCreativeTab(EXAMPLE_CREATIVE_TAB);
-// 注意此名字和 registry name 不是一个概念。
-// 这个名字仅用于国际化支持。
-// 这个方法也返回 Item。
-yourItem.setTranslationKey("my_mod" + "." + "example_item");
+public static Item yourItem = new Item()
+    // 这样我们就能让它显示在我们自己的创造标签页中。
+    // 这个方法返回 Item。
+    .setCreativeTab(EXAMPLE_CREATIVE_TAB)
+    // 注意此名字和 registry name 不是一个概念。
+    // 这个名字仅用于国际化支持。
+    // 这个方法也返回 Item。
+    .setTranslationKey("my_mod.example_item");
 ````
 
 然后，是喜闻乐见的语言文件：
