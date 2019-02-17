@@ -11,6 +11,7 @@ import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 
 public class MyFluidTank extends TileEntity {
 
+    // 我们直接复用 Forge 自带的 FluidTank 实现，它可以满足 90% 的需求。
     private IFluidHandler tank = new FluidTank(8000);
 
     public boolean hasCapability(Capability<?> capability, EnumFacing direction) {
@@ -22,7 +23,7 @@ public class MyFluidTank extends TileEntity {
         if (capability == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY) {
             return CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY.cast(this.tank);
         } else {
-            super.getCapability(capability, direction);
+            return super.getCapability(capability, direction);
         }
     }
 }
