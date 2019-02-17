@@ -34,7 +34,7 @@ public class MyInventory extends TileEntity {
 
     public boolean hasCapability(Capability<?> cap, EnumFacing direction) {
         return cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY
-                && super.hasCapability(cap, direction);
+                || super.hasCapability(cap, direction);
     }
 
     public <T> T getCapability(Capability<T> cap, EnumFacing direction) {
