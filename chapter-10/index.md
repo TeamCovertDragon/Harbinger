@@ -1,12 +1,11 @@
 ## TileEntity
 
-Tile 这个单词的本意是“瓷砖”或“瓦砖”。实际上这里它和 Block 是一个意思。所以它是一个给方块用的概念。  
+Tile 这个单词的本意是“瓷砖”或“瓦砖”。实际上这里它和 Block 是一个意思。所以它是一个给方块用的概念。实际上 Mojang 很早（大约 1.8 的时候）就给它改名 BlockEntity 了。  
 
 ### 为什么要有 TileEntity？
-定义TileEntity：可以存储一个NBT标签的方块。  
-这意味着你可以在一个方块中存储超过4bits的数据。  
-TileEntity的另一个意义是它不仅像Entity一样能保存一个NBT标签，还**可以**有每秒刷新20次的能力。  
-可以说，绝大部分看上去功能异常强大的方块都是基于TileEntity的。
+TileEntity 是一种和实体类似，可以存储一个 NBT 标签的特殊对象，这意味着你可以在一个方块中存储超过 4 bits 的数据。  
+TileEntity 也可以像 Entity 一样，通过实现 `ITickable` 来获得每秒刷新 20 次的能力。  
+可以说，绝大部分看上去功能异常强大的方块都是基于 TileEntity 的。
 
 ### 起点：声明该 Block 持有 TileEntity
 
@@ -24,11 +23,24 @@ public class MyMachineBlock extends Block {
 }
 ```
 
+### TileEntity 的注册
+
+TileEntity 虽然需要注册，但它并不走 Forge 的注册表系统。一个比较常见的做法是在注册方块的时候一并注册 TileEntity。
+
+```java
+@SubscibreEvent
+public static void onBlockRegistration(RegistryEvent.Register<Block> event) {
+    // 第一个参数是你要注册的 TileEntity 对应的 class 对象。必须 extends TileEntity。
+    // 第二个参数的要求和方块的注册名一致。
+    GameRegistry.registerTileEntity(MyMachine.class, new ResourceLocation("my_mod", "my_machine"));
+}
+```
+
 ### 逻辑
 
 然后就是要补全那个 `MyMachine` 类了。
 
-````java
+```java
 public class MyMachine extends TileEntity {
     //注意，虽然TileEntity本身是abstract，但它并没有任何抽象方法。
     public MyMachine() {
@@ -58,7 +70,7 @@ public class MyMachine extends TileEntity {
     }
 
 }
-````
+```
 
 ### `ITickable`
 
