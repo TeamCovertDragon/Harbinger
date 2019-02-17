@@ -1,42 +1,29 @@
-### 物品概论
+## 物品概论
 
-#### 你的第一个物品
+### 你的第一个物品
 
-````java
-public class ExampleItem extends Item {
-    public ExampleItem() {
-        super();
-        //同样是不能有大写字母，snake_case
-        //此方法的用途很快会提到。
-        //此方法返回Item，可组成调用链。
-        this.setRegistryName("example_item");
-    }
-}
-````
-
-完。
-
-#### 呃？我看不到我的物品啊？
-
-啊不好意思，忘记注册了。注册的话要走事件。
+我们首先通过一个叫 `RegistryEvent.Register<Item>` 的事件注册一个啥都没用的物品。
 
 ````java
-// 这个注解的意思是“将这个类注册到事件总线中去，该事件监听器属于 mymodid 这个 Mod”
-@Mod.EventBusSubsriber(modid = "mymodid")
+// 这个注解的意思是“将这个类注册到事件总线中去，该事件监听器属于 my_mod 这个 Mod”
+@Mod.EventBusSubsriber(modid = "my_mod")
 public final class ItemLoader {
 
     // 和正常的事件一样，你不需要手动调用此方法！Forge 会自动调用它的。
     @SubscribeEvent
     public static void registerItem(RegistryEvent.Register<Item> event) {
-        event.getRegistry().register(new ExampleItem());
+        // 注意到那个 setRegistryName。
+        // 每一个物品都有一个对应的注册名，用于和其他物品区分开来。
+        // 这个注册名不能含有大写字母。
+        // 此方法返回 Item。
+        event.getRegistry().register(new ExampleItem().setRegistryName("my_mod:example_item"));
     }
-
 }
 ````
 
 注意，每一个透过此法注册的物品的实例必须都有调用过 `setRegistryName`，否则会抛异常并导致游戏退出。
 
-好了注册了，但是... 创造物品栏里没有你的新物品。当然你可以用 `/give <玩家名> <registry name>` 获得你的新物品，但你不觉得显示在创造模式物品栏里更方便么。
+好了注册了，但是……创造物品栏里没有你的新物品。当然你可以用 `/give <玩家名> <registry name>` 获得你的新物品，但你不觉得显示在创造模式物品栏里更方便么。
 
 ````java
 // 我们需要一个 CreativeTabs 的实例，当然那个类下面就有原版的 10 个，可以直接拿来用，
@@ -62,11 +49,10 @@ public static Item yourItem = new ExampleItem().setCreativeTab(EXAMPLE_CREATIVE_
 ````java
 public static Item yourItem = new ExampleItem();
 yourItem.setCreativeTab(EXAMPLE_CREATIVE_TAB);
-//注意此名字和 registry name 不是一个概念。
-//这个名字仅用于国际化支持。
-//这个方法也返回 Item。
-//这些也可以考虑塞进构造器里
-yourItem.setUnlocalizedName("example_mod" + "." + "example_item");
+// 注意此名字和 registry name 不是一个概念。
+// 这个名字仅用于国际化支持。
+// 这个方法也返回 Item。
+yourItem.setTranslationKey("my_mod" + "." + "example_item");
 ````
 
 然后，是喜闻乐见的语言文件：
