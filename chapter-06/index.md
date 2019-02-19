@@ -12,10 +12,10 @@
 
 ```json
 {
-	"parent": "item/generated",
-	"textures": {
-		"layer0": "example_mod:item/example_item_texture"
-	}
+    "parent": "item/generated",
+    "textures": {
+        "layer0": "example_mod:item/example_item_texture"
+    }
 }
 ```
 
@@ -38,9 +38,9 @@ public static void onModelRegistration(ModelRegistryEvent event) {
 
 ```json
 {
-	"vairants": {
-		"default": "example_mod:example_block_model"
-	}
+    "variants": {
+        "default": "example_mod:example_block_model"
+    }
 }
 ```
 
@@ -48,15 +48,15 @@ public static void onModelRegistration(ModelRegistryEvent event) {
 
 ```json
 {
-	"parent": "block/cube",
-	"textures": {
-		"up": "example_mod:blocks/example_block_texture_up",
-		"down": "example_mod:blocks/example_block_texture_down",
-		"west": "example_mod:blocks/example_block_texture_west",
-		"north": "example_mod:blocks/example_block_texture_north",
-		"east": "example_mod:blocks/example_block_texture_east",
-		"south": "example_mod:blocks/example_block_texture_south"
-	}
+    "parent": "block/cube",
+    "textures": {
+        "up": "example_mod:blocks/example_block_texture_up",
+        "down": "example_mod:blocks/example_block_texture_down",
+        "west": "example_mod:blocks/example_block_texture_west",
+        "north": "example_mod:blocks/example_block_texture_north",
+        "east": "example_mod:blocks/example_block_texture_east",
+        "south": "example_mod:blocks/example_block_texture_south"
+    }
 }
 ```
 
@@ -76,7 +76,7 @@ Item.getItemFromBlock(myBlock);
 
 ```json
 {
-	"parent": "example_mod:block/example_block_model"
+    "parent": "example_mod:block/example_block_model"
 }
 ```
 
