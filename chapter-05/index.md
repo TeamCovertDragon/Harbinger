@@ -1,8 +1,8 @@
-### 注册表
+## 注册表
 
 Minecraft 是一个处处充满了注册的游戏，因为…… 这个游戏里充满了各种各样奇奇怪怪的对象。
 
-#### 事件驱动的注册
+### 事件驱动的注册
 
 Forge 引入了一个注册表系统以接管原版的注册表系统。Forge 的系统与原版的系统相比多了 ID 自动分配、映射存储、映射重定义等好用的功能。其中映射存储更是使得跨整合的存档分享成为了可能。此前带 Mod 的存档的分享往往需要连带整合一起发布，而现在的话只需要给出必须的 Mod 列表就可以了，不需要发布整个整合。  
 
@@ -13,12 +13,12 @@ Forge 引入了一个注册表系统以接管原版的注册表系统。Forge �
 // 泛型事件的使用决定了你需要对每一种对象的注册都写一个订阅。你不能向方块的注册表里
 // 注册物品，反之亦然。
 @SubscribeEvent
-public void onRegistry(RegistryEvent.Register<Block> regBlock) {
+public static void onRegistry(RegistryEvent.Register<Block> regBlock) {
     regBlock.getRegistry().register(myBlock);
 }
 ````
 
-#### 注册项？
+### 注册项？
 刚才说到了“注册项”这个概念。
 那么我们来总结一下吧，需要通过标准化的注册表进行注册的东西有：
 
@@ -35,7 +35,7 @@ public void onRegistry(RegistryEvent.Register<Block> regBlock) {
  这些东西会在后面的章节中一一讲到。  
  原版工作台合成的确也是受注册表控制的，但大多数时候你不应该通过这个方式注册原版工作台合成，而是写 JSON。相关细节在第二十章中有详细阐述。
 
-#### 结束了？
+### 结束了？
 非也。还有一个十分有趣的注解： `@GameRegistry.ObjectHodler`。
 
 ````java
@@ -79,7 +79,7 @@ public class MyStuffHolder2 {
 
 虽然注册事件的触发顺序是未定义的，但有一个例外：根据 ForgeDocs，方块注册总是在物品注册之前。目前 MinecraftForge 本身所有的 test 都可以印证此约定。
 
-#### 复用注册表
+### 复用注册表
 
 所以你也可以使用 `IForgeRegistry` 来让其他 Mod 注册你自己的 Mod 的东西。
 
