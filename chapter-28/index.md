@@ -1,50 +1,70 @@
-## 跨 Mod 兼容，及扩展 Mod 的制作
+## Capability
 
-可以说，这是现在整合包存在的基石。Mod 之间要互相打交道，如何正确处理这些问题便是本章的话题。
+请仔细回想一下 `TileEntity` 的用途：它可以存储物品、流体甚至是某种形式的能量，同时其他 Mod 也可以通过对应的接口与这个 `TileEntity` 持有的这些东西打交道。
 
-### Gradle
-
-基于 Forge 的 Mod 开发环境是基于 Gradle 的。所以导入其他 Mod 的方式和正常的引入第三方 jar 的方式毫无差别。
-
-```groovy
-dependencies {
-    deobfCompile "mezz.jei:jei_1.12.2:4.13.1.220"
-
-    runtime group: 'mezz.jei', name: 'jei_1.12.2', version: '4.13.1.220'
+```java
+// 假想的情景，不要照抄
+TileEntity tile = world.getTileEntity(pos);
+if (tile instanceof Something) {
+    ((Something)tile).interact(...);
 }
 ```
 
-不，其实还是有一点小差别的：`deobfCompile` 和 `deobfProvided`。这两个 `configuration` 都是 ForgeGradle 提供的，它们的存在和 MCP 有关系，具体细节会在[第二十九章](../chapter-29/index.md)讲到。
+这些接口自然是没办法统一的，但如果从一个更抽象的角度来看，不难发现：我们总是在检查某个 `TileEntity` 是否实现了某种功能。类似的情况实际上也出现在了 `ItemStack`、`Entity` 甚至是 `World` 和 `Chunk` 上。我们希望这些东西能持有某种特定的信息，并且希望其他 Mod 能通过指定的接口与这些信息打交道。我们可以控制 `TileEntity`，但 `ItemStack` 有 `final` 修饰符，我们不能直接干涉它的行为。更不用说 `World` 和 `Chunk` 是 Minecraft 自己管理的了。  
+让我们再审视一遍需求：“让这些对象能持有某种特定的信息”。也就是说，我们只需要让它能持有这些信息，并暴露出一个能操纵这些信息的接口就可以了。至于是通过继承还是组合（Composite）来实现已经无关紧要了。有办法利用这一点来统一吗？接口可能不存在，但数据是不需要任何依赖就可以存在的。  
+Capability 系统应运而生。
 
-### 那我想添加对某某 Mod 的兼容！怎么做！
+### 再论流体容器——`ICapabilityProvider`
 
-不好意思没有定式。这种东西应该直接读对应的文档。
-
-### 正确声明依赖
-
-虽然跨 Mod 兼容没有定式，但 FML 依然允许你指定你自己的 Mod 的加载顺序。
+下面这个例子来自[第二十六章物品形式的流体容器一节](../chapter-26/container/item.md)。
 
 ```java
-@Mod(
-        modid = "my_mod",
-        name = "Example Mod",
-        version = "0.1.0",
-        dependencies = "required-after:mod_a;after:mod_b;before:mod_c;required-client:mod_d"
-)
+// WIP
+import net.minecraftforge.fluids.capability.templates.FluidHandlerItemStack;
+
+public class MyFluidContainer extends Item {
+    public ICapabilityProvider initCapabilities(ItemStack item, NBTTagCompound data) {
+        return new FluidHandlerItemStack(item);
+    }
+}
 ```
 
-<!-- https://github.com/MinecraftForge/MinecraftForge/pull/4403 -->
-<!-- TODO 这样解释未免太粗暴了 -->
+注意到这个方法的返回值其实是 `ICapabilityProvider`。它只有这样两个方法：
 
-|Directive|含义|
-|:------|:------|
-|`required`|声明对指定 Mod 的硬依赖。缺失对应 Mod 时 FML 会提示缺失 Mod。|
-|`after`|声明在指定 Mod 之后加载。若声明了 Mod 的版本范围，则会在 Mod 版本不对时提示缺失 Mod。不安装对应 Mod 时不会提示错误。|
-|`before`|声明在指定 Mod 之前加载。若声明了 Mod 的版本范围，则会在 Mod 版本不对时提示缺失 Mod。不安装对应 Mod 时不会提示错误。|
-|`server`|声明只在物理服务器端使用此依赖项。|
-|`client`|声明只在物理客户端使用此依赖项。|
+```java
+public interface ICapabilityProvider {
+    boolean hasCapability(@Nonnull Capability<?> capability, @Nullable EnumFacing facing);
 
-### 一些不成文的规矩
+    @Nullable <T> T getCapability(@Nonnull Capability<T> capability, @Nullable EnumFacing facing);
+}
+```
 
-  * 矿物词典名一定形如 `ingotIron`、`gemDiamond`，即把形态放前面，物质类别放后面，小写驼峰。
-  * 在 `PostInitializationEvent` 中处理跨 Mod 兼容。实际上这个的意义不是特别大了，但在少数情况下还是相当有用的。
+似曾相识，不是吗？  
+没错，`TileEntity` 这个类已经实现了这个接口。这两个方法的用途也非常明确：根据享元的 `Capability<?>` 对象来确定请求的接口类型（即 `getCapability` 中的 `T`），并按需返回一个具体的实现（或者一个表示存在与否的真值）。  
+在 `TileEntity` 中，出于性能考虑<!-- 想想看，漏斗等 TileEntity 每一个 tick 都会请求一次 `IItemHandler`，getCapability 实际上调用频率不低 -->，我们通过一连串 `if` 来决定应该返回什么值。对于 `initCapabilities` 来说，我们也可以做类似的事情，即返回一个自己的 `ICapabilityProvider` 实现。毕竟，它叫 `Provider` 嘛：
+
+```java
+public class ConcreteCapabilityProvider implements ICapabilityProvider {
+    private final ItemStack theItem;
+    public ConcreteCapabilityProvider(ItemStack item) {
+        this.theItem = item;
+    }
+
+    @Override
+    public boolean hasCapability(@Nonnull Capability<?> cap, @Nullable EnumFacing facing) {
+        return cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY || cap == CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY;
+    }
+
+    @Nullable
+    @Override
+    public <T> T getCapability(@Nonnull Capability<T> cap, @Nullable EnumFacing facing) {
+        if (cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
+            return ...;
+        } else if (cap == CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY) {
+            return ...;
+        } else {
+            return null;
+        }
+    }
+}
+```

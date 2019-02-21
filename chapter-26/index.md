@@ -1,19 +1,37 @@
-## 流体
+## 配置文件
 
-在 Minecraft Mod 社区发展的早先时候<!-- TODO 具体是多早？-->，就有很多 Mod（比如 BuildCraft、Railcraft、Thermal Expansion 等）开始引入流体的概念。当时最先出现的是液体，但随着蒸汽等气体的引入，Modder 们发现这两者在代码上的差别基本可以忽略不计。在经过大量 Modder 的打磨后，Forge 的流体系统有了今天的样子。
+走到这一步的读者大概已经发现了，很多东西其实都是有自定义的空间的。某个机器使用的常量，某种世界生成的开关，某个客户端特效的精确控制，不胜枚举。所以你大概需要一个配置文件。Forge 正好提供了这样一套工具用来快速搞定这个需求。
 
-<!-- 冷知识：曾经这套系统在 Forge 里叫液体（Liquid）。-->
+### 一个简单示范：MyModConfig.java
 
-### 第一个流体
+最简单的创建配置文件的方法是使用这套基于注解的系统。
 
-````java
-// 构造器中第一个参数是流体的唯一识别 ID，第二个参数是材质位置。
-// 同时有一个三参数构造器可用，此时第二个参数是静止时的材质，第三个是流动时的材质。
-public static final Fluid myFluid = new Fluid("example_fluid", new ResourceLocation("example_mod:example_fluid")).setGaseous(true).setDensity(Integer.MAX_VALUE);
+```java
+@Config(modid = "my_mod_id") // 相当于入口标记一样的东西。`modid` 一定要填你的 mod id。
+@Config.LangKey("config.my_mod.general") // 这个用于本地化，稍后会讲
+public final class MyModConfig {
 
-// 此方法会返回一个 boolean。
-// 返回 true 代表注册成功。
-// 返回 false 则代表“已有同名流体注册”，但 Forge 仍然保留了一份此流体对象的引用，
-// 这样一来即便注册失败，仍可以在 new FluidStack 时使用这个注册失败的版本。
-FluidRegistry.registerFluid(myFluid);
-````
+    // 最简单的一个选项就是这样声明的。
+    // 反映到真正的配置文件中，会是 `B:think=false`。
+    public static boolean think = false;
+
+    @Config.Comment("Hey I am foo") // 有了这个就会多一个注释。
+    @Config.LangKey("config.my_mod.general.foo") // 本地化用，稍后会讲
+    @Config.Name("Foo") // 默认配置选项名是字段名，如果需要别的名字就用这个。
+    @Config.RangeInt(min = 1, max = 10000) // 整数值支持限定范围。
+    @Config.RequireWorldRestart // meta 标记，代表需要重进存档才会生效
+    @Config.RequiresMcRestart // meta 标记，代表需要重启游戏才会生效
+    public static int foo = 0;
+
+    @Config.Comment("Hey I am bar")
+    @Config.LangKey("config.my_mod.general.bar")
+    @Config.Name("Bar")
+    @Config.RangeDouble(min = 1.0, max = 10000.0) // 和 RangeInt 一个意思，不过是给 double 的。
+    @Config.RequireWorldRestart
+    @Config.RequiresMcRestart
+    public static double bar = 0;
+
+    // 数组也是支持的。
+    public static String[] strArr = new String[] { "test" };
+}
+```

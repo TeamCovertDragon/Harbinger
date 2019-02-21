@@ -1,117 +1,109 @@
-## 物品概论
+### 事件概论
 
-### 你的第一个物品
+#### 什么是事件？
 
-我们首先通过一个叫 `RegistryEvent.Register<Item>` 的事件注册一个啥都没用的物品。
+事件是什么？某个时间点发生的有一定关注度的“事情”。
+
+考虑下面的代码：
 
 ````java
-// 这个注解的意思是“将这个类注册到事件总线中去，该事件监听器属于 my_mod 这个 Mod”
-@Mod.EventBusSubsriber(modid = "my_mod")
-public final class ItemLoader {
+Teacher teacher = aCertainClass.getInstructor();
+teacher.post(homework);
+````
 
-    // 和正常的事件一样，你不需要手动调用此方法！Forge 会自动调用它的。
-    @SubscribeEvent
-    public static void registerItem(RegistryEvent.Register<Item> event) {
-        // 注意到那个 setRegistryName。
-        // 每一个物品都有一个对应的注册名，用于和其他物品区分开来。
-        // 这个注册名不能含有大写字母。
-        // 此方法返回 Item。
-        event.getRegistry().register(new Item().setRegistryName("my_mod:example_item"));
+教师发布了作业。一个包含有若干“作业”对象的 `List` 分派到了学生手中。  
+表面上，到此为止了。事实上，果真只能有这点逻辑吗？发布作业的过程中难道不会发生什么事情吗？比方说，教师是有课代表的：
+
+````java
+studentRepresentative = teacher.getRepresentative();
+homeworkList = homework.content();
+for (entry : homeworkList) {
+    if (!studentRepresentative.validate(singleHomework)) {
+        studentRepresentative.broadcast("This homework has problem, please notify {} to fix it!", teacher);
     }
 }
 ````
 
-注意，每一个透过此法注册的物品的实例必须都有调用过 `setRegistryName`，否则会抛异常并导致游戏退出。
-
-好了注册了，但是……创造物品栏里没有你的新物品。当然你可以用 `/give <玩家名> <registry name>` 获得你的新物品，但你不觉得显示在创造模式物品栏里更方便么。
+再比如说，有别的老师会关心别的老师的作业，然后忽然决定“今天就少布置一点作业吧”。
 
 ````java
-// 我们需要一个 CreativeTabs 的实例，当然那个类下面就有原版的 10 个，可以直接拿来用，
-// 但是你不觉得有一个自己的更方便吗……
-// 一般是使用匿名内部类，就像这样。
-public static final CreativeTabs EXAMPLE_CREATIVE_TAB = new CreativeTabs("example_tab") {
-    // 获得用作标签图标的 ItemStack。你大可以往里面塞各种奇奇怪怪的数据。
-    @Override
-    public ItemStack createIcon() {
-        return new ItemStack(Items.DIAMOND);
+if (homeworkList.content().size() > THRESHOLD) {
+    myProposedHomework = myProposedHomework.subList(1, 3);
+}
+````
+
+#### Minecraft 没有事件系统
+
+回到 Minecraft 上来——Modder 有时候希望能干涉原版的机制。  
+问题来了，怎么干涉？原版的代码很多地方都是写死的，对于这些地方来说没什么办法。  
+举个例子，我想在玩家进入游戏时发出欢迎词，怎么办？原版是有那么一句话但那显然是写死的。
+
+Forge 提供了一个完善的事件系统来解决这个问题。
+
+目前，Forge 有三条事件总线：
+
+  * 一般事件总线
+  * 矿物生成总线
+  * 地形修饰总线
+
+注意，FML 的那几个用于 Mod 加载的事件不算。那些是 Mod 加载周期的事件，在那个时候 FML 需要使用别的事件总线（具体来说，是 Guava 的事件总线）。
+
+#### 事件订阅
+按如下步骤操作：
+
+1. 确定需求，然后找事件
+2. 如果找到了对应的事件：
+
+````java
+//本方法返回值必须是void
+//本方法的参数必须是一个事件，并且作为唯一的参数存在
+//本方法可以是静态的，具体差别一会就会出现
+@SubscribeEvent
+public void onEventFired(Event event) {
+    //当然这个Event一定要换成对应的事件。
+    //这里之所以写Event，是因为在MinecraftForge事件总线中
+    //Event这个类便是所有的事件的父类
+    //方法名无所谓，最后都会被ASM成全新的Callback实例
+}
+
+//然后注册
+MinecraftForge.EVENT_BUS.register(new EventListener());
+//如果是静态方法监听，则应注册class
+MinecraftForge.EVENT_BUS.register(EventListener.class);
+
+````
+
+以及注意一点，如果你订阅的事件属于矿物生成类的，或是地形生成类的（比如什么`InitNoise`这样的事件，那么请往`ORE_GEN_BUS`或者`TERRAIN_GEN_BUS`注册。
+
+然后——如果你能看到这里：很好，你大概没找到你需要的事件。
+
+  1. 如果你的事件是自己用的，请看下面一小节。
+  2. 请仔细思考你的需求。你的需求是不是和原版的什么东西比较像？原版的东西是怎么做的？
+  3. 再仔细思考你的需求。你的需求是不是已经有 Mod 实现过了？他们都是利用了什么事件？
+  3. 否则你只能给 Forge 发 Pull request 了。
+
+#### 但是我需要给自己的【某种机制】弄一个事件！
+
+````java
+// Cancable注解声明此事件可以撤销。不可撤销的事件不要加Cancalable注解。
+// 撤销后的事件会直接退出其生命周期，并且不会被后续的Listener影响。
+// HasResult注解声明此事件会有“结果”。没有结果的事件不要加HasResult注解。
+// Result类位于Event类内部，为枚举类，有三种可能：SUCCESS, FAIL, PASS
+//（等等我好像记错了，这好像是控制物品使用的EnumActionResult，不是Result）
+@Cancalable
+@HasResult
+public class MyEvent extends Event {
+    public final Object foo;
+    //按照惯例，事件中的字段都应该是Final的
+    public MyEvent(Object foo) {
+        this.foo = foo;
     }
-};
+}
 
-// 然后这样我们就能让它显示在我们自己的创造标签页中。
-// 这个方法返回 Item。
-public static Item yourItem = new Item().setCreativeTab(EXAMPLE_CREATIVE_TAB);
+// 发布事件。
+// 这个post是有返回值，含义如下：
+// true 代表事件被取消。事件必须有 @Cancalable 注解才可以被取消，并有可能令 EventBus.post 返回 true。
+// false 代表事件成功发布。有 @Cancalable 的事件，且没有被取消时会返回 false。
+// 若这个事件无法取消，一定会返回 false。
+boolean result = MinecraftForge.EVENT_BUS.post(new MyEvent(aFoo));
 ````
-
-#### 呃……这物品名字不对……
-
-你可能会发现你得到的东西的名字叫 `item.null.name`。这…… 总之我们需要给它一个正常点的名字。
-因为 Minecraft 是个面向全球的游戏，所以这个过程有些复杂。关于这部分内容的细节可参考[第十三章](../chapter-13/index.md)。
-
-````java
-public static Item yourItem = new Item()
-    .setCreativeTab(EXAMPLE_CREATIVE_TAB)
-    // 注意此名字和 registry name 不是一个概念。
-    // 这个名字仅用于国际化支持。
-    // 这个方法也返回 Item。
-    .setTranslationKey("my_mod.example_item");
-````
-
-然后，是喜闻乐见的语言文件：
-
- 1. 在 `resources` 下新建 `assets` 文件夹
- 2. 在 `assets` 下新建文件夹，名字和你的 modid 相同
- 3. 在以你的modid命名的文件夹下新建 `lang` 文件夹
- 4. 在 `lang` 文件夹下新建 `en_us.lang`：
-
-    ````
-    item.example_mod.example_item.name=Example Item
-    ````
-
- 5. 等等，如果没理解错，这是英文（美国）的 Locale 啊？  
-    OK。然后还是`lang`文件夹，新建`zh_cn.lang`：  
-
-    ````
-    item.example_mod.example_item.name=示例物品
-    ````
-
-如果你之前有汉化 Mod 的经验，你会发现流程是一致的。
-
-不过为什么要搞这么麻烦呢？直接让它显示中文不就好了。
-道理也很简单——如果国外的 Modder 也这么想，那我们还能汉化什么？
-
-#### 享元
-
-你应该注意到了，`Item` 是没有数量的概念的。它实际上只是一个物品种类的标记而已。想想看：
-
-* 一颗钻石和一组钻石都是钻石，只是数量不同。
-* 一块铁锭和一块金锭的数量相同，但它们不是同一种物品。
-
-`Item` 代表了物品的“类型”。两颗钻石因为“都是钻石”所以能叠加在一起。两块不同的金属锭因为类型不同所以不能叠加在一起。
-有数量概念的是 `ItemStack`，一个 `ItemStack` 的实例代表了“一堆特定物品，数量不定”。Minecraft 中玩家背包里的东西都是 `ItemStack`。玩家手持的也是 `ItemStack`。  
-Minecraft 在这里采用了享元的概念：一种特定物品只对应一个 `Item` 实例。换言之，在 Modding 的过程中，我们可以直接通过 `==` 来判断两个物品是否为同一个种类。
-
-#### 对于物品 `Item` 类更深入的理解
-
-既然上文说到了 `Item` 实际上是指类型，那么不妨先来探讨一下物品的“类型”究竟是什么。
-
-笔者认为，相同类型的物品(ItemStack)应该具有以下性质
-
-* 对所有的互动行为有相同的处理逻辑
-
-* 拥有相同的渲染、文本显示逻辑
-
-* 对应的各项属性有相同的处理逻辑
-
-* 拥有相同的修复逻辑
-
-* 在同一个 `CreativeTab` 内
-
-如果读者仔细翻阅了 `net.minecraft.item.Item` 类的话，会发现大多数方法、字段和上面的性质是对应的。
-
-所谓 `Item` ，其实是对所有玩家通过 `ItemStack` 互动行为处理机制的逻辑所存放的类。
-
-所有 `ItemStack` 在被实例化的时候必定指定了一个 `Item` 实例作为它的**类型**，相应的，该 `ItemStack` 的所有互动行为 (右键、挖掘方块、攻击实体、渲染..etc) 都会通过调用指定的 `Item` 类的方法 (`onItemRightClick`、`onItemUseFinish`、`hitEntity`、`onBlockDestroyed`、`canHarvestBlock` ...etc) 来实现。因此，这其中绝大多数方法的参数中都会包含一个 (ItemStack) 实例——用于确定该物品的具体**状态**。
-
-其实，通过覆写这些方法，读者当然可以实现绝大部分自己想要的功能——但是十分麻烦，而且对其他mod的兼容性也会受影响(其实就是在造轮子)。
-
-在 3.1 中，笔者将会介绍一些 `Item` 类的子类以及 `Item` 类其他的一些特性，以进一步阐述如何实现 `Item` 类。不过在此之前，请读者确保自己已经对上面所说的东西充分理解了。

@@ -1,23 +1,70 @@
-## 特种模型
+## 状态效果与药水
 
-Minecraft 中有那么一些东西看上去并不是一般的方块模型能做到的。比如附魔台上的那本悬浮的书，你靠近的时候就一定会面朝你打开。再比如箱子有开关的动画效果。还有旗帜的图案。自然也包括所有实体的模型。  
-这些模型有一个共同特点：它们都在某种意义上靠近底层。箱子、附魔台和旗帜使用了名为 `TileEntitySpecialRenderer` 的原版类（很多人直呼这个叫 `TESR`，本指南中也会大量使用这个称呼）。所有实体的模型则都基于名为 `Render` 的类。两者都直接使用 `GlStateManager` 来进行绘制。`GlStateManager` 中封装了大量使用 `GL11` 系列固定渲染管线的操作，这也是为什么说“它们靠近底层”的原因。
+首先从一个新的状态效果（亦称药水效果）开始：
 
-### 关于性能
+```java
+public class MyNewPotion extends Potion {
+    public MyNewPotion(boolean isBad, int hexColor) {
+        super(isBad, hexColor);
+        // isBad 决定了这个效果是不是个“坏东西”，参考饥饿、中毒、反胃、迟缓、虚弱等。
+        // hexColor 是写成一个 int 的 RGB。
+    }
+}
+```
 
-是的，有一个很常见的说法是 TESR 对性能影响巨大。毕竟 TESR 和 TileEntity 的刷新频率是一样的（一秒最多 20 次），服务器上 TileEntity tick 一次，客户端这边对应的 `TESR`（如果有的话）也得重新绘制一次。这样的东西一多，后果自不必说。更何况 TESR 还挺常见的——比如原版箱子就有一个。堆满箱子的游戏后期存档应该是原版玩家的日常吧…… 固定管线的问题就不提了，因为提了也解决不了 Minecraft 现在还需要用这玩意的问题。
+因为药水也是注册表管理的，所以我们用和方块、物品注册差不多的方式注册：
 
-### Necessary Evil 和 Forge 的应对
+```java
+@SubscribeEvent
+public static void onPotionRegistration(RegistryEvent.Register<Potion> event) {
+    event.getRegistry().registerAll(new MyNewPotion().setRegistryName("example_mod", "my_potion"));
+}
+```
 
-但 TESR 的确有它存在的意义。箱子、末影箱、附魔台的动画效果自不必说，它们不可能用有限数量的方块状态枚举出来。还有一个应用场景是储物桶：很多 Mod 的储物桶都会在桶上渲染一个当前内容物的图标，这个更不可能只用方块状态枚举出来。它们必须“动态地”渲染出来，而非利用方块状态，将所有的可能性与一个固定的模型联系在一起。  
-Forge 自然是有应对方案的：[`FastTESR`][ref-0710bdf3]。类如其名，一个比原版 TESR 快的 TESR。快的原理和它的处理方式有关：
+### 给玩家加上
 
->   \* TESRs can now be batched - look at TESR.renderTileEntityFast + TE.hasFastRenderer.  
-> \- RainWarrior (fry)
+只是测试有没有注册成功的话，可以使用命令 `/effect <玩家名> example_mod:my_potion 1 60` 来获得等级 1，持续 60 秒的你的效果。  
+如果需要加入到相关的逻辑的话，你需要 `EntityLivingBase` 下的 `addPotionEffect`（`func_70690_d`）：
 
-简单来说，在 Forge patch 后的实现中，它用了一个独立的 `Tessellator` 用于存放渲染数据。`renderTileEntityFast` 的实际意义也只是将需要渲染的数据丢进那个 `Tessellator` 的 `BufferBuilder` 中，然后交由 `RenderGlobal` 一次性全部绘制。同样的理由，`FastTESR` 中的 `render` 方法有 `final` 修饰符，有 `abstract` 的是 `renderTileEntityFast`。  
-这个思路实际上和原版的方块模型的渲染有点类似。
+```java
+int duration = 1200; // 这次单位是 tick
+int amplifier = 0; // 0 代表等级 1
+entityPlayer.addPotionEffect(new PotionEffect(myPotion, duration, amplifier));
+```
 
-<!-- TODO 也许我们应该问六花把他的那个图直接贴这里，或者第六章的什么地方 -->
+### 图标
 
-[ref-0710bdf3]: https://github.com/MinecraftForge/MinecraftForge/commit/0710bdf3f5a64e5fe1c725a30421b2c7523dca44
+原版药水效果的图标是集中在一张纹理上的。原版默认的逻辑是根据 `Potion` 类下的 `setIconIndex`（`func_76399_b`）和 `getStatusIconIndex`（`func_76392_e`）来确定该用哪一个图标。其中，`getStatusIconIndex` 使用的 `int` 是 `x + (y * 8)` 的结果，其中 x 和 y 是纹理上的坐标（u、v），需要通过 `index % 8` 和 `index / 8` 转换回来。  
+但不幸的是，这张纹理是定死的，准确地说这些图标其实都在玩家物品栏的那张纹理上。所以这两个方法实际上没什么卵用了。Forge 提供了一套解决方案：`renderInventoryEffect` 和 `renderHUDEffect`。前者负责玩家物品栏里的图标绘制；后者负责正常游戏时 HUD 中药水效果图标的绘制。使用方法如下：
+
+```java
+public class MyNewPotion extends Potion {
+    public MyNewPotion(boolean isBad, int hexColor) {
+        super(isBad, hexColor);
+    }
+
+    // func_76400_d
+    // 返回 false 时触发 Forge patch 后的逻辑，即调用 renderInventoryEffect 和 renderHUDEffect
+    @Override
+    public boolean hasStatusIcon() {
+        return false;
+    }
+
+    @Override
+    public void renderInventoryEffect(int x, int y, PotionEffect effect, Minecraft mc) {
+        // 绘制逻辑，可直接交给 renderHUDEffect，此时 alpha = 1F
+        this.renderHUDEffect(x, y, effect, mc, 1F);
+    }
+
+    @Override
+    public void renderHUDEffect(int x, int y, PotionEffect effect, Minecraft mc, float alpha) {
+        // 绘制逻辑
+        mc.getTextureManager().bindTexture(textureResourceLocation);
+        // func_146110_a
+        // x, y 为绘制的起点，u, v 为纹理的起点，w, h 为选取的纹理的宽和高，texW 和 texH 代表整张纹理的宽和高
+        Gui.drawModalRectWithCustomSizedTexture(x, y, u, v, w, h, texW, texH);
+    }
+}
+```
+
+实际上，有这些方法，你甚至可以绘制出比原版那些药水图标更华丽的特效出来。

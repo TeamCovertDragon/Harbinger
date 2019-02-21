@@ -1,84 +1,81 @@
-## 命令
+## 战利品表（Loot Table）
 
-Minecraft 有一个命令系统。这个系统的功能就是它的字面意思：以纯文本的形式给 Minecraft 这个程序下达奇奇怪怪的命令，要求其完成。  
-因为是纯文本，对大多数玩家来说，命令系统的入口就是普通的聊天窗口。所有以 `/` 开头的输入都会被视作是一条命令。关于原版命令的内容在 [Minecraft Wiki](https://minecraft-zh.gamepedia.com/%E5%91%BD%E4%BB%A4) 上已有详细介绍，这里不做赘述。
+战利品表是 Minecraft 1.9 时引入的新特性，允许地图制作者修改实体的掉落物和战利品箱子（地牢、要塞、废弃矿井等）中的内容。1.14 中也开始用于决定方块的掉落物。
 
-### 一个 Hello, world 风格的命令
+### 先看一个表
 
-一个 `ICommand` 的实现代表了一个具体的命令。所以首先要实现 `ICommand` 接口：
+下列这个表只包含一个战利品池（Loot Pool），这个战利品池只有 10% 的概率会被用到，一旦被抽到则会从整个池中随机抽取五次，每点幸运会带来一次额外抽取。整个池中只有一个条目：钻石，且因为 `set_count` 的存在，每次抽到的钻石都会是 6 个。
 
-````java
-// 我们选择直接继承 CommandBase，因为从头实现 ICommand 是个很费劲的事情。
-public class MyCommand extends CommandBase {
-
-    // 必须覆写。这一部分将作为命令的名字而存在。
-    // 换言之，该命令的第一部分将会是 /mycommand。
-    @Override
-    public String getCommandName() {
-        return "mycommand";
+```json
+{
+  "pools": [
+    {
+      "conditions": [
+        {
+          "condition": "random_chance",
+          "chance": 0.1
+        }
+      ],
+      "rolls": 5,
+      "bonus_rolls": 1,
+      "entries": [
+        {
+          "type": "item",
+          "name": "minecraft:diamond",
+          "functions": [
+            {
+              "function": "set_count",
+              "count": 6
+            }
+          ]
+        }
+      ]
     }
-
-    //必须覆写
-    @Override
-    public String getCommandUsage(ICommandSender sender) {
-        // 实际上这里应该使用 I18n 来保证支持国际化。 TODO I18n
-        return "/mycommand - my first command";
-    }
-
-    // 必须覆写
-    @Override
-    public void execute(MinecraftServer server, ICommandSender sender, String[] args) throws CommandException {
-        // 命令的执行逻辑全部在这里发生。
-        sender.sendMessage(new TextComponentString("Hello, world"));
-    }
-
-    // 可以不覆写，但默认权限要求是 4（即游戏管理员），所以请按需覆写
-    @Override
-    public int getRequiredPermissionLevel() {
-        return 0; // 0 代表任何人都能用
-    }
-}
-````
-
-### 关于 `ICommandSender`
-
-这个接口代表了“发出命令的那个实体”。这里的“实体”不是指第七章讨论的那个实体，而是指更一般的“某个切实存在的对象”的概念。这么一个接口的存在实际上说明发出命令的方式不止聊天窗口。根据发出命令的方式的不同，它实际上可以是：
-
-  - 全体实体（`Entity`）
-    - 这包括了 `EntityPlayer` 乃至 `FakePlayer`。
-  - 命令方块（`CommandBlockBaseLogic`），具体来说是这两个：
-    - 方块形态的命令方块（`TileEntityCommandBlock$1`）
-    - 实体形态的命令方块矿车（`EntityMinecartCommandBlock$1`）
-  - 服务器（`MinecraftServer`）
-    - 包括 `IntegratedServer` 和 `DedicatedServer`。
-  - 每 tick 执行[函数](function.md)的 `FunctionManager.gameLoopFunctionSender`（`field_193073_g`）（`FunctionManager$1`）。
-  - 进度系统奖励函数时也会使用一个特殊的 `ICommandSender`（`AdvancementRewards$1`）
-  - RCon 远端连接（`RConConsoleSource`）。
-  - 告示牌（`TileEntitySign$1` 和 `TileEntity$2`）。
-
-是不是快晕过去了？实际上你不需要在意 `ICommandSender` 的具体类型。举个例子，你调用 `sendMessage` 方法，如果这个 `ICommandSender` 根本没可能看到这个消息的话，这个方法也就会是 no-op，无需对 `ICommandSender` 的类型有任何猜测。
-
-### 关于[目标选择器][ref-target-selector] `@p`、`@r`、`@a`、`@e`、`@s`
-
-你不需要在 `execute` 中处理这些东西，因为这些东西都会被 Minecraft 提前帮你展开好。具体来说，是 Minecraft 首先会根据目标选择器获取一个符合要求的 `List<Entity>`，然后，对于你收到的参数来说，原本是目标选择器的地方会变成一个字符串形式的 UUID，这个 UUID 代表了一个确定的实体。这个 UUID 即是 `Entity.getUniqueID`（`func_110124_au`）的返回值；Forge 对 `Entity` 类的 patch 中也有一个历史遗留的 `getPersistentID` 方法会返回这个 UUID。不过你不需要手动写根据 UUID 查 `Entity` 的方法——`CommandBase.getEntity`（`func_184884_a`）就可以搞定这个问题了。
-
-[ref-target-selector]: https://minecraft-zh.gamepedia.com/%E5%91%BD%E4%BB%A4#.E7.9B.AE.E6.A0.87.E9.80.89.E6.8B.A9.E5.99.A8
-
-### 注册
-
-实际上命令是纯服务器端的东西，这也是很多服务器端插件的功能都是围绕命令展开的原因——它不需要让客户端安装任何东西，客户端只需要能发送聊天消息就能使用这些服务器上有的命令。
-
-```java
-// 一般的命令需要这样注册。请注意，这个事件是基于逻辑服务器的。
-@Mod.EventHandler
-public void onServerStarting(FMLServerStartingEvent event) {
-    event.registerServerCommand(new MyCommand());
+  ]
 }
 ```
 
-但 Forge 提供了一套基于客户端的命令注册，这样一来可以添加一些只在客户端上才有意义的命令（比如渲染相关的命令——服务器上渲染啥？）。
+### 术语
 
-````java
-// 客户端专有的命令可以考虑走这个
-ClientCommandRegistry.registerCommand(new MyCommand());
-````
+ - Loot Table（战利品表）：指多个随机池组成的一张表。之所以叫表，很大程度上是因为 JSON 将它以表的形式呈现出来了。
+ - Loot Pool（随机池）：指多个 Loot Entry 组成的一个集合。~~这实际上就是平时所说的“奖池”~~……主要作用是方便管理。Loot Table 会根据每一个随机池的 Loot Condition 决定是否从中抽物品，并根据 `rolls` 和 `bonus_rolls` 决定抽多少次物品。
+ - Loot Entry：一个特定的“战利品条目”。可用 Loot Condition 控制是否使用。可用 Loot Function 控制更多属性。
+ - Loot Condition：启用某个 Loot Pool/Loot Entry/Loot Function 的判据。
+ - Loot Function：修改 Loot Entry 抽到的物品的“函数”。
+
+### 使用战利品表
+
+从战利品表中抽物品很简单：首先你需要知道目标战利品表的名字，然后：
+
+```java
+WorldServer world = ...;
+LootTableManager manager = world.getLootTableManager()
+ResourceLocation lootTableLocator = ...;
+LootTable table = manager.getLootTableFromLocation(lootTableLocator);
+// 注：LootContext.Builder 的构造器只接受 WorldServer，但 getLootTableManager 方法是 World 里的。
+LootContext context = LootContext.Builder(world).withPlayer(player).withDamageSource(...).build();
+List<ItemStack> loots = table.generateLootForPools(world.rand, context);
+```
+
+在 `LootTableList` 类中有全部原版使用的 Loot Table 的 ID。
+
+除此之外，对于继承了 `TileEntityLockableLoot` 的原版 `TileEntity`，你还可以这么做：
+
+```java
+TileEntity tile = world.getTileEntity(pos);
+if (tile instanceof TileEntityLockableLoot) {
+    ((TileEntityLockableLoot)tile).setLootTable(lootTableID, randomSeed);
+}
+```
+
+对于箱子等，这会令其在下一次被打开时从对应的 Loot Table 中抽取物品并放入容器中。抽取结束后这些容器会清除它们被设定的 Loot Table ID。
+
+### 注册新的战利品表
+
+你可能已经发现了，`LootTableList` 下的战利品表都是“注册”过的，用途是 `LootTableManager` 中的 `reloadLootTables` 方法会自动加载这些“注册”过的战利品表。
+
+```java
+// 这个路径展开后就是 /assets/my_mod/loot_tables/custom.json。
+// 是的，和工作台合成及进度一样，因为数据包跳票，所以被迫放在 /assets 目录下，且路径硬编码。
+LootTableList.register(new ResourceLocation("my_mod", "custom"));
+```

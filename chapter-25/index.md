@@ -1,37 +1,24 @@
-## 配置文件
+## Forge 权限系统
 
-走到这一步的读者大概已经发现了，很多东西其实都是有自定义的空间的。某个机器使用的常量，某种世界生成的开关，某个客户端特效的精确控制，不胜枚举。所以你大概需要一个配置文件。Forge 正好提供了这样一套工具用来快速搞定这个需求。
+是的。Forge 内置了一个非常简易的权限系统。有鉴于 Forge 的一贯原则，它只是一套有完整功能的 API 而已，并不影响游戏功能，甚至它自带的占位用实现都是假定 OP 有所有权限的（参考原版命令系统）。  
+虽然说简易，但有鉴于这套系统是基于权限名、玩家和上下文（`IContext`）的，所以它还是比较 versatile 的。
 
-### 一个简单示范：MyModConfig.java
-
-最简单的创建配置文件的方法是使用这套基于注解的系统。
+### 基于上下文的权限查询
 
 ```java
-@Config(modid = "my_mod_id") // 相当于入口标记一样的东西。`modid` 一定要填你的 mod id。
-@Config.LangKey("config.my_mod.general") // 这个用于本地化，稍后会讲
-public final class MyModConfig {
-
-    // 最简单的一个选项就是这样声明的。
-    // 反映到真正的配置文件中，会是 `B:think=false`。
-    public static boolean think = false;
-
-    @Config.Comment("Hey I am foo") // 有了这个就会多一个注释。
-    @Config.LangKey("config.my_mod.general.foo") // 本地化用，稍后会讲
-    @Config.Name("Foo") // 默认配置选项名是字段名，如果需要别的名字就用这个。
-    @Config.RangeInt(min = 1, max = 10000) // 整数值支持限定范围。
-    @Config.RequireWorldRestart // meta 标记，代表需要重进存档才会生效
-    @Config.RequiresMcRestart // meta 标记，代表需要重启游戏才会生效
-    public static int foo = 0;
-
-    @Config.Comment("Hey I am bar")
-    @Config.LangKey("config.my_mod.general.bar")
-    @Config.Name("Bar")
-    @Config.RangeDouble(min = 1.0, max = 10000.0) // 和 RangeInt 一个意思，不过是给 double 的。
-    @Config.RequireWorldRestart
-    @Config.RequiresMcRestart
-    public static double bar = 0;
-
-    // 数组也是支持的。
-    public static String[] strArr = new String[] { "test" };
+String permissionKey = "a.random.permission.key";
+if (PermissionAPI.hasPermission(player.getGameProfile(), permissionKey, new PlayerContext(player))) {
+    // 在有权限的时候执行操作
 }
 ```
+
+`PermissionAPI.hasPermission` 会将这个调用代理给当前的 `IPermissionHandler.hasPermission`。无需关心接口的实现，只要它不是 `null` 就好。
+
+### 权限注册
+
+```java
+String permissionKey = "a.random.permission.key";
+PermissionAPI.registerNode(permissionKey, DefaultPermissionLevel.OP, "My first permission");
+```
+
+最后一个参数是描述，可选。中间的参数实际上是给这套系统的默认实现用的，目的是尽可能贴近原版行为（顺带让 `PermissionAPI` 持有的 `IPermissionHandler` 引用永远不是 `null`）。
