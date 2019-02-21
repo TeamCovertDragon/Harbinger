@@ -110,7 +110,7 @@
 * [29. 跨 Mod 兼容及 Add-on 制作](chapter-29/index.md)
   * [29.1 跨 Mod 通信（Inter-Mod Communication，IMC）](chapter-29/imc.md)
   * [29.2 使用第三方 Capability](chapter-29/foreign-capabilities.md)
-* 30. <!-- ls: chapter-30: No such file or directory -->
+* 30\. <!-- ls: chapter-30: No such file or directory -->
 
 <!--
 待考虑：
