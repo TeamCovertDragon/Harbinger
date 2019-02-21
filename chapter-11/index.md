@@ -7,11 +7,11 @@
 ### 业务端判定
 原版很多地方的业务逻辑，服务器和客户端是耦合在一起的……（也许这个词笔者用错了，但暂时先这样）。举个例子，方块右击的时候给玩家发一句话，在实际游戏中你会发现显示了两次——这时再加上 `FMLCommonHandler` 的 `getEffectiveSide` 的输出就能见真相了：一次来自服务器，一次来自客户端。  
 怎么办呢。其实刚才提到了一个解决办法就是 `FMLCommonHandler.getEffectiveSide`。这个方法其实是不推荐的——它实际上是个 hack，此前是通过检查线程名判定是服务器端还是客户端；现在这个方法的实现是 Forge 在 patch Minecraft 底层后，两个线程及派生出的线程隶属不同的 `ThreadGroup`（分别对应客户端和服务器），以此为基础检查逻辑侧。新的实现使 这个方法显得不那么 hack 了，但也只是让它显得不 hack 了而已。  
-最稳妥的办法，从 1.6.4 到 1.12.2，就没有变过——检查 `World` 实例的 `isRemote`：
+最稳妥也是最高效的办法，从 1.6.4 到 1.12.2，就没有变过——检查 `World` 实例的 `isRemote`：
 
 ````java
                         // Last Remote
-world.isRemote == true  //   客户端，意即“这个世界是被遥控的”
+world.isRemote == true  //  客户端，意即“这个世界是被遥控的”
 world.isRemote == false // 服务器端，意即“这个世界不是被遥控的”
 ````
 
