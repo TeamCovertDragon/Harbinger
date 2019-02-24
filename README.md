@@ -40,9 +40,9 @@ _`void foo(List<String> bar)` 和 `void foo(List<Ingeter> bar)` 能否在一个�
 
 如前所述，Java 的泛型由类型擦除实现，所以不能。它们的方法签名均为 `foo(Ljava/util/List;)V`。
 
-_`boolean contains(E e) { for (E e1 : this.data) { if (e1.equals(e)) return true; } return false; }` 的上界时间复杂度？_
+_`boolean contains(E e) { for (E e1 : this.data) { if (e1.equals(e)) return true; } return false; }` 的时间复杂度？_
 
-O(n)。
+$\Theta(n)$。
 
 _通常所说的 Stack Overflow（栈溢）中的 Stack 是指？_
 
