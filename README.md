@@ -42,7 +42,7 @@ _`void foo(List<String> bar)` 和 `void foo(List<Ingeter> bar)` 能否在一个�
 
 _`boolean contains(E e) { for (E e1 : this.data) { if (e1.equals(e)) return true; } return false; }` 的时间复杂度？_
 
-$\Theta(n)$。
+$$\Theta(n)$$。
 
 _通常所说的 Stack Overflow（栈溢）中的 Stack 是指？_
 
