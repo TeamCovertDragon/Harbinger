@@ -1,4 +1,8 @@
-## 目录
+## 总目录
+
+* 前言
+  * [写在前面：这是什么？](README.md)
+  * [序：《异教与隐士》](preface/index.md)
 
 ### 正文
 
@@ -132,20 +136,18 @@
   - JSON <-> NBT？虽然那个格式并不是严格的 JSON。
  -->
 
-### 实战
-
-* [31. 实战：？？？](chapter-31/index.md)
-* [32. 实战：微波炉](chapter-32/index.md)
-* [33. 实战：移动电源](chapter-33/index.md)
-* [34. 实战：Kotlin](chapter-34/index.md)
-* [35. 实战：？？？](chapter-35/index.md)
-* [36. 实战：？？？](chapter-36/index.md)
-* [37. 实战：多方块结构](chapter-37/index.md)
-* [38. 实战：？？？](chapter-38/index.md)
-* [39. 实战：？？？](chapter-39/index.md)
-* [40. 实战：？？？](chapter-40/index.md)
-
 ### 附录
 
-* [41. 附录一：FML 生命周期](chapter-41/index.md)
-* [42. 附录二：？？？](chapter-42/index.md)
+* [31. 附录 I：？？？](chapter-31/index.md)
+* [32. 附录 II：？？？](chapter-32/index.md)
+* [33. 附录 III：？？？](chapter-33/index.md)
+* [34. 附录 IV：？？？](chapter-34/index.md)
+* [35. 附录 V：？？？](chapter-35/index.md)
+* [36. 附录 VI：？？？](chapter-36/index.md)
+* [37. 附录 VII：？？？](chapter-37/index.md)
+* [38. 附录 VIII：？？？](chapter-38/index.md)
+
+### 实战
+
+* [39. 实战：？？？](chapter-39/index.md)
+* [40. 实战：？？？](chapter-40/index.md)
