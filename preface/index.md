@@ -28,9 +28,9 @@ _简述 `throw` 和 `throws` 的区别。_
 
 `throw` 用于抛出异常；`throws` 用于在方法声明中注明允许抛出的 checked 异常。
 
-_`transient` 关键字作用？_
+_`synchronized` 关键字作用？_
 
-`java.io.ObjectOutputStream` 的 `writeObject` 方法不会持久化该字段。对于其他序列化方式可能有其他定义。
+标记有 `synchronized` 的方法在执行时会对 `this` 加锁，直到方法执行完毕并释锁。亦可使用 `synchronized` 来声明临界区，以指定需要拿到锁才能执行的代码块。
 
 _JLS 8 中哪两个关键字没有任何用途？_
 
