@@ -2,6 +2,8 @@
 
 Harbinger 是一套全面的，基于 Forge 的，中文 Minecraft Mod 开发指南。身为读者的你，需要记住以下事项：
 
+* 本教程基于 Minecraft 1.12.2 Release 和足够新的 Forge。**如无特殊说明，本教程基于 Minecraft 1.12.2 Release 和 Forge 14.23.5.2772，MCP Mapping 版本使用 `stable_39`。本教程原则上不涉及任何旧版内容。**
+* 本教程使用的目录分隔符（directory separator）统一为 `/`。
 * 这里不是 Java 教程。你必须掌握至少一门基于 JVM 的编程语言。对零基础新人来说，Java 就可以，先去花点时间把 Java 学了。Scala 用户用 Scala 当然也是十分欢迎的，只是笔者不会 Scala。
 
   > 什么叫“降低门槛”？要我说，我已经很久没见到比国内MC圈的开发门槛还要低的圈子了，软件版和编程版的门槛已经低到不能再低了。至少对于我而言，我已经在无数个场合说过无数次了，学开发插件/Mod的时候，先花上几个月把Java学了，然后再学会很轻松。实际上呢？我接触过的连Java基本语法都没了解清楚就去学写插件/Mod的人，实在是太多太多了。Java实际上，甚至可以说是最简单的现代编程语言之一。至于多了解了解其他的编程语言，多学习学习一些计算机科学的知识，什么数据结构啊，设计模式啊，组成原理啊，这些本来应该是程序猿提升自我理应做的事情，对于他们来说，我真是想都不敢想。  
@@ -19,10 +21,7 @@ Harbinger 是一套全面的，基于 Forge 的，中文 Minecraft Mod 开发指
     * FAIL 是 Forge Abstraction Interpertation Layer（Forge 抽象与解释层）的首字母缩略词。
     * FAIL 这个单词本身的含义是“失败”。某种意义上的自嘲。
     * [事实上也的确停止开发了][ref-fail-status]。如果你真的很在意跨 Minecraft 版本的兼容性，[Sponge][ref-sponge-docs]。
-* 代码要保持整洁、高效。
-
-最后，本教程基于 Minecraft 1.12.2 Release 和足够新的 Forge。**如无特殊说明，本教程基于 Minecraft 1.12.2 Release 和 Forge 14.23.5.2772，MCP Mapping 版本使用 `stable_39`。本教程原则上不涉及任何旧版内容。**
-此外，本教程使用的目录分隔符（directory separator）统一为 `/`。
+* 最后，代码要保持整洁、高效。
 
 另外，几个建议：
 * 请务必时常关注 GitHub 上 MinecraftForge/MinecraftForge 的 commit 以及 Pull Requests。这是你获得第一手信息的最简单还最可靠的方式（更何况，如果你在国内，别的方式对你来说，不仅是奢望，效率还不怎么高）。
@@ -46,3 +45,10 @@ Harbinger 是一套全面的，基于 Forge 的，中文 Minecraft Mod 开发指
 [ref-ubuntu-paste-bin]: https://paste.ubuntu.com/
 [ref-xy]: https://meta.stackexchange.com/a/66378
 [ref-just-ask]: http://sol.gfxile.net/dontask.html
+
+<!--
+关于 XY 问题还可以参考：
+
+  - http://xyproblem.info/
+  - http://coolshell.cn/articles/10804.html
+-->
