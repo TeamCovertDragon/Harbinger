@@ -29,12 +29,11 @@ Harbinger 是一套全面的，基于 Forge 的，中文 Minecraft Mod 开发指
 * 请务必时常关注 [Forge 自己的文档][ref-forge-doc]。有能力的读者，请务必考虑协助他们补全文档（位于[这里][ref-forge-doc-src]）。
   * 更新并不及时的[非正式中文翻译][ref-forge-doc-translation]，实在看不懂英语的话可以用来救急。
 * 欧美社区的 Modder 很多都常驻在一些 Discord 服务器中，比如 Minecraft Mod Development，在这些 Discord 服务器里问他们问题也许能得到详尽的解答。
-  * 英语要求不需要强调第二次。
-  * 注意不规则拼写，拿不定的时候放出声读一读。
+  * 英语要求不需要强调第二次。注意不规则拼写，拿不定的时候放出声读一读。
   * 海量 meme 警告，可以考虑潜水收图。
-  * 遵守一切频道相关的规定。发错频道的后果自负。huahuahuahua
-  * 多数开发者的标准比较高（`With great power comes with great responsibility`），问问题时想清楚要问什么，不要拐弯抹角，直接把最开始的问题拿出来，而不是问“你觉得可行的方案如何去实现”。（即避免 XY 问题。）
-  * http://sol.gfxile.net/dontask.html - 有问题直接问，不要问“在吗，我有一个问题想请教一下”。
+  * 遵守一切有关规定，发错频道后果自负。
+  * 问问题时想清楚要问什么，不要拐弯抹角，[直接把最开始的问题拿出来][ref-xy]，而不是问“你觉得可行的方案如何去实现”。
+  * [有问题直接问][ref-just-ask]，不要问“在吗，我有一个问题想请教一下”。
     * 但非常神奇的是，多数 Modder 对私信和 Ping 非常敏感，所以请不要这么做。
   * 善用各类粘贴箱（paste bin）。国内的话 [Ubuntu PasteBin][ref-ubuntu-paste-bin] 就可以。
   * 因为国内国外都有熊孩子和 troll，所以很多人可能并没有耐心。直接“Go to learn Java”的回复并不少见。
@@ -45,3 +44,5 @@ Harbinger 是一套全面的，基于 Forge 的，中文 Minecraft Mod 开发指
 [ref-forge-doc-src]: https://github.com/MinecraftForge/Documentation
 [ref-forge-doc-translation]: http://mcforge-cn.readthedocs.io/zh/latest/
 [ref-ubuntu-paste-bin]: https://paste.ubuntu.com/
+[ref-xy]: https://meta.stackexchange.com/a/66378
+[ref-just-ask]: http://sol.gfxile.net/dontask.html
