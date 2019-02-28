@@ -1,10 +1,17 @@
 ## Minecraft 的方块及物品模型
 
-你看到的 Minecraft 中所有的方块和物品基本都是一个个静态模型贴上合适的材质后的产物。本章专门讨论这个。
+你看到的 Minecraft 中所有的方块和物品基本都是一个个静态模型贴上合适的纹理后的产物。本章专门讨论这个。
 
 ### 紫黑块
 
-你应该已经注意到了：你的新物品现在全是紫黑色的方块。虽说有观点认为这是世界上最好的模型，但几乎所有时候这绝对不是你想看到的模型。为此我们需要给它一个模型。
+你应该已经注意到了：你的新物品现在全是紫黑色的方块。虽说有观点认为这是世界上最好的模型，但几乎所有时候这绝对不是你想看到的模型。为此我们需要给它一个模型。  
+
+### JSON
+
+是的，这些模型是用一种基于 JSON 的 DSL 描述的。  
+Minecraft 本身使用的 JSON 格式的模型定义在[中文 Minecraft Wiki][link-mw-model] 上有比较详细的解释，有问题的时候可以参考。简单来说，Minecraft 的方块/物品模型系统可以表达只有立方体组成的模型，每个立方体都可以旋转，但旋转的角度有限制（旋转的基本单位是 1/16 圆周，即 22.5 度，不支持任意角度旋转），且只能绕一个轴转。即便如此，在这样一个到处都是方块的世界里，这样的模型也足够用了。  
+
+[link-mw-model]: https://minecraft-zh.gamepedia.com/%E6%A8%A1%E5%9E%8B#.E6.96.B9.E5.9D.97.E6.A8.A1.E5.9E.8B
 
 ### 模型的定义
 
@@ -25,6 +32,7 @@
 ```java
 @SubscribeEvent
 public static void onModelRegistration(ModelRegistryEvent event) {
+    // 因为一些奇怪的原因，原版不会主动去搜索 Mod 的物品的模型的位置。我们需要手动指定一个。
     ModelLoader.setCustomModelResourceLocation(myItem, 0, new ModelResourceLocation(new ResourceLocation("example_mod", "example_item_model"), "inventory"));
 }
 ```
@@ -83,6 +91,7 @@ Item.getItemFromBlock(myBlock);
 这样就够了。事实上，任何物品都可以用这样的方式拥有一个方块的模型，对于那些设定上外观是方块的合成用物品来说这样做相当省事。
 
 ### 附加篇：空模型
+
 定义一个完全透明啥都没有的空模型其实也不是难事：
 
 ```json
