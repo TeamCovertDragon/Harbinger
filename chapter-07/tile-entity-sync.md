@@ -11,8 +11,8 @@ TileEntity 类中有四个和数据同步相关的方法，分别是：
 
 ### `onDataPacket`
 
-`getUpdatePacket` 返回一个 `SPacketUpdateTileEntity`。这个是原版 Minecraft 中用来将服务器线程上需要同步的 TileEntity 数据发送到客户端线程上所用的数据包。它的构造器需要一个 `NBTTagCompound` 对象，这个对象就是你需要同步的数据的集合了。  
-在 Forge 修改过 Minecraft 的底层后，你可以通过 `onDataPacket` 在客户端上拿到你同步过来的数据。
+`getUpdatePacket` 返回一个 `SPacketUpdateTileEntity`。这个是原版 Minecraft 中用来将逻辑服务器上需要同步的 TileEntity 数据发送到逻辑客户端上所用的数据包。它的构造器需要一个 `NBTTagCompound` 对象，这个对象就是你需要同步的数据的集合了。  
+在 Forge 修改过 Minecraft 的底层后，你可以通过 `onDataPacket` 在逻辑客户端上拿到你同步过来的数据。
 
 ```java
 @Override
@@ -43,6 +43,9 @@ public void syncToTrackingClients() {
         SPacketUpdateTileEntity packet = this.getUpdatePacket();
         // 获取当前正在“追踪”目标 TileEntity 所在区块的玩家。
         // 之所以这么做，是因为在逻辑服务器上，不是所有的玩家都需要获得某个 TileEntity 更新的信息。
+        // 比方说，有一个玩家和需要同步的 TileEntity 之间差了八千方块，或者压根儿就不在同一个维度里。
+        // 这个时候就没有必要同步数据——强行同步数据实际上也没有什么用，因为大多数时候这样的操作都应会被
+        // World.isBlockLoaded（func_175667_e）的检查拦截下来，避免意外在逻辑客户端上加载多余的区块。
         PlayerChunkMapEntry trackingEntry = ((WorldServer)this.world).getPlayerChunkMap().getEntry(this.pos.getX() >> 4, this.pos.getZ() >> 4);
         if (trackingEntry != null) {
             for (EntityPlayerMP player : trackingEntry.getWatchingPlayers()) {
@@ -55,7 +58,7 @@ public void syncToTrackingClients() {
 
 ### `getUpdateTag`
 
-`getUpdateTag` 返回一个 `NBTTagCompound`。这个方法是在“区块刚刚被加载时”，同步 TileEntity 数据用的。对于那些不需要 `ITickable` 的 TileEntity，比如纯装饰性的 TileEntity 来说，使用它可以有效避免频繁更新 TileEntity 带来的开销。
+`getUpdateTag` 返回一个 `NBTTagCompound`。这个方法是在“区块刚刚被加载时”，同步 TileEntity 数据到逻辑客户端用的。对于那些不需要 `ITickable` 的 TileEntity，比如纯装饰性的 TileEntity 来说，使用它可以有效避免频繁更新 TileEntity 带来的开销。毕竟数据就在那了，同步一次一劳永逸。
 
 ```java
 @Override
