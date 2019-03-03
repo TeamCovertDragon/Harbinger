@@ -30,7 +30,7 @@ public class MultiMetaItem extends Item {
     // 实际上这个方法控制该物品在创造模式物品栏中显示的所有具体物品。
     // 比方说你可以用这个来显示一个没电的电钻和一个充满电的电钻（参考 IC2）。
     @Override
-    public void getSubItems(CreativeTabs tabs, List<ItemStack> list) {
+    public void getSubItems(CreativeTabs tab, List<ItemStack> list) {
         if (this.isInCreativeTab(tab)) {
             // ItemStack表示“一堆数量若干的物品”。
             // 构造器中，第一个参数可以是 Item 也可以是 Block（有对应的重载）
