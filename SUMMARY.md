@@ -93,6 +93,8 @@
     * [19.4.3 `IChunkGenerator`](chapter-19/dimension/chunk-gen.md)
     * [19.4.4 `BiomeProvider`](chapter-19/dimension/biome-gen.md)
 * [20. 村庄](chapter-20/index.md)
+  * [20.1 村民职业](chapter-20/villager-profession.md)
+  * [20.2 村庄结构](chapter-20/village-structure.md)
 * [21. 合成表](chapter-21/index.md)
   * [21.1 Forge 的扩展](chapter-21/forge-extension/index.md)
     * [21.1.1 矿物词典（Ore Dictionary）](chapter-21/forge-extension/ore-dictionary.md)
