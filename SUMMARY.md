@@ -8,7 +8,7 @@
 
 * [1. 站在巨人的肩膀上](chapter-01/index.md)
   * [1.1 MCP](chapter-01/mcp.md)
-  * [1.2 Forge](chapter-1/forge.md)
+  * [1.2 Forge](chapter-01/forge.md)
   * [1.3 ForgeGradle](chapter-01/forgegradle.md)
 * [2. 一切的开始](chapter-02/index.md)
   * [2.1 Mod 元数据](chapter-02/metadata.md)
