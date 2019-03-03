@@ -105,6 +105,7 @@
   * [21.2 重新实现 `IRecipe`](chapter-21/custom-recipe.md)
   * [21.3 扩展篇：熔炉配方及燃料值](chapter-21/vanilla-furnace.md)
   * [21.4 扩展篇：酿造台配方](chapter-21/vanilla-brewing-stand.md)
+  * [21.5 扩展篇：铁砧“配方”](chapter-21/forge-extension/anvil-events.md)
 * [22. 进度（Advancement）](chapter-22/index.md)
   * [22.1 自定义进度触发条件](chapter-22/forge-extension/custom-criterion.md)
   * [22.2 自定义 Item Predicate](chapter-22/forge-extension/custom-item-predicates.md)
