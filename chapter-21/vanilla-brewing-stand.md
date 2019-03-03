@@ -40,3 +40,5 @@ public final class MyBrewingRecipe implements IBrewingRecipe {
     }
 }
 ```
+
+对于不需要依赖具体输入的酿造配方，可以考虑直接使用 `AbstractBrewingRecipe` 而不是从零开始实现 `IBrewingRecipe`。
