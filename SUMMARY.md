@@ -88,7 +88,7 @@
     * [19.3.2 `MapGenStructure`](chapter-19/structure/structure.md)
     * [19.3.3 `Template`](chapter-19/structure/template.md)
   * [19.4 新维度](chapter-19/dimension/index.md)
-    * [19.4.1 `WorldType`](chapter-19/dimension/type.md)
+    * [19.4.1  可选的 `WorldType`](chapter-19/dimension/type.md)
     * [19.4.2 `WorldProvider`](chapter-19/dimension/dimension.md)
     * [19.4.3 `IChunkGenerator`](chapter-19/dimension/chunk-gen.md)
     * [19.4.4 `BiomeProvider`](chapter-19/dimension/biome-gen.md)
