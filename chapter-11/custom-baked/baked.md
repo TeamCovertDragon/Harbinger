@@ -32,7 +32,7 @@ public class BakedBrandNewModel implements IBakedModel {
     {
         // 当返回 true 时，将调用 TileEntityItemStackRenderer 来进行绘制。
         // 99% 的时候你都应该返回 false。
-        // 关于 TileEntityItemStackRenderer 的信息可参考第十二章的 TEISR 一节。
+        // 关于 TileEntityItemStackRenderer 的信息可参考本章 Forge 扩展部分的 TEISR 一节。
         return false;
     }
 
