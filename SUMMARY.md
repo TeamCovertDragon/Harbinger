@@ -1,5 +1,7 @@
 ## 总目录
 
+### 前言
+
 * 前言
   * [写在前面：这是什么？](README.md)
   * [序：《异教与隐士》](preface/index.md)
@@ -177,4 +179,6 @@
 
 ### 后记
 
-* [∞. 后记：？？？](afterword/index.md)
+* 后记
+  * [跋：《Aboard Harbinger Gunship》](afterword/index.md)
+  * [写在后面：鸣谢名单](afterword/credits.md)
