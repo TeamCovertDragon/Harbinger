@@ -9,7 +9,15 @@
 
 ### 用法
 
-使用 TEISR 需要确保对应物品使用的 `IBakedModel` 的 [`isBulitInRender` 返回 true](../custom-baked/custom-model/baked.md)。接下来的操作就和 `TileEntitySpecialRenderer` 没有太大区别了。毕竟都是直接用“底层”（`GL11` 系列固定管线）来完成渲染。
+使用 TEISR 需要确保对应物品使用的 `IBakedModel` 的 [`isBulitInRender` 返回 true](../custom-baked/custom-model/baked.md)。一般来说，只需要这样写 JSON 模型即可：
+
+```json
+{
+  "parent": "builtin/entity"
+}
+```
+
+接下来的操作就和 `TileEntitySpecialRenderer` 没有太大区别了。毕竟都是直接用“底层”（`GL11` 系列固定管线）来完成渲染。
 
 ```java
 public class SomeCrazyRenderingForMyItem extends TileEntityItemStackRenderer {
