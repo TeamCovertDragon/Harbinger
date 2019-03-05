@@ -20,13 +20,3 @@ Minecraft 从 1.12 起引入了使用技术性 JSON 文件的原版工作台合�
 
 Minecraft 原定于 1.12 引入的数据包跳票到了 1.13 才放出，但 Mojang 仍然在 1.12 中把合成表全转换成了 JSON 格式。Mojang 选择的存放位置是 `assets/minecraft/recipes/`。  
 自然地，Forge 也将 JSON 视作推荐标准，并提供了对应的支持。与原版的路径相对应，Mod 的合成表只需要放在 `assets/[modid]/recipes/` 里就能被 Forge 扫描到并自动加载。`modid` 自然就是你的 Mod 的 id。有一点要注意，虽然这个路径和资源包的路径如出一辙，但合成表不是资源包的一部分。设定上讲，它是数据包的一部分，但显然 1.12 没有数据包，只能先这样将就了。（实际上原版和 Forge 都硬编码了这个路径。）
-
-### Forge 的扩展
-
-是的，原版的 JSON 格式表达能力还是相当有限的，为此 Forge 引入了一堆新东西。
-
-  - [矿物词典](forge-extension/ore-dictionary.md)
-  - [加载条件（Condition）](forge-extension/condition.md)
-  - [常量池（`_constants.json`）](forge-extension/constants.md)
-  - [自定义 Ingredient](forge-extension/ingredient-factory.md)
-  - [合成表工厂（Recipe Factory）](forge-extension/recipe-factory.md)
