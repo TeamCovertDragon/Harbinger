@@ -27,10 +27,10 @@ public class ExampleMod {
 ````
 
 成功注册的流体桶可在原版创造模式物品栏的“杂项”底下找到这些桶。  
-此外，`addBucketItemFor` 这个方法会同时尝试注册传入的流体，但 `addBucketItemFor` 这个方法没有返回值。请自行取舍。
+此外，`addBucketForFluid` 这个方法会同时尝试注册传入的流体，但 `addBucketForFluid` 这个方法没有返回值。请自行取舍。
 
 <!--
-可能有人会问，这不是和 MinecraftForge 的“不添加游戏内容”相冲突了吗？
+可能有人会问，这不是和 Forge 的“不添加游戏内容”相冲突了吗？
 这实际上正是这个功能默认禁用的原因。只有当某个 Mod 要求启用这个功能时，这个物品才会被注册。
 自然地，为方便起见，Forge 也就顺势使用了它自己的 modid。
 -->
