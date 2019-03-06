@@ -12,7 +12,7 @@
 后来在几个 Modder <!-- 具体来说是 RWTema、boni-xx、mezz -->的不懈努力下，Forge 有了一个所谓的“万能桶”（Universal Bucket）物品，从此 Modder 们再也不需要一样的代码复制几十遍了。如果你需要的也只是这样一个桶，只需要这么做就可以了：
 
 ```java
-FluidRegistry.addBucketItemFor(myFluid);
+FluidRegistry.addBucketForFluid(myFluid);
 ```
 
 但万能桶这个功能默认禁用。需要至少有一个 Mod 在 `FMLPreInitializationEvent` 之前显式要求启用此功能。通常可选择在Mod主类的构造器，或静态初始化块中，显式开启：
