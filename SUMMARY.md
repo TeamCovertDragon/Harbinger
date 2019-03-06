@@ -23,7 +23,7 @@
     * [4.2.3 工具及武器等](chapter-04/advanced/tool.md)
     * [4.2.4 护甲](chapter-04/advanced/armor.md)
     * [4.2.5 投掷物](chapter-04/advanced/throwable.md)
-* [5. 方块](chapter-04/index.md)
+* [5. 方块](chapter-05/index.md)
   * [5.1 方块状态](chapter-05/block-state.md)
   * 5.2 高级的方块
     * [5.2.1 矿石](chapter-05/advanced/ore.md)
