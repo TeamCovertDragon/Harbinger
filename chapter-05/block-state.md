@@ -26,7 +26,7 @@ public BlockStateContainer createBlockState() {
 而 `IProperty<?>` 代表了一个有有限多个可能性的一种属性。比如说 `BlockHorizontal.FACING` 的可能值便只有 `EnumFacing.EAST`、`EnumFacing.SOUTH`、`EnumFacing.WEST` 和 `EnumFacing.NORTH`。这些可能性互不相同，换言之每一个 `IProperty<?>` 的所有可能性可以放到一个集合中。  
 如此一来，所有可能的方块状态便是…… 所有 `IProperty<?>` 的 `getAllowedValues()` 返回值的笛卡尔积。
 
-$$\[\prod_{p \in block}(p.getAllowedValues())\]$$
+$$\prod_{p \in block}(p.getAllowedValues())$$
 
 ### `ImmutableMap`？
 
