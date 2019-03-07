@@ -16,7 +16,8 @@ FML 提供了一套基于“发信和收信”的跨 Mod 间的通信系统（In
 
 ### 发送消息
 
-一般来说消息是在 FML 加载的生命周期中进行的。只要是在 `FMLInterModComms.IMCEvent` 发布之前发送 IMC 消息即可。一般情况下，通常会选择 `FMLPreInitializationEvent` 或 `FMLInitializationEvent` 完成。
+一般来说消息是在 FML 加载的生命周期中进行的。只要是在 `FMLInterModComms.IMCEvent` 发布之前发送 IMC 消息即可。一般情况下，通常会选择 `FMLPreInitializationEvent` 或 `FMLInitializationEvent` 完成。  
+发送消息并不需要额外的 `Loader.isModLoaded` 的检查——因为 IMC 系统自己就会在存储消息前执行这个检查，收信的 Mod 不存在时就不会继续存储消息。所以直接发送消息即可，无用的数据自然会被回收掉的。
 
 ```java
 // Sending a String message
@@ -55,15 +56,19 @@ public void onIMCMessageDistributed(FMLInterModComms.IMCEvent event) {
     for (FMLInterModComms.IMCMessage message : messages) {
         if (message.isStringMessage()) {
             String stringData = message.getStringValue();
+            // Do further process
         }
         if (message.isItemStackMessage()) {
             ItemStack itemStackData = message.getItemStackValue();
+            // Do further process
         }
         if (message.isNBTMessage()) {
             NBTTagCompound nbtData = message.getNBTValue();
+            // Do further process
         }
         if (message.isResourceLocationMessage()) {
             ResourceLocation resourceLocation = message.getResourceLocationValue();
+            // Do further process
         }
         if (message.isFunctionMessage()) {
             Optional<Function<Foo, Bar>> function = message.getFunctionValue(Foo.class, Bar.class);
