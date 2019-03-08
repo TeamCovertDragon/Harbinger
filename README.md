@@ -18,9 +18,9 @@ Harbinger 是一套全面的，基于 Forge 的，中文 Minecraft Mod 开发指
 * 你没有退路。要么一开始就不要做，要么一路走到黑，中途退出只会让你在新版本懵逼。
   * 对了，写多了 Minecraft 的 Mod 可能会有强烈的副作用，如果屏幕前的你打算以此入门编程，请三思。
   * 不要有任何怀疑，Forge 的设计是“只保持某个 Minecraft 主要版本内的二进制兼容”，跨版本兼容是不可能的。Minecraft 更新一次实际上就是 Forge 进行 Breaking change 的窗口，而且这个窗口开放的时间往往也很短。要知道 FAIL 已经停止开发了。<!-- FAIL 仓库的地址原本位于 https://github.com/MinecraftForge/FAIL -->
-    * FAIL 是 Forge Abstraction Interpertation Layer（Forge 抽象与解释层）的首字母缩略词。
-    * FAIL 这个单词本身的含义是“失败”。某种意义上的自嘲。
-    * [事实上也的确停止开发了][ref-fail-status]。如果你真的很在意跨 Minecraft 版本的兼容性，[Sponge][ref-sponge-docs]。
+   * FAIL 是 Forge Abstraction Interpertation Layer（Forge 抽象与解释层）的首字母缩略词。
+   * FAIL 这个单词本身的含义是“失败”。某种意义上的自嘲。
+   * [事实上也的确停止开发了][ref-fail-status]。如果你真的很在意跨 Minecraft 版本的兼容性，[Sponge][ref-sponge-docs]。
 * 最后，代码要保持整洁、高效。
 
 另外，几个建议：
