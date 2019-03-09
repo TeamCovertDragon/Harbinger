@@ -68,4 +68,5 @@ public enum ExampleMod {
     public void preLoad(FMLPreInitializationEvent event) {
         System.out.println("Hello, MinecraftForge");
     }
+}
 ````
