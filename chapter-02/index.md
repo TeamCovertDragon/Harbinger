@@ -22,6 +22,24 @@
 
 是的，因为各种乱七八糟的原因，部署环境的过程总是会有各种莫名其妙的问题。一般情况下， `--debug`、`--stacktrace` 直接莽拿到的信息足够 debug 用了。但有一点请注意：部署环境的过程中，因为涉及到几轮 mapping 和下载 Minecraft 的 assets，所以在没有预先部署好的环境留下的缓存的情况行，这个过程不会特别快。要有耐心。
 
+### Gradle 代理配置
+
+因为众所周知的原因，在 Gradle 配置的过程中可能会出现无法下载依赖导致构建开发环境失败的情况，我们可以为其配置`SOCKS`代理来解决这个问题。
+
+在你解压目录下找到`gradle.properties`如果文件不存在的话请创建一个（请注意后缀为`properties`)，使用记事本或者任何你喜爱的文本编辑器打开它，并在最后添加一行。
+
+```
+ org.gradle.jvmargs=-DsocksProxyHost=127.0.0.1 -DsocksProxyPort={你软件的本地代理端口}
+```
+
+比如我的本地代理的`SOCKS`端口为`1081`，那么就添加
+
+```
+org.gradle.jvmargs=-DsocksProxyHost=127.0.0.1 -DsocksProxyPort=1081
+```
+
+再重新运行`gradlew.bat setupDecompWorkspace` 或者`./gradlew setupDecompWorkspace`。
+
 ### 入口类
 
 和一般的教程不一样，这里的写法有些特殊：
