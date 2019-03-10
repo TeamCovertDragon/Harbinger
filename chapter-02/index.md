@@ -22,7 +22,9 @@
 
 是的，因为各种乱七八糟的原因，部署环境的过程总是会有各种莫名其妙的问题。一般情况下， `--debug`、`--stacktrace` 直接莽拿到的信息足够 debug 用了。但有一点请注意：部署环境的过程中，因为涉及到几轮 mapping 和下载 Minecraft 的 assets，所以在没有预先部署好的环境留下的缓存的情况行，这个过程不会特别快。要有耐心。
 
-另外，因为一些众所周知的原因， Gradle 在配置的过程中可能会报错或者异常的缓慢，读者可以通过为 Gradle 配置代理来解决。相关的资料[网上很容易找到](https://fmltutor.ustc-zzzz.net/1.1-%E9%85%8D%E7%BD%AE%E4%BD%A0%E7%9A%84%E5%B7%A5%E4%BD%9C%E7%8E%AF%E5%A2%83.html#%E9%85%8D%E7%BD%AE%E5%B7%A5%E4%BD%9C%E7%8E%AF%E5%A2%83)，这里不再赘述。
+然而，由于某些特殊原因，即使你有足够的耐心也不一定能部署成功。遇到这种情况时，你可以尝试通过为 Gradle 配置代理。[相关资料][ref-zzzz-tutorial]很容易找到，这里不再赘述。
+
+[ref-zzzz-tutorial]: https://fmltutor.ustc-zzzz.net/1.1-%E9%85%8D%E7%BD%AE%E4%BD%A0%E7%9A%84%E5%B7%A5%E4%BD%9C%E7%8E%AF%E5%A2%83.html#%E9%85%8D%E7%BD%AE%E5%B7%A5%E4%BD%9C%E7%8E%AF%E5%A2%83
 
 ### 入口类
 
