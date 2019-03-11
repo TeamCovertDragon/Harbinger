@@ -6,11 +6,15 @@
         "katex",
         "splitter",
         "expandable-chapters",
-        "anchor-navigation-ex"
+        "anchor-navigation-ex",
+	"baidu"
     ],
     "pluginsConfig": {
         "flow": {
             "line-color": "red"
-        }
+        },
+	"baidu": {
+	    "token": "645a7b56ba5b41f04733fe514e5d965a"
+	}
     }
 }
