@@ -5,9 +5,8 @@
 我们首先通过一个叫 `RegistryEvent.Register<Item>` 的事件注册一个啥都没用的物品。
 
 ````java
-// 这个注解的意思是“将这个类注册到事件总线中去，该事件监听器属于 my_mod 这个 Mod”
-@Mod.EventBusSubsriber(modid = "my_mod")
-public final class ItemLoader {
+@Mod.EventBusSubscriber(modid = "my_mod")
+public final class ItemInitializer {
 
     // 和正常的事件一样，你不需要手动调用此方法！Forge 会自动调用它的。
     @SubscribeEvent
