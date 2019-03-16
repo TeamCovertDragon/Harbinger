@@ -69,6 +69,19 @@ MinecraftForge.EVENT_BUS.register(new EventListener());
 
 以及注意一点，如果你订阅的事件属于矿物生成类的，或是地形生成类的（比如什么 `InitNoise` 这样的事件，那么请往 `ORE_GEN_BUS` 或者 `TERRAIN_GEN_BUS` 注册。
 
+### 自动注册
+
+```java
+// 这个注解的意思是“将这个类注册到事件总线中去，该事件监听器属于 my_mod 这个 Mod”
+@Mod.EventBusSubscriber(modid = "example_mod")
+public final class MyFirstEventListener {
+    @SubscribeEvent
+    public static void onEventFired(ACertainEvent event) {
+
+    }
+}
+```
+
 ### 事件的取消与结果
 
 注意到事件的监听器一定是一个返回值为 `void`（即无返回值）的方法。如果我要表达某种类似返回值的概念该怎么做，比如说“我通过某个事件来控制是否执行某一段代码”？  
