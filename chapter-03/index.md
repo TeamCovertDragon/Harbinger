@@ -73,6 +73,7 @@ MinecraftForge.EVENT_BUS.register(new EventListener());
 
 ```java
 // 这个注解的意思是“将这个类注册到事件总线中去，该事件监听器属于 my_mod 这个 Mod”
+// 它相当于 Forge 帮你执行了 MinecraftForge.EVENT_BUS.register(MyFirstEventListener.class)
 @Mod.EventBusSubscriber(modid = "example_mod")
 public final class MyFirstEventListener {
     @SubscribeEvent
@@ -81,6 +82,10 @@ public final class MyFirstEventListener {
     }
 }
 ```
+
+注意那个 `static`。当且仅当你使用 `EventBusSubscriber` 或 `class` 对象时你需要在方法上加 `static`。
+
+![Courtesy to JamiesWhiteShirt](https://cdn.discordapp.com/attachments/179315645005955072/475010493824892948/unknown.png)
 
 ### 事件的取消与结果
 
