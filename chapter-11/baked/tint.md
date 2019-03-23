@@ -50,7 +50,7 @@ import net.minecraft.client.renderer.color.IBlockColor;
 
 public final class MyBlockTinter implements IBlockColor {
     @Override
-    public colorMultiplier(IBlockState state, @Nullable IBlockAccess worldIn, @Nullable BlockPos pos, int tintIndex) {
+    public int colorMultiplier(IBlockState state, @Nullable IBlockAccess worldIn, @Nullable BlockPos pos, int tintIndex) {
         // 在这里返回的颜色代码将决定最终方块模型的“颜色”。这里使用 RGB。
         // 第四个参数即是上文中提到的 `tintIndex` 属性的值。
         return 0;
