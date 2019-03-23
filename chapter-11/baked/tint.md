@@ -17,7 +17,7 @@
 
 ## `tintIndex`
 
-支持染色的模型中应当有 `tintIndex` 这个属性。原版所有用到这个属性的模型中，这个属性的值都是 0。下面给出一个改造后的原版 `minecraft:block/cube` 模型以说明 `tintIndex` 属性应当如何使用：
+支持染色的方块模型中应当有 `tintIndex` 这个属性。原版所有用到这个属性的模型中，这个属性的值都是 0。下面给出一个改造后的原版 `minecraft:block/cube` 模型以说明 `tintIndex` 属性应当如何使用：
 
 ```json
 {
@@ -39,7 +39,8 @@
 }
 ```
 
-虽然 Minecraft Wiki 上[“模型”一文提到了这个属性][ref-mcw]，但它提供的信息并不多。
+虽然 Minecraft Wiki 上[“模型”一文提到了这个属性][ref-mcw]，但它提供的信息并不多。  
+此外，对于物品模型，只要最终使用的物品模型直接或间接继承自 `item/generated` 就能支持染色，不需要特别的操作。
 
 [ref-mcw]: https://minecraft-zh.gamepedia.com/%E6%A8%A1%E5%9E%8B
 
