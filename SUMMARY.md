@@ -132,6 +132,7 @@
     * [27.3.1 物品形式的容器](chapter-27/container/item.md)
     * [27.3.2 方块形式的容器](chapter-27/container/block.md)
     * [27.3.3 流体容器之间的交互](chapter-27/container/interaction.md)
+  * [27.4 流体渲染相关](chapter-27/render.md)
 * [28. Forge Capability 系统](chapter-28/index.md)
   * [28.1 Forge 内建的 Capability](chapter-28/built-in/index.md)
     * [28.1.1 `IItemHandler`](chapter-28/built-in/item.md)
