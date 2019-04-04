@@ -35,11 +35,10 @@
 * [6. 注册表](chapter-06/index.md)
 * [7. 物理端、逻辑端与网络 IO](chapter-07/index.md)
   * [7.1 TileEntity 内建的解决方案](chapter-07/tile-entity-sync.md)
-  * [7.2 Container 内建的解决方案](chapter-07/container-sync.md)
-  * [7.3 实体的解决方案](chapter-07/entity-sync.md)
-  * 7.4 Forge 的扩展
-    * [7.4.1 `SimpleNetworkWrapper`](chapter-07/forge-extension/simple-network-wrapper.md)
-    * [7.4.2 `FMLEventChannel`](chapter-07/forge-extension/fml-event-channel.md)
+  * [7.2 实体的解决方案](chapter-07/entity-sync.md)
+  * 7.3 Forge 的扩展
+    * [7.3.1 `SimpleNetworkWrapper`](chapter-07/forge-extension/simple-network-wrapper.md)
+    * [7.3.2 `FMLEventChannel`](chapter-07/forge-extension/fml-event-channel.md)
 * [8. 实体](chapter-08/index.md)
 * [9. 方块实体（TileEntity）](chapter-09/index.md)
   * [9.1 实例](chapter-09/examples/index.md)
@@ -51,6 +50,8 @@
   * [11.1 方块及物品模型](chapter-11/baked/index.md)
     * [11.1.1 自定义物品模型映射](chapter-11/baked/custom-mesh.md)
     * [11.1.2 染色](chapter-11/baked/tint.md)
+    * [11.1.3 方块状态映射](chapter-11/baked/block-state-json.md)
+    * [11.1.4 `IStateMapper`](chapter-11/baked/state-mapper.md)
   * [11.2 自定义模型](chapter-11/custom-baked/index.md)
     * [11.2.1 `IBakedModel`](chapter-11/custom-baked/baked.md)
     * [11.2.2 `IModel`](chapter-11/custom-baked/unbaked.md)
@@ -74,15 +75,24 @@
 * [13. 国际化与本地化](chapter-13/index.md)
   * [13.1 文本组件（`ITextComponent`）](chapter-13/text-component.md)
 * [14. 用户交互界面（GUI）](chapter-14/index.md)
+  * [13.1 Widget](chapter-14/widget/index.md)
+    * [13.1.1 文本输入](chapter-14/widget/text-field.md)
+    * [13.1.2 按钮](chapter-14/widget/button.md)
+    * [13.1.3 列表](chapter-14/widget/list.md)
+  * [13.2 游戏主界面与 HUD](chapter-14/main-screem/index.md)
+  * [13.3 Toast](chapter-14/toast/index.md)
+  * [13.4 `Container` 与数据同步](chapter-14/container.md)
 * [15. 音效控制](chapter-15/index.md)
 * [16. 粒子效果](chapter-16/index.md)
 * [17. 资源包](chapter-17/index.md)
 * [18. 用户输入](chapter-18/index.md)
   * [18.1 键盘输入](chapter-18/keyboard.md)
   * [18.2 鼠标输入](chapter-18/mouse.md)
+    * [18.2.1 GUI 中的鼠标控制](chapter-18/mouse-in-gui.md)
 * [19. 世界生成与新维度](chapter-19/index.md)
   * [19.1 地图特性（Feature）](chapter-19/world-gen-feature/index.md)
     * [19.1.1 矿石生成](chapter-19/world-gen-feature/ore.md)
+    * [19.1.2 Retrogen](chapter-19/world-gen-feature/retro-gen.md)
   * [19.2 生物群系（Biome）](chapter-19/biome/index.md)
     * [19.2.1 复用地图特性](chapter-19/biome/feature.md)
     * [19.2.2 生物群系装饰器（Decorator）](chapter-19/biome/decorator.md)
@@ -177,11 +187,12 @@
 
 ### 实战
 
-* [39. 实战：？？？](chapter-39/index.md)
-* [40. 实战：？？？](chapter-40/index.md)
+* [39. 实战（上）](chapter-39/index.md)
+* [40. 实战（下）](chapter-40/index.md)
 
 ### 后记
 
 * 后记
   * [跋：《Aboard Harbinger Gunship》](afterword/index.md)
   * [写在后面：鸣谢名单](afterword/credits.md)
+  * [参考书目](afterword/bibliography.md)
