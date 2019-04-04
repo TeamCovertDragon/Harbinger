@@ -85,7 +85,7 @@ public final class MyFirstEventListener {
 
 注意那个 `static`。当且仅当你使用 `EventBusSubscriber` 或 `class` 对象时你需要在方法上加 `static`。
 
-![Courtesy to JamiesWhiteShirt](https://cdn.discordapp.com/attachments/179315645005955072/475010493824892948/unknown.png)
+![Courtesy to JamiesWhiteShirt](https://raw.githubusercontent.com/TeamCovertDragon/Harbinger/bleeding/chapter-03/why-doesnt-my-event-handler-work.png)
 
 ### 事件的取消与结果
 
