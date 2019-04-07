@@ -12,7 +12,7 @@ $ gradlew build
 > gradlew.bat build
 ```
 
-一行命令的事。  
+一行命令的事。实际上主流 IDE 的 Gradle 支持插件中都应该有执行指定 Gradle task 的功能，所以实际上不一定非得要打命令行，在 IDE 里操作就可以了。  
 构建结果位于 MDK 目录的 `build/libs` 目录下。
 
 ## 发布
