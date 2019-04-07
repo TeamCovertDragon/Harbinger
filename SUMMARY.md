@@ -14,6 +14,7 @@
   * [1.3 ForgeGradle](chapter-01/forgegradle.md)
 * [2. 一切的开始](chapter-02/index.md)
   * [2.1 Mod 元数据](chapter-02/metadata.md)
+  * [2.2 Mod 的构建与发布](chapter-02/build.md)
 * [3. 事件](chapter-03/index.md)
 * [4. 物品](chapter-04/index.md)
   * [4.1 `ItemStack`](chapter-04/item-stack.md)
