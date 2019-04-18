@@ -17,7 +17,7 @@ public class MyGui extends GuiContainer {
 
 就 Container 和 GuiContainer 之间的关系，ustc-zzzz 有一张图很好的对其进行了解释：
 
-![我是图](https://fmltutor.ustc-zzzz.net/resources/gui_analysis.png)
+![Container 和 GuiContainer 的关系](https://fmltutor.ustc-zzzz.net/resources/gui_analysis.png)
 
 （屏幕前的读者你要是直接看 Markdown 源文件的话你就会发现这图直接来自他教程… 准确地说是3.4.1的第一张插图。）  
 虽然你完全可以直接看 zzzz 的教程，但我还是再用自己的理解复述一遍吧：
