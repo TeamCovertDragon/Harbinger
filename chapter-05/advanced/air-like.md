@@ -23,6 +23,13 @@ public class BlockWithoutHitbox extends Block {
         return false;
     }
 
+    // TODO Actual meaning and necessity
+    @override
+    public boolean isCollidable()
+    {
+        return false;
+    }
+
     // func_149686_d，返回 false 代表这个方块不是完整的 1x1x1 立方体。
     // 和 isOpaqueCube 不一样的地方在于，这个方法会影响窒息、碰撞等判定及光照计算。
     @override

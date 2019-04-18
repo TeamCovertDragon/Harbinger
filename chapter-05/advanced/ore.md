@@ -7,6 +7,8 @@ public class SapphireOre extends Block {
 
     public SapphireOre() {
         super(Material.ROCK, MapColor.STONE);
+        this.setSoundType(SoundType.STONE);
+        this.setHardness(2.5F);
         // Forge 的采掘等级机制，幻数 2 代表与钻石矿同级，magic string "pickaxe" 代表镐
         this.setHarvestLevel("pickaxe", 2);
     }
