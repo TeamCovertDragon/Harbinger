@@ -21,6 +21,13 @@ public class MyFirstWorldGenFeature extends WorldGenerator {
     @Override
     public boolean generate(World world, Random rand, BlockPos position) {
         // 所有放置方块的逻辑均在这里发生。
+
+        // 生成特性的操作即是放置方块的操作。
+        // 通常这些方块放置操作不应引发方块更新，所以这里不使用最低有效位（用于决定是否产生方块更新）。
+        // 绝大多数时候你可以直接使用 this.setBlockAndNotifyAdequately。
+        world.setBlockState(position, Blocks.DIAMOND_BLOCK.getDefaultState(), Constants.BlockFlags.SEND_TO_CLIENTS);
+
+        // 当且仅当特性生成成功时此方法返回 true。
         return false;
     }
 }
