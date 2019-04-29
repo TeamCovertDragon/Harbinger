@@ -6,45 +6,52 @@
 public class BlockWithoutHitbox extends Block {
 
     // TODO Actual meaning and necessity
-    @override
+    @Override
     public boolean isFullBlock(IBlockState state) {
         return false;
     }
 
     // TODO Actual meaning and necessity
-    @override
+    @Override
     public boolean isBlockNormalCube(IBlockState state) {
         return false;
     }
 
     // TODO Actual meaning and necessity
-    @override
+    @Override
     public boolean isNormalCube(IBlockState state) {
+        return false;
+    }
+
+    // TODO Actual meaning and necessity
+    @Override
+    public boolean isCollidable()
+    {
         return false;
     }
 
     // func_149686_d，返回 false 代表这个方块不是完整的 1x1x1 立方体。
     // 和 isOpaqueCube 不一样的地方在于，这个方法会影响窒息、碰撞等判定及光照计算。
-    @override
+    @Override
     public boolean isFullCube(IBlockState state) {
         return false;
     }
 
     // func_176205_b，返回 true 代表可以钻过这个方块，参考原版门的情况
-    @override
+    @Override
     public boolean isPassable(IBlockAccess worldIn, BlockPos pos) {
         return true;
     }
 
     // func_149662_c，返回 false 代表这个方块是完整的 1x1x1 的正方体，且没有透明材质
     // TODO According to MCP, this affects ambient occlusion & culling?
-    @override
+    @Override
     public boolean isOpaqueCube(IBlockState state) {
         return false;
     }
 
     // func_149645_b，返回 EnumBlockRenderType.INVISIBLE 代表不渲染这个方块
-    @override
+    @Override
     public EnumBlockRenderType getRenderType(IBlockState state) {
         return EnumBlockRenderType.INVISIBLE;
     }

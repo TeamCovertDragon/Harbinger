@@ -21,7 +21,7 @@ public class MyCloth extends ItemArmor implements ISpecialArmor {
 
     @Override
     public void onArmorTick(World world, EntityPlayer player, ItemStack item) {
-        //穿在身上的时候的每时每刻都会调用的方法，可以用来追加药水效果什么的
+        // 穿在身上的时候的每时每刻都会调用的方法，可以用来追加药水效果什么的
     }
 
     // ISpecialArmor 接口实现开始

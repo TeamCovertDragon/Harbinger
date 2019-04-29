@@ -49,7 +49,7 @@ public static void onSoundEvenrRegistration(RegistryEvent.Register<SoundEvent> e
 
 ### 在哪里会用到 `SoundEvent`？
 
-用到 `SoundEvent` 的地方其实不少，但其实挺集中的，主要是方块音效、实体音效、唱片机相关及 `World` 下的几个方法。
+用到 `SoundEvent` 的地方其实较为集中，主要是方块音效、实体音效、唱片机相关及 `World` 下的几个方法。
 
 #### `SoundType`
 
