@@ -40,10 +40,10 @@ public static final CreativeTabs EXAMPLE_CREATIVE_TAB = new CreativeTabs("exampl
 public static Item yourItem = new Item().setCreativeTab(EXAMPLE_CREATIVE_TAB);
 ```
 
-## 呃…… 这物品名字不对……
+## 这物品名字不对……
 
 你可能会发现你的新物品叫 `item.null.name`。我们需要给它一个正常点的名字。
-因为 Minecraft 是个面向全球的游戏，所以这个过程有些复杂，因为我们需要确保使用其他语言的人可以翻译这个物品名称。关于这部分内容的细节可参考[第十三章](../chapter-13/index.md)。
+因为 Minecraft 是个面向全球的游戏，所以这个过程有些复杂，因为我们需要确保使用其他语言的人可以翻译这个物品名称。关于这部分内容的细节可参考[第十三章](../chapter-13/index.md)，这里不作详细说明。
 
 ```java
 public static Item yourItem = new Item()
