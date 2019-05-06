@@ -1,4 +1,4 @@
-## 序：《异教与隐士》 <!-- "Proselyte and Hermit" -->
+# 序：《异教与隐士》 <!-- "Proselyte and Hermit" -->
 
 > If I have to do this, I will do this right. - Yunru
 

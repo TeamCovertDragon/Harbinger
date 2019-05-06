@@ -1,4 +1,4 @@
-### `IIngredientFactory`
+# `IIngredientFactory`
 
 Forge 在原版的 JSON 合成表的基础上提供的五种扩展功能之一。如名字所示，它是个将 JSON 转化为 `Ingredient` 实例的抽象工厂，本质上是 JSON 的反序列化器。
 
@@ -13,7 +13,7 @@ public final class MyIngredientFactory implements IIngredientFactory {
 }
 ```
 
-#### “实现” `Ingredient`
+## “实现” `Ingredient`
 
 `Ingredient` 并非是接口，所以说“继承”或“覆写”可能更准确些。总而言之，既然是自定义的 `Ingredient`，它至少要覆写下面这几个方法：
 
@@ -90,7 +90,7 @@ public final class MyIngredient extends Ingredient {
 
 然后根据具体实现调整对应的 `IIngredientFactory` 实现即可。
 
-#### 使用
+## 使用
 
 要使用自定义的 `Ingredient`，就需要先在 `assets/[modid]/recipes/_factories.json` 中声明：
 

@@ -1,4 +1,4 @@
-## 原版熔炉配方
+# 原版熔炉配方
 
 和原版工作台配方不一样，原版熔炉并没有使用专门的 Recipe 类或接口，而是单纯地使用 `FurnaceRecipes` 这样一个类来管理一个私有的 `Map<ItemStack, ItemStack>`。实际上这个类使用这个 Map 的方式更像是在用 `Collection<Map.Entry<ItemStack, ItemStack>>`，毕竟 ItemStack 不满足用作 Map 的键的要求。  
 实际上我们甚至不需要去管 `FurnaceRecipes` 这个类，因为 FML 出手了。
@@ -10,7 +10,7 @@
 GameRegistry.addSmelting(inputItem, outputItem, expGained);
 ```
 
-### 燃料热值
+## 燃料热值
 
 在 Forge patch 过原版熔炉后，燃料热值由一个事件决定：
 

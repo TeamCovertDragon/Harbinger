@@ -1,10 +1,10 @@
-## 地图生成特性（World Gen. Feature）
+# 地图生成特性（World Gen. Feature）
 
 回想一下原版中的地图生成。看起来有一些东西的生成是非常有规律的：比如矿石生成，它们一定生成在某个特定的高度，服从某一种特定的离散或连续分布；再比如甘蔗，一定出现在水边；以及粘土<!-- balance! -->，一定是出现在河床、湖床这样的地方；还有下界的荧石，它们总是倾向于挂天花板上。
 
 实际上它们的确是有规律的。因为这些东西有一个共同的抽象层：世界生成特性（World Generation Feature）。我们可以简称它为地图特性（Feature）。从代码的角度来看，它们均由某个 `WorldGenerator` 的衍生类实现。
 
-### `WorldGenerator`
+## `WorldGenerator`
 
 `WorldGenerator` 代表了一种在新世界和/或新区块中生成某种按特定方式放置方块的算法。有这样一个东西后，我们就可以通过持有一系列 `WorldGenerator` 并调用 `generate` 方法来在目标世界中“生成”（也就是放置）一系列有特定结构的方块了。所以我们先写一个 `WorldGenerator`。
 
@@ -33,13 +33,13 @@ public class MyFirstWorldGenFeature extends WorldGenerator {
 }
 ```
 
-### Strategy pattern
+## Strategy pattern
 
 `WorldGenerator` 和世界生成其实没什么联系。它只是封装了一系列放置方块的操作，具体是谁在用它其实是无所谓的，只要有一个 `World` 实例、一个起点坐标和一个合适的伪随机数发生器就行了。所以 `WorldGenerator` 实际上只是一种“放置方块的策略”，并不是专职负责地图生成的。两者之间唯一的联系只是“按特定方式放置方块”。  
 一个非常典型的例子是原版树苗——原版树苗方块（`BlockSapling`）中就复用了若干种 `WorldGenerator` 的实现（都是生成原版树的）来避免重复的代码。  
 同样的理由，`WorldGenerator` 也不需要注册，因为没有意义，需要的时候 new 一个，或者用别的地方提前 new 好的就可以了。
 
-### Cascading World Generation
+## Cascading World Generation
 
 注意，通常情况下你需要给 x 和 z 坐标各加 8。换言之，即：
 

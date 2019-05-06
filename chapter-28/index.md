@@ -1,4 +1,4 @@
-## Capability
+# Capability
 
 请仔细回想一下 `TileEntity` 的用途：它可以存储物品、流体甚至是某种形式的能量，同时其他 Mod 也可以通过对应的接口与这个 `TileEntity` 持有的这些东西打交道。
 
@@ -14,7 +14,7 @@ if (tile instanceof Something) {
 让我们再审视一遍需求：“让这些对象能持有某种特定的信息”。也就是说，我们只需要让它能持有这些信息，并暴露出一个能操纵这些信息的接口就可以了。至于是通过继承还是组合（Composite）来实现已经无关紧要了。有办法利用这一点来统一吗？接口可能不存在，但数据是不需要任何依赖就可以存在的。  
 Capability 系统应运而生。
 
-### 再论流体容器——`ICapabilityProvider`
+## 再论流体容器——`ICapabilityProvider`
 
 下面这个例子来自[第二十六章物品形式的流体容器一节](../chapter-26/container/item.md)。
 

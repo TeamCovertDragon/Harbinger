@@ -1,13 +1,13 @@
-## TileEntity
+# TileEntity
 
 Tile 这个单词的本意是“瓷砖”或“瓦砖”。实际上这里它和 Block 是一个意思。所以它是一个给方块用的概念。实际上 Mojang 很早（大约 1.8 的时候）就给它改名 BlockEntity 了。  
 
-### 为什么要有 TileEntity？
+## 为什么要有 TileEntity？
 TileEntity 是一种和实体类似，可以存储一个 NBT 标签的特殊对象，这意味着你可以在一个方块中存储超过 4 bits 的数据。  
 TileEntity 也可以像 Entity 一样，通过实现 `ITickable` 来获得每秒刷新 20 次的能力。  
 可以说，绝大部分看上去功能异常强大的方块都是基于 TileEntity 的。
 
-### 起点：声明该 Block 持有 TileEntity
+## 起点：声明该 Block 持有 TileEntity
 
 ```java
 public class MyMachineBlock extends Block {
@@ -23,7 +23,7 @@ public class MyMachineBlock extends Block {
 }
 ```
 
-### TileEntity 的注册
+## TileEntity 的注册
 
 TileEntity 虽然需要注册，但它并不走 Forge 的注册表系统。一个比较常见的做法是在注册方块的时候一并注册 TileEntity。
 
@@ -36,7 +36,7 @@ public static void onBlockRegistration(RegistryEvent.Register<Block> event) {
 }
 ```
 
-### 逻辑
+## 逻辑
 
 然后就是要补全那个 `MyMachine` 类了。
 
@@ -72,7 +72,7 @@ public class MyMachine extends TileEntity {
 }
 ```
 
-### `ITickable`
+## `ITickable`
 
 TileEntity 的刷新功能由 `ITickable` 接口提供。TileEntity 默认是没有刷新功能的，你必须实现 `ITickable` 接口方能获得1秒20次的刷新能力。
 

@@ -1,4 +1,4 @@
-## `FastTESR`
+# `FastTESR`
 
 `FastTESR` 的使用和普通 TESR 基本一致，但有一处非常关键的不同：
 
@@ -19,7 +19,7 @@ public class CrazyFastRenderer extends FastTESR<MyCrazyTileEntity> {
 }
 ```
 
-### 将 FastTESR 与 TileEntity 绑定
+## 将 FastTESR 与 TileEntity 绑定
 
 因为 `FastTESR` 也继承 `TileEntitySpecialRenderer`，所以它的注册与普通 TESR 无异。  
 但仍然需要注意一点：对于绑定了一个 `FastTESR` 的 TileEntity，其 `hasFastRenderer` 方法应返回 `true`：

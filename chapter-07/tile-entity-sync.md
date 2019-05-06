@@ -1,4 +1,4 @@
-## TileEntity 与数据同步
+# TileEntity 与数据同步
 
 TileEntity 类中有四个和数据同步相关的方法，分别是：
 
@@ -9,7 +9,7 @@ TileEntity 类中有四个和数据同步相关的方法，分别是：
 
 其中 `getUpdatePacket` 和 `getUpdateTag` 是原版的固有方法，其余两个均是 Forge 加进去的。关于四个方法的解释，[Forge 自己的文档](http://mcforge.readthedocs.io/en/latest/tileentities/tileentity/)已经解释得很清楚了，可以直接拿来参考。这里只作简要说明。
 
-### `onDataPacket`
+## `onDataPacket`
 
 `getUpdatePacket` 返回一个 `SPacketUpdateTileEntity`。这个是原版 Minecraft 中用来将逻辑服务器上需要同步的 TileEntity 数据发送到逻辑客户端上所用的数据包。它的构造器需要一个 `NBTTagCompound` 对象，这个对象就是你需要同步的数据的集合了。  
 在 Forge 修改过 Minecraft 的底层后，你可以通过 `onDataPacket` 在逻辑客户端上拿到你同步过来的数据。
@@ -38,7 +38,7 @@ public void onDataPacket(NetworkManager manager, SPacketUpdateTileEntity packet)
 world.notifyBlockUpdate(pos, oldState, oldState, Constants.BlockFlags.SEND_TO_CLIENTS)
 ```
 
-#### 复用 `SPacketUpdateTileEntity`
+### 复用 `SPacketUpdateTileEntity`
 
 如果你只是想同步 `TileEntity`，但 `notifyBlockUpdate` 显得太重量级了，那怎么办？其实我们可以复用原版的网络数据包。
 
@@ -62,7 +62,7 @@ public void syncToTrackingClients() {
 }
 ```
 
-### `getUpdateTag`
+## `getUpdateTag`
 
 `getUpdateTag` 返回一个 `NBTTagCompound`。这个方法是在“区块刚刚被加载时”，同步 TileEntity 数据到逻辑客户端用的。对于那些不需要 `ITickable` 的 TileEntity，比如纯装饰性的 TileEntity 来说，使用它可以有效避免频繁更新 TileEntity 带来的开销。毕竟数据就在那了，同步一次一劳永逸。
 

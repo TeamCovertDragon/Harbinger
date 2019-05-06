@@ -1,4 +1,4 @@
-## Forge 内建的四种 Capability
+# Forge 内建的四种 Capability
 
 出于各种考虑，Forge 自身提供了四种 Capability：
 

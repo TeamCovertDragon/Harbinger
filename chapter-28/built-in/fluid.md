@@ -1,8 +1,8 @@
-## `IFluidHandler`
+# `IFluidHandler`
 
 实际上有两种 `IFluidHandler`：一种就是它自己，另一种是 `IFluidHandlerItem`。`IFluidHandlerItem` 继承 `IFluidHandler`。
 
-### 普通的 `IFluidHandler`
+## 普通的 `IFluidHandler`
 
 大多数时候你不需要手动实现这个类——`FluidTank` 已经正确实现这个接口了，还附赠读写 NBT 的方法，拿来直接用就好。但实际上我们难免会遇到“需要有特殊行为的 `IFluidHandler`”的情况。这里只对实现 `IFluidHandler` 的要求做简要说明。
 
@@ -76,7 +76,7 @@ public class MyFluidHandler implements IFluidHandler {
 }
 ```
 
-### `IFluidHandlerItem`
+## `IFluidHandlerItem`
 
 因为 `IFluidHandlerItem` 继承了 `IFluidHandler`，所以两者基本一致，只是 `IFluidHandlerItem` 多一个 `getContainerItem` 方法。
 

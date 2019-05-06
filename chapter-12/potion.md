@@ -1,4 +1,4 @@
-## 状态效果
+# 状态效果
 
 首先从一个新的状态效果（亦称药水效果）开始：
 
@@ -21,7 +21,7 @@ public static void onPotionRegistration(RegistryEvent.Register<Potion> event) {
 }
 ```
 
-### 给玩家加上
+## 给玩家加上
 
 只是测试有没有注册成功的话，可以使用命令 `/effect <玩家名> example_mod:my_potion 1 60` 来获得等级 1，持续 60 秒的你的效果。  
 如果需要加入到相关的逻辑的话，你需要 `EntityLivingBase` 下的 `addPotionEffect`（`func_70690_d`）：
@@ -32,7 +32,7 @@ int amplifier = 0; // 0 代表等级 1
 entityPlayer.addPotionEffect(new PotionEffect(myPotion, duration, amplifier));
 ```
 
-### 图标
+## 图标
 
 原版药水效果的图标是集中在一张纹理上的。原版默认的逻辑是根据 `Potion` 类下的 `setIconIndex`（`func_76399_b`）和 `getStatusIconIndex`（`func_76392_e`）来确定该用哪一个图标。其中，`getStatusIconIndex` 使用的 `int` 是 `x + (y * 8)` 的结果，其中 x 和 y 是纹理上的坐标（u、v），需要通过 `index % 8` 和 `index / 8` 转换回来。  
 但不幸的是，这张纹理是定死的，准确地说这些图标其实都在玩家物品栏的那张纹理上。所以这两个方法实际上没什么卵用了。Forge 提供了一套解决方案：`renderInventoryEffect` 和 `renderHUDEffect`。前者负责玩家物品栏里的图标绘制；后者负责正常游戏时 HUD 中药水效果图标的绘制。使用方法如下：

@@ -1,4 +1,4 @@
-## 矿石生成
+# 矿石生成
 
 实际上我们没有必要为了生成矿石重新写一个 `WorldGenerator`——原版自己就有一个 `WorldGenMinable` 可用，用它就可以，而且自带对 cascading world gen 的处理，不需要你管了。当然了，面对特殊需求的话自然还是需要重新写一个的，不过那样的情况其实并不多见。  
 但是，如前文所说，`WorldGenerator` 和世界生成其实没有什么联系——那我们在哪生成矿石？  
@@ -13,7 +13,7 @@ public static void onOreGen(OreGenEvent.Post event) {
 }
 ```
 
-### 干涉矿石生成
+## 干涉矿石生成
 
 `OreGenEvent` 除了 `OreGenEvent.Post` 外，还有另外两个变种：
 

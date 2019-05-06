@@ -1,4 +1,4 @@
-## 酿造台配方
+# 酿造台配方
 
 在 Forge patch 过原版的酿造台后，我们可以通过一套 Forge 提供的接口来添加“酿造配方”了。
 
@@ -13,7 +13,7 @@ BrewingRecipeRegistry.addRecipe(new ItemStack(Blocks.DIRT), new ItemStack(Blocks
 BrewingRecipeRegistry.addRecipe(new ItemStack(Blocks.DIRT), "cobblestone", new ItemStack(Items.DIAMOND));
 ```
 
-### 重新实现 `IBrewingRecipe`
+## 重新实现 `IBrewingRecipe`
 
 除此之外还有一个 `IBrewingRecipe` 接口可用。如果需要某种更高级的酿造配方，可以考虑从零开始实现这个。
 

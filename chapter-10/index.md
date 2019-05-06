@@ -1,4 +1,4 @@
-## 附魔
+# 附魔
 
 ```java
 public class MyPowerfulEnchantment extends Enchantment {

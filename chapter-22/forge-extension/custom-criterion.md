@@ -1,4 +1,4 @@
-## 自定义进度触发条件
+# 自定义进度触发条件
 
 进度触发条件（Criterion Trigger）代表了解锁进度的某一个具体条件。一个进度的解锁可能会需要满足一个触发条件，或是多个触发条件的组合。虽然原版提供了相当丰富的触发条件，但我们仍然会不可避免地遇到需要自定义触发条件的情况。不过，写一个新的触发条件其实并不简单。一个完整的 `ICriterionTrigger<? extends ICriterionInstance>` 的实现大约长这样：
 
@@ -122,6 +122,6 @@ public final class CustomTrigger implements ICriterionTrigger<CustomTrigger.Inst
   2. 在适当的时候调用 `TRIGGER.trigger(player, ...)`，其中 `player` 是玩家实体，`...` 代表你需要的上下文信息。玩家实体的作用是提供 `PlayerAdvancements` 对象。上文中的示例代码使用了 `Context`——这是一个假想的 parameter object，在这里充当上下文的容器。
   3. `TRIGGER.trigger(player, ...)` 查表获得对应的 `Set<Listener<? extends ICriterionInstance>>`，若存在则遍历所有已知的 `ICriterionInstance`，并根据上下文过滤出所有满足触发条件的 `Listener<? extends ICriterionInstance>`。然后对所有满足条件的 `Listener<? extends ICriterionInstance>` 对象调用 `grantCriterion(PlayerAdvancements)` 方法。上文中示例代码之所以使用了单独的 `List` 是因为 Minecraft 会在 `grantCriterion` 被调用时清理不再使用的 `ICriterionInstance`，若处理不当，极易导致 `ConcurrentModificationException` 出现。<!-- TODO：照这么说那个 HashMap 可以改用 IdentityHashMap，直接使用 == 比较，绕开 Object.equals？-->
 
-### 真实案例：右击方块时触发的 criterion
+## 真实案例：右击方块时触发的 criterion
 
 【施工中】

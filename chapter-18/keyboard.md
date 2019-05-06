@@ -1,8 +1,8 @@
-## 键盘输入
+# 键盘输入
 
 因为 Minecraft 是基于 LWJGL 的，所以 Minecraft 也是通过 LWJGL 的 `org.lwjgl.input.Keyboard` 来获得相关信息的。然而不幸的是 Minecraft 把相关的逻辑全部写死在了 `Minecraft.runTickKeyboard`（`func_184118_az`）这个私有方法里，所以理论上我们什么都做不了。
 
-### 事件：`InputEvent.KeyboardInputEvent`
+## 事件：`InputEvent.KeyboardInputEvent`
 
 但 FML 在 `runTickKeyboard` 的结尾处，处理原版快捷键之前 patch 进去一个事件——`InputEvent.KeyboardInputEvent`。通过它我们就能做一些有趣的事情了。
 
@@ -13,7 +13,7 @@ public static void onKeyPressed(InputEvent.KeyboardInputEvent event) {
 }
 ```
 
-### 快捷键（KeyBinding）
+## 快捷键（KeyBinding）
 
 `InputEvent.KeyboardInputEvent` 最典型的用途就是 Mod 们的自定义快捷键。  
 Minecraft 有一个专门负责快捷键的类叫 `KeyBinding`，但 Minecraft 把快捷键处理写死在了 `Minecraft` 类下的一个方法里，所以我们只能通过 `InputEvent.KeyboardInputEvent` 来处理我们自己的 `KeyBinding` 了。  
@@ -58,7 +58,7 @@ public static void onKeyPressed(InputEvent.KeyboardInputEvent event) {
 
 有一点需要注意，因为键盘输入是完全发生在玩家的客户端上的，所以如果你希望逻辑服务器能得知玩家按下了某个按键并以此做出响应，需要客户端向服务器发送数据包。关于发包相关的内容可参考第十一章中 [`SimpleNetworkWrapper`](../chapter-11/forge-extension/simple-network-wrapper.md) 和 [`FMLEventChannel`](../chapter-11/forge-extension/fml-event-channel.md) 两章的内容。
 
-### GUI
+## GUI
 
 在 `GuiScreen` 类下有一个名为 `handleKeyboardInput`（`func_146282_l`）的方法可以用来处理当前 GUI 中用户的键盘输入。但实际上通常覆写的方法是同在 `GuiScreen` 类下的 `keyTyped`（`func_73869_a`），因为 `handleKeyboardInput` 会在确认输入有效之后调用它：
 
@@ -70,6 +70,6 @@ public void keyTyped(char inputChar, int keyId) {
 }
 ```
 
-#### 事件
+### 事件
 
 甚至 Forge 在这里都 patch 进去两个事件：`GuiScreenEvent.KeyboardInputEvent.Pre` 和 `GuiScreenEvent.KeyboardInputEvent.Post`。取消 `GuiScreenEvent.KeyboardInputEvent.Pre` 可以阻止目标 `GuiScreen` 的 `handleKeyboardInput` 继续执行原版逻辑，而 `GuiScreenEvent.KeyboardInputEvent.Post` 仅是作为逻辑执行结束后的 Callback 存在。

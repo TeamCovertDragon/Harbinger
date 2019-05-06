@@ -1,4 +1,4 @@
-### `CommandTreeBase`
+# `CommandTreeBase`
 
 [MinecraftForge/MinecraftForge#3193][Forge#3193] 引入了一个比较实用的基类：`CommandTreeBase`，可用于非常快速地实现“子命令”的概念。
 

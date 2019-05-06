@@ -1,6 +1,6 @@
-## 事件概论
+# 事件概论
 
-### 什么是事件？
+## 什么是事件？
 
 事件是什么？某个时间点发生的有一定关注度的“事情”。
 
@@ -32,7 +32,7 @@ if (homeworkList.content().size() > THRESHOLD) {
 }
 ```
 
-### Minecraft 没有事件系统
+## Minecraft 没有事件系统
 
 回到 Minecraft 上来——Modder 有时候希望能干涉原版的机制。问题来了，怎么干涉？原版的代码很多地方都是写死的，对于这些地方来说没什么办法。  
 举个例子，我想在玩家进入游戏时发出欢迎词，怎么办？原版是有那么一句话但那显然是写死的。
@@ -45,7 +45,7 @@ Forge 提供了一个完善的事件系统来解决这个问题。目前，Forge
 
 注意，FML 的那几个用于 Mod 加载的事件不算。那些是 Mod 加载周期的事件，在那个时候 FML 需要使用别的事件总线（具体来说，是 Guava 的事件总线）。
 
-### 事件订阅
+## 事件订阅
 按如下步骤操作：
 
 1. 确定需求，然后找事件
@@ -69,7 +69,7 @@ MinecraftForge.EVENT_BUS.register(new EventListener());
 
 以及注意一点，如果你订阅的事件属于矿物生成类的，或是地形生成类的（比如什么 `InitNoise` 这样的事件，那么请往 `ORE_GEN_BUS` 或者 `TERRAIN_GEN_BUS` 注册。
 
-### 自动注册
+## 自动注册
 
 ```java
 // 这个注解的意思是“将这个类注册到事件总线中去，该事件监听器属于 my_mod 这个 Mod”
@@ -87,7 +87,7 @@ public final class MyFirstEventListener {
 
 ![Courtesy to JamiesWhiteShirt](why-doesnt-my-event-handler-work.png)
 
-### 事件的取消与结果
+## 事件的取消与结果
 
 注意到事件的监听器一定是一个返回值为 `void`（即无返回值）的方法。如果我要表达某种类似返回值的概念该怎么做，比如说“我通过某个事件来控制是否执行某一段代码”？  
 事件总线给出的答案是：`@Cancelable` 和 `@HasResult`。  
@@ -121,7 +121,7 @@ public static void onEventFired(ARandomEvent event) {
 }
 ```
 
-### 优先级
+## 优先级
 
 很明显，同一个事件可以有好几个监听器在监听。这些监听器最终都会收到目标事件，但谁先谁后是没有定义的。如果我一定需要某种确定的顺序怎么办？解决方案是指定优先级。
 
@@ -134,7 +134,7 @@ public static void onEventFired(ARandomEvent event) {
 
 优先级有五种，按优先级从高到低依次是：`HIGHEST`、`HIGH`、`NORMAL`、`LOW` 和 `LOWEST`。默认，若不显式指定优先级，则使用 `NORMAL`。
 
-### 如果没有我需要的事件怎么办？
+## 如果没有我需要的事件怎么办？
 
 然后——如果你能看到这里：很好，你大概没找到你需要的事件。
 
@@ -143,7 +143,7 @@ public static void onEventFired(ARandomEvent event) {
   3. 再仔细思考你的需求。你的需求是不是已经有 Mod 实现过了？他们都是利用了什么事件？
   3. 否则你只能给 Forge 发 Pull request 了。
 
-### 但是我需要给自己的【某种机制】弄一个事件！
+## 但是我需要给自己的【某种机制】弄一个事件！
 
 ```java
 // @Cancalable // 允许取消的事件需要有这个注解。

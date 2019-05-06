@@ -1,4 +1,4 @@
-## 战利品表函数（Loot Function）
+# 战利品表函数（Loot Function）
 
 不是隔壁那个 `.mcfunction`，用于组合多个命令到一个文件里的函数。  
 
@@ -58,7 +58,7 @@
   - `set_name`：无条件赋予物品显示名称。参考铁砧重命名。
   - `set_nbt`：无条件赋予物品 NBT 数据。这里的 NBT 数据需要写成 String 的形式。
 
-### 自定义的函数
+## 自定义的函数
 
 显然我们会遇到“原版内建的 Loot Function 不够用”的窘境。写一个新的 Loot Function 其实很简单……
 

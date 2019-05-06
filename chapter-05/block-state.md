@@ -1,4 +1,4 @@
-## 方块状态
+# 方块状态
 
 和 [`ItemStack`][ref-item-stack] 一样，方块状态（`IBlockState`）代表了同一类方块在这个世界中被附加上不同“属性”（即 `IProperty<?>`）后的“状态”。考虑下列案例即可注意到方块状态与 `ItemStack` 的相似之处：
 
@@ -10,7 +10,7 @@
 
 [ref-item-stack]: ../chapter-04/item-stack.md
 
-### ~~枚举、排列与组合？~~ 枚举与笛卡尔积
+## ~~枚举、排列与组合？~~ 枚举与笛卡尔积
 
 和 `ItemStack` 不一样，一个方块的所有可能的方块状态是可以被穷尽的。  
 一个方块的方块状态由有限多个 `IProperty<?>` 所描述，这些 `IProperty<?>` 都会传入 `BlockStateContainer` 的构造器中，如下所示：
@@ -30,7 +30,7 @@ $$
 \prod_{p \in block}(p.getAllowedValues())
 $$
 
-### `ImmutableMap`？
+## `ImmutableMap`？
 
 方块状态可以看作是一个 `Map`，你可以用某个 `IProperty<?>` 拿到目标 `IBlockState` 中的对应值。
 
@@ -57,7 +57,7 @@ if（block == ...) {
 }
 ```
 
-### 序列化方块状态与方块的 metadata
+## 序列化方块状态与方块的 metadata
 
 很明显，既然 `IBlockState` 有 `Map` 的特征，那它的序列化应该不会太困难。
 实际上并非如此——难道我们要把一个区块中的 16 \* 16 \* 256 = 65536 块方块全部序列化成 `Map`？  
@@ -75,7 +75,7 @@ public int getMetaFromState(IBlockState state) {
 }
 ```
 
-### Hack 之上再加 Hack：不参与序列化的方块状态
+## Hack 之上再加 Hack：不参与序列化的方块状态
 
 然而 Mojang 为了临时解决问题使用的 Hack 导致了更大规模的 Hack 的出现。
 新的问题出在红石线和栅栏上——它们的方块状态复杂到了 4 bit 压根儿没可能存得下来的地步。于是 `getActualState` 横空出世，允许某个方块根据当前世界里的属性补全方块状态。

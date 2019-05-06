@@ -1,4 +1,4 @@
-### 对其他格式的模型的支持
+# 对其他格式的模型的支持
 
 自然地，Minecraft 没有内建对其他格式的模型支持。出于某些原因，Forge 提供了两种格式的支持——Blitz3D 和 Wavefront OBJ。
 
@@ -6,7 +6,7 @@
   - https://en.wikipedia.org/wiki/Blitz_BASIC#Blitz3D
   - https://en.wikipedia.org/wiki/Wavefront_.obj_file
 
-#### 使用
+## 使用
 
 首先要告知对应的加载器：“我需要用到特殊模型”
 

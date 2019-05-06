@@ -1,4 +1,4 @@
-## 一口“箱子”
+# 一口“箱子”
 
 “箱子”加引号的意思是指它不一定就叫箱子，也可以叫别的名字（桶、抽屉、货架、……）。但不论叫什么，它们都有一个共同特征：可以保存任意物品，并且其他 `TileEntity` 可以访问。  
 下面给出了一个这样的 `TileEntity` 的参考实现。关于 `ItemStackHandler`（[`IItemHandler`][ref-item-handler]）的内容会在第二十七章讲到 Capability 系统时有详细解释。

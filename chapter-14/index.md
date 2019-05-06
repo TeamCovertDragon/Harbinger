@@ -1,4 +1,4 @@
-### 图形化用户交互界面
+# 图形化用户交互界面
 
 ````java
 public class MyContainer extends Container {
@@ -10,7 +10,7 @@ public class MyGui extends GuiContainer {
 
 这就是 Minecraft 自己使用的 GUI 系统的基础：一个客户端显示的 `GuiContainer`（准确地说，应该是 `GuiScreen`），以及可选的 `Container`，用于逻辑服务器。
 
-### 第一步：为什么要有 Container？
+## 第一步：为什么要有 Container？
 当且仅当你需要和服务器打交道时。
 
 比方说一个工作台。你可以用这个 GUI 合成东西！所以必须有服务器端的业务逻辑，不然你合成的物品全是客户端特效你骗谁呢你。
@@ -42,26 +42,26 @@ public class MyContainer extends Container {
 }
 ````
 
-### 且慢！我不需要和服务器打交道啊！
+## 且慢！我不需要和服务器打交道啊！
 那就直奔 `GuiContainer` 好了。想想看，一本游戏内置的手册多数时候不需要服务器端有什么操作吧……
 
-### 组成GUI的元件 (Components)
+## 组成GUI的元件 (Components)
 说是这么说，其实能称得上 Components 的东西真的不多。
-#### 背景
-#### 文本框
+### 背景
+### 文本框
 `GuiTextField`
-#### 按钮
+### 按钮
 `GuiButton`
-#### 滚动菜单
-#### 滑块
-#### 勾选框是啥来着？
+### 滚动菜单
+### 滑块
+### 勾选框是啥来着？
 你可以使用按钮来模拟勾选框。
 
-### 那如果我的 GUI 里还要和服务器打交道呢？
+## 那如果我的 GUI 里还要和服务器打交道呢？
 
 你需要一个 `Container`。不需要的话也许也可以，但是很多事情就需要重新从零开始写。
 
-### 等等！我怎么打开GUI？
+## 等等！我怎么打开GUI？
 ````java
 import javax.annotation.Nullable;
 import net.minecraft.entity.player.EntityPlayer;

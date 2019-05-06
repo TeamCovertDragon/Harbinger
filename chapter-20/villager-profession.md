@@ -1,4 +1,4 @@
-## 村民职业
+# 村民职业
 
 原版的村民职业是写死进 `EntityVillager` 的。经过 Forge 一番 patch 后我们可以通过 Forge 的注册表来注册新的村民职业了。
 
@@ -15,7 +15,7 @@ public static void onVillagerProfessionRegistration(RegistryEvent.Register<Villa
 }
 ```
 
-### “子职业”（Career）
+## “子职业”（Career）
 
 每一个村民职业（Profession）又会被细分为各种“子职业”（Career），比如原版农民（Farmer）被细分为了普通农民（Farmer）、渔夫（Fisherman）、牧羊人（Shepherd）和制箭师（Fletcher）。子职业的相关信息是直接存储在对应的职业下的。
 
@@ -29,7 +29,7 @@ public static void onVillagerProfessionRegistration(RegistryEvent.Register<Villa
 }
 ```
 
-### 村民交易
+## 村民交易
 
 一个卖鱼给 fisherman 的交易：
 

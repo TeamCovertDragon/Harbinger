@@ -1,4 +1,4 @@
-## 实体
+# 实体
 
 一句话：Minecraft 里会动的，但不是方块的东西，基本上都是实体。  
 诸如你自己（玩家）、动物、地上掉的物品、经验球、怪物、矿车…… 都是实体。物品展示架和盔甲架也都是实体，虽然看起来像是方块。  
@@ -9,7 +9,7 @@ public class MyEntity extends Entity {
 }
 ```
 
-### 注册
+## 注册
 
 实体的注册项通过一个叫 `EntityEntry` 的东西代理，而它是 `IForgeRegistryEntry`。所以：
 
@@ -26,7 +26,7 @@ public static void onEntityRegistation(RegistryEvent.Register<EntityEntry> event
 }
 ```
 
-### 数据同步
+## 数据同步
 
 所有 Mod 的实体都需要有这样一个构造器：
 

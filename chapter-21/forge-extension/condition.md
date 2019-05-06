@@ -1,8 +1,8 @@
-### `IConditionFactory`
+# `IConditionFactory`
 
 Forge 在原版的 JSON 合成表的基础上提供的五种扩展功能之一。如名字所示，它可以根据 JSON 合成中给出的条件，产生一个 `BooleanSupplier` 对象，用来决定是否使用某个 JSON 合成表或是某个命名常量。
 
-#### 为什么会有这么一个东西？
+## 为什么会有这么一个东西？
 
 假如说你的合成依赖别的 Mod 的物品，但你不硬依赖那个 Mod，那么没装那个 Mod 的时候 JSON 合成表岂不是完蛋了。所以 Forge 内建的 `IConditionFactory` 中有一个就是对付这个情况的：
 
@@ -50,7 +50,7 @@ Forge 在原版的 JSON 合成表的基础上提供的五种扩展功能之一�
 }
 ```
 
-#### Forge 内建的六种 Condition
+## Forge 内建的六种 Condition
 
 1. `minecraft:item_exists` - 在有指定物品时允许注册此合成。`item` 字段填入对应物品的注册名。
   ```json
@@ -97,7 +97,7 @@ Forge 在原版的 JSON 合成表的基础上提供的五种扩展功能之一�
   { "conditions": [ { "type": "forge:false" } ] }
   ```
 
-#### 自己实现 `IConditionFactory`：受配置文件控制的合成表
+## 自己实现 `IConditionFactory`：受配置文件控制的合成表
 
 首先：
 

@@ -1,4 +1,4 @@
-## 工具、武器、盾牌、以及任何有耐久的东西
+# 工具、武器、盾牌、以及任何有耐久的东西
 
 对于普通的工具来说，复用或继承 ItemTool 即可。
 
@@ -8,7 +8,7 @@ public class MyTool extends ItemTool {
 }
 ```
 
-### 附加篇：你持盾吗
+## 附加篇：你持盾吗
 
 从 https://github.com/MinecraftForge/MinecraftForge/pull/4126 合并之后，我们可以自定义盾牌了。
 

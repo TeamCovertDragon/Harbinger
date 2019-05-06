@@ -1,4 +1,4 @@
-## FMLEventChannel
+# FMLEventChannel
 
 FML 提供的另一个解决方案，基于 FML 的 EventBus（没错就是第二章里讲的那一个）。有很多 Mod 在用它。下面来做个示范。
 
@@ -36,7 +36,7 @@ public enum MyNetworkManager {
         // 解包的第一步逻辑应在这里出现，即识别包的种类
         // 具体实现应将InputStream重新用MyPacket包装后解耦实现
     }
-    
+
     //但这里就不能@SideOnly(Side.SERVER)，因为单机游戏也需要这个。
     //这里的server实质是逻辑服务器端。
     private void decodeDataServer(ByteBuf input, EntityPlayerMP player) {
@@ -107,7 +107,7 @@ public interface MyPacket {
 //待补全
 ```
 
-### 设计模式
+## 设计模式
 
 工厂。肯定是工厂啊。
 
