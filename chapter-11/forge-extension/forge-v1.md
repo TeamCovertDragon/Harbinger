@@ -99,7 +99,7 @@ Forge BlockState V1 格式允许你使用若干子模型，换言之可以把好
 这样一来，这个设备工作的时候就会“长”出点东西。`part1` 在这里只是起到一个命名的作用；如果你需要多个子模型，你大可以在 `submodel` 里塞 `part2`、`part3`、……  
 唯一的遗憾是子模型似乎不能在 `defaults` 中使用，原因未知。
 
-## TRSRTransformation 与仿射变换（Affine Transformation）
+## 仿射变换（Affine Transformation）与 TRSRTransformation
 
 Forge BlockState V1 格式还允许你对模型（自然也包括子模型）做仿射变换。为简明起见，从这里开始，本文不给出完整的 BlockState JSON。
 
@@ -118,7 +118,7 @@ Forge BlockState V1 格式还允许你对模型（自然也包括子模型）做
 }
 ```
 
-最右边的 column 用于 translation。左侧的 3x3 矩阵不多解释。也可以写成这样：
+这个增广矩阵最右一列用于平移，左侧的 $3*3$ 矩阵是只包括旋转和缩放的变换矩阵。也可以写成这样：
 
 ```json
 "transform": {
@@ -130,7 +130,7 @@ Forge BlockState V1 格式还允许你对模型（自然也包括子模型）做
 }
 ```
 
-但是这样写起来的可读性多数时候并不好。所以还有另一种形式的写法可用：TRSRTransformation。[TRSR 是 "translation, rotation, scale, rotation" 的首字母缩略词。][citation-trsr]
+但是这样写起来的可读性多数时候并不好。不过，还有另一种形式的写法可用：TRSRTransformation。[TRSR 是 "translation, rotation, scale, rotation" 的首字母缩略词。][citation-trsr]
 
 [citation-trsr]: https://github.com/SlimeKnights/Mantle/blob/13695e8464b1f110c47f06fb141021ce3118f143/src/main/java/slimeknights/mantle/client/model/TRSRBakedModel.java#L30
 
@@ -153,7 +153,7 @@ Forge BlockState V1 格式还允许你对模型（自然也包括子模型）做
 其中：
 
   - 所有字段都是可选的，不需要的变换都可以直接省略。
-  - `rotation` 和 `post-rotation` 字段可使用四元数 `[ x, y, z, w ]`
+  - `rotation` 和 `post-rotation` 字段可使用四元数 `[ x, y, z, w ]`。
   - `rotation` 和 `post-rotation` 字段亦可直接赋值为类似 `{ "x": 0 }` 的形式，表示只在唯一一个指定的轴上转。
   - `scale` 可直接赋值为一个数，表示 uniform scale。使用 `[ 1, 1, 1 ]` 形式则表示在对应的轴上缩放（x、y、z）。
 
