@@ -136,6 +136,7 @@
 * [26. Forge 配置文件系统](chapter-26/index.md)
   * [26.1 Forge 可视化配置文件编辑界面](chapter-26/config-gui.md)
   * [26.2 `Configuration` 类](chapter-25/raw-config.md)
+  * [26.3 同步配置文件](chapter-26/sync.md)
 * [27. Forge 流体系统](chapter-27/index.md)
   * [27.1 `Fluid` 与 `FluidStack`](chapter-27/fluid-stack.md)
   * [27.2 流体方块](chapter-27/block.md)
