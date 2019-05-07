@@ -7,11 +7,23 @@
     "splitter",
     "expandable-chapters",
     "anchor-navigation-ex",
-    "heimu"
+    "heimu",
+    "yahei"
   ],
   "pluginsConfig": {
     "flow": {
       "line-color": "red"
     }
+  },
+  "pdf": {
+    "toc": true,
+    "pageNumbers": true,
+    "fontSize": 18,
+    "paperSize": "a3",
+    "margin": {
+      "right": 30,
+      "left": 30,
+      "top": 30,
+      "bottom": 50
   }
 }
