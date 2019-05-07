@@ -2,7 +2,7 @@
 
 要实现在玩家通过 GUI 修改之后立刻同步配置文件很简单，监听 `ConfigChangedEvent.OnConfigChangedEvent` 并调用 `ConfigManager::sync` 即可。
 
-在 MyConfig.java 中添加：
+在 MyModConfig.java 中添加：
 
 ```java
 @Mod.EventBusSubscriber(modid = YOUR_MODID)
