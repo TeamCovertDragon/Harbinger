@@ -3,6 +3,7 @@
 Harbinger 是一套全面的，基于 Forge 的，中文 Minecraft Mod 开发指南。身为读者的你，需要记住以下事项：
 
 * **如无特殊说明，本教程基于 Minecraft 1.12.2 Release 和 Forge 14.23.5.2836，MCP Mapping 版本使用 `stable_39`。本教程原则上不涉及任何旧版内容。**
+* 如有疑问，欢迎到[本项目的 issues](https://github.com/TeamCovertDragon/Harbinger/issues) 中提出。
 * 本教程使用的目录分隔符（directory separator）统一为 `/`。
 * 这里不是 Java 教程。你必须掌握至少一门基于 JVM 的编程语言。对零基础新人来说，Java 就可以，先去花点时间把 Java 学了。Scala 用户用 Scala 当然也是十分欢迎的，只是笔者不会 Scala。
 
@@ -24,8 +25,8 @@ Harbinger 是一套全面的，基于 Forge 的，中文 Minecraft Mod 开发指
 * 最后，代码要保持整洁、高效。
 
 另外，几个建议：
-* 请务必时常关注 GitHub 上 MinecraftForge/MinecraftForge 的 commit 以及 Pull Requests。这是你获得第一手信息的最简单还最可靠的方式（更何况，如果你在国内，别的方式对你来说，不仅是奢望，效率还不怎么高）。
-* 请务必时常关注 [Forge 自己的文档][ref-forge-doc]。有能力的读者，请务必考虑协助他们补全文档（位于[这里][ref-forge-doc-src]）。
+* 时常关注 GitHub 上 MinecraftForge/MinecraftForge 的 commit 以及 Pull Requests。这是你获得第一手信息的最简单还最可靠的方式（更何况，如果你在国内，别的方式对你来说，不仅是奢望，效率还不怎么高）。
+* 时常关注 [Forge 自己的文档][ref-forge-doc]。有能力的读者，请务必考虑协助他们补全文档（位于[这里][ref-forge-doc-src]）。
   * 更新并不及时的[非正式中文翻译][ref-forge-doc-translation]，实在看不懂英语的话可以用来救急。
 * 欧美社区的 Modder 很多都常驻在一些 Discord 服务器中，比如 Minecraft Mod Development，在这些 Discord 服务器里问他们问题也许能得到详尽的解答。
   * 英语要求不需要强调第二次。注意不规则拼写，拿不定的时候放出声读一读。
