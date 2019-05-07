@@ -16,7 +16,7 @@
     }
   },
   "pdf": {
-    "toc": true,
+    "toc": false,
     "pageNumbers": true,
     "fontSize": 18,
     "paperSize": "a3",
@@ -24,19 +24,7 @@
       "right": 30,
       "left": 30,
       "top": 30,
-      "bottom": 50
-    }
-  },
-  "epub": {
-    "toc": true,
-    "pageNumbers": true,
-    "fontSize": 18,
-    "paperSize": "a3",
-    "margin": {
-      "right": 30,
-      "left": 30,
-      "top": 30,
-      "bottom": 50
+      "bottom": 30
     }
   }
 }
