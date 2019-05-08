@@ -13,12 +13,14 @@
       //...
   }
   ```
-     [将 `mapping = "..."` 改成 `mapping = "stable_39"`](../chapter-1/forgegradle.md)。
+     [将 `mapping = "..."` 改成 `mapping = "stable_39"`](../chapter-1/forgegradle.html)。
   4. 根据你的具体情况不同，在命令行中，切换到 MDK 的目录，然后：
+
     - Windows（CMD、PowerShell 等）：`gradlew.bat setupDecompWorkspace`。注意权限。
     - 某种 Linux 发行版，或 macOS：`./gradlew setupDecompWorkspace`。注意权限。
     - 其他系统：很抱歉，Minecraft 所依赖的 LWJGL 只有针对 Windows、macOS 和 Linux 三类系统的 native lib。
   5. 根据你使用的 IDE 不同，执行下列对应命令后，在对应的 IDE 中以 Gradle 项目的形式导入项目：
+
     * Eclipse：在 `setupDecompWorkspace` 后接上 `eclipse`
     * IntelliJ IDEA：恭喜你，在这里你不需要加任何东西。
     * 其他 IDE：不好意思你需要找对应的 Gradle 插件来解决问题，请查阅相关资料获得更多帮助。在这里的话就什么也不用加好了。
