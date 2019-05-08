@@ -3,7 +3,7 @@
 因为 Forge 的 MDK 是基于 Gradle 的（使用 ForgeGradle 提供某些特殊的技术支持），所以构建 Mod 其实就是：
 
 ```
-$ gradlew build
+$ ./gradlew build
 ```
 
 或者在 Windows 上：
