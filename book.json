@@ -14,5 +14,10 @@
     "flow": {
       "line-color": "red"
     }
+  },
+  "links": {
+    "sidebar": {
+      "TeamCovertDragon": "https://covertdragon.team/"
+    }
   }
 }
