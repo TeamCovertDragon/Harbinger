@@ -13,7 +13,7 @@
       //...
   }
   ```
-     [将 `mapping = "..."` 改成 `mapping = "stable_39"`](../chapter-1/forgegradle.html)。
+     [将 `mapping = "..."` 改成 `mapping = "stable_39"`](../chapter-01/forgegradle.html)。
   4. 根据你的具体情况不同，在命令行中，切换到 MDK 的目录，然后：
 
     - Windows（CMD、PowerShell 等）：`gradlew.bat setupDecompWorkspace`。注意权限。
