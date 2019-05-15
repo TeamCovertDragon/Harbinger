@@ -60,7 +60,7 @@ assert I18n.format("我想要什么键就可以有什么键.我说过这是真�
 
 你应当用客户端专用的那个版本的 `I18n`。`util` 下的 `I18n` 不应被使用；事实上在 1.13 中它也直接消失了。究其原因，是因为逻辑服务器上不应有本地化相关的内容，毕竟那是面向机器的，不是面向用户的。如果你遇到了“需要在服务器上本地化”的需求，不妨考虑一下你的设计上是否有改进的空间。
 
-## 特殊的语言文件格式
+## Java Properties
 
 Forge 添加了一个新的国际化特性：只要在语言文件中任意一行添加 `#PARSE_ESCAPES` ，Forge 就会以 [`Java Properties` ](https://en.wikipedia.org/wiki/.properties)格式、`UTF-8` 编码进行读取。相比较于简单的 Minecraft 默认语言文件格式， `Java Properties` 格式具有更高的灵活性，例如能够多行书写，插入 Unicode 转义字符。
 
