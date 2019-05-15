@@ -62,20 +62,8 @@ assert I18n.format("我想要什么键就可以有什么键.我说过这是真�
 
 ## Java Properties
 
-Forge 添加了一个新的国际化特性：只要在语言文件中任意一行添加 `#PARSE_ESCAPES` ，Forge 就会以 [`Java Properties` ](https://en.wikipedia.org/wiki/.properties)格式、`UTF-8` 编码进行读取。相比较于简单的 Minecraft 默认语言文件格式， `Java Properties` 格式具有更高的灵活性，例如能够多行书写，插入 Unicode 转义字符。
+Forge 添加了一个新的国际化特性：只要在语言文件中任意一行添加 `#PARSE_ESCAPES` ，Forge 就会以 [`Java Properties` ](https://en.wikipedia.org/wiki/.properties)格式、`UTF-8` 编码读取该语言文件。
+
+相比较于简单的 Minecraft 默认语言文件格式， `Java Properties` 格式具有更高的灵活性，例如能够多行书写，插入 Unicode 转义字符。
 
 <!--TODO: 替换en wiki链接？这玩意现在也被墙了-->
-
-## 注意事项
-
-### 避免重名键
-
-Minecraft 将所有的语言文件处理成一个统一的 Map ，这意味着后读入的键会覆盖先前读入的相同的键，给玩家造成不必要的麻烦。一个典型的例子是 [Mekanism#4698](https://github.com/mekanism/Mekanism/issues/4698) 。
-
-为了避免这种情况的发生，笔者推荐在汉化键名中添加本模组的 modid ，例如想要将某个 GUI 按钮的文字国际化时，为键名添加 modid ，或者在给物品 `setTranslationKey` 时，给键名添加上本模组的 modid 。
-
-### 不要错用国际化
-
-错用国际化也会导致各种问题，例如更换语言后存档读取错误，物品/方块/实体丢失。国际化只应该出现在客户端，不应当影响游戏的内部机制。切勿调用国际化来作为配置文件的键，甚至作为游戏注册的参考字符。
-
-另：国际化是面向普通玩家的，所以后台日志、F3 调试信息这样面向开发者的东西不应该添加国际化。

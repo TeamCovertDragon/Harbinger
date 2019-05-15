@@ -75,6 +75,7 @@
   * [12.3 药水类型](chapter-12/potion-type.md)
 * [13. 国际化与本地化](chapter-13/index.md)
   * [13.1 文本组件（`ITextComponent`）](chapter-13/text-component.md)
+  * [13.2 注意事项](chapter-13/note.md)
 * [14. 用户交互界面（GUI）](chapter-14/index.md)
   * [14.1 Widget](chapter-14/widget/index.md)
     * [14.1.1 文本输入](chapter-14/widget/text-field.md)
