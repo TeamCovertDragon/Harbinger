@@ -62,8 +62,6 @@ assert I18n.format("我想要什么键就可以有什么键.我说过这是真�
 
 ## Java Properties
 
-Forge 添加了一个新的国际化特性：只要在语言文件中任意一行添加 `#PARSE_ESCAPES` ，Forge 就会以 [`Java Properties` ](https://en.wikipedia.org/wiki/.properties)格式、`UTF-8` 编码读取该语言文件。
+Forge 添加了一个新的国际化特性：只要在语言文件中任意一行添加 `#PARSE_ESCAPES` ，Forge 就会以 [`Java Properties` ](https://docs.oracle.com/cd/E23095_01/Platform.93/ATGProgGuide/html/s0204propertiesfileformat01.html)格式、`UTF-8` 编码读取该语言文件。
 
 相比较于简单的 Minecraft 默认语言文件格式， `Java Properties` 格式具有更高的灵活性，例如能够多行书写，插入 Unicode 转义字符。
-
-<!--TODO: 替换en wiki链接？这玩意现在也被墙了-->
