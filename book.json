@@ -12,7 +12,7 @@
   "pluginsConfig": {
     "flow": {
       "line-color": "red"
-    },
+    }
   },
   "links": {
     "sidebar": {
