@@ -16,7 +16,7 @@ public final class MyModConfig {
     public static boolean think = false;
 
     @Config.Comment("Hey I am foo") // 有了这个就会多一个注释。
-    @Config.LangKey("config.my_mod.general.foo") // 本地化用，稍后会讲
+    @Config.LangKey("config.my_mod.general.foo") // 供配置 GUI 界面使用的本地化键，参阅“可视化配置文件编辑界面”一节
     @Config.Name("Foo") // 默认配置选项名是字段名，如果需要别的名字就用这个。
     @Config.RangeInt(min = 1, max = 10000) // 整数值支持限定范围。
     @Config.RequireWorldRestart // meta 标记，代表需要重进存档才会生效
