@@ -16,7 +16,7 @@ public class MyRecipeFactory implements IRecipeFactory {
 
 ```json
 {
-    "factories": {
+    "recipes": {
         "my_recipe": "my_mod.MyRecipeFactory"
     }
 }
