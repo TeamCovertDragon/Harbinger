@@ -47,12 +47,14 @@ public static void onModelRegistration(ModelRegistryEvent event) {
 ```json
 {
     "variants": {
-        "default": "example_mod:example_block_model"
+        "normal": {
+            "model": "example_mod:example_block_model"
+        }
     }
 }
 ```
 
-因为这个方块没什么特别的所以它只有一种状态：`default`。对于那些有各种奇怪状态的方块，这里会稍微麻烦一些，但这是后话。和物品的模型类似，方块模型统一放在 `assets/[modid]/models/block` 目录下。也就是说，上面我们给出的 `example_mod:example_block_model` 代表 Minecraft 会去寻找 `assets/example_mod/models/block/example_block_model.json` 这个文件。切换到目标目录下新建这个文件：
+因为这个方块没什么特别的所以它只有一种状态：`normal`。对于那些有各种奇怪状态的方块，这里会稍微麻烦一些，但这是后话。和物品的模型类似，方块模型统一放在 `assets/[modid]/models/block` 目录下。也就是说，上面我们给出的 `example_mod:example_block_model` 代表 Minecraft 会去寻找 `assets/example_mod/models/block/example_block_model.json` 这个文件。切换到目标目录下新建这个文件：
 
 ```json
 {
