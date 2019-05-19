@@ -67,7 +67,7 @@ Minecraft 所使用的模型及渲染系统会[在第十一章有详细说明](.
 ```json
 {
     "variants": {
-        "default": {
+        "normal": {
             "model": "my_mod:example_block_model"
         }
     }
