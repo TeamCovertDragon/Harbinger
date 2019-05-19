@@ -1,8 +1,8 @@
-# 方块形式的物品容器
+# 方块形式的流体容器
 
 很明显，普通的方块不可能有能力持有任意流体数据——所以你需要一个 `TileEntity`。  
-关于 TileEntity 的内容可参考[第十章的相关内容](../../chapter-10/index.md)。  
-关于 `IFluidHandler` 的细节可参考[第二十七章的相关内容](../../chapter-27/built-in/fluid.md)。
+关于 TileEntity 的内容可参考[第九章的相关内容](../../chapter-09/index.md)。  
+关于 `IFluidHandler` 的细节可参考[第二十八章的相关内容](../../chapter-28/built-in/fluid.md)。
 
 ```java
 // WIP
