@@ -76,3 +76,19 @@ OreDictionary.addOre(new ItemStack(MyItems.copperOre), "oreCopper");
   }
 }
 ```
+
+## `OreDictionary.WILDCARD_VALUE`
+
+有那么一些时候，你希望你的输入的 metadata 或者损害值不影响合成的匹配，比如原版的木棍合成使用的木板是可以混搭的，此时作为合成材料的木板的 metadata 是无所谓的（“don't care”）。  
+为此，Minecraft 引入了一个幻数——`Short.MAX_VALUE`——来指代这一情况。你可以在 `Ingredient` 类的 `apply` 方法的实现中找到这个幻数（`32767`）的身影。
+
+Forge 在矿物词典中明确了这个字段的含义及具体值，以 `OreDictionary` 类下的 `WILDCARD_VALUE` 字段的形式呈现。
+
+有鉴于此，你可以这样表示原版的全部六种木板：
+
+```json
+{
+    "item": "minecraft:plank",
+    "data": 32767
+}
+```
