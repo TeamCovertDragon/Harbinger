@@ -6,14 +6,26 @@
 
 ## 第一个流体
 
-````java
-// 构造器中第一个参数是流体的唯一识别 ID，第二个参数是材质位置。
-// 同时有一个三参数构造器可用，此时第二个参数是静止时的材质，第三个是流动时的材质。
+```java
+// 构造器中第一个参数是流体的唯一识别 ID，第二个参数是材质位置，第三个则是流动时的材质。
+// 此外，Fluid 还有如下几个构造器：
+//   - String name, ResourceLocation still, ResourceLocation flow, int color
+//     允许指定流体的“颜色”，颜色以 ARGB 的格式出现。
+//   - String name, ResourceLocation still, ResourceLocation flow, java.awt.Color color
+//     同上，但颜色以 java.awt.Color 的形式出现。
+//   - String name, ResourceLocation still, ResourceLocation flow, ResourceLocation overlay
+//     允许指定流体的遮罩纹理。
+//   - String name, ResourceLocation still, ResourceLocation flow, ResourceLocation overlay, int color
+//     同时允许指定流体的“颜色”和遮罩纹理，颜色以 ARGB 的格式出现。
+//   - String name, ResourceLocation still, ResourceLocation flow, ResourceLocation overlay, java.awt.Color color
+//     同上，但颜色以 java.awt.Color 的形式出现。
 public static final Fluid myFluid = new Fluid("example_fluid", new ResourceLocation("example_mod:example_fluid")).setGaseous(true).setDensity(Integer.MAX_VALUE);
 
 // 此方法会返回一个 boolean。
 // 返回 true 代表注册成功。
 // 返回 false 则代表“已有同名流体注册”，但 Forge 仍然保留了一份此流体对象的引用，
 // 这样一来即便注册失败，仍可以在 new FluidStack 时使用这个注册失败的版本。
+// 使用注册失败的 Fluid 来创建 FluidStack 时，Forge 会自动将其转换到转注册成功的
+// 那个同名 Fluid 对象上去。
 FluidRegistry.registerFluid(myFluid);
-````
+```
