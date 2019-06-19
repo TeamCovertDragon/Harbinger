@@ -38,8 +38,8 @@ ModelLoader.setCustomStateMapper(myFluid.getBlock(), new StateMapperBase() {
 
 ## 流体有纹理
 
-注意到 `Fluid` 有几个接受若干 `ResourceLocation` 的构造器。它们用于指定流体的纹理。接受两个 `ResourceLocation` 的代表流体的静止纹理和流动纹理不一致；只接受一个的则是有统一的纹理，不论静止还是流动。  
-如果我们的流体没有对应的方块，那么这几个纹理实际上是不会自动被识别并载入原版的 Texture Map 的。但有时候我们又需要依赖这些纹理——比如说绘制 GUI 中的流体储罐的时候——此时我们不得不手动确保这些纹理会载入原版方块及物品的 Texture Map 中。
+所有 `Fluid` 的构造器中都有两个 `ResourceLocation` 的参数，第一个指定了流体静止时的纹理，第二个则指定了流体流动时的纹理。
+如果我们的流体没有对应的方块，那么这几个纹理实际上是不会自动被识别并载入原版的 Texture Map 的。但有时候我们又需要依赖这些纹理——比如说绘制 GUI 中的流体储罐的时候——此时我们不得不通过订阅 `TextureStitchEvent.Pre` 来确保这些纹理会载入原版方块及物品的 Texture Map 中。
 
 ```java
 @SubscribeEvent
