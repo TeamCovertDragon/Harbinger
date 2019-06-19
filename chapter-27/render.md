@@ -32,6 +32,8 @@ ModelLoader.setCustomStateMapper(myFluid.getBlock(), new StateMapperBase() {
 }
 ```
 
+默认，`forge:fluid` 这个模型会调用 `Fluid.getStill()` 和 `Fluid.getFlowing()` 两个方法来获得流体的纹理，这两个纹理可以是静止的，也可以是有动画效果的。若是使用静止的纹理则这个纹理和普通方块的纹理的要求无异。若是使用带动画纹理，则该纹理的要求亦须要符合普通带动画纹理的要求（[可参考第十一章的说明](../chapter-11/baked/texture.md)）。
+
 很多 Mod 都会通过类似的方式将所有流体方块的模型整合在一起方便管理。
 
 ## 流体有纹理
