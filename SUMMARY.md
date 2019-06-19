@@ -50,6 +50,7 @@
 * [11. 渲染概论](chapter-11/index.md)
   * [11.1 方块及物品模型](chapter-11/baked/index.md)
     * [11.1.1 自定义物品模型映射](chapter-11/baked/custom-mesh.md)
+    * [11.1.2 纹理与纹理动画](chapter-11/baked/texture.md)
     * [11.1.2 染色](chapter-11/baked/tint.md)
     * [11.1.3 方块状态映射](chapter-11/baked/block-state-json.md)
     * [11.1.4 `IStateMapper`](chapter-11/baked/state-mapper.md)
