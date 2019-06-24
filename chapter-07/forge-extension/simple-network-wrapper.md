@@ -62,15 +62,15 @@ public class MessageFoo implements IMessage {
 
     @Override
     public void toBytes(ByteBuf buf) {
-        buf.writeLong(this.bar.getLeastSignificantBits());
         buf.writeLong(this.bar.getMostSignificantBits());
+        buf.writeLong(this.bar.getLeastSignificantBits());
     }
 
     @Override
     public void fromBytes(ByteBuf buf) {
-        final long least = buf.readLong();
         final long most = buf.readLong();
-        this.bar = new UUID(least, most);
+        final long least = buf.readLong();
+        this.bar = new UUID(most, least);
     }
 
     // 以及对应的 Handler，通常是静态内部类
