@@ -99,7 +99,7 @@ public final class ModelMapper {
 ```json
 {
     "parent": "item/generated",
-    "texture": {
+    "textures": {
         "layer0": "my_mod:items/example_item"
     }
 }
