@@ -7,7 +7,7 @@
 
 首先造个轮子：
 
-````java
+```java
 public enum MySimpleNetworkHandler {
     INSTANCE;
 
@@ -43,11 +43,11 @@ public enum MySimpleNetworkHandler {
         channel.sendToServer(msg);
     }
 }
-````
+```
 
 然后是数据包：
 
-````java
+```java
 public class MessageFoo implements IMessage {
     //解包用的构造器
     public MessageFoo() {}
@@ -62,44 +62,45 @@ public class MessageFoo implements IMessage {
 
     @Override
     public void toBytes(ByteBuf buf) {
-        buf.writeBytes(bar.toString().getBytes())
+        buf.writeLong(this.bar.getLeastSignificantBits());
+        buf.writeLong(this.bar.getMostSignificantBits());
     }
 
     @Override
     public void fromBytes(ByteBuf buf) {
-        byte[] bytes = new byte[36]; //如果我没记错的话，这就是UUID的长度。
-        buf.readBytes(bytes);
-        this.bar = new UUID(new String(bytes));
+        final long least = buf.readLong();
+        final long most = buf.readLong();
+        this.bar = new UUID(least, most);
     }
 
-    //以及对应的Handler，通常是静态内部类
-    //对于这个IMessageHandler，如果是内部类那一定是静态的，如果不是静态的那一定不是内部类，没有第三种情况
-    //这里的泛参是这样，IMessageHandler<REQ, REPLY>
-    //如果不需要在收到包后发回复包，则第二个泛参保留IMessage，否则请填入对应的类型
+    // 以及对应的 Handler，通常是静态内部类
+    // 对于这个 IMessageHandler，如果是内部类那一定是静态的，如果不是静态的那一定不是内部类，没有第三种情况
+    // 这里的泛参是这样，IMessageHandler<REQ, REPLY>，REPLY 代表“回执”包的类型。
+    // 理论上，如果不需要发送回执包作为应答，则第二个泛参保留 IMessage 并实际上返回 null，否则应填入对应的类型。
+    // 但实际上，因为 Forge 没有实现回执包这个特性，所以实际上这里只能使用 IMessage 并返回 null。
+    // 参考：https://github.com/MinecraftForge/MinecraftForge/issues/4231
     public static class MessageFooHandler implements implements IMessageHandler<MessageFoo, IMessage> {
         @Override
         public IMessage onMessage(MessageFoo myFoo , MessageContext ctx) {
+            // 此时 MessageFoo 里的数据已经经过 fromBytes 处理并展开，可以直接使用。
             UUID uuid = message.bar;
-            // 该干啥干啥
-            // 返回null表示没有回复包
             return null;
         }
     }
 }
-````
+```
 
 最后，回到刚才的`MySimpleNetworkHandler`，给它加个构造器：
 
-````java
+```java
 private MySimpleNetworkHandler {
-    //注册该Message及Handler
-    //第三个参数是识别码 (discriminator)
-    //第四个参数是收包端，是逻辑端。
-    //如果一个Message可以同时在两个逻辑端发送，那就要注册两次，使用不同的识别码
-    //^ForgeDoc如是说。
+    // 注册该 Message 及处理它的 Handler
+    // 第三个参数是识别码 (discriminator)
+    // 第四个参数是收包端，是逻辑端。
+    // 如果一个 Message 可以同时在两个逻辑端发送，那就要注册两次，使用不同的识别码
     this.instance.registerMessage(MessageFooHandler.class, MessageFoo.class, 0, Side.CLIENT);
 }
-````
+```
 
 就可以用了。用法如下：
 
