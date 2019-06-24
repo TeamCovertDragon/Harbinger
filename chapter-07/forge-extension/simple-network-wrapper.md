@@ -76,6 +76,7 @@ public class MessageFoo implements IMessage {
         this.bar = new UUID(most, least);
     }
 
+<<<<<<< HEAD
     // 以及对应的 Handler，通常是静态内部类，如果不是静态的那一定不是内部类，没有第三种情况。
     // 这里的泛参是这样，IMessageHandler<REQ, REPLY>，REQ 代表收到的数据包的类型，而
     // REPLY 代表“回执”包的类型。
@@ -83,6 +84,13 @@ public class MessageFoo implements IMessage {
     ///否则应填入对应的类型。
     // 但实际上，若处理数据的过程需要操作游戏主线程上的对象，这里的回执包是无法正确工作的，
     // 此时只能使用 IMessage 并返回 null。
+=======
+    // 以及对应的 Handler，通常是静态内部类
+    // 对于这个 IMessageHandler，如果是内部类那一定是静态的，如果不是静态的那一定不是内部类，没有第三种情况
+    // 这里的泛参是这样，IMessageHandler<REQ, REPLY>，REPLY 代表“回执”包的类型。
+    // 理论上，如果不需要发送回执包作为应答，则第二个泛参保留 IMessage 并实际上返回 null，否则应填入对应的类型。
+    // 但实际上，因为 Forge 没有实现回执包这个特性，所以实际上这里只能使用 IMessage 并返回 null。
+>>>>>>> bleeding
     // 参考：https://github.com/MinecraftForge/MinecraftForge/issues/4231
     public static class MessageFooHandler implements implements IMessageHandler<MessageFoo, IMessage> {
         @Override
