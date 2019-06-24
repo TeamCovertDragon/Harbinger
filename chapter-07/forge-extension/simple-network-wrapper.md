@@ -1,7 +1,7 @@
 # 残酷的事实和救世者：`SimpleNetworkWrapper`
 
-说完这么多，但是还是没回答一开始的问题：怎么处理网络 IO？  
-很抱歉你要自己想办法。  
+~~说完这么多，但是还是没回答一开始的问题：怎么处理网络 IO？~~  
+~~很抱歉你要自己想办法。~~  
 
 开玩笑的。MinecraftForge 有几个已经封装好的解决方案，直接拿去用就可以了。
 
@@ -11,16 +11,15 @@
 public enum MySimpleNetworkHandler {
     INSTANCE;
 
+    // 首先我们拿到一个 SimpleNetworkWrapper 的实例，然后对它进行封装
     private final SimpleNetworkWrapper channel = NetworkRegistry.INSTANCE.newSimpleChannel("example_mod");
 
-    //从这里开始就是一堆封装...
-
-    //向某个维度发包
+    // 向某个维度发包（服务器到客户端）
     public void sendMessageToDim(IMessage msg, int dim) {
         channel.sendToDimension(msg, dim);
     }
 
-    //向某个维度的某个点发包
+    // 向某个维度的某个点发包（服务器到客户端）
     public void sendMessageAroundPos(IMessage msg, int dim, BlockPos pos) {
         // TargetPoint的构造器为：
         // 维度id x坐标 y坐标 z坐标 覆盖范围
@@ -28,17 +27,17 @@ public enum MySimpleNetworkHandler {
         channel.sendToAllAround(msg, new NetworkRegistry.TargetPoint(dim, pos.getX(), pos.getY(), pos.getZ(), 2.0D);
     }
 
-    //向某个玩家发包
+    // 向某个玩家发包（服务器到客户端）
     public void sendMessageToPlayer(IMessage msg, EntityPlayerMP player) {
         channel.sendToPlayer(msg, player);
     }
 
-    //向所有人发包
+    // 向所有人发包（服务器到客户端）
     public void sendMessageToAll(IMessage msg) {
         channel.sendToAll(msg);
     }
 
-    //向服务器发包
+    // 向服务器发包（客户端到服务器）
     public void sendMessageToServer(IMessage msg) {
         channel.sendToServer(msg);
     }
@@ -48,24 +47,28 @@ public enum MySimpleNetworkHandler {
 然后是数据包：
 
 ```java
+import java.util.UUID;
+
 public class MessageFoo implements IMessage {
-    //解包用的构造器
+
+    UUID bar;
+
+    // 解包用的构造器
     public MessageFoo() {}
 
-    //别问我为毛是这个
-    java.util.UUID bar;
-
-    //封包用的构造器
+    // 封包用的构造器
     public MessageFoo(UUID uuid) {
         this.bar = uuid;
     }
 
+    // 封包
     @Override
     public void toBytes(ByteBuf buf) {
         buf.writeLong(this.bar.getMostSignificantBits());
         buf.writeLong(this.bar.getLeastSignificantBits());
     }
 
+    // 解包
     @Override
     public void fromBytes(ByteBuf buf) {
         final long most = buf.readLong();
@@ -93,7 +96,7 @@ public class MessageFoo implements IMessage {
 最后，回到刚才的`MySimpleNetworkHandler`，给它加个构造器：
 
 ```java
-private MySimpleNetworkHandler {
+private MySimpleNetworkHandler() {
     // 注册该 Message 及处理它的 Handler
     // 第三个参数是识别码 (discriminator)
     // 第四个参数是收包端，是逻辑端。
