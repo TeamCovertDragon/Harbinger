@@ -20,6 +20,7 @@ public final class MyIngredientFactory implements IIngredientFactory {
 ```java
 public final class MyIngredient extends Ingredient {
     // 来自 java.util.function.Predicate
+    // 在这里它用于检查给定的 ItemStack 是否与该 Ingredient 相匹配。
     @Override
     public boolean apply(@Nullable ItemStack input) { // 应该是 Mojang 抽风了，ItemStack 在这里不可能是 null
         return false;
@@ -44,14 +45,14 @@ public final class MyIngredient extends Ingredient {
      *         .mapToInt(RecipeItemHelper::pack)
      *         .sorted()
      *         .toArray())
-     *     )
      * </pre>
      *
      * 注：IntList 来自 FastUtil。FastUtil 的 IntList 有对 Java 集合框架
      * 的兼容（即实现 List<Integer>）。
      *
      * 这里有一个小知识：虽然 RecipeItemHelper 这个类是客户端包里的（具体来说是
-     * net.minecraft.client.util 包中），但它没有 @SideOnly(Side.CLIENT)。
+     * net.minecraft.client.util 包中），但它没有 @SideOnly(Side.CLIENT)，
+     * 因此可以放心使用。
      */
     @Nonnull
     @Override
@@ -71,14 +72,17 @@ public final class MyIngredient extends Ingredient {
     }
 
     /*
-     * 此方法强烈建议无条件返回 true。这个方法的存在和下列几个 Forge 的 Issue 和 Pull
-     * Request 有关：
+     * 这个方法的存在和下列几个 Forge 的 Issue 和 Pull Request 有关：
      *
      * https://github.com/MinecraftForge/MinecraftForge/pull/4472
      * https://github.com/MinecraftForge/MinecraftForge/issues/4516
      * https://github.com/MinecraftForge/MinecraftForge/pull/4519
      *
-     * 出于某些理由，仅当此方法返回 true 时，覆写后的 apply 方法才会被调用。
+     * 可通过下面的测试判断该方法的返回值：
+     * “该 Ingredient 的实现是否是纯粹地判断固定物品和固定 metadata”？
+     * 若通过该测试，则应返回 true，否则应返回 false。
+     * 举例：可以实现一个真正意义上的忽略 metadata 的 Ingredient，此时
+     * 对 metadata 的匹配就不是固定的（一对多），则 isSimple 应返回 false。
      */
     @Override
     public boolean isSimple() {
