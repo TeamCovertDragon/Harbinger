@@ -4,7 +4,7 @@
 
 ## 流体没有模型
 
-有模型的是流体对应的方块。既然有模型的是方块，那么只需要参考第十一章的内容就可以了。  
+有模型的是流体对应的方块。既然有模型的是方块，那么只需要参考第十一章的内容，给流体对应的方块赋予一个模型就可以了。  
 Forge 提供了一个已经实现好的流体模型，可以拿来就用。有鉴于这个模型的实现方式比较特殊，它必须通过 Forge BlockState V1 格式引用方能正常工作。下面给出了这个流体模型的使用方法：
 
 ```java
@@ -49,3 +49,5 @@ public static void regFluidSpirit(TextureStitchEvent.Pre event) {
     textureMap.registerSprite(myFluid.getStill());
 }
 ```
+
+同样的，通过此法加载的纹理也可以有动画效果，其要求与普通方块纹理的动画无异。
