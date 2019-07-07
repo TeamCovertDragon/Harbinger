@@ -13,12 +13,14 @@
 ## ~~枚举、排列与组合？~~ 枚举与笛卡尔积
 
 和 `ItemStack` 不一样，一个方块的所有可能的方块状态是可以被穷尽的。  
-一个方块的方块状态由有限多个 `IProperty<?>` 所描述，这些 `IProperty<?>` 都会传入 `BlockStateContainer` 的构造器中，如下所示：
+一个方块的方块状态由有限多个“属性”（即 `IProperty<?>`）所描述，这些 `IProperty<?>` 都会传入 `BlockStateContainer` 的构造器中，如下所示：
 
 ```java
 @Override
 public BlockStateContainer createBlockState() {
     // 实际上第二个参数是 var arg，这里为了让参数更明显而使用了显式的数组声明。
+    // 换言之，你可以这样写：
+    // return new BlockStateContainer(this, prop1, prop2, prop3);
     return new BlockStateContainer(this, new IProperty<?>[] { ... });
 }
 ```
@@ -101,16 +103,20 @@ public final class MyProperty implements IProperty<String> {
 方块状态可以看作是一个 `Map`，你可以用某个 `IProperty<?>` 作为键拿到目标 `IBlockState` 中的对应值。
 
 ```java
+// 我们可以这样来获得某个方块的当前朝向，前提是这个方块有 BlockHorizontal.FACING 这个属性。
 EnumFacing facing = state.getValue(BlockHorizontal.FACING);
 ```
 
 类似地，可以用 `withProperty` 改变 `IBlockState` 的内部状态，但如此做会得到一个新的 `IBlockState` 对象，而非原来的那一个，是为“不变”：
 
 ```java
+// 我们可以这样来改变方块的朝向。
 IBlockState newState = state.withProperty(BlockHorizontal.FACING, EnumFacing.EAST);
 assert newState != state;
 
-// 事实上它的不变性也可以通过另一个角度看出来—— getProperties 返回了 Guava 的 ImmutableMap
+// 事实上它的不变性也可以通过另一个角度看出来—— getProperties 返回了 Guava 的 ImmutableMap。
+// getProperties() 这个方法在 Mod 开发中基本没有用处，它之所以存在是因为 Minecraft 它自己需要用到，
+// 比如序列化方块状态成一个 NBTTagCompound 的时候。
 ImmutableMap<IProperty<?>, Comparable<?>> properties = state.getProperties();
 ```
 
@@ -127,17 +133,23 @@ if（block == ...) {
 
 很明显，既然 `IBlockState` 有 `Map` 的特征，那它的序列化应该不会太困难。
 实际上并非如此——难道我们要把一个区块中的 16 \* 16 \* 256 = 65536 块方块全部序列化成 `Map`？  
-Mojang 实际上在 1.13 用一个非常有趣的办法（即“调色盘”，palette）解决了这个问题，但那是发生在未来的事情，我们现在面对的是：方块状态需要正确映射到一个 metadata 上才能正确持久化。Mojang 在这个过渡时期使用的临时解决方案是 `getStateFromMeta` 和 `getMetaFromState`。
+Mojang 实际上在 1.13 用一个非常有趣的办法（即“调色盘”，palette）解决了这个问题，但那是发生在未来的事情，我们现在面对的是：方块状态需要正确映射到一个 metadata 上才能正确持久化。Mojang 在这个过渡时期使用的临时解决方案是这样的：
+
+  - `getStateFromMeta`，顾名思义，根据 meta 构造对应的 `IBlockState`，是为反序列化。
+  - `getMetaFromState`，顾名思义，根据 `IBlockState` 获得对应的 meta，是为序列化。
+
 这个过程基本就是在不断位运算，因为 Minecraft 从 1.3 开始一直在使用的 Anvil 地图格式中，只给每一个坐标上的方块留了 4 个 bit 当 metadata 用。
 
 ```java
 @Override
 public IBlockState getStateFromMeta(int metadata) {
     // 取决于实际情况
+    return 0;
 }
 @Override
 public int getMetaFromState(IBlockState state) {
     // 取决于实际情况
+    return state;
 }
 ```
 
@@ -147,7 +159,7 @@ public int getMetaFromState(IBlockState state) {
 新的问题出在红石线和栅栏上——它们的方块状态复杂到了 4 bit 压根儿没可能存得下来的地步。于是 `getActualState` 横空出世，允许某个方块根据当前世界里的属性补全方块状态。
 
 ```java
-// 比如说栅栏、红石线、火这种。这些方块需要根据周围状态确定真实状态。
+// 比如说栅栏、红石线、火焰方块这种。这些方块需要根据周围状态确定真实状态。
 @Override
 public IBlockState getActualState(IBlockAccess access, BlockPos pos, IBlockState baseState) {
     // 返回补全属性的 BlockState
