@@ -115,6 +115,8 @@ IBlockState newState = state.withProperty(BlockHorizontal.FACING, EnumFacing.EAS
 // 因为我们拿到了一个全新的 IBlockState 对象，所以我们需要手动调用 setBlockState 之类的方法
 // 从而让当前游戏世界看到这个变化。
 assert newState != state;
+// 这里的 world 是一个 World 对象。在很多 Block 下的方法中都有 World 参数传入。
+world.setBlockState(pos, newState);
 
 // 事实上它的不变性也可以通过另一个角度看出来—— getProperties 返回了 Guava 的 ImmutableMap。
 // getProperties() 这个方法在 Mod 开发中基本没有用处，它之所以存在是因为 Minecraft 它自己需要用到，
