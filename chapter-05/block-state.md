@@ -52,6 +52,8 @@ $$
 重新实现 `IProperty` 的需求非常罕见，几乎所有时候 `PropertyInteger`、`PropertyEnum` 和 `PropertyBool` 的组合即可满足需求。下面给出一个模仿 `PropertyEnum` 实现的 `IProperty<String>`，在实际使用上和 `PropertyEnum` 没有区别：
 
 ```java
+import com.google.common.base.Optional;
+
 public final class MyProperty implements IProperty<String> {
     // 返回该属性的名称。
     // PropertyEnum.create 的第一个参数即是它的返回值。
@@ -78,6 +80,9 @@ public final class MyProperty implements IProperty<String> {
 
     // 从 String 中反序列化出该属性的值，在反序列化命令中出现的
     // 方块状态等情况下会用到此方法。
+    // 注意这个 Optional 是 Guava 的。用 Guava 的 Optional 的原因也很简单，
+    // Minecraft 直到 1.12.2 才使用 Java 8，而 java.util.Optinal 也是
+    // 从 Java 8 才有的类。
     @Override
     public Optional<String> parseValue(String value) {
         return Optional.of(value.toLowerCase(Locale.ENGLISH));
