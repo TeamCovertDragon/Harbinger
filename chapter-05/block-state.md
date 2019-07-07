@@ -98,7 +98,7 @@ public final class MyProperty implements IProperty<String> {
 }
 ```
 
-## `ImmutableMap`？
+## 操作方块状态与方块状态的不变性
 
 方块状态可以看作是一个 `Map`，你可以用某个 `IProperty<?>` 作为键拿到目标 `IBlockState` 中的对应值。
 
@@ -112,6 +112,8 @@ EnumFacing facing = state.getValue(BlockHorizontal.FACING);
 ```java
 // 我们可以这样来改变方块的朝向。
 IBlockState newState = state.withProperty(BlockHorizontal.FACING, EnumFacing.EAST);
+// 因为我们拿到了一个全新的 IBlockState 对象，所以我们需要手动调用 setBlockState 之类的方法
+// 从而让当前游戏世界看到这个变化。
 assert newState != state;
 
 // 事实上它的不变性也可以通过另一个角度看出来—— getProperties 返回了 Guava 的 ImmutableMap。
