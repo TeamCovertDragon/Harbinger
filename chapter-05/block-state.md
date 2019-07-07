@@ -42,12 +42,12 @@ $$
 
 自然地，原版使用的这些属性不一定能准确描述我们的需求，我们需要全新的 `IProperty`。对于简单的情况，我们可以复用这几个原版类：
 
-  - `PropertyInteger`。只需要 `PropertyInteger.create(propertyName, minValue, maxValue)` 简单调用即可获得一个全新的 `PropertyInteger` 对象，它通常代表某种进度（机器工作进度、设备生长进度）或某种测量值（信号强度）。
+  - `PropertyInteger`。只需要调用 `PropertyInteger.create(propertyName, minValue, maxValue)` 即可获得一个全新的 `PropertyInteger` 对象，它通常代表某种进度（机器工作进度、设备生长进度）或某种测量值（信号强度）。
   - `PropertyBool`。只需要 `PropertyBool.create(propertyName)` 简单调用就可以拿到一个代表开/关的属性。
   - `PropertyEnum`。使用它有些复杂，首先我们需要一个枚举类，并让这个枚举类实现 `IStringSerializable`，然后我们才能通过 `PropertyEnum.create(propertyName, enumClass)` 拿到一个 `PropertyEnum`。方块的 meta-hack 即是用 `PropertyEnum` 实现的。除此之外代表方向的 `PropertyDirection` 也继承了 `PropertyEnum<EnumFacing>`。
     - `IStringSerializable` 只有一个方法：`String getName()`。有鉴于它用于方块状态属性的具体值，它的返回值只能使用小写拉丁字母、阿拉伯数字或下划线（`_`）。其他字符均会令 Minecraft 报错。
     - `PropertyEnum.create` 有两个重载，允许你只使用一部分你的枚举类的值。`PropertyDirection` 便用到了这两个重载中的一个，用于限定仅东南西北四个方向的 `EnumFacing` 有效。
-    - 作为 `PropertyEnum` 的特例，`PropertyDirection` 可用于描述方向。虽然有对应的 `PropertyDirection.create`，但你可以直接使用 `BlockDirectional.FACING` 和 `BlockHorizontal.FACING` 两个现成的字段。
+    - 作为 `PropertyEnum` 的特例，`PropertyDirection` 可用于描述方向。你可以直接使用 `BlockDirectional.FACING` 和 `BlockHorizontal.FACING` 两个现成的字段，如果这两个字段不能满足你的需求，也可以使用 `PropertyDirection.create` 来创建一个新的 `PropertyDirection`。
 
 ### 重新实现 `IProperty`
 
