@@ -25,7 +25,7 @@
     - Pro：MIT 授权
     - Pro：简单干净的物品管理器界面 Overlay 实现
     - Pro：API 设计清楚，文档齐全，正确搭配 SemVer 迭代并废弃旧版 API，可实现可选兼容
-  - 匠魂（Tinkers' Construct）https://github.com/SlimeKnights/TinkersConstruct：
+  - 匠魂（Tinkers' Construct）https://github.com/SlimeKnights/TinkersConstruct
     - Pro：MIT 授权
     - Pro：一套高效的拼接模型的实现，用于实现匠魂工具及武器的“组合”模型
     - Pro：多方块结构（冶炼炉等）的实现
