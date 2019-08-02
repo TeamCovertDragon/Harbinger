@@ -8,25 +8,25 @@
 ## 那些历史悠久的 Mod 的源码
 
   - CraftTweaker：https://github.com/CraftTweaker/CraftTweaker
-    - Pro：老牌整合制作工具 MineTweaker 的正统续作，包括为数不少的看似简单实则非常困难的功能的实现
-    - Pro：MIT 授权
-    - Con：黑魔法众多，多数时候你应该让用户直接用 CraftTweaker 而不是自己写一个
+    - 优势：老牌整合制作工具 MineTweaker 的正统续作，包括为数不少的看似简单实则非常困难的功能的实现
+    - 优势：MIT 授权
+    - 劣势：黑魔法众多，多数时候你应该让用户直接用 CraftTweaker 而不是自己写一个
   - 林业（Forestry）：https://github.com/ForestryMC/ForestryMC
-    - Pro：LGPL v3 授权
-    - Pro：最早在物品上塞大量数据的 Mod 之一（养蜂系统）
-    - Pro：自动收割作物的农场
-    - Con：有数个抽象层，需要花时间阅读
+    - 优势：LGPL v3 授权
+    - 优势：最早在物品上塞大量数据的 Mod 之一（养蜂系统）
+    - 优势：自动收割作物的农场
+    - 劣势：有数个抽象层，需要花时间阅读
   - 沉浸工程（Immersive Engineering）：https://github.com/BluSunrize/ImmersiveEngineering
-    - Pro：多方块结构的控制及渲染
-    - Pro：一套相对简单的电网实现
-    - Con：有时候方法体会非常长，导致可读性略微下降
-    - Con：自定义授权，可能对有许可方面要求的用户不甚友好
+    - 优势：多方块结构的控制及渲染
+    - 优势：一套相对简单的电网实现
+    - 劣势：有时候方法体会非常长，导致可读性略微下降
+    - 劣势：自定义授权，可能对有许可方面要求的用户不甚友好
   - JEI（Just Enough Items)：https://github.com/mezz/JustEnoughItems
-    - Pro：MIT 授权
-    - Pro：简单干净的物品管理器界面 Overlay 实现
-    - Pro：API 设计清楚，文档齐全，正确搭配 SemVer 迭代并废弃旧版 API，可实现可选兼容
+    - 优势：MIT 授权
+    - 优势：简单干净的物品管理器界面 Overlay 实现
+    - 优势：API 设计清楚，文档齐全，正确搭配 SemVer 迭代并废弃旧版 API，可实现可选兼容
   - 匠魂（Tinkers' Construct）https://github.com/SlimeKnights/TinkersConstruct
-    - Pro：MIT 授权
-    - Pro：一套高效的拼接模型的实现，用于实现匠魂工具及武器的“组合”模型
-    - Pro：多方块结构（冶炼炉等）的实现
-    - Con：时常也需要查阅它的前置（Mantle，同为 MIT 授权）
+    - 优势：MIT 授权
+    - 优势：一套高效的拼接模型的实现，用于实现匠魂工具及武器的“组合”模型
+    - 优势：多方块结构（冶炼炉等）的实现
+    - 劣势：时常也需要查阅它的前置（Mantle，同为 MIT 授权）
