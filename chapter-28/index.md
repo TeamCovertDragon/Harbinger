@@ -84,7 +84,7 @@ public static void onAttachCapabilitiesEntity(AttachCapabilitiesEvent<SomeObject
     if (event.getObject() instanceof ...) {
         event.addCapability(
             new ResourceLocation("your_modid","your_capability_name"),
-            new yourProvider()
+            new YourCapabilityProvider()
         );
     }
 }
