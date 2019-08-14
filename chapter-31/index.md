@@ -28,6 +28,12 @@
     - 可参考的内容
       - 简单干净的物品管理器界面 Overlay 实现
       - API 的架构
+  - 群峦传说（TerraFirmaCraft）：https://github.com/TerraFirmaCraft/TerraFirmaCraft
+    - 可参考的内容
+      - 如何替换主世界生成器
+      - 如何生成大矿脉
+      - 如何生成起伏巨大的地形
+      - 气候系统
   - 匠魂（Tinkers' Construct）https://github.com/SlimeKnights/TinkersConstruct
     - 可参考的内容
       - 一套高效的拼接模型的实现，用于实现匠魂工具及武器的“组合”模型
