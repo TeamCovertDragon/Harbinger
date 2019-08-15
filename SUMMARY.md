@@ -179,7 +179,7 @@
 
 ### 附录
 
-* [31. 附录 I：？？？](chapter-31/index.md)
+* [31. 附录 I：相关开发资源](chapter-31/index.md)
 * [32. 附录 II：？？？](chapter-32/index.md)
 * [33. 附录 III：？？？](chapter-33/index.md)
 * [34. 附录 IV：？？？](chapter-34/index.md)
