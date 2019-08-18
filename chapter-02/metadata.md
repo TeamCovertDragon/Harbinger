@@ -6,7 +6,7 @@ Forge 允许你给你的 Mod 提供一个元数据描述文件，用于 Forge �
 ```json
 [
     {
-        "modid": "example_mod",
+        "modid": "my_mod",
         "name": "Example Mod",
         "description": "Just a demo mod",
         "version": "${version}",

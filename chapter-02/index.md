@@ -71,7 +71,7 @@ $ ./gradlew genIntellijRuns
 //
 // version 没有限制，若不填则使用 1.0，并产生警告。
 // 对于 version 来说，***强烈***推荐只用数字和点，比如只有 MAJOR.MINOR.PATCH 的 SemVer。
-@Mod(modid = "example_mod", name = "ExampleMod", version = "0.0.0")
+@Mod(modid = "my_mod", name = "ExampleMod", version = "0.0.0")
 public enum ExampleMod {
     INSTANCE;
 
