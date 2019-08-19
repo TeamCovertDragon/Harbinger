@@ -71,16 +71,19 @@ $ ./gradlew genIntellijRuns
 //
 // version 没有限制，若不填则使用 1.0，并产生警告。
 // 对于 version 来说，***强烈***推荐只用数字和点，比如只有 MAJOR.MINOR.PATCH 的 SemVer。
-@Mod(modid = "my_mod", name = "ExampleMod", version = "0.0.0")
-public enum ExampleMod {
+//
+// useMetadata = true 让 Forge 以 mcmod.info 里的信息为准。它的格式在“Mod 的元数据”一节
+// 会有详细说明。
+@Mod(modid = "my_mod", name = "My First Mod", version = "0.0.0", useMetadata = true)
+public enum MyMod {
     INSTANCE;
 
-    // Mod主类实例的“工厂”。
-    // 别的Mod开发教程肯定使用的是@Mod.Instance
+    // Mod 主类实例的“工厂”。
+    // 别的 Mod 开发教程肯定使用的是@Mod.Instance
     // 这里之所以这么写，是因为主类是 enum，换言之父类是 java.lang.Enum
-    // 因此，FML 直接 Class.newInstance() 的话会炸掉，java.lang.Enum 没有零参构造器
+    // 因此，FML 直接 Class.newInstance() 的话一定会报错，java.lang.Enum 没有零参构造器
     @Mod.InstanceFactory
-    public static ExampleMod getInstance() {
+    public static MyMod getInstance() {
         return INSTANCE;
     }
 
@@ -98,7 +101,7 @@ public enum ExampleMod {
     // 剩下两个事件只有在相当少见的情况下才会用到，大可暂时无视。
     @Mod.EventHandler
     public void preLoad(FMLPreInitializationEvent event) {
-        System.out.println("Hello, MinecraftForge");
+        System.out.println("Hello, Forge");
     }
 }
 ```
