@@ -13,7 +13,7 @@ public enum MyNetworkManager {
     //当然也可以用别的，保证唯一即可。
     private final FMLEventChannel channel = NetworkRegistry.INSTANCE.newEventDrivenChannel(CHANNEL_NAME);
 
-    private static final String CHANNEL_NAME = "example_mod";
+    private static final String CHANNEL_NAME = "my_mod";
 
     private MyNetworkManager() {
         //注册listener

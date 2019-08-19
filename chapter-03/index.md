@@ -74,7 +74,7 @@ MinecraftForge.EVENT_BUS.register(new EventListener());
 ```java
 // 这个注解的意思是“将这个类注册到事件总线中去，该事件监听器属于 my_mod 这个 Mod”
 // 它相当于 Forge 帮你执行了 MinecraftForge.EVENT_BUS.register(MyFirstEventListener.class)
-@Mod.EventBusSubscriber(modid = "example_mod")
+@Mod.EventBusSubscriber(modid = "my_mod")
 public final class MyFirstEventListener {
     @SubscribeEvent
     public static void onEventFired(ACertainEvent event) {
