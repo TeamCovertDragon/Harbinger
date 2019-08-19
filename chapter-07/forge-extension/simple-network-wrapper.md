@@ -12,7 +12,7 @@ public enum MySimpleNetworkHandler {
     INSTANCE;
 
     // 首先我们拿到一个 SimpleNetworkWrapper 的实例，然后对它进行封装
-    private final SimpleNetworkWrapper channel = NetworkRegistry.INSTANCE.newSimpleChannel("example_mod");
+    private final SimpleNetworkWrapper channel = NetworkRegistry.INSTANCE.newSimpleChannel("my_mod");
 
     // 向某个维度发包（服务器到客户端）
     public void sendMessageToDim(IMessage msg, int dim) {

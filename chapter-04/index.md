@@ -75,14 +75,14 @@ public static Item yourItem = new Item()
  4. 在 `lang` 文件夹下新建 `en_us.lang`：
 
     ```
-    item.example_mod.example_item.name=Example Item
+    item.my_mod.example_item.name=Example Item
     ```
 
  5. 等等，如果没理解错，这是英文（美国）的 Locale 啊？  
     OK。然后还是 `lang` 文件夹，新建 `zh_cn.lang`：  
 
     ```
-    item.example_mod.example_item.name=示例物品
+    item.my_mod.example_item.name=示例物品
     ```
 
 ## 紫黑块？

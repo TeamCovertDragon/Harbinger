@@ -9,7 +9,7 @@
 ````java
 // 构造器中第一个参数是流体的唯一识别 ID，第二个参数是材质位置。
 // 同时有一个三参数构造器可用，此时第二个参数是静止时的材质，第三个是流动时的材质。
-public static final Fluid myFluid = new Fluid("example_fluid", new ResourceLocation("example_mod:example_fluid")).setGaseous(true).setDensity(Integer.MAX_VALUE);
+public static final Fluid myFluid = new Fluid("example_fluid", new ResourceLocation("my_mod:example_fluid")).setGaseous(true).setDensity(Integer.MAX_VALUE);
 
 // 此方法会返回一个 boolean。
 // 返回 true 代表注册成功。

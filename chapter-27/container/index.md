@@ -18,7 +18,7 @@ FluidRegistry.addBucketForFluid(myFluid);
 但万能桶这个功能默认禁用。需要至少有一个 Mod 在 `FMLPreInitializationEvent` 之前显式要求启用此功能。通常可选择在Mod主类的构造器，或静态初始化块中，显式开启：
 
 ```java
-@Mod(modid = "example_mod", name = "Example Mod")
+@Mod(modid = "my_mod", name = "Example Mod")
 public class ExampleMod {
     public ExampleMod() {
         FluidRegistry.enableUniversalBucket();

@@ -11,12 +11,12 @@ Forge 提供了一个已经实现好的流体模型，可以拿来就用。有�
 ModelLoader.setCustomStateMapper(myFluid.getBlock(), new StateMapperBase() {
     @Override
     protected ModelResourceLocation getModelResourceLocation(@Nonnull IBlockState state) {
-        return new ModelResourceLocation(new ResourceLocation("example_mod", "fluid"), "my_fluid");
+        return new ModelResourceLocation(new ResourceLocation("my_mod", "fluid"), "my_fluid");
     }
 });
 ```
 
-注意到 `setCustomStateMapper` 将目标方块指向了一个特殊的 `StateMapper`，它进而无条件将模型指向 `assets/example_mod/blockstates/fluid.json` 中定义的 `my_fluid` 这个 variant。下面是 `fluid.json` 中的内容：
+注意到 `setCustomStateMapper` 将目标方块指向了一个特殊的 `StateMapper`，它进而无条件将模型指向 `assets/my_mod/blockstates/fluid.json` 中定义的 `my_fluid` 这个 variant。下面是 `fluid.json` 中的内容：
 
 ```json
 {

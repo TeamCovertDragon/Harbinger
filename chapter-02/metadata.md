@@ -6,13 +6,11 @@ Forge 允许你给你的 Mod 提供一个元数据描述文件，用于 Forge �
 ```json
 [
     {
-        "modid": "example_mod",
-        "name": "Example Mod",
+        "modid": "my_mod",
+        "name": "My First Mod",
         "description": "Just a demo mod",
         "version": "${version}",
-        "mcversion": "${mcversion}",
         "url": "http://example.net",
-        "updateUrl": "",
         "authorList": ["Some random guy"],
         "credits": "Forge guys",
         "logoFile": "logo.png",
@@ -25,8 +23,8 @@ Forge 允许你给你的 Mod 提供一个元数据描述文件，用于 Forge �
 ```
 
 `logoFile` 可以用来放你的 Mod 的 banner 或 logo。效果奇佳。注意不要太大，不然放不下。查找 `logoFile` 时的 `/` 是 jar 内部的根目录，对于源码来说，那就是 `src/main/resources/` 目录。和 `mcmod.info` 放一块就可以了。  
-此外，`updateUrl` 字段已 deprecated，没有任何效果。可以直接删除。  
-`useDependencyInformation` 的作用会在第 28 章讲到。
+
+`useDependencyInformation`、`requiredMods`、`dependencies` 的作用会在第 28 章讲到。
 
 # 数组？
 你应该注意到了这个 JSON 的最外层是个数组。这意味着，如果你的一个 jar 里有两个 `@Mod` 定义的 Mod，你可以利用这个数组把它们的元数据塞一起。

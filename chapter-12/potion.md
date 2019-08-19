@@ -17,13 +17,13 @@ public class MyNewPotion extends Potion {
 ```java
 @SubscribeEvent
 public static void onPotionRegistration(RegistryEvent.Register<Potion> event) {
-    event.getRegistry().registerAll(new MyNewPotion().setRegistryName("example_mod", "my_potion"));
+    event.getRegistry().registerAll(new MyNewPotion().setRegistryName("my_mod", "my_potion"));
 }
 ```
 
 ## 给玩家加上
 
-只是测试有没有注册成功的话，可以使用命令 `/effect <玩家名> example_mod:my_potion 1 60` 来获得等级 1，持续 60 秒的你的效果。  
+只是测试有没有注册成功的话，可以使用命令 `/effect <玩家名> my_mod:my_potion 1 60` 来获得等级 1，持续 60 秒的你的效果。  
 如果需要加入到相关的逻辑的话，你需要 `EntityLivingBase` 下的 `addPotionEffect`（`func_70690_d`）：
 
 ```java
