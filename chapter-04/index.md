@@ -8,18 +8,20 @@
 @Mod.EventBusSubscriber(modid = "my_mod")
 public final class ItemInitializer {
 
+    public static Item firstItem;
+
     // 和正常的事件一样，你不需要手动调用此方法！Forge 会自动调用它的。
     @SubscribeEvent
     public static void registerItem(RegistryEvent.Register<Item> event) {
         // 注意 setRegistryName 调用。
         // 每一个物品都对应唯一一个注册名，用于和其他物品区分开来。这个注册名不能含有大写字母。
         // 此方法返回被注册的 Item 对象。
-        event.getRegistry().register(new Item().setRegistryName("my_mod:example_item"));
+        event.getRegistry().register((firstItem = new Item().setRegistryName("my_mod:first_item")));
     }
 }
 ```
 
-注意，每一个透过此法注册的物品的实例必须都有调用过 `setRegistryName`，否则会抛异常并导致游戏退出。
+注意，所有 `Item` 在注册时必须都有调用过 `setRegistryName`，否则会抛异常并导致游戏退出。
 
 但是……创造物品栏里没有你的新物品。当然你可以用 `/give <玩家名> <registry name>` 获得你的新物品，但你不觉得显示在创造模式物品栏里更方便么。
 
@@ -34,10 +36,20 @@ public static final CreativeTabs EXAMPLE_CREATIVE_TAB = new CreativeTabs("exampl
         return new ItemStack(Items.DIAMOND);
     }
 };
+```
 
-// 然后这样我们就能让它显示在我们自己的创造标签页中。
-// 这个方法返回 Item。
-public static Item yourItem = new Item().setCreativeTab(EXAMPLE_CREATIVE_TAB);
+然后我们需要对我们的事件订阅器稍加修改，以让我们的物品显示在这个全新的标签页中：
+
+```java
+@SubscribeEvent
+public static void registerItem(RegistryEvent.Register<Item> event) {
+    // 注意 setRegistryName 调用。
+    // 每一个物品都对应唯一一个注册名，用于和其他物品区分开来。这个注册名不能含有大写字母。
+    // 此方法返回被注册的 Item 对象。
+    event.getRegistry().register((firstItem = new Item()
+        .setCreativeTab(EXAMPLE_CREATIVE_TAB)
+        .setRegistryName("my_mod:first_item")));
+}
 ```
 
 ## 这物品名字不对……
