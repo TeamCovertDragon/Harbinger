@@ -2357,12 +2357,12 @@
         
         
     
-        <li class="chapter " data-level="4.1" data-path="../../chapter-31/index.md">
+        <li class="chapter " data-level="4.1" data-path="../../chapter-31/">
             
-                <span>
+                <a href="../../chapter-31/">
             
                     
-                    31. 附录 I：？？？
+                    31. 附录 I：相关开发资源
             
                 </a>
             
@@ -2632,7 +2632,7 @@ ModelLoader.setCustomModelResourceLocation(myItem, <span class="hljs-number">0</
     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">MyEpicTool</span><span class="hljs-params">()</span> </span>{
         <span class="hljs-keyword">super</span>();
         <span class="hljs-comment">// &#x5FC5;&#x8981;&#x7684;&#x521D;&#x59CB;&#x5316;&#xFF0C;&#x8BF7;&#x6309;&#x9700;&#x6DFB;&#x52A0;</span>
-        <span class="hljs-keyword">this</span>.addPropertyOverride(<span class="hljs-keyword">new</span> ResourceLocation(<span class="hljs-string">&quot;example_mod&quot;</span>, <span class="hljs-string">&quot;test_damage&quot;</span>), <span class="hljs-keyword">new</span> IItemPropertyGetter() {
+        <span class="hljs-keyword">this</span>.addPropertyOverride(<span class="hljs-keyword">new</span> ResourceLocation(<span class="hljs-string">&quot;my_mod&quot;</span>, <span class="hljs-string">&quot;test_damage&quot;</span>), <span class="hljs-keyword">new</span> IItemPropertyGetter() {
             <span class="hljs-meta">@Override</span>
             <span class="hljs-meta">@SideOnly</span>(Side.CLIENT)
             <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">float</span> <span class="hljs-title">apply</span><span class="hljs-params">(ItemStack stack, @Nullable World world, @Nullable EntityLivingBase entity)</span> </span>{
@@ -2648,11 +2648,11 @@ ModelLoader.setCustomModelResourceLocation(myItem, <span class="hljs-number">0</
     <span class="hljs-string">&quot;...&quot;</span>: <span class="hljs-string">&quot;...&quot;</span>,
     <span class="hljs-string">&quot;overrides&quot;</span>: [
         {
-            <span class="hljs-string">&quot;predicate&quot;</span>: { <span class="hljs-string">&quot;example_mod:test_damage&quot;</span>: <span class="hljs-number">0.1</span> },
+            <span class="hljs-string">&quot;predicate&quot;</span>: { <span class="hljs-string">&quot;my_mod:test_damage&quot;</span>: <span class="hljs-number">0.1</span> },
             <span class="hljs-string">&quot;model&quot;</span>: <span class="hljs-string">&quot;...&quot;</span>
         },
         {
-            <span class="hljs-string">&quot;predicate&quot;</span>: { <span class="hljs-string">&quot;example_mod:test_damage&quot;</span>: <span class="hljs-number">0.2</span> },
+            <span class="hljs-string">&quot;predicate&quot;</span>: { <span class="hljs-string">&quot;my_mod:test_damage&quot;</span>: <span class="hljs-number">0.2</span> },
             <span class="hljs-string">&quot;model&quot;</span>: <span class="hljs-string">&quot;...&quot;</span>
         }
     ]
@@ -2725,7 +2725,7 @@ ModelLoader.setCustomModelResourceLocation(myItem, <span class="hljs-number">0</
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"11.1.1 自定义物品模型映射","level":"3.11.1.1","depth":3,"next":{"title":"11.1.2 染色","level":"3.11.1.2","depth":3,"path":"chapter-11/baked/tint.md","ref":"chapter-11/baked/tint.md","articles":[]},"previous":{"title":"11.1 方块及物品模型","level":"3.11.1","depth":2,"path":"chapter-11/baked/index.md","ref":"chapter-11/baked/index.md","articles":[{"title":"11.1.1 自定义物品模型映射","level":"3.11.1.1","depth":3,"path":"chapter-11/baked/custom-mesh.md","ref":"chapter-11/baked/custom-mesh.md","articles":[]},{"title":"11.1.2 染色","level":"3.11.1.2","depth":3,"path":"chapter-11/baked/tint.md","ref":"chapter-11/baked/tint.md","articles":[]},{"title":"11.1.3 方块状态映射","level":"3.11.1.3","depth":3,"path":"chapter-11/baked/block-state-json.md","ref":"chapter-11/baked/block-state-json.md","articles":[]},{"title":"11.1.4 IStateMapper","level":"3.11.1.4","depth":3,"path":"chapter-11/baked/state-mapper.md","ref":"chapter-11/baked/state-mapper.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["katex","splitter","expandable-chapters","anchor-navigation-ex","heimu"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"splitter":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"flow":{"line-color":"red"},"katex":{},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"heimu":{"keyword":"black","title":""},"anchor-navigation-ex":{"associatedWithSummary":true,"float":{"floatIcon":"fa fa-navicon","level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showGoTop":true,"showLevel":true},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"expandable-chapters":{}},"theme":"default","author":"https://github.com/TeamCovertDragon/Harbinger/graphs/contributors","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Harbinger","links":{"sidebar":{"TeamCovertDragon":"https://covertdragon.team/"}},"gitbook":"*","description":"Just Another FMLTutor For Future"},"file":{"path":"chapter-11/baked/custom-mesh.md","mtime":"2019-08-21T04:21:33.239Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-08-21T04:21:50.491Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"11.1.1 自定义物品模型映射","level":"3.11.1.1","depth":3,"next":{"title":"11.1.2 染色","level":"3.11.1.2","depth":3,"path":"chapter-11/baked/tint.md","ref":"chapter-11/baked/tint.md","articles":[]},"previous":{"title":"11.1 方块及物品模型","level":"3.11.1","depth":2,"path":"chapter-11/baked/index.md","ref":"chapter-11/baked/index.md","articles":[{"title":"11.1.1 自定义物品模型映射","level":"3.11.1.1","depth":3,"path":"chapter-11/baked/custom-mesh.md","ref":"chapter-11/baked/custom-mesh.md","articles":[]},{"title":"11.1.2 染色","level":"3.11.1.2","depth":3,"path":"chapter-11/baked/tint.md","ref":"chapter-11/baked/tint.md","articles":[]},{"title":"11.1.3 方块状态映射","level":"3.11.1.3","depth":3,"path":"chapter-11/baked/block-state-json.md","ref":"chapter-11/baked/block-state-json.md","articles":[]},{"title":"11.1.4 IStateMapper","level":"3.11.1.4","depth":3,"path":"chapter-11/baked/state-mapper.md","ref":"chapter-11/baked/state-mapper.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["katex","splitter","expandable-chapters","anchor-navigation-ex","heimu"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"splitter":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"flow":{"line-color":"red"},"katex":{},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"heimu":{"keyword":"black","title":""},"anchor-navigation-ex":{"associatedWithSummary":true,"float":{"floatIcon":"fa fa-navicon","level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showGoTop":true,"showLevel":true},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"expandable-chapters":{}},"theme":"default","author":"https://github.com/TeamCovertDragon/Harbinger/graphs/contributors","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Harbinger","links":{"sidebar":{"TeamCovertDragon":"https://covertdragon.team/"}},"gitbook":"*","description":"Just Another FMLTutor For Future"},"file":{"path":"chapter-11/baked/custom-mesh.md","mtime":"2019-08-21T04:22:36.307Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-08-21T04:22:41.622Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>
