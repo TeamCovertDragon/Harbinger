@@ -22,7 +22,7 @@ public class MyEntityRenderer extends Render<MyEntity> {
         return MY_ENTITY_TEXTURE;
     }
 
-    private static final ResourceLocation MY_ENTITY_TEXTURE = new ResourceLocation("example_mod", "textures/entity/first_entity.png");
+    private static final ResourceLocation MY_ENTITY_TEXTURE = new ResourceLocation("my_mod", "textures/entity/first_entity.png");
 }
 ```
 

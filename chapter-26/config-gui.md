@@ -36,7 +36,7 @@ public class MyModConfigGuiFactory implements IModGuiFactory {
 然后你需要 `MyModConfigGuiFactory` 的 caonical name，并把它填入 `@Mod` 中：
 
 ```java
-@Mod(modid = "example_mod", name = "ExampleMod", version = "0.0.0",
+@Mod(modid = "my_mod", name = "ExampleMod", version = "0.0.0",
     guiFactory = "my_mod.MyModConfigGuiFactory")
 ```
 

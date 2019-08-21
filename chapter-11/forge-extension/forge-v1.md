@@ -211,10 +211,10 @@ Forge BlockState V1 格式还允许你对模型（自然也包括子模型）做
 没错，四种可用的变换模板里的 `forge:default-item` 实际上是可以给物品用的。具体来说，是这样操作的：
 
 ```java
-ModelLoader.setCustomModelResourceLocation(myItem, 0, new ModelResourceLocation(new ResourceLocation("example_mod", "example_item_model"), "inventory"));
+ModelLoader.setCustomModelResourceLocation(myItem, 0, new ModelResourceLocation(new ResourceLocation("my_mod", "example_item_model"), "inventory"));
 ```
 
-实际上这个 `ModelResourceLocation` 也可以代表一个 BlockState JSON 的位置。比如上面这个例子中的 `ModelResourceLocation` 也可以指向 `assets/example_mod/blockstates/example_item_model.json` 中定义的 `variants.inventory`。事实上，Minecraft/Forge 也的确是会搜索这里的。  
+实际上这个 `ModelResourceLocation` 也可以代表一个 BlockState JSON 的位置。比如上面这个例子中的 `ModelResourceLocation` 也可以指向 `assets/my_mod/blockstates/example_item_model.json` 中定义的 `variants.inventory`。事实上，Minecraft/Forge 也的确是会搜索这里的。  
 但这里有一个坑：`variants` 同时也包含了所有方块状态中的属性列表，直接声明成这样会有歧义：
 
 ```json

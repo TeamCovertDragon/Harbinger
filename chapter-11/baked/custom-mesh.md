@@ -41,7 +41,7 @@ public class MyEpicTool extends Item {
     public MyEpicTool() {
         super();
         // 必要的初始化，请按需添加
-        this.addPropertyOverride(new ResourceLocation("example_mod", "test_damage"), new IItemPropertyGetter() {
+        this.addPropertyOverride(new ResourceLocation("my_mod", "test_damage"), new IItemPropertyGetter() {
             @Override
             @SideOnly(Side.CLIENT)
             public float apply(ItemStack stack, @Nullable World world, @Nullable EntityLivingBase entity) {
@@ -60,11 +60,11 @@ public class MyEpicTool extends Item {
     "...": "...",
     "overrides": [
         {
-            "predicate": { "example_mod:test_damage": 0.1 },
+            "predicate": { "my_mod:test_damage": 0.1 },
             "model": "..."
         },
         {
-            "predicate": { "example_mod:test_damage": 0.2 },
+            "predicate": { "my_mod:test_damage": 0.2 },
             "model": "..."
         }
     ]
