@@ -19,7 +19,7 @@ public final class MyModConfig {
     @Config.LangKey("config.my_mod.general.foo") // 供配置 GUI 界面使用的本地化键，参阅“可视化配置文件编辑界面”一节
     @Config.Name("Foo") // 默认配置选项名是字段名，如果需要别的名字就用这个。
     @Config.RangeInt(min = 1, max = 10000) // 整数值支持限定范围。
-    @Config.RequireWorldRestart // meta 标记，代表需要重进存档才会生效
+    @Config.RequiresWorldRestart // meta 标记，代表需要重进存档才会生效
     @Config.RequiresMcRestart // meta 标记，代表需要重启游戏才会生效
     public static int foo = 0;
 
@@ -27,7 +27,7 @@ public final class MyModConfig {
     @Config.LangKey("config.my_mod.general.bar")
     @Config.Name("Bar")
     @Config.RangeDouble(min = 1.0, max = 10000.0) // 和 RangeInt 一个意思，不过是给 double 的。
-    @Config.RequireWorldRestart
+    @Config.RequiresWorldRestart
     @Config.RequiresMcRestart
     public static double bar = 0;
 
