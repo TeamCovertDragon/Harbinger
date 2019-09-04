@@ -15,6 +15,13 @@ public class CrazyRenderer extends TileEntitySpecialRenderer<MyCrazyTileEntity> 
         // 3. destroyStage 大约是“方块被破坏的进度”的意思 // TODO 查清楚
         // 4. alpha // TODO 可能是“透明度”的意思，待查
     }
+    
+    @Override
+    public boolean isGlobalRenderer(MyCrazyTileEntity tile) { // 实际上是泛型参数
+        // 这个方法用于决定是否渲染类似结构方块一样尺寸巨大，甚至跨区块的内容。
+        // 默认为 false，若返回 false，那么这个 TESR 只有在处于玩家视锥（Frustum）覆盖区块内时才会渲染。
+        return true;
+    }
 }
 ```
 
