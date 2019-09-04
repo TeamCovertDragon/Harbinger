@@ -18,8 +18,8 @@ public class CrazyRenderer extends TileEntitySpecialRenderer<MyCrazyTileEntity> 
     
     @Override
     public boolean isGlobalRenderer(MyCrazyTileEntity tile) { // 实际上是泛型参数
-        // 这个方法用于决定是否渲染类似信标光柱一样尺寸巨大的内容。
-        // 默认，若返回 false，那么这个 TESR 只会渲染半径 3 方块以内的内容
+        // 这个方法用于决定是否渲染类似结构方块一样尺寸巨大，甚至跨区块的内容。
+        // 默认，若返回 false，那么这个 TESR 只会渲染玩家视锥（Frustum）覆盖范围内的内容。
         return true;
     }
 }
