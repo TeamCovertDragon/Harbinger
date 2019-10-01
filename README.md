@@ -1,4 +1,4 @@
-# Harbinger woxianzaikuaiyaofengle*2
+# Harbinger woxianzaikuaiyaofengle*3
 
 Harbinger 是一套全面的，基于 Forge 的，中文 Minecraft Mod 开发指南。身为读者的你，需要记住以下事项：
 
