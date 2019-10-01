@@ -19,7 +19,7 @@
 //     同时允许指定流体的“颜色”和遮罩纹理，颜色以 ARGB 的格式出现。
 //   - String name, ResourceLocation still, ResourceLocation flow, ResourceLocation overlay, java.awt.Color color
 //     同上，但颜色以 java.awt.Color 的形式出现。
-public static final Fluid myFluid = new Fluid("example_fluid", new ResourceLocation("example_mod:example_fluid")).setGaseous(true).setDensity(Integer.MAX_VALUE);
+public static final Fluid myFluid = new Fluid("example_fluid", new ResourceLocation("my_mod:example_fluid")).setGaseous(true).setDensity(Integer.MAX_VALUE);
 
 // 此方法会返回一个 boolean。
 // 返回 true 代表注册成功。

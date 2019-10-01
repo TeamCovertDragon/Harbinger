@@ -17,12 +17,12 @@ Minecraft 本身使用的 JSON 格式的模型定义在[中文 Minecraft Wiki][l
 {
     "parent": "item/generated",
     "textures": {
-        "layer0": "example_mod:item/example_item_texture"
+        "layer0": "my_mod:item/example_item_texture"
     }
 }
 ```
 
-可以说这是最简单的物品模型了——你只需要指定纹理（texture）的位置就可以了。`example_mod:example_item_texture` 意味着你的纹理应当位于 `assets/[modid]/textures/item/example_item_texture.png`。  
+可以说这是最简单的物品模型了——你只需要指定纹理（texture）的位置就可以了。`my_mod:example_item_texture` 意味着你的纹理应当位于 `assets/[modid]/textures/item/example_item_texture.png`。  
 文件名中的 `.png` 扩展名暗示了纹理必须是 PNG 格式的。纹理一般都是边长为 2 的整数次方（单位像素）的正方形，其中又以原版使用的 边长 16 像素的正方形纹理最为常见。<!-- TODO 一定要使用 2 的整数次方的原因？ -->
 完成这些后，订阅 `ModelRegistryEvent`：
 
@@ -30,7 +30,7 @@ Minecraft 本身使用的 JSON 格式的模型定义在[中文 Minecraft Wiki][l
 @SubscribeEvent
 public static void onModelRegistration(ModelRegistryEvent event) {
     // 因为一些奇怪的原因，原版不会主动去搜索 Mod 的物品的模型的位置。我们需要手动指定一个。
-    ModelLoader.setCustomModelResourceLocation(myItem, 0, new ModelResourceLocation(new ResourceLocation("example_mod", "example_item_model"), "inventory"));
+    ModelLoader.setCustomModelResourceLocation(myItem, 0, new ModelResourceLocation(new ResourceLocation("my_mod", "example_item_model"), "inventory"));
 }
 ```
 
@@ -45,24 +45,24 @@ public static void onModelRegistration(ModelRegistryEvent event) {
 {
     "variants": {
         "normal": {
-            "model": "example_mod:example_block_model"
+            "model": "my_mod:example_block_model"
         }
     }
 }
 ```
 
-因为这个方块没什么特别的所以它只有一种状态：`normal`。对于那些有各种奇怪状态的方块，这里会稍微麻烦一些，但这是后话。和物品的模型类似，方块模型统一放在 `assets/[modid]/models/block` 目录下。也就是说，上面我们给出的 `example_mod:example_block_model` 代表 Minecraft 会去寻找 `assets/example_mod/models/block/example_block_model.json` 这个文件。切换到目标目录下新建这个文件：
+因为这个方块没什么特别的所以它只有一种状态：`normal`。对于那些有各种奇怪状态的方块，这里会稍微麻烦一些，但这是后话。和物品的模型类似，方块模型统一放在 `assets/[modid]/models/block` 目录下。也就是说，上面我们给出的 `my_mod:example_block_model` 代表 Minecraft 会去寻找 `assets/my_mod/models/block/example_block_model.json` 这个文件。切换到目标目录下新建这个文件：
 
 ```json
 {
     "parent": "block/cube",
     "textures": {
-        "up": "example_mod:blocks/example_block_texture_up",
-        "down": "example_mod:blocks/example_block_texture_down",
-        "west": "example_mod:blocks/example_block_texture_west",
-        "north": "example_mod:blocks/example_block_texture_north",
-        "east": "example_mod:blocks/example_block_texture_east",
-        "south": "example_mod:blocks/example_block_texture_south"
+        "up": "my_mod:blocks/example_block_texture_up",
+        "down": "my_mod:blocks/example_block_texture_down",
+        "west": "my_mod:blocks/example_block_texture_west",
+        "north": "my_mod:blocks/example_block_texture_north",
+        "east": "my_mod:blocks/example_block_texture_east",
+        "south": "my_mod:blocks/example_block_texture_south"
     }
 }
 ```
@@ -83,7 +83,7 @@ Item.getItemFromBlock(myBlock);
 
 ```json
 {
-    "parent": "example_mod:block/example_block_model"
+    "parent": "my_mod:block/example_block_model"
 }
 ```
 
