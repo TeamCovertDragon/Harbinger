@@ -30,7 +30,7 @@ public final class MyWorldType extends WorldType {
 ```java
 @Mod.EventHandler
 public void preInit(FMLPreInitializationEvent event) {
-    new MyWorldType().enableInfoNotice();
+    new MyWorldType();
     // 没必要保留它的实例。
     // 你随时可以通过 WorldType.byName("my_world_type") 拿到你在这里创建的实例。
 }
@@ -96,7 +96,7 @@ public final class MyWorldType extends WorldType {
     // 随机决定出生点时，出生点的最低高度。注意这里有对应的 World 实例。
     @Override
     public int getMinimumSpawnHeight(World world) {
-        return 100F;
+        return 100;
     }
 
     // 随机决定新玩家出生点时的“干扰因数”。
