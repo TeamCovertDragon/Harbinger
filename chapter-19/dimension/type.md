@@ -134,6 +134,7 @@ public final class MyWorldType extends WorldType {
     }
 
     @Override
+    @SideOnly(Side.CLIENT) // 以防万一。这个方法的两个参数比较棘手……
     public void onCustomizeButton(Minecraft mc, GuiCreateWorld parentGui) {
         // 然后这个方法就会被调用了。
         // 在这里打开你的定制界面即可。
