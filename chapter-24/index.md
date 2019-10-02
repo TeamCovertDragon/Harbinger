@@ -80,5 +80,5 @@ public void onServerStarting(FMLServerStartingEvent event) {
 
 ````java
 // 客户端专有的命令可以考虑走这个
-ClientCommandRegistry.registerCommand(new MyCommand());
+ClientCommandHandler.instance.registerCommand(new MyCommand());
 ````
