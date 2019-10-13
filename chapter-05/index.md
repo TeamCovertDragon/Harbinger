@@ -80,13 +80,13 @@ Minecraft 所使用的模型及渲染系统会[在第十一章有详细说明](.
 {
     "parent": "block/cube",
     "textures": {
-        "particle": "my_mod:blocks/example_block_particle.png",
-        "down": "my_mod:blocks/example_block_down.png",
-        "up": "my_mod:blocks/example_block_up.png",
-        "north": "my_mod:blocks/example_block_north.png",
-        "south": "my_mod:blocks/example_block_south.png",
-        "west": "my_mod:blocks/example_block_west.png",
-        "east": "my_mod:blocks/example_block_east.png"
+        "particle": "my_mod:blocks/example_block_particle",
+        "down": "my_mod:blocks/example_block_down",
+        "up": "my_mod:blocks/example_block_up",
+        "north": "my_mod:blocks/example_block_north",
+        "south": "my_mod:blocks/example_block_south",
+        "west": "my_mod:blocks/example_block_west",
+        "east": "my_mod:blocks/example_block_east"
     }
 }
 ```
