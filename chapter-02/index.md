@@ -24,7 +24,7 @@
     * Eclipse：在 `setupDecompWorkspace` 后接上 `eclipse`
     * IntelliJ IDEA：恭喜你，在这里你不需要加任何东西。
     * 其他 IDE：不好意思你需要找对应的 Gradle 插件来解决问题，请查阅相关资料获得更多帮助。在这里的话就什么也不用加好了。
-  6. 回车运行。若看到 `BUILD SUCCESSFUL` 字样则表示大功告成，否则重复步骤 3. 和 4.，直到看到那个 `BUILD SCCESSFUL` 为止。
+  6. 回车运行。若看到 `BUILD SUCCESSFUL` 字样则表示大功告成，否则重复步骤 3. 和 4.，直到看到那个 `BUILD SUCCESSFUL` 为止。
   7. 在你使用的 IDE 中以 Gradle 项目的形式导入工程目录。
 
 [ref-forge-home]: https://files.minecraftforge.net/
