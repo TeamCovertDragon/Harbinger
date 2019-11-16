@@ -24,7 +24,7 @@ public class ExampleMod {
         FluidRegistry.enableUniversalBucket();
     }
 }
-````
+```
 
 成功注册的流体桶可在原版创造模式物品栏的“杂项”底下找到这些桶。  
 此外，`addBucketForFluid` 这个方法会同时尝试注册传入的流体，但 `addBucketForFluid` 这个方法没有返回值。请自行取舍。
