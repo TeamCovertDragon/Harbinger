@@ -34,4 +34,4 @@ jobs:
           cp $GITHUB_WORKSPACE/_book/* $GITHUB_SHA -vr
           git add .
           git commit -m "Deploy preview for $GITHUB_SHA"
-          git push origin gh-pages
+          git push "https://${GITHUB_ACTOR}:${{ secrets.GITHUB_TOKEN }}@github.com/${REPOSITORY}.git" HEAD:gh-pages
