@@ -18,5 +18,18 @@ jobs:
           npm install -g gitbook-cli
           npm install gitbook
       - name: Generate Pages
-        run: "gitbook install && gitbook build"
-#TODO: Deploy to gh-pages (help-wanted)
+        run: "gitbook install && gitbook build && echo $(pwd)"
+      - name: Deploy gh-pages
+        run: |
+          git config --global user.email "action@github.com"
+          git config --global user.name "GitHub Action"
+          cd ..
+          mkdir gh-pages
+          cd gh-pages
+          git init
+          git remote add origin https://github.com/TeamCovertDragon/Harbinger.git
+          git pull
+          git checkout gh-pages
+          mkdir $GITHUB_SHA
+#TODO...
+
