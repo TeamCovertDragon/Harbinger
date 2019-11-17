@@ -18,7 +18,7 @@ jobs:
           npm install -g gitbook-cli
           npm install gitbook
       - name: Generate Pages
-        run: "gitbook install && gitbook build && echo $(pwd)"
+        run: "gitbook install && gitbook build"
       - name: Deploy gh-pages
         run: |
           git config --global user.email "action@github.com"
@@ -32,6 +32,7 @@ jobs:
           git checkout gh-pages
           mkdir $GITHUB_SHA
           cp $GITHUB_WORKSPACE/_book/* $GITHUB_SHA -vr
+          git add .
           git commit -m "Deploy preview for $GITHUB_SHA"
 #TODO push
 
