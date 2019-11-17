@@ -6,7 +6,7 @@ on:
 
 jobs:
   build:
-    name: Generate Preview Pages
+    name: Generate preview pages
     runs-on: [ubuntu-latest]
     steps:
       - uses: actions/checkout@master
@@ -17,7 +17,7 @@ jobs:
         run: |
           npm install -g gitbook-cli
           npm install gitbook
-      - name: Generate Pages
+      - name: Generate pages
         run: "gitbook install && gitbook build"
       - name: Deploy gh-pages
         run: |
@@ -34,4 +34,7 @@ jobs:
           cp $GITHUB_WORKSPACE/_book/* $GITHUB_SHA -vr
           git add .
           git commit -m "Deploy preview for $GITHUB_SHA"
-          git push "https://${GITHUB_ACTOR}:${{ secrets.GITHUB_TOKEN }}@github.com/${REPOSITORY}.git" HEAD:gh-pages
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
