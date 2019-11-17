@@ -1,0 +1,20 @@
+name: Harbinger PR
+
+on:
+  push: 
+    branches-ignore: "bleeding"
+
+jobs:
+  build:
+    name: build
+    runs-on: [ubuntu-latest]
+    steps:
+      - uses: actions/setup-node@master
+        with:
+          node-version: 10.x
+      - name: "Setup Gitbook"
+        run: |
+          npm install -g gitbook-cli
+          npm install gitbook
+      - name: "Generate Pages"
+        run: "gitbook build"
