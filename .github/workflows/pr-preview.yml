@@ -19,3 +19,4 @@ jobs:
           npm install gitbook
       - name: Generate Pages
         run: "gitbook install && gitbook build"
+#TODO: Deploy to gh-pages (help-wanted)
