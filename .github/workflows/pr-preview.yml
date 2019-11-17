@@ -28,8 +28,10 @@ jobs:
           cd gh-pages
           git init
           git remote add origin https://github.com/TeamCovertDragon/Harbinger.git
-          git pull
+          git pull origin gh-pages
           git checkout gh-pages
           mkdir $GITHUB_SHA
-#TODO...
+          cp $GITHUB_WORKSPACE/_book/* $GITHUB_SHA -vr
+          git commit -m "Deploy preview for $GITHUB_SHA"
+#TODO push
 
