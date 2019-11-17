@@ -1,20 +1,21 @@
 name: Harbinger PR
 
 on:
-  push: 
-    branches-ignore: "bleeding"
+  pull_request:
+    branches: bleeding
 
 jobs:
   build:
-    name: build
+    name: Generate Preview Pages
     runs-on: [ubuntu-latest]
     steps:
+      - uses: actions/checkout@master
       - uses: actions/setup-node@master
         with:
           node-version: 10.x
-      - name: "Setup Gitbook"
+      - name: Setup Gitbook
         run: |
           npm install -g gitbook-cli
           npm install gitbook
-      - name: "Generate Pages"
-        run: "gitbook build"
+      - name: Generate Pages
+        run: "gitbook install && gitbook build"
