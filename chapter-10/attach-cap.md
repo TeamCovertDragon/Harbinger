@@ -18,7 +18,7 @@ public static void addCap(AttachCapabilitiesEvent<Entity> event) {
             @Override
             public <T> T getCapability(Capability<T> cap, EnumFacing facing) {
                 if (cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
-                    return  CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.cast(...);
+                    return CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.cast(...);
                 } else {
                     return null;
                 }

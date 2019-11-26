@@ -8,7 +8,7 @@ Tile 这个单词的本意是“瓷砖”或“瓦砖”。实际上这里它和
 
 TileEntity 是一种和[实体](../chapter-08/index.md)类似，可以存储一个 NBT 标签的特殊对象。
 这意味着，借助 TileEntity，你可以在一个方块中存储超过 4 bits 的数据。  
-TileEntity 也可以像 Entity 一样，通过[实现 `ITickable` 接口](ticking.md)来获得每秒刷新 20 次的能力。  
+TileEntity 可以通过[实现 `ITickable` 接口](ticking.md)来获得每秒刷新 20 次的能力。  
 可以说，绝大部分看上去功能异常强大的方块都是基于 TileEntity 的。
 
 ## 起点：声明该 Block 持有 TileEntity
@@ -110,15 +110,14 @@ public final class MyLavaFurnace extends Block {
 
     @Override
     public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-        if (!world.isRemote) {
-            TileEntity tile = world.getTileEntity(pos);
-            if (tile instanceof MyLavaFurnaceEntity) {
-                ((MyLavaFurnaceEntity)tile).tryAcceptFuel(player.getHeldItem(hand));
-                player.sendStatusMessage(new TextComponentString("Fuel: " + ((MyLavaFurnaceEntity) tile).getFuel()), true);
-                return true;
-            }
+        TileEntity tile = world.getTileEntity(pos);
+        if (tile instanceof MyLavaFurnaceEntity && !world.isRemote) {
+            player.setHeldItem(hand, ((MyLavaFurnaceEntity)tile).tryAcceptFuel(player.getHeldItem(hand)));
+            player.sendStatusMessage(new TextComponentString("Fuel: " + ((MyLavaFurnaceEntity) tile).getFuel()), true);
+            return true;
+        } else {
+            return false;
         }
-        return true;
     }
 }
 ```
@@ -130,17 +129,11 @@ public final class MyLavaFurnaceEntity extends TileEntity {
     private int fuel;
 
     /**
-     * @param fuel the potential fuel as item stack
-     * @return true if it is accepted as fuel and thus consumed
+     * @param fuel 玩家当前手持的物品（见 MyLavaFurnace.onBlockActivated）
+     * @return 尝试消耗燃料后的剩余物品，有可能仍然是未经修改的 fuel 实例
      */
-    public boolean tryAcceptFuel(ItemStack fuel) {
-        IFluidHandler tank = FluidUtil.getFluidHandler(fuel);
-        if (tank != null && tank.drain(new FluidStack(FluidRegistry.LAVA, Fluid.BUCKET_VOLUME), false) != null) {
-            tank.drain(new FluidStack(FluidRegistry.LAVA, Fluid.BUCKET_VOLUME), true);
-            this.fuel += 100;
-            return true;
-        }
-        return false;
+    public ItemStack tryAcceptFuel(ItemStack fuel) {
+        return fuel.getItem() == Items.LAVA_BUCKET ? ItemStack.EMPTY : fuel;
     }
 
     @Override

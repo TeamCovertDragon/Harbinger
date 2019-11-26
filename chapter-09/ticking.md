@@ -39,14 +39,8 @@ public final class MyLavaFurnaceEntity extends TileEntity implements ITickable {
         }
     }
 
-    public boolean tryAcceptFuel(ItemStack fuel) {
-        IFluidHandler tank = FluidUtil.getFluidHandler(fuel);
-        if (tank != null && tank.drain(new FluidStack(FluidRegistry.LAVA, Fluid.BUCKET_VOLUME), false) != null) {
-            tank.drain(new FluidStack(FluidRegistry.LAVA, Fluid.BUCKET_VOLUME), true);
-            this.fuel += 100;
-            return true;
-        }
-        return false;
+    public ItemStack tryAcceptFuel(ItemStack fuel) {
+        return fuel.getItem() == Items.LAVA_BUCKET ? ItemStack.EMPTY : fuel;
     }
 
     @Override
