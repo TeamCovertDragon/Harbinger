@@ -11,8 +11,43 @@
 
 就可以了。
 
+Forge 提供了一个标准的 `IItemHandler` 的实现：`ItemStackHandler`，我们可以直接拿来用。
+那么让我们试着改造一下 `MyLavaFurnaceEntity`……
+
 ```java
 public final class MyLavaFurnaceEntity {
+
+    private int progress;
+    // 2 代表“我们需要两个槽位”——一个放输入，一个放输出。
+    private final ItemStackHandler inventory = new ItemStackHandler(2);
+
+    @Override
+    public void update() {
+        if (!world.isRemote) {
+            // IItemHandler 的下标从 0 开始。
+            if (inventory.getItemInSlot(0).isEmpty()) {
+                for (EntityItem entity : this.world.getEntitiesWithinAABB(EntityItem.class, new AxisAlignedBB(this.pos.up()))) {
+                    final ItemStack result = FurnaceRecipes.instance().getSmeltingResult(entity.getItem());
+                    if (!result.isEmpty()) {
+                        // insertItem 的第一个参数是要放入的物品
+                        // 第二个参数是目标槽位的编号
+                        // 第三个参数指定“该操作是不是仅模拟”（simulate/dry-run）。
+                        // 若第三个参数为 true，则该操作不会真的把物品放入物品栏中。
+                        // 常用于测试目标物品栏。
+                        entity.setItem(inventory.insertItem(entity.getItem(), 0, false));
+                        progress = 0;
+                        break;
+                    }
+                }
+            } else {
+                ++progress;
+                if (progress > 200) {
+                    inventory.insertItem(FurnaceRecipes.instance().getSmeltingResult(inventory.getItemInSlot(0).copy(), 1, false));
+                }
+            }
+        }
+    }
+
     @Override
     public boolean hasCapability(Capability<?> cap, EnumFacing facing) {
         return cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY || super.hasCapability(cap, facing);
@@ -21,28 +56,7 @@ public final class MyLavaFurnaceEntity {
     @Override
     public <T> T getCapability(Capability<T> cap, EnumFacing facing) {
         if (cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
-            return new IItemHandler {
-                @Override
-                public int getSlots() {
-
-                }
-                @Override
-                public ItemStack getStackInSlot(int slot) {
-
-                }
-                @Override
-                public int getSlotLimit(int slot) {
-
-                }
-                @Override
-                public ItemStack insertItem(int slot, ItemStack toInsert, boolean simulate) {
-
-                }
-                @Override
-                public ItemStack extractItem(int slot, int maxSize, boolean simulate) {
-
-                }
-            };
+            return CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.cast(this.inventory);
         } else {
             return super.getCapability(cap, facing);
         }

@@ -47,9 +47,6 @@ public final class MyLavaFurnaceEntity extends TileEntity implements ITickable {
 
     private int progress;
 
-    private ItemStack input = ItemStack.EMPTY;
-    private ItemStack output = ItemStack.EMPTY;
-
     @Override
     public void update() {
         // 所有的逻辑全部在这里发生…… 至于这里会发生什么完全要看
