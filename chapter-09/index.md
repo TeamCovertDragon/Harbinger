@@ -115,9 +115,8 @@ public final class MyLavaFurnace extends Block {
             player.setHeldItem(hand, ((MyLavaFurnaceEntity)tile).tryAcceptFuel(player.getHeldItem(hand)));
             player.sendStatusMessage(new TextComponentString("Fuel: " + ((MyLavaFurnaceEntity) tile).getFuel()), true);
             return true;
-        } else {
-            return false;
         }
+        return false;
     }
 }
 ```
