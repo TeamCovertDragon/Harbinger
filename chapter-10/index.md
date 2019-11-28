@@ -44,7 +44,7 @@ if (tile.hasFeature("Something")) {
 ```
 
 这便是 Capability 系统存在的理由：
-将功能转化为可反复使用的零件，用作某一个更大的“实体”（可以是狭义上的实体、TileEntity 甚至是物品）的基础。
+将功能转化为可反复使用的零件，用作某一个更大的“实体”（可以是狭义上的实体、TileEntity 甚至是物品）的基础，同时避免过强的耦合。
 
 ## `Capability<?>`：Token
 
