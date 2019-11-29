@@ -46,6 +46,7 @@ while (keepGameOn) {
 public final class MyLavaFurnaceEntity extends TileEntity implements ITickable {
 
     private int progress;
+    private int fuel;
 
     @Override
     public void update() {
@@ -74,6 +75,10 @@ public final class MyLavaFurnaceEntity extends TileEntity implements ITickable {
 
     public ItemStack tryAcceptFuel(ItemStack fuel) {
         return fuel.getItem() == Items.LAVA_BUCKET ? ItemStack.EMPTY : fuel;
+    }
+
+    public int getFuel() {
+        return this.fuel;
     }
 
     @Override

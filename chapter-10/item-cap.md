@@ -15,9 +15,10 @@ Forge 提供了一个标准的 `IItemHandler` 的实现：`ItemStackHandler`，�
 那么让我们试着改造一下 `MyLavaFurnaceEntity`……
 
 ```java
-public final class MyLavaFurnaceEntity {
+public final class MyLavaFurnaceEntity extends TileEntity implements ITickable {
 
     private int progress;
+    private int fuel;
     // 2 代表“我们需要两个槽位”——一个放输入，一个放输出。
     private final ItemStackHandler inventory = new ItemStackHandler(2);
 
@@ -40,12 +41,21 @@ public final class MyLavaFurnaceEntity {
                     }
                 }
             } else {
+                --fuel;
                 ++progress;
                 if (progress > 200) {
                     inventory.insertItem(1, FurnaceRecipes.instance().getSmeltingResult(inventory.getStackInSlot(0).copy(), false));
                 }
             }
         }
+    }
+
+    public ItemStack tryAcceptFuel(ItemStack fuel) {
+        return fuel.getItem() == Items.LAVA_BUCKET ? ItemStack.EMPTY : fuel;
+    }
+
+    public int getFuel() {
+        return this.fuel;
     }
 
     @Override
@@ -61,6 +71,24 @@ public final class MyLavaFurnaceEntity {
             return super.getCapability(cap, facing);
         }
     }
+
+    @Override
+    public void readFromNBT(NBTTagCompound tag) {
+        super.readFromNBT(tag);
+        this.progress = tag.getInteger("Progress");
+        this.fuel = tag.getInteger("Fuel");
+        this.inventory.deserializeNBT(tag.getCompoundTag("Inventory"));
+    }
+
+    @Override
+    public NBTTagCompound writeToNBT(NBTTagCompound tag) {
+        tag.setInteger("Progress", this.progress);
+        tag.setInteger("Fuel", this.fuel);
+        tag.setTag("Inventory", this.inventory.serializeNBT());
+        return super.writeToNBT(tag);
+    }
+
+
 }
 ```
 

@@ -30,6 +30,10 @@ public final class MyLavaFurnace extends Block {
         return new MyLavaFurnaceEntity();
     }
 }
+
+public final class MyLavaFurnaceEntity extends TileEntity {
+    // 暂时什么都没有
+}
 ```
 
 ## TileEntity 的注册
@@ -133,6 +137,10 @@ public final class MyLavaFurnaceEntity extends TileEntity {
      */
     public ItemStack tryAcceptFuel(ItemStack fuel) {
         return fuel.getItem() == Items.LAVA_BUCKET ? ItemStack.EMPTY : fuel;
+    }
+
+    public int getFuel() {
+        return this.fuel;
     }
 
     @Override
