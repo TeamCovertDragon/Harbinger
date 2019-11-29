@@ -23,7 +23,7 @@ public static void addCap(AttachCapabilitiesEvent<Entity> event) {
                     return null;
                 }
             }
-        })
+        });
     }
 }
 ```

@@ -42,7 +42,7 @@ TileEntity 虽然需要注册，但它并不走 Forge 的注册表系统，反�
 一个比较常见的做法是在注册方块的时候一并注册 TileEntity。
 
 ```java
-@SubscibreEvent
+@SubscribeEvent
 public static void onBlockRegistration(RegistryEvent.Register<Block> event) {
     event.getRegistry().register(new MyLavaFurnace().setRegistryName("my_mod", "lava_furnace"));
     // 第一个参数是你要注册的 TileEntity 对应的 class 对象。必须 extends TileEntity。

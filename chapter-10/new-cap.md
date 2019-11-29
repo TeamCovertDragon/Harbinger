@@ -24,15 +24,15 @@ public interface PowerContainer {
 ```java
 @Mod.EventHandler
 public void preInit(FMLPreInitializationEvent event) {
-    CapabilityManager.register(PowerContainer.class, new IStorage<PowerContainer>() {
+    CapabilityManager.INSTANCE.register(PowerContainer.class, new Capability.IStorage<PowerContainer>() {
         @Override
         public NBTBase writeNBT(Capability<PowerContainer> cap, PowerContainer instance, EnumFacing side) {
             return new NBTTagString(instance.getPower().toString());
         }
         @Override
-        public void readNBT(Capability<PowerContainer> cap, PowerContainer instance, NBTBase data, EnumFacing side) {
+        public void readNBT(Capability<PowerContainer> cap, PowerContainer instance, EnumFacing side, NBTBase data) {
             if (data instanceof NBTTagString) {
-                instance.setPower(new BigInteger(data.getString()));
+                instance.setPower(new BigInteger(((NBTTagString)data).getString()));
             }
         }
     }, () -> new PowerContainer() {
@@ -45,6 +45,6 @@ public void preInit(FMLPreInitializationEvent event) {
         public BigInteger getPower() {
             return this.power;
         }
-    })
+    });
 }
 ```

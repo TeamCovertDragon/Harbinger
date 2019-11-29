@@ -25,7 +25,7 @@ public final class MyLavaFurnaceEntity {
     public void update() {
         if (!world.isRemote) {
             // IItemHandler 的下标从 0 开始。
-            if (inventory.getItemInSlot(0).isEmpty()) {
+            if (inventory.getStackInSlot(0).isEmpty()) {
                 for (EntityItem entity : this.world.getEntitiesWithinAABB(EntityItem.class, new AxisAlignedBB(this.pos.up()))) {
                     final ItemStack result = FurnaceRecipes.instance().getSmeltingResult(entity.getItem());
                     if (!result.isEmpty()) {
@@ -34,7 +34,7 @@ public final class MyLavaFurnaceEntity {
                         // 第三个参数指定“该操作是不是仅模拟”（simulate/dry-run）。
                         // 若第三个参数为 true，则该操作不会真的把物品放入物品栏中。
                         // 常用于测试目标物品栏。
-                        entity.setItem(inventory.insertItem(entity.getItem(), 0, false));
+                        entity.setItem(inventory.insertItem(0, entity.getItem(), false));
                         progress = 0;
                         break;
                     }
@@ -42,7 +42,7 @@ public final class MyLavaFurnaceEntity {
             } else {
                 ++progress;
                 if (progress > 200) {
-                    inventory.insertItem(FurnaceRecipes.instance().getSmeltingResult(inventory.getItemInSlot(0).copy(), 1, false));
+                    inventory.insertItem(1, FurnaceRecipes.instance().getSmeltingResult(inventory.getStackInSlot(0).copy(), false));
                 }
             }
         }

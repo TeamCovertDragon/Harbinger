@@ -47,7 +47,7 @@ public class MyFluidHandler implements IFluidHandler {
      * 的结果，直接赋值会破坏缓存！
      */
     @Override
-    public IFluidTankProperties[] getTanksProperties() {
+    public IFluidTankProperties[] getTankProperties() {
         return new IFluidTankProperties[0];
     }
 

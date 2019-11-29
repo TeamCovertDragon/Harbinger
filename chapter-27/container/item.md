@@ -10,8 +10,10 @@
 import net.minecraftforge.fluids.capability.templates.FluidHandlerItemStack;
 
 public class MyFluidContainer extends Item {
+    @Override
     public ICapabilityProvider initCapabilities(ItemStack item, NBTTagCompound data) {
-        return new FluidHandlerItemStack(item);
+        // 第二个参数代表容积，单位为毫桶（千分之一桶，mB）
+        return new FluidHandlerItemStack(item, 8000);
     }
 }
 ```

@@ -48,7 +48,7 @@
   * [10.1 实例：TileEntity 的物品栏](chapter-10/item-cap.md)
   * [10.2 追加 Capability](chapter-10/attach-cap.md)
   * [10.3 Capability 数据的持久化](chapter-10/persistence.md)
-  * [10.4 你自己的 Capability](chapetr-10/new-cap.md)
+  * [10.4 你自己的 Capability](chapter-10/new-cap.md)
 * [11. 渲染概论](chapter-11/index.md)
   * [11.1 方块及物品模型](chapter-11/baked/index.md)
     * [11.1.1 自定义物品模型映射](chapter-11/baked/custom-mesh.md)
