@@ -2552,9 +2552,10 @@
 <p>&#x5C31;&#x53EF;&#x4EE5;&#x4E86;&#x3002;</p>
 <p>Forge &#x63D0;&#x4F9B;&#x4E86;&#x4E00;&#x4E2A;&#x6807;&#x51C6;&#x7684; <code>IItemHandler</code> &#x7684;&#x5B9E;&#x73B0;&#xFF1A;<code>ItemStackHandler</code>&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x76F4;&#x63A5;&#x62FF;&#x6765;&#x7528;&#x3002;
 &#x90A3;&#x4E48;&#x8BA9;&#x6211;&#x4EEC;&#x8BD5;&#x7740;&#x6539;&#x9020;&#x4E00;&#x4E0B; <code>MyLavaFurnaceEntity</code>&#x2026;&#x2026;</p>
-<pre><code class="lang-java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">final</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyLavaFurnaceEntity</span> </span>{
+<pre><code class="lang-java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">final</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyLavaFurnaceEntity</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">TileEntity</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">ITickable</span> </span>{
 
     <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> progress;
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> fuel;
     <span class="hljs-comment">// 2 &#x4EE3;&#x8868;&#x201C;&#x6211;&#x4EEC;&#x9700;&#x8981;&#x4E24;&#x4E2A;&#x69FD;&#x4F4D;&#x201D;&#x2014;&#x2014;&#x4E00;&#x4E2A;&#x653E;&#x8F93;&#x5165;&#xFF0C;&#x4E00;&#x4E2A;&#x653E;&#x8F93;&#x51FA;&#x3002;</span>
     <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> ItemStackHandler inventory = <span class="hljs-keyword">new</span> ItemStackHandler(<span class="hljs-number">2</span>);
 
@@ -2577,12 +2578,21 @@
                     }
                 }
             } <span class="hljs-keyword">else</span> {
+                --fuel;
                 ++progress;
                 <span class="hljs-keyword">if</span> (progress &gt; <span class="hljs-number">200</span>) {
                     inventory.insertItem(<span class="hljs-number">1</span>, FurnaceRecipes.instance().getSmeltingResult(inventory.getStackInSlot(<span class="hljs-number">0</span>).copy(), <span class="hljs-keyword">false</span>));
                 }
             }
         }
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> ItemStack <span class="hljs-title">tryAcceptFuel</span><span class="hljs-params">(ItemStack fuel)</span> </span>{
+        <span class="hljs-keyword">return</span> fuel.getItem() == Items.LAVA_BUCKET ? ItemStack.EMPTY : fuel;
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">getFuel</span><span class="hljs-params">()</span> </span>{
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.fuel;
     }
 
     <span class="hljs-meta">@Override</span>
@@ -2598,6 +2608,24 @@
             <span class="hljs-keyword">return</span> <span class="hljs-keyword">super</span>.getCapability(cap, facing);
         }
     }
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">readFromNBT</span><span class="hljs-params">(NBTTagCompound tag)</span> </span>{
+        <span class="hljs-keyword">super</span>.readFromNBT(tag);
+        <span class="hljs-keyword">this</span>.progress = tag.getInteger(<span class="hljs-string">&quot;Progress&quot;</span>);
+        <span class="hljs-keyword">this</span>.fuel = tag.getInteger(<span class="hljs-string">&quot;Fuel&quot;</span>);
+        <span class="hljs-keyword">this</span>.inventory.deserializeNBT(tag.getCompoundTag(<span class="hljs-string">&quot;Inventory&quot;</span>));
+    }
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> NBTTagCompound <span class="hljs-title">writeToNBT</span><span class="hljs-params">(NBTTagCompound tag)</span> </span>{
+        tag.setInteger(<span class="hljs-string">&quot;Progress&quot;</span>, <span class="hljs-keyword">this</span>.progress);
+        tag.setInteger(<span class="hljs-string">&quot;Fuel&quot;</span>, <span class="hljs-keyword">this</span>.fuel);
+        tag.setTag(<span class="hljs-string">&quot;Inventory&quot;</span>, <span class="hljs-keyword">this</span>.inventory.serializeNBT());
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">super</span>.writeToNBT(tag);
+    }
+
+
 }
 </code></pre>
 <h2 id="&#x4E00;&#x4E9B;&#x7EC6;&#x8282;"><a name="&#x4E00;&#x4E9B;&#x7EC6;&#x8282;" class="anchor-navigation-ex-anchor" href="#&#x4E00;&#x4E9B;&#x7EC6;&#x8282;"><i class="fa fa-link" aria-hidden="true"></i></a>1.1. &#x4E00;&#x4E9B;&#x7EC6;&#x8282;</h2>
@@ -2649,7 +2677,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"10.1 实例：TileEntity 的物品栏","level":"3.10.1","depth":2,"next":{"title":"10.2 追加 Capability","level":"3.10.2","depth":2,"path":"chapter-10/attach-cap.md","ref":"chapter-10/attach-cap.md","articles":[]},"previous":{"title":"10. Forge Capability 系统","level":"3.10","depth":1,"path":"chapter-10/index.md","ref":"chapter-10/index.md","articles":[{"title":"10.1 实例：TileEntity 的物品栏","level":"3.10.1","depth":2,"path":"chapter-10/item-cap.md","ref":"chapter-10/item-cap.md","articles":[]},{"title":"10.2 追加 Capability","level":"3.10.2","depth":2,"path":"chapter-10/attach-cap.md","ref":"chapter-10/attach-cap.md","articles":[]},{"title":"10.3 Capability 数据的持久化","level":"3.10.3","depth":2,"path":"chapter-10/persistence.md","ref":"chapter-10/persistence.md","articles":[]},{"title":"10.4 你自己的 Capability","level":"3.10.4","depth":2,"path":"chapter-10/new-cap.md","ref":"chapter-10/new-cap.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["katex","splitter","expandable-chapters","anchor-navigation-ex","heimu"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"splitter":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"flow":{"line-color":"red"},"katex":{},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"heimu":{"keyword":"black","title":""},"anchor-navigation-ex":{"associatedWithSummary":true,"float":{"floatIcon":"fa fa-navicon","level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showGoTop":true,"showLevel":true},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"expandable-chapters":{}},"theme":"default","author":"https://github.com/TeamCovertDragon/Harbinger/graphs/contributors","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Harbinger","links":{"sidebar":{"TeamCovertDragon":"https://covertdragon.team/"}},"gitbook":"*","description":"Just Another FMLTutor For Future"},"file":{"path":"chapter-10/item-cap.md","mtime":"2019-11-29T06:24:08.771Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-11-29T06:24:16.609Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"10.1 实例：TileEntity 的物品栏","level":"3.10.1","depth":2,"next":{"title":"10.2 追加 Capability","level":"3.10.2","depth":2,"path":"chapter-10/attach-cap.md","ref":"chapter-10/attach-cap.md","articles":[]},"previous":{"title":"10. Forge Capability 系统","level":"3.10","depth":1,"path":"chapter-10/index.md","ref":"chapter-10/index.md","articles":[{"title":"10.1 实例：TileEntity 的物品栏","level":"3.10.1","depth":2,"path":"chapter-10/item-cap.md","ref":"chapter-10/item-cap.md","articles":[]},{"title":"10.2 追加 Capability","level":"3.10.2","depth":2,"path":"chapter-10/attach-cap.md","ref":"chapter-10/attach-cap.md","articles":[]},{"title":"10.3 Capability 数据的持久化","level":"3.10.3","depth":2,"path":"chapter-10/persistence.md","ref":"chapter-10/persistence.md","articles":[]},{"title":"10.4 你自己的 Capability","level":"3.10.4","depth":2,"path":"chapter-10/new-cap.md","ref":"chapter-10/new-cap.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["katex","splitter","expandable-chapters","anchor-navigation-ex","heimu"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"splitter":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"flow":{"line-color":"red"},"katex":{},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"heimu":{"keyword":"black","title":""},"anchor-navigation-ex":{"associatedWithSummary":true,"float":{"floatIcon":"fa fa-navicon","level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showGoTop":true,"showLevel":true},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"expandable-chapters":{}},"theme":"default","author":"https://github.com/TeamCovertDragon/Harbinger/graphs/contributors","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Harbinger","links":{"sidebar":{"TeamCovertDragon":"https://covertdragon.team/"}},"gitbook":"*","description":"Just Another FMLTutor For Future"},"file":{"path":"chapter-10/item-cap.md","mtime":"2019-11-29T06:37:17.986Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-11-29T06:37:22.779Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
