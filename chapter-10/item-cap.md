@@ -20,6 +20,7 @@ public final class MyLavaFurnaceEntity extends TileEntity implements ITickable {
     private int progress;
     private int fuel;
     // 2 代表“我们需要两个槽位”——一个放输入，一个放输出。
+    // 我们指定 0 号槽为输入，1 号槽为输出。
     private final ItemStackHandler inventory = new ItemStackHandler(2);
 
     @Override
@@ -51,7 +52,7 @@ public final class MyLavaFurnaceEntity extends TileEntity implements ITickable {
     }
 
     public ItemStack tryAcceptFuel(ItemStack fuel) {
-        return fuel.getItem() == Items.LAVA_BUCKET ? ItemStack.EMPTY : fuel;
+        return fuel.getItem() == Items.LAVA_BUCKET ? new ItemStack(Items.BUCKET) : fuel;
     }
 
     public int getFuel() {
@@ -97,4 +98,54 @@ public final class MyLavaFurnaceEntity extends TileEntity implements ITickable {
 实现 `hasCapability` 和 `getCapability` 的时候有一些细节问题需要注意：
 
   - 需要保证在 `hasCapability` 返回 `true` 时，用一样的参数调用 `getCapability` 不能返回 `null`。
-  - 出于性能考虑，`getCapability` 的实现建议一路 `if-else if-else` 到底。
+  - 出于性能考虑，实现 `getCapability` 的一般方式是 `if-else if-else` 到底。
+
+## 区分输入和输出
+
+然而目前的例子还是有问题。我们很快就会发现：通过使用漏斗等设备，我们指定的输出格也可以放进去物品。我们不能直接将 `ItemStackHandler` 暴露出来，而是通过一个“中间人”来完成。将 `getCapability` 方法改成这样：
+
+```java
+@Override
+public <T> T getCapability(Capability<T> cap, EnumFacing facing) {
+    if (cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
+        return CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.cast(new IItemHandler {
+            @Override
+            public int getSlots() {
+                return inventory.getSlots();
+            }
+            @Override
+            public ItemStack getStackInSlot(int slot) {
+                return inventory.getStackInSlot(slot);
+            }
+            @Override
+            public ItemStack insertItem(int slot, @Nonnull ItemStack stack, boolean simulate) {
+                // 仅当对 0 号槽位尝试输入物品时允许通过，否则拒绝输入
+                if (slot == 0) {
+                    return inventory.insertItem(0, stack, simulate);
+                }
+                return stack;
+            }
+            @Override
+            public ItemStack extractItem(int slot, int amount, boolean simulate) {
+                // 仅当对 1 号槽位尝试提取物品时允许听过，否则拒绝提取
+                if (slot == 1) {
+                    return inventory.extractItem(1, amount, simulate);
+                }
+                return ItemStack.EMPTY;
+            }
+            @Override
+            public int getSlotLimit(int slot) {
+                return inventory.getSlotLimit(slot);
+            }
+            @Override
+            public boolean isItemValid(int slot, ItemStack stack) {
+                // 我们只允许 0 号槽位输入物品。
+                // 1 号槽位中的物品不能通过自动化手段输入，必须由我们自己控制。
+                return slot == 0;
+            }
+        });
+    } else {
+        return super.getCapability(cap, facing);
+    }
+}
+```

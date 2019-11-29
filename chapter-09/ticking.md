@@ -74,7 +74,7 @@ public final class MyLavaFurnaceEntity extends TileEntity implements ITickable {
     }
 
     public ItemStack tryAcceptFuel(ItemStack fuel) {
-        return fuel.getItem() == Items.LAVA_BUCKET ? ItemStack.EMPTY : fuel;
+        return fuel.getItem() == Items.LAVA_BUCKET ? new ItemStack(Items.BUCKET) : fuel;
     }
 
     public int getFuel() {

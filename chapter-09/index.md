@@ -136,7 +136,7 @@ public final class MyLavaFurnaceEntity extends TileEntity {
      * @return 尝试消耗燃料后的剩余物品，有可能仍然是未经修改的 fuel 实例
      */
     public ItemStack tryAcceptFuel(ItemStack fuel) {
-        return fuel.getItem() == Items.LAVA_BUCKET ? ItemStack.EMPTY : fuel;
+        return fuel.getItem() == Items.LAVA_BUCKET ? new ItemStack(Items.BUCKET) : fuel;
     }
 
     public int getFuel() {
