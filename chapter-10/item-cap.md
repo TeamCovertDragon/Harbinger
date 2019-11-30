@@ -52,7 +52,12 @@ public final class MyLavaFurnaceEntity extends TileEntity implements ITickable {
     }
 
     public ItemStack tryAcceptFuel(ItemStack fuel) {
-        return fuel.getItem() == Items.LAVA_BUCKET ? new ItemStack(Items.BUCKET) : fuel;
+        if (fuel.getItem() == Items.LAVA_BUCKET) {
+            this.fuel += 1000;
+            return new ItemStack(Items.BUCKET);
+        } else {
+            return fuel;
+        }
     }
 
     public int getFuel() {
@@ -88,7 +93,6 @@ public final class MyLavaFurnaceEntity extends TileEntity implements ITickable {
         tag.setTag("Inventory", this.inventory.serializeNBT());
         return super.writeToNBT(tag);
     }
-
 
 }
 ```
@@ -146,6 +150,29 @@ public <T> T getCapability(Capability<T> cap, EnumFacing facing) {
         });
     } else {
         return super.getCapability(cap, facing);
+    }
+}
+```
+
+## 破坏方块后掉落物品
+
+最后我们需要考虑一下这样一个问题：挖掉这个方块之后，我们的 `inventory` 里的东西怎么办？  
+原版箱子的解决方法是掉落。我们这里也仿照原版箱子的处理方式，来让我们内部物品栏里的东西在方块本体被挖掉后掉出来：
+
+```java
+public final class MyLavaFurnace extends Block {
+    // 省略之前的写的方法
+
+    @Override
+    public void breakBlock(World world, BlockPos pos, IBlockState state) {
+        final TileEntity tile = world.getTileEntity(pos);
+        if (tile instanceof MyLavaFurnaceEntity) {
+            final ItemStackHandler inv = ((MyLavaFurnaceEntity)tile).inventory;
+            for (int i = 0; i < inv.getSlots(); i++) {
+                InventoryHelper.spawnItemStack(world, pos.getX(), pos.getY(), pos.getZ(), inv.getStackInSlot(i));
+            }
+        }
+        super.breakBlock(world, pos, state);
     }
 }
 ```
