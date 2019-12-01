@@ -45,4 +45,13 @@ Minecraft 在这里采用了享元的概念：一种特定物品只对应一个 
 
 上文提到“所有 `ItemStack` 在被实例化的时候必定指定了一个 `Item` 实例作为它的**类型**”，但实际上有一个例外：`ItemStack` 类下的常量字段 `EMPTY` 初始化时没有使用 `Item` 实例，而是用了 `null`。相应地，它代表了“空”的状态，即这个 `ItemStack` 实质上什么都没有；更准确地说，它相当于持有 `Items.AIR`（即“空气”）这个物品，这在 Minecraft 的世界中等价于“无”。  
 代表“空”的状态的不止这一个情况。当数量为非正数（小于等于零）的时候，这个 `ItemStack` 也会被认为是“空”的。构造 `ItemStack` 对象时使用 `Items.AIR` 效果也一样。
+
 有鉴于对“空”的状态的明确定义，`ItemStack` 的引用在 Minecraft 中被看作是 non-null 的。换言之，任何出现 `ItemStack` 的地方都应视作“不可能为 `null`”。
+至于判断给定 `ItemStack` 是不是空的，我们只需要调用 `isEmpty()` 就行了。
+
+```java
+ItemStack stack = ...;
+if (!stack.isEmpty()) {
+    // 仅当物品非空时继续操作
+}
+```
