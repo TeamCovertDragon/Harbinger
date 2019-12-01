@@ -29,12 +29,28 @@
   - `IAttribute` 决定了某一属性的上下限和初始值等。
   - 操作属性的值时，我们修改的是 `IAttributeInstance`。
 
-简单来说，`IAttribute` 之于 `IAttributeInstance` 就像是 `Item` 之于 `ItemStack` 或是 `Block` 之于 `IBlockState`。
+简单来说，`IAttribute` 之于 `IAttributeInstance` 就像是 `Item` 之于 `ItemStack`。
 
 ## 注册：不需要注册
 
 `IAttribute` 无需注册，创建后即可拿去给生物实体用。
 原版使用的实现是 `RangedAttribute`，我们可以直接拿来用。
+
+```java
+// 第一个参数指定一个别的 IAttribute 作为它的 parent。一般都是填 null，
+// 但如果你的属性真的是从别的属性衍生而来的话，建议加上。原版会通过
+// IAttribute.getParent() 把所有 parent 属性一并加入到目标实体上。
+// 第二个参数是 id，兼职 translation key。不要和别的属性重名了。
+// 第三个参数是该属性的初始值。
+// 第四个参数指定下限：该属性最低必须是这个值。
+// 第五个参数指定上限：该属性最高只能是这个值。
+//
+// setShouldWatch 决定了该属性的值的变化是否需要同步至逻辑客户端。
+// setShouldWatch(false) 会令逻辑客户端看不到该属性的变化。
+// 如果你不希望客户端看到这个值，或者客户端不需要知道这个值，可以用它
+// 来稍微节约一点点带宽。
+public static final IAttribute MAGIC_POWER = new RangedAttribute(null, "my_mod.attribute.magic", 0.0, 0.0, 20.0).setShouldWatch(false);
+```
 
 在原版的 `SharedMonsterAttributes` 类下可以找到原版实体使用的各种 `IAttribute`，
 虽然我们也可以直接拿来用，但是在 `EntityLivingBase` 中这些属性大都已经在构造阶段添加好了，所以我们直接让我们的新生物继承 `EntityLivingBase` 即可。
