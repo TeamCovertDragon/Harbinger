@@ -90,6 +90,9 @@ public Multimap<String, AttributeModifier> getAttributeModifiers(EntityEquipment
 }
 ```
 
+需要注意的是，若指定 `ItemStack` 的 NBT 数据中含有名为 `AttributeModifiers` 的标签且类型为 `NBTTagList`，Minecraft 会从这个标签中读取属性修饰符，而忽略 `Item.getAttributeModifiers` 方法的返回结果。这个特性可以用来修改原版或其他 Mod 的武器装备的“属性”（本质上是实体属性修饰符）。  
+类似的，`ItemStack.addAttributeModifier` 方法可以为任意 `ItemStack` 添加任意属性修饰符，这些人为添加的修饰符也会写入物品 NBT 的 `AttributeModifiers` 标签下。
+
 ### 药水效果与修饰符
 
 `registerPotionAttributeModifier` 方法可以令药水作用于生物实体上时将指定修饰符附加到该实体上，药水过期后移除。
