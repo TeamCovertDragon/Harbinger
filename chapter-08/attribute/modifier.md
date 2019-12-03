@@ -50,7 +50,7 @@ mod = mod.setSaved(false);
 
 ### 幻数
 
-Forge 提供了对应的常量以消灭幻数的使用。
+你可能已经注意到了，代表运算类型的参数是个无厘头的幻数。Forge 提供了对应的常量以消灭幻数的使用。
 这些常量位于 `net.minecraftforge.common.util.Constants` 下：
 
 |运算类型|常量|
@@ -93,14 +93,6 @@ public Multimap<String, AttributeModifier> getAttributeModifiers(EntityEquipment
 需要注意的是，若指定 `ItemStack` 的 NBT 数据中含有名为 `AttributeModifiers` 的标签且类型为 `NBTTagList`，Minecraft 会从这个标签中读取属性修饰符，而忽略 `Item.getAttributeModifiers` 方法的返回结果。这个特性可以用来修改原版或其他 Mod 的武器装备的“属性”（本质上是实体属性修饰符）。  
 类似的，`ItemStack.addAttributeModifier` 方法可以为任意 `ItemStack` 添加任意属性修饰符，这些人为添加的修饰符也会写入物品 NBT 的 `AttributeModifiers` 标签下。
 
-### 药水效果与修饰符
+### 状态效果与修饰符
 
-`registerPotionAttributeModifier` 方法可以令药水作用于生物实体上时将指定修饰符附加到该实体上，药水过期后移除。
-
-```java
-new Potion(...).registerPotionAttributeModifier(
-        SharedMonsterAttributes.ATTACK_DAMAGE, // 目标属性类型
-        "b44157cd-2a86-4dc4-ae8a-9820767db864", // 字符串形式的 UUID
-        1, Constants.AttributeModifierOperation.ADD // 同 AttributeModifier 构造器第 3、4 个参数
-);
-```
+原版有一部分状态效果也是通过属性修饰符实现的。关于这方面的信息，可在[对应章节](../../chapter-12/attributes-modifier.md)中找到。
