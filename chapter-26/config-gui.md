@@ -19,7 +19,7 @@ public class MyModConfigGuiFactory implements IModGuiFactory {
 
     @Override
     public GuiScreen createConfigGui(GuiScreen parent) {
-        return new GuiConfig(parent, Collections.singletonList(ConfigElement.from(MyModConfig.class)), "my_mod_id", false, false, "First line", "Second line");
+        return new GuiConfig(parent, ConfigElement.from(MyModConfig.class).getChildElements(), "my_mod_id", false, false, "First line", "Second line");
     }
 
     @Override
