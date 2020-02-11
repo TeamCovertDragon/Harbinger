@@ -191,6 +191,12 @@
 
 * [39. 实战（上）](chapter-39/index.md)
 * [40. 实战（下）](chapter-40/index.md)
+  * [40.1 问题 1](chapter-40/practice-1.md)
+  * [40.1 问题 2](chapter-40/practice-2.md)
+  * [40.1 问题 3](chapter-40/practice-3.md)
+  * [40.1 问题 4](chapter-40/practice-4.md)
+  * [40.1 问题 5](chapter-40/practice-5.md)
+  * [40.1 问题 6](chapter-40/practice-6.md)
 
 ### 后记
 
