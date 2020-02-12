@@ -53,7 +53,7 @@ LootTableManager manager = world.getLootTableManager()
 ResourceLocation lootTableLocator = ...;
 LootTable table = manager.getLootTableFromLocation(lootTableLocator);
 // 注：LootContext.Builder 的构造器只接受 WorldServer，但 getLootTableManager 方法是 World 里的。
-LootContext context = LootContext.Builder(world).withPlayer(player).withDamageSource(...).build();
+LootContext context = new LootContext.Builder(world).withPlayer(player).withDamageSource(...).build();
 List<ItemStack> loots = table.generateLootForPools(world.rand, context);
 ```
 
