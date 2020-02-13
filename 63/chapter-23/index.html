@@ -2500,7 +2500,7 @@
                 <a href="../chapter-40/practice-2.html">
             
                     
-                    40.1 问题 2
+                    40.2 问题 2
             
                 </a>
             
@@ -2513,7 +2513,7 @@
                 <a href="../chapter-40/practice-3.html">
             
                     
-                    40.1 问题 3
+                    40.3 问题 3
             
                 </a>
             
@@ -2526,7 +2526,7 @@
                 <a href="../chapter-40/practice-4.html">
             
                     
-                    40.1 问题 4
+                    40.4 问题 4
             
                 </a>
             
@@ -2539,7 +2539,7 @@
                 <a href="../chapter-40/practice-5.html">
             
                     
-                    40.1 问题 5
+                    40.5 问题 5
             
                 </a>
             
@@ -2552,7 +2552,20 @@
                 <a href="../chapter-40/practice-6.html">
             
                     
-                    40.1 问题 6
+                    40.6 问题 6
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.2.7" data-path="../chapter-40/practice-7.html">
+            
+                <a href="../chapter-40/practice-7.html">
+            
+                    
+                    40.7 问题 7
             
                 </a>
             
@@ -2721,7 +2734,7 @@ LootTableManager manager = world.getLootTableManager()
 ResourceLocation lootTableLocator = ...;
 LootTable table = manager.getLootTableFromLocation(lootTableLocator);
 <span class="hljs-comment">// &#x6CE8;&#xFF1A;LootContext.Builder &#x7684;&#x6784;&#x9020;&#x5668;&#x53EA;&#x63A5;&#x53D7; WorldServer&#xFF0C;&#x4F46; getLootTableManager &#x65B9;&#x6CD5;&#x662F; World &#x91CC;&#x7684;&#x3002;</span>
-LootContext context = LootContext.Builder(world).withPlayer(player).withDamageSource(...).build();
+LootContext context = <span class="hljs-keyword">new</span> LootContext.Builder(world).withPlayer(player).withDamageSource(...).build();
 List&lt;ItemStack&gt; loots = table.generateLootForPools(world.rand, context);
 </code></pre>
 <p>&#x5728; <code>LootTableList</code> &#x7C7B;&#x4E2D;&#x6709;&#x5168;&#x90E8;&#x539F;&#x7248;&#x4F7F;&#x7528;&#x7684; Loot Table &#x7684; ID&#x3002;</p>
@@ -2781,7 +2794,7 @@ LootTableList.register(<span class="hljs-keyword">new</span> ResourceLocation(<s
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"23. 战利品表","level":"3.23","depth":1,"next":{"title":"23.1 战利品表条件（Loot Condition）","level":"3.23.1","depth":2,"path":"chapter-23/condition.md","ref":"chapter-23/condition.md","articles":[]},"previous":{"title":"22.2 自定义 Item Predicate","level":"3.22.2","depth":2,"path":"chapter-22/forge-extension/custom-item-predicates.md","ref":"chapter-22/forge-extension/custom-item-predicates.md","articles":[]},"dir":"ltr"},"config":{"plugins":["katex","splitter","expandable-chapters","anchor-navigation-ex","heimu"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"splitter":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"flow":{"line-color":"red"},"katex":{},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"heimu":{"keyword":"black","title":""},"anchor-navigation-ex":{"associatedWithSummary":true,"float":{"floatIcon":"fa fa-navicon","level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showGoTop":true,"showLevel":true},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"expandable-chapters":{}},"theme":"default","author":"https://github.com/TeamCovertDragon/Harbinger/graphs/contributors","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Harbinger","links":{"sidebar":{"TeamCovertDragon":"https://covertdragon.team/"}},"gitbook":"*","description":"Just Another FMLTutor For Future"},"file":{"path":"chapter-23/index.md","mtime":"2019-10-01T16:34:51.793Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-02-11T00:30:31.360Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"23. 战利品表","level":"3.23","depth":1,"next":{"title":"23.1 战利品表条件（Loot Condition）","level":"3.23.1","depth":2,"path":"chapter-23/condition.md","ref":"chapter-23/condition.md","articles":[]},"previous":{"title":"22.2 自定义 Item Predicate","level":"3.22.2","depth":2,"path":"chapter-22/forge-extension/custom-item-predicates.md","ref":"chapter-22/forge-extension/custom-item-predicates.md","articles":[]},"dir":"ltr"},"config":{"plugins":["katex","splitter","expandable-chapters","anchor-navigation-ex","heimu"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"splitter":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"flow":{"line-color":"red"},"katex":{},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"heimu":{"keyword":"black","title":""},"anchor-navigation-ex":{"associatedWithSummary":true,"float":{"floatIcon":"fa fa-navicon","level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showGoTop":true,"showLevel":true},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"expandable-chapters":{}},"theme":"default","author":"https://github.com/TeamCovertDragon/Harbinger/graphs/contributors","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Harbinger","links":{"sidebar":{"TeamCovertDragon":"https://covertdragon.team/"}},"gitbook":"*","description":"Just Another FMLTutor For Future"},"file":{"path":"chapter-23/index.md","mtime":"2020-02-12T07:22:08.931Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-02-13T00:09:48.952Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
