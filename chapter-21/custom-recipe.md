@@ -52,7 +52,7 @@ public final class MyRecipe extends IForgeRegistryEntry.Impl<IRecipe> implements
   
     @Override
     public NonNullList<Ingredient> getIngredients() {
-        // 返回该合成的输入，用于原版小绿书那样的显示合成表的工具。
+        // 返回该合成的输入。
         return NonNullList.create();
     }
 
