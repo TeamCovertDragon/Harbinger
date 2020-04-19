@@ -5,7 +5,7 @@
 我们首先从从一个没有任何功能的方块开始。和物品一样，方块也需要注册：
 
 ```java
-@Mod.EventBusSubsriber(modid = "my_mod")
+@Mod.EventBusSubscriber(modid = "my_mod")
 public final class BlockInitializer {
     @SubscribeEvent
     public static void registerBlock(RegistryEvent.Register<Block> event) {
