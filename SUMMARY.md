@@ -180,9 +180,9 @@
 
 * [31. 附录 I：相关开发资源](chapter-31/index.md)
 * [32. 附录 II：Gradle](chapter-32/index.md)
-  * [依赖管理](./dependencies/index.md)
-    * [CurseMaven](./dependencies/curse.md)
-    * [`mavenLocal()`](./dependencies/local.md)
+  * [依赖管理](chapter-32/dependencies/index.md)
+    * [CurseMaven](chapter-32/dependencies/curse.md)
+    * [`mavenLocal()`](chapter-32/dependencies/local.md)
   * 自动化
     * 读取配置文件
     * 自动生成 `MANIFEST.MF`
