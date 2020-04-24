@@ -16,6 +16,8 @@
   - [Thirst Mod/Tough As Nails/EnviroMine/TerraFirmaCraft 玩家饮水机制][q4]
   - [Tough As Nails/EnviroMine 体温机制][q5]
   - [Railcraft 界钉（Worldspike，即原世界锚 World Anchor）][q6]
+  - [OpenBlock 流体储罐][q7]
+  - [Twilight Forest 暮色森林传送门][q8]
 
 [q1]: practice-1.md
 [q2]: practice-2.md
@@ -23,3 +25,5 @@
 [q4]: practice-4.md
 [q5]: practice-5.md
 [q6]: practice-6.md
+[q7]: practice-7.md
+[q8]: practice-8.md
