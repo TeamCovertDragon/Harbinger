@@ -45,6 +45,13 @@ public final class MyRecipe extends IForgeRegistryEntry.Impl<IRecipe> implements
     }
 
     @Override
+    public NonNullList<ItemStack> getRemainingItems(InventoryCrafting inv) {
+        // 根据当前工作台中的物品决定工作台中有哪些物品剩余。
+        // 可用来实现“合成后返还物品”。
+        return NonNullList.create();
+    }
+
+    @Override
     public boolean canFit(int width, int height) {
         // 给定工作台的输入网格尺寸，判断该合成能否放进这个尺寸的合成网格中
         return true;
@@ -86,4 +93,5 @@ public static void onRecipeReg(RegistryEvent.Register<IRecipe> event) {
 ```
 
 或者，你也可以考虑使用 Forge 的 [`IRecipeFactory`](./forge-extension/recipe-factory)。
-两种方法都可以解决问题，但 Forge 的 `IRecipeFactory` 更接近 1.13 及更高版本中 Minecraft 对这些有特殊逻辑的合成的解决方案。如果你在意向新版迁移的问题，建议使用后者。
+两种方法都可以解决问题，但 Forge 的 `IRecipeFactory` 更接近 1.13 及更高版本中 Minecraft 对这些有特殊逻辑的合成的解决方案。
+如果你在意向新版迁移的问题，建议使用 `IRecipeFactory`，迁移起来省事一点。
