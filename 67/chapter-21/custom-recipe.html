@@ -2622,6 +2622,13 @@
     }
 
     <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> NonNullList&lt;ItemStack&gt; <span class="hljs-title">getRemainingItems</span><span class="hljs-params">(InventoryCrafting inv)</span> </span>{
+        <span class="hljs-comment">// &#x6839;&#x636E;&#x5F53;&#x524D;&#x5DE5;&#x4F5C;&#x53F0;&#x4E2D;&#x7684;&#x7269;&#x54C1;&#x51B3;&#x5B9A;&#x5DE5;&#x4F5C;&#x53F0;&#x4E2D;&#x6709;&#x54EA;&#x4E9B;&#x7269;&#x54C1;&#x5269;&#x4F59;&#x3002;</span>
+        <span class="hljs-comment">// &#x53EF;&#x7528;&#x6765;&#x5B9E;&#x73B0;&#x201C;&#x5408;&#x6210;&#x540E;&#x8FD4;&#x8FD8;&#x7269;&#x54C1;&#x201D;&#x3002;</span>
+        <span class="hljs-keyword">return</span> NonNullList.create();
+    }
+
+    <span class="hljs-meta">@Override</span>
     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">canFit</span><span class="hljs-params">(<span class="hljs-keyword">int</span> width, <span class="hljs-keyword">int</span> height)</span> </span>{
         <span class="hljs-comment">// &#x7ED9;&#x5B9A;&#x5DE5;&#x4F5C;&#x53F0;&#x7684;&#x8F93;&#x5165;&#x7F51;&#x683C;&#x5C3A;&#x5BF8;&#xFF0C;&#x5224;&#x65AD;&#x8BE5;&#x5408;&#x6210;&#x80FD;&#x5426;&#x653E;&#x8FDB;&#x8FD9;&#x4E2A;&#x5C3A;&#x5BF8;&#x7684;&#x5408;&#x6210;&#x7F51;&#x683C;&#x4E2D;</span>
         <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>;
@@ -2658,7 +2665,8 @@
 }
 </code></pre>
 <p>&#x6216;&#x8005;&#xFF0C;&#x4F60;&#x4E5F;&#x53EF;&#x4EE5;&#x8003;&#x8651;&#x4F7F;&#x7528; Forge &#x7684; <a href="forge-extension/recipe-factory"><code>IRecipeFactory</code></a>&#x3002;
-&#x4E24;&#x79CD;&#x65B9;&#x6CD5;&#x90FD;&#x53EF;&#x4EE5;&#x89E3;&#x51B3;&#x95EE;&#x9898;&#xFF0C;&#x4F46; Forge &#x7684; <code>IRecipeFactory</code> &#x66F4;&#x63A5;&#x8FD1; 1.13 &#x53CA;&#x66F4;&#x9AD8;&#x7248;&#x672C;&#x4E2D; Minecraft &#x5BF9;&#x8FD9;&#x4E9B;&#x6709;&#x7279;&#x6B8A;&#x903B;&#x8F91;&#x7684;&#x5408;&#x6210;&#x7684;&#x89E3;&#x51B3;&#x65B9;&#x6848;&#x3002;&#x5982;&#x679C;&#x4F60;&#x5728;&#x610F;&#x5411;&#x65B0;&#x7248;&#x8FC1;&#x79FB;&#x7684;&#x95EE;&#x9898;&#xFF0C;&#x5EFA;&#x8BAE;&#x4F7F;&#x7528;&#x540E;&#x8005;&#x3002;</p>
+&#x4E24;&#x79CD;&#x65B9;&#x6CD5;&#x90FD;&#x53EF;&#x4EE5;&#x89E3;&#x51B3;&#x95EE;&#x9898;&#xFF0C;&#x4F46; Forge &#x7684; <code>IRecipeFactory</code> &#x66F4;&#x63A5;&#x8FD1; 1.13 &#x53CA;&#x66F4;&#x9AD8;&#x7248;&#x672C;&#x4E2D; Minecraft &#x5BF9;&#x8FD9;&#x4E9B;&#x6709;&#x7279;&#x6B8A;&#x903B;&#x8F91;&#x7684;&#x5408;&#x6210;&#x7684;&#x89E3;&#x51B3;&#x65B9;&#x6848;&#x3002;
+&#x5982;&#x679C;&#x4F60;&#x5728;&#x610F;&#x5411;&#x65B0;&#x7248;&#x8FC1;&#x79FB;&#x7684;&#x95EE;&#x9898;&#xFF0C;&#x5EFA;&#x8BAE;&#x4F7F;&#x7528; <code>IRecipeFactory</code>&#xFF0C;&#x8FC1;&#x79FB;&#x8D77;&#x6765;&#x7701;&#x4E8B;&#x4E00;&#x70B9;&#x3002;</p>
 
                                 
                                 </section>
@@ -2686,7 +2694,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"21.2 重新实现 IRecipe","level":"3.21.2","depth":2,"next":{"title":"21.3 扩展篇：熔炉配方及燃料值","level":"3.21.3","depth":2,"path":"chapter-21/vanilla-furnace.md","ref":"chapter-21/vanilla-furnace.md","articles":[]},"previous":{"title":"21.1.5 常量池（_constants.json）","level":"3.21.1.5","depth":3,"path":"chapter-21/forge-extension/constants.md","ref":"chapter-21/forge-extension/constants.md","articles":[]},"dir":"ltr"},"config":{"plugins":["-search","katex","splitter","expandable-chapters","anchor-navigation-ex","heimu"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"splitter":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"flow":{"line-color":"red"},"katex":{},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"heimu":{"keyword":"black","title":""},"anchor-navigation-ex":{"associatedWithSummary":true,"float":{"floatIcon":"fa fa-navicon","level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showGoTop":true,"showLevel":true},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"expandable-chapters":{}},"theme":"default","author":"https://github.com/TeamCovertDragon/Harbinger/graphs/contributors","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Harbinger","links":{"sidebar":{"TeamCovertDragon":"https://covertdragon.team/"}},"gitbook":"*","description":"Just Another FMLTutor For Future"},"file":{"path":"chapter-21/custom-recipe.md","mtime":"2020-03-24T07:01:25.690Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-03-24T07:01:34.024Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"21.2 重新实现 IRecipe","level":"3.21.2","depth":2,"next":{"title":"21.3 扩展篇：熔炉配方及燃料值","level":"3.21.3","depth":2,"path":"chapter-21/vanilla-furnace.md","ref":"chapter-21/vanilla-furnace.md","articles":[]},"previous":{"title":"21.1.5 常量池（_constants.json）","level":"3.21.1.5","depth":3,"path":"chapter-21/forge-extension/constants.md","ref":"chapter-21/forge-extension/constants.md","articles":[]},"dir":"ltr"},"config":{"plugins":["-search","-lunr","katex","splitter","expandable-chapters","anchor-navigation-ex","heimu"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"splitter":{},"flow":{"line-color":"red"},"katex":{},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"heimu":{"keyword":"black","title":""},"anchor-navigation-ex":{"associatedWithSummary":true,"float":{"floatIcon":"fa fa-navicon","level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showGoTop":true,"showLevel":true},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"expandable-chapters":{}},"theme":"default","author":"https://github.com/TeamCovertDragon/Harbinger/graphs/contributors","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Harbinger","links":{"sidebar":{"TeamCovertDragon":"https://covertdragon.team/"}},"gitbook":"*","description":"Just Another FMLTutor For Future"},"file":{"path":"chapter-21/custom-recipe.md","mtime":"2020-04-24T06:06:59.151Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-04-24T06:07:10.523Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
@@ -2701,14 +2709,6 @@
     
         
         <script src="../gitbook/gitbook-plugin-expandable-chapters/expandable-chapters.js"></script>
-        
-    
-        
-        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
-        
-    
-        
-        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
         
     
         
