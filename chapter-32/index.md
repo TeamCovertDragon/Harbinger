@@ -18,6 +18,7 @@ Gradle 的存在让我们可以直接一行 `gradle build` 命令就能搞定编
   - 信息安全
     - Jar 签名
   - [构建与发布](./publish/index.md)
+    - [强制指定编码方式](./publish/encoding.md)
     - Shadow/Shade
     - [`publishToMavenLocal` 任务](./publish/local.md)
     - CurseGradle
