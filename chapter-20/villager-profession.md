@@ -25,7 +25,7 @@ import net.minecraftforge.fml.common.registry.VillagerRegistry;
 @SubscribeEvent
 public static void onVillagerProfessionRegistration(RegistryEvent.Register<VillagerRegistry.VillagerProfession> event) {
     VillagerRegistry.VillagerProfession profession = event.getRegistry().getValue(new ResourceLocation("minecraft", "farmer"));
-    VillagerRegistry.VillagerCareer newCarrrer = new VillagerRegistry.VillagerCareer(profession, "fisherman");
+    VillagerRegistry.VillagerCareer newCareer = new VillagerRegistry.VillagerCareer(profession, "fisherman");
 }
 ```
 
@@ -34,7 +34,7 @@ public static void onVillagerProfessionRegistration(RegistryEvent.Register<Villa
 一个卖鱼给 fisherman 的交易：
 
 ```java
-newCarrrer.addTrade(1, new EntityVillager.ListItemForEmeralds(new ItemStack(Items.FISH), new PriceInfo(1, 1)));
+newCareer.addTrade(1, new EntityVillager.ListItemForEmeralds(new ItemStack(Items.FISH), new PriceInfo(1, 1)));
 ```
 
 注意到 `addTrade` 方法的第二个参数接受的是 `EntityVillager.ITradeList trades...`。在 `EntityVillager` 下有这些现成的实现可用：
