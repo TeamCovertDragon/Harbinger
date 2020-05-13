@@ -104,4 +104,4 @@ public static void onModelRegistration(ModelRegistryEvent event) {
 
 ### 重新实现 `ItemOverrideList`
 
-这一手段虽然仍然是基于原版类的，但有鉴于它牵扯到的其他信息，[它有自己的独立章节](../custom-model/item-override.md)。请直接前往那里获取有关信息。
+这一手段虽然仍然是基于原版类的，但有鉴于它牵扯到的其他信息，[它有自己的独立章节](../custom-baked/item-override.md)。请直接前往那里获取有关信息。

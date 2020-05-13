@@ -28,14 +28,14 @@ public class MyGui extends GuiContainer {
 * 序号 4 是指 Slot 的操作结果返回给 Container。
 * 序号 5 是指服务器端的业务发信（乱七八糟诸如物品和“进度条”这种）给客户端。
 * 序号 6 是指客户端的操作都会通知服务器端。
-* 实线是 Mojang 用它的黑魔法帮你搞定了。
-* 虚线是 Mojang 表示这个你要自己来。
+* 虚线是 Mojang 用它的黑魔法帮你搞定了。
+* 实线是 Mojang 表示这个你要自己来。
 
 ````java
 public class MyContainer extends Container {
     // 此方法必须覆写，因为父类里这是个抽象方法。
     @Override
-    public boolean canPlayerInteractWith(EntityPlayer player) {
+    public boolean canInteractWith(EntityPlayer player) {
         return true;
         // 返回 false 的时候会给你关掉 GUI。
     }

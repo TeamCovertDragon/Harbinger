@@ -3,6 +3,7 @@
 Harbinger 是一套全面的，基于 Forge 的，中文 Minecraft Mod 开发指南。身为读者的你，需要记住以下事项：
 
 * **如无特殊说明，本教程基于 Minecraft 1.12.2 Release 和 Forge 14.23.5.2836，MCP Mapping 版本使用 `stable_39`。本教程原则上不涉及任何旧版内容。**
+  * 适用于新版本的 Minecraft+Forge 的指南已经提上日程，还请稍安勿躁。
 * 如有疑问，欢迎到[本项目的问题追踪器](https://github.com/TeamCovertDragon/Harbinger/issues)中提出，或加入这个 QQ 群咨询：128025486。
 * 本教程使用的目录分隔符（directory separator）统一为 `/`。
 * 这里不是 Java 教程。你必须掌握至少一门基于 JVM 的编程语言。对零基础新人来说，Java 就可以，先去花点时间把 Java 学了。Scala 用户用 Scala 当然也是十分欢迎的，只是笔者不会 Scala。

@@ -4,10 +4,12 @@
 
 > Minecraft 是一个商业软件，诚然它是 Java 写的，没有人能阻止某个人对其进行逆向工程，但我们为什么还能看到未经混淆的代码？甚至还能对着这玩意写 Mod？这不可能是 Mojang 干出来的事情。
 
-事实上 Mojang 的确从未放出过 Minecraft 的完整源码，所以首先我们明确了一个事实：我们一直在讨论的并不是 Minecraft 源码的真正形态，毕竟只有 Mojang 员工才能看到这种商业机密嘛。直接对 Minecraft 的 jar 进行反编译也只能得到混淆后的反编译结果。它往往长这样：
+事实上 Mojang 的确从未放出过 Minecraft 的真正源码（即便是[在 19w36a 发布时宣布放出含有原始类名、方法名和字段名的 ProGuard 的混淆记录][ref-19w36a]），所以首先我们要明确一个事实：我们一直在讨论的并不是 Minecraft 源码的真正形态，毕竟只有 Mojang 员工才能看到这种商业机密嘛。直接对 Minecraft 的 jar 进行反编译也只能得到混淆后的反编译结果。它往往长这样：
+
+[ref-19w36a]: https://www.minecraft.net/en-us/article/minecraft-snapshot-19w36a
 
 ```java
-// 实际上这个例子是瞎编的。
+// 并非 Minecraft 本体反编译结果，仅供说明使用
 public class a extends b {
     private c c1;
     private final d d1;

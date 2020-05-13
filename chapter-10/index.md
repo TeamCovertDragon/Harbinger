@@ -1,40 +1,81 @@
-# 附魔
+# Capability
+
+让我们再来看一下 `TileEntity`：我们可以给它附加诸如存储物品等等的功能，具体使用的时候只需要转型就可以了：
 
 ```java
-public class MyPowerfulEnchantment extends Enchantment {
-    public MyPowerfulEnchantment(Enchantment.Rarity rarity, EnumEnchantmentType type, EntityEquipmentSlot[] slots) {
-        super(rarity, type, slots);
-        // rarity 代表了这个附魔的稀有程度，可以是 COMMON、UNCOMMON、RARE 或 VERY_RARE。
-        // type 代表了这个附魔可以加在什么工具/武器/装备上。
-        // slots 代表了“这个附魔加在什么格子里装的工具/武器/装备上才有效果”，例如荆棘只在盔甲四件套上有效。
-        // slots 会影响 getEnchantedItem（func_92099_a）的返回值，这个方法用于获取某个实体上有指定附魔的物品。
-    }
-
-    // func_77319_d，决定了附魔的最低可能等级
-    @Override
-    public int getMinLevel() {
-        return 1;
-    }
-
-    // func_77325_b，决定了附魔的最高可能等级
-    @Override
-    public int getMaxLevel() {
-        return 3;
-    }
+// 假想的情景，不要照抄
+TileEntity tile = world.getTileEntity(pos);
+if (tile instanceof Something) { // 假定这个 TileEntity 实现了名为 Something 的接口
+    ((Something)tile).interact(...);
 }
 ```
 
-和药水效果一样，附魔的注册受 Forge 注册表系统的控制。
+但不同的功能需要的接口也不尽相同，这些接口自然是没办法统一的。我们可能会写出这种东西：
 
 ```java
-@SubscribeEvent
-public static void onEnchantmentRegistration(RegistryEvent.Register<Enchantment> event) {
-    event.getRegistry().registerAll(new MyPowerfulEnchantment().setName("super_duper_enchantment").setRegistryName(...));
-    // setName（func_77322_b）用于组成附魔名称的本地化键，和注册名无关。本地化相关的内容请参考第 13 章。
+if (tile instanceof Something) {
+    // …
+} else if (tile instanceof AnotherThing) {
+    // …
+} else if (tile instanceof SomethingElse) {
+    // …
+} else {
+    // …
 }
 ```
 
-### 如何让自己的附魔有效果？
+不难发现：我们总是在检查某个 `TileEntity` 是否支持某种功能（以 `instanceof` 的形式呈现）。类似的情况实际上也出现在了 `ItemStack`、`Entity` 甚至是 `World` 和 `Chunk` 上。我们希望给这些东西追加一些功能，并且希望别人能通过指定的接口使用这些功能。但是新的问题也浮出水面：
 
-通常，附魔的效果和附魔本身的类没有关系。举个例子，精准采集和时运的逻辑实际上是在 `Block` 里的。还记得 Forge patch 后的那个获得掉落的方法 `getDrops` 吗？它最后一个 `int` 参数就是当前使用工具的时运等级。  
-这也意味着，你的附魔的具体效果需要通过覆写 `Block` 或 `Item` 类下的某些方法及事件订阅等方式实现。`EnchantmentHelper` 类提供了一些帮助确定某物品的附魔等级的方法，比如 `getEnchantmentLevel`（`func_77506_a`）和 `getEnchantments`（`func_82781_a`）。
+```java
+// 如果 Something 并不存在会发生什么？
+if (tile instanceof Something) {
+    // …
+}
+```
+
+若 `Something` 是来自别的 Mod 的接口，而你希望你的 Mod 不依赖别的 Mod 就能运行，上面这样的写法，一般来说就行不通了。  
+有办法解决这个问题吗？
+让我们再审视一遍需求：“为游戏对象扩展新功能，并允许其他人使用”。也就是说，只要我们能让其他人拿到这些功能对应的接口就可以了。我们能不能这么做：
+
+```java
+if (tile.hasFeature("Something")) {
+    Something sth = tile.getFeature("Something");
+}
+```
+
+这便是 Capability 系统存在的理由：
+将功能转化为可反复使用的零件，用作某一个更大的“实体”（可以是狭义上的实体、TileEntity 甚至是物品）的基础，同时避免过强的耦合。
+
+## `Capability<?>`：Token
+
+上文中我们写下了这么一段代码：
+
+```java
+if (tile.hasFeature("Something")) {
+    Something sth = tile.getFeature("Something");
+}
+```
+
+在 Capability 系统中，它实际上是这样的：
+
+```java
+if (tile.hasCapability(CapabilitySomething.CAP_TOKEN, EnumFacing.EAST)) {
+    Something sth = tile.getCapability(CapabilitySomething.CAP_TOKEN, EnumFacing.EAST);
+}
+```
+
+我们通过一个 `CapabilitySomething.CAP_TOKEN` 来标记我们需要的功能，或者说，这是我们“能力”（“capability”）的标记（token）。
+它的类型是 `Capability<Somthing>`。`Something` 便是实际功能的接口。  
+有了这样一个标记，我们就能从其他地方查询并请求这个功能的接口。这个“其他地方”指的是实现了 `ICapabilityProvider` 的类的实例。
+
+## `ICapabilityProvider`：不同功能的容器
+
+`ICapabilityProvider` 便是各种不同功能的实现整合在一起的结果。
+你可以问它“支持不支持 xxx”（`hasCapability`），也可以问它“要 xxx 功能的接口”（`getCapability`）。  
+在 Forge patch 过若干原版类后，这些原版类实现了 `ICapabilityProvider`，意味着我们可以[通过某种方式](attach-cap.md)给它们追加功能。这些实现了 `ICapabilityProvider` 的类包括但不限于：
+
+  - `TileEntity`
+  - `Entity`
+  - `ItemStack`
+  - `Village`
+  - `World`

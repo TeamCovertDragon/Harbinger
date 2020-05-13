@@ -3,6 +3,8 @@
   "description": "Just Another FMLTutor For Future",
   "author": "https://github.com/TeamCovertDragon/Harbinger/graphs/contributors",
   "plugins": [
+    "-search",
+    "-lunr",
     "katex",
     "splitter",
     "expandable-chapters",
