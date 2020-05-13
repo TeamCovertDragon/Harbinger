@@ -8,6 +8,7 @@
 @Mod.EventBusSubscriber(modid = "my_mod")
 public final class ItemInitializer {
 
+    // 我们一会会用到它。
     public static Item firstItem;
 
     // 和正常的事件一样，你不需要手动调用此方法！Forge 会自动调用它的。
@@ -16,7 +17,9 @@ public final class ItemInitializer {
         // 注意 setRegistryName 调用。
         // 每一个物品都对应唯一一个注册名，用于和其他物品区分开来。这个注册名不能含有大写字母。
         // 此方法返回被注册的 Item 对象。
-        event.getRegistry().register((firstItem = new Item().setRegistryName("my_mod:first_item")));
+        event.getRegistry().registerAll(
+            firstItem = new Item().setRegistryName("my_mod:first_item")
+        );
     }
 }
 ```
@@ -43,12 +46,17 @@ public static final CreativeTabs EXAMPLE_CREATIVE_TAB = new CreativeTabs("exampl
 ```java
 @SubscribeEvent
 public static void registerItem(RegistryEvent.Register<Item> event) {
+
+    public static Item firstItem;
+
     // 注意 setRegistryName 调用。
     // 每一个物品都对应唯一一个注册名，用于和其他物品区分开来。这个注册名不能含有大写字母。
     // 此方法返回被注册的 Item 对象。
-    event.getRegistry().register((firstItem = new Item()
-        .setCreativeTab(EXAMPLE_CREATIVE_TAB)
-        .setRegistryName("my_mod:first_item")));
+    event.getRegistry().registerAll(
+        firstItem = new Item()
+            .setCreativeTab(EXAMPLE_CREATIVE_TAB)
+            .setRegistryName("my_mod:first_item")
+    );
 }
 ```
 
@@ -58,13 +66,18 @@ public static void registerItem(RegistryEvent.Register<Item> event) {
 因为 Minecraft 是个面向全球的游戏，所以这个过程有些复杂，因为我们需要确保使用其他语言的人可以翻译这个物品名称。关于这部分内容的细节可参考[第十三章](../chapter-13/index.md)，这里不作详细说明。
 
 ```java
-public static Item yourItem = new Item()
-    .setCreativeTab(EXAMPLE_CREATIVE_TAB)
-    // 注意此名字和 registry name 不是一个概念。
-    // 这个名字仅用于国际化支持。
-    // 这个方法也返回 Item。
-    .setTranslationKey("my_mod.example_item")
-    .setRegistryName("my_mod", "example_item");
+@SubscribeEvent
+public static void registerItem(RegistryEvent.Register<Item> event) {
+    event.getRegistry().register(
+        firstItem = new Item()
+            .setCreativeTab(EXAMPLE_CREATIVE_TAB)
+            // 注意此名字和 registry name 不是一个概念。
+            // 这个名字仅用于国际化支持。
+            // 这个方法也返回 Item。
+            .setTranslationKey("my_mod.example_item")
+            .setRegistryName("my_mod:first_item")
+    );
+}
 ```
 
 然后，是喜闻乐见的语言文件：
@@ -100,7 +113,7 @@ import net.minecraftforge.client.model.ModelLoader;
 public final class ModelMapper {
     @SubscribeEvent
     public static void onModelReg(ModelRegistryEvent event) {
-        ModelLoader.setCustomModelResourceLocation(yourItem, 0, new ModelResourceLocation(yourItem.getRegistryName(), "inventory"));
+        ModelLoader.setCustomModelResourceLocation(ItemInitializer.firstItem, 0, new ModelResourceLocation(ItemInitializer.firstItem.getRegistryName(), "inventory"));
     }
 }
 ```
