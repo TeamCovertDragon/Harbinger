@@ -8,18 +8,23 @@
 @Mod.EventBusSubscriber(modid = "my_mod")
 public final class ItemInitializer {
 
+    // 我们一会会用到它。
+    public static Item firstItem;
+
     // 和正常的事件一样，你不需要手动调用此方法！Forge 会自动调用它的。
     @SubscribeEvent
     public static void registerItem(RegistryEvent.Register<Item> event) {
         // 注意 setRegistryName 调用。
         // 每一个物品都对应唯一一个注册名，用于和其他物品区分开来。这个注册名不能含有大写字母。
         // 此方法返回被注册的 Item 对象。
-        event.getRegistry().register(new Item().setRegistryName("my_mod:example_item"));
+        event.getRegistry().registerAll(
+            firstItem = new Item().setRegistryName("my_mod:first_item")
+        );
     }
 }
 ```
 
-注意，每一个透过此法注册的物品的实例必须都有调用过 `setRegistryName`，否则会抛异常并导致游戏退出。
+注意，所有 `Item` 在注册时必须都有调用过 `setRegistryName`，否则会抛异常并导致游戏退出。
 
 但是……创造物品栏里没有你的新物品。当然你可以用 `/give <玩家名> <registry name>` 获得你的新物品，但你不觉得显示在创造模式物品栏里更方便么。
 
@@ -34,10 +39,25 @@ public static final CreativeTabs EXAMPLE_CREATIVE_TAB = new CreativeTabs("exampl
         return new ItemStack(Items.DIAMOND);
     }
 };
+```
 
-// 然后这样我们就能让它显示在我们自己的创造标签页中。
-// 这个方法返回 Item。
-public static Item yourItem = new Item().setCreativeTab(EXAMPLE_CREATIVE_TAB);
+然后我们需要对我们的事件订阅器稍加修改，以让我们的物品显示在这个全新的标签页中：
+
+```java
+@SubscribeEvent
+public static void registerItem(RegistryEvent.Register<Item> event) {
+
+    public static Item firstItem;
+
+    // 注意 setRegistryName 调用。
+    // 每一个物品都对应唯一一个注册名，用于和其他物品区分开来。这个注册名不能含有大写字母。
+    // 此方法返回被注册的 Item 对象。
+    event.getRegistry().registerAll(
+        firstItem = new Item()
+            .setCreativeTab(EXAMPLE_CREATIVE_TAB)
+            .setRegistryName("my_mod:first_item")
+    );
+}
 ```
 
 ## 这物品名字不对……
@@ -46,13 +66,18 @@ public static Item yourItem = new Item().setCreativeTab(EXAMPLE_CREATIVE_TAB);
 因为 Minecraft 是个面向全球的游戏，所以这个过程有些复杂，因为我们需要确保使用其他语言的人可以翻译这个物品名称。关于这部分内容的细节可参考[第十三章](../chapter-13/index.md)，这里不作详细说明。
 
 ```java
-public static Item yourItem = new Item()
-    .setCreativeTab(EXAMPLE_CREATIVE_TAB)
-    // 注意此名字和 registry name 不是一个概念。
-    // 这个名字仅用于国际化支持。
-    // 这个方法也返回 Item。
-    .setTranslationKey("my_mod.example_item")
-    .setRegistryName("my_mod", "example_item");
+@SubscribeEvent
+public static void registerItem(RegistryEvent.Register<Item> event) {
+    event.getRegistry().register(
+        firstItem = new Item()
+            .setCreativeTab(EXAMPLE_CREATIVE_TAB)
+            // 注意此名字和 registry name 不是一个概念。
+            // 这个名字仅用于国际化支持。
+            // 这个方法也返回 Item。
+            .setTranslationKey("my_mod.example_item")
+            .setRegistryName("my_mod:first_item")
+    );
+}
 ```
 
 然后，是喜闻乐见的语言文件：
@@ -88,7 +113,7 @@ import net.minecraftforge.client.model.ModelLoader;
 public final class ModelMapper {
     @SubscribeEvent
     public static void onModelReg(ModelRegistryEvent event) {
-        ModelLoader.setCustomModelResourceLocation(yourItem, 0, new ModelResourceLocation(yourItem.getRegistryName(), "inventory"));
+        ModelLoader.setCustomModelResourceLocation(ItemInitializer.firstItem, 0, new ModelResourceLocation(ItemInitializer.firstItem.getRegistryName(), "inventory"));
     }
 }
 ```
