@@ -31,3 +31,19 @@ OBJLoader.addDomain(myModID);
     }
 }
 ```
+
+## `flip-v`
+
+如果你在使用 OBJ 模型时遇到了模型纹理上下颠倒的情况，尝试让 `OBJLoader` 把 V 翻转一下：
+
+```json
+{
+    "forge_marker": 1,
+    "variants": {
+        "normal": {
+            "model": ".../my_model.obj",
+            "custom": { "flip-v": true }
+        }
+    }
+}
+```
