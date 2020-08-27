@@ -1,9 +1,9 @@
-## 依赖于具体情况的物品模型
+# 依赖于具体情况的物品模型
 
 这里讲述的内容只适用于物品模型；方块模型若需要类似的效果，可能需要使用 Forge BlockState V1。  
 原版的物品模型都很简单，绝大多数物品的外貌也都是几个大版本下来都雷打不动的。但 Mod 不一样，很多时候我们都会发现“我们的物品的模型需要随着物品的某一数据的改变而改变”。有没有办法实现这个效果呢。
 
-### 依赖于损害值的物品模型
+## 依赖于损害值的物品模型
 可以说是所有情况中最简单的一种，多见于 meta hack。
 
 ```java
@@ -12,7 +12,7 @@
 ModelLoader.setCustomModelResourceLocation(myItem, 0, targetModelResourceLocation);
 ```
 
-### Property Override
+## Property Override
 
 但不是所有的时候我们都有 metadata 可以用。比如工具，它实际上没有 metadata，但它有耐久。如果我们希望一个工具的耐久会决定其外观该怎么做？最简单的方法就是 Property Override。  
 这是原版物品模型的一个机制，允许物品模型根据一个浮点数（准确地说是一个 `float`）的值来决定该使用什么模型。举个例子，对于有耐久度设定的工具来说，可以考虑这么做：
@@ -73,7 +73,7 @@ public class MyEpicTool extends Item {
 
 尽管如此，它的局限依然很大——比如返回的值必须在 [0, 1] 之间。而且这只是一个 `float`，面对其他不能完美转化的数据它就束手无策了。
 
-### `ItemMeshDefinition`
+## `ItemMeshDefinition`
 
 如果我要依赖的数据是字符串一类的东西该怎么办？是时候让 `ItemMeshDefinition` 登场了。  
 `ItemMeshDefinition` 是一个原版类，允许某个物品只根据 `ItemStack` 提供的信息返回不同的 `ModelResourceLocation`。一个 `ItemStack` 里有什么？物品类型、数量、metadata（或损害值）甚至是 NBT 数据。<!-- 当然还有 Capability 数据，但是这需要后面的章节才会讲到。 -->理论上应该足够满足各种奇怪的需求了。  
@@ -102,6 +102,6 @@ public static void onModelRegistration(ModelRegistryEvent event) {
 }
 ```
 
-### 重新实现 `ItemOverrideList`
+## 重新实现 `ItemOverrideList`
 
 这一手段虽然仍然是基于原版类的，但有鉴于它牵扯到的其他信息，[它有自己的独立章节](../custom-baked/item-override.md)。请直接前往那里获取有关信息。

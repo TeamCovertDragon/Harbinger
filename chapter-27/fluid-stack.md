@@ -22,7 +22,8 @@ int size = anotherFluid.amount;
 
 ## 不寻常的 `equals`
 
-`FluidStack` 覆写了 `Object.equals` 方法，但它只比较 `Fluid` 和 NBT 数据，不比较数量。[但出于某个未知原因][ref-1]，`FluidStack` 覆写的 `Object.hashCode` 方法中，代表流体数量的 `FluidStack.amount` 字段也参与了散列码的计算。
+`FluidStack` 覆写了 `Object.equals` 和 `Object.hashCode` 方法，但这两个方法只比较 `Fluid` 和 NBT 数据，不比较数量。换言之，`FluidStack` 本身可用作 `HashMap` 的键，这个键相当于 `Fluid` 和 `NBTTagCompound` 组成的二元组。  
+需要比较数量的话，可以使用 `FluidStack#isFluidStackIdentical` 这个方法。  
+另外，`FluidStack` 覆写的 `Object.equals` 实际上是代理给了 `FluidStack.isFluidEqual`。
 
-
-[ref-1]: https://github.com/MinecraftForge/MinecraftForge/pull/5272
+<!-- 在...版本之前 FluidStack.hashCode 的实现并不正确，详见 https://github.com/MinecraftForge/MinecraftForge/pull/5272 -->
