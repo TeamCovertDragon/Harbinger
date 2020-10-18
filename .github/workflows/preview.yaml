@@ -1,0 +1,32 @@
+name: build-preview
+on: 
+  pull-request:
+    types: synchronize
+    branch:
+      - bleeding
+    paths-ignore:
+      - '.github/**'
+      - '.gitignore'
+      - 'LICENSE'
+jobs:
+  preview:
+    name: 'Build Preview'
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v2
+      - name: Install GitBook CLI
+        run: npm install -g gitbook-cli
+      - name: Build Pages
+        run: gitbook install --log=warn && gitbook build --log=warn 
+      - name: Upload Pages
+        env:
+          PR_NUMBER: ${{ github.event.number }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.S3_ACCESS }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.S3_SECRET }}
+        run: aws --endpoint-url='https://eu-central-1.linodeobjects.com' s3 sync ./_book/ s3://preview.harbinger.covertdragon.team/$PR_NUMBER/ --acl public-read --delete --only-show-errors
+      - name: Ensure Website Config
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.S3_ACCESS }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.S3_SECRET }}
+        run: aws --endpoint-url='https://eu-central-1.linodeobjects.com' s3 website s3://preview.harbinger.covertdragon.team/
