@@ -29,4 +29,4 @@ jobs:
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.S3_ACCESS }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.S3_SECRET }}
-        run: aws --endpoint-url='https://eu-central-1.linodeobjects.com' s3 website s3://preview.harbinger.covertdragon.team/
+        run: aws --endpoint-url='https://eu-central-1.linodeobjects.com' s3 website s3://preview.harbinger.covertdragon.team/ --index-document index.html
