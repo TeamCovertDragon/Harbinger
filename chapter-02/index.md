@@ -54,6 +54,16 @@ $ ./gradlew genIntellijRuns
 运行完之后你便能在 "Run…" 中找到名为“Minecraft Client”和“Minecraft Server”的配置了。  
 注意：这个 task 必须在项目已经导入进 IDEA 之后运行！<black>你以为刚才比 Eclipse 用户少打一行就算完了吗（笑）</black>
 
+如果你在用 IDEA 14 之后的版本~这之前的版本不会有人在用了吧~，你还需要在 `build.gradle` 添加以下内容来让 GradleStart 识别到 IDEA 新的资源文件存放目录。
+
+```groovy
+sourceSets {
+    main {
+        output.resourcesDir = output.classesDir
+    }
+}
+```
+
 ## 入口类
 
 和一般的教程不一样，这里的写法有些特殊：
