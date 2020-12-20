@@ -44,11 +44,10 @@ public static final CreativeTabs EXAMPLE_CREATIVE_TAB = new CreativeTabs("exampl
 然后我们需要对我们的事件订阅器稍加修改，以让我们的物品显示在这个全新的标签页中：
 
 ```java
+public static Item firstItem;
+
 @SubscribeEvent
 public static void registerItem(RegistryEvent.Register<Item> event) {
-
-    public static Item firstItem;
-
     // 注意 setRegistryName 调用。
     // 每一个物品都对应唯一一个注册名，用于和其他物品区分开来。这个注册名不能含有大写字母。
     // 此方法返回被注册的 Item 对象。
