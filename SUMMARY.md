@@ -199,6 +199,7 @@
   * [40.5 问题 5](chapter-40/practice-5.md)
   * [40.6 问题 6](chapter-40/practice-6.md)
   * [40.7 问题 7](chapter-40/practice-7.md)
+  * [40.7 问题 8](chapter-40/practice-8.md)
 
 ### 后记
 
