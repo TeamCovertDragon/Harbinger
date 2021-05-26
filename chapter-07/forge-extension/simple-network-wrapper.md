@@ -82,7 +82,7 @@ public class MessageFoo implements IMessage {
     // 理论上，如果不需要发送回执包作为应答，则第二个泛参保留 IMessage 并实际上返回 null，
     ///否则应填入对应的类型。
     // 但实际上，若处理数据的过程需要操作游戏主线程上的对象，这里的回执包是无法正确工作的，
-    // 此时只能使用 IMessage 并返回 null。
+    // 所以，在这里你实际上只能使用 IMessage 并返回 null。
     // 参考：https://github.com/MinecraftForge/MinecraftForge/issues/4231
     public static class MessageFooHandler implements implements IMessageHandler<MessageFoo, IMessage> {
         @Override
@@ -95,7 +95,7 @@ public class MessageFoo implements IMessage {
 }
 ```
 
-最后，回到刚才的`MySimpleNetworkHandler`，给它加个构造器：
+最后，回到刚才的 `MySimpleNetworkHandler`，给它加个构造器：
 
 ```java
 private MySimpleNetworkHandler() {
@@ -110,5 +110,8 @@ private MySimpleNetworkHandler() {
 就可以用了。用法如下：
 
 ```java
-// 待补全
+// 第一个参数是要发送的包，第二个参数是收包的玩家。
+// 对于 sendMessageToAll，收包的是所有玩家：所有玩家的客户端都会各自收到一样的包并处理。
+// 对于 sendMessageToServer，收包的不是玩家，而是服务器。
+MySimpleNetworkHandler.INSTANCE.sendMessageToPlayer(new MessageFoo(…), player);
 ```
