@@ -2,6 +2,8 @@
 
 ForgeGradle 是 Forge 开发团队推出的 Gradle 插件，主要用途就是简化基于 MCP+Forge 的 Minecraft Mod 开发的流程。
 
+如果你还不知道 Gradle 是什么，[可以考虑先读一下这个](../chapter-32/index.md)。
+
 ## 为什么？
 
 思考一下 Mod 开发和发布的流程。通常的情况下，玩家面对的 Minecraft 使用的是混淆名，但是开发者在开发 Mod 时不太可能硬啃混淆名，而是使用某种形式的反混淆名（比如 MCP）。这样一来，当开发者编译 Mod 时，编译器是基于反混淆后的代码，而非玩家实际上使用的混淆代码进行编译的。如此一来，如果不先把 Mod 所引用的 Minecraft 底层代码混淆回去，Mod 是肯定无法运行的。同样的，为了方便开发 Mod，首先你要对 Minecraft 进行反混淆。
