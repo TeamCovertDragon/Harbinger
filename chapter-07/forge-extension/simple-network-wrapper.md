@@ -84,7 +84,7 @@ public class MessageFoo implements IMessage {
     // 但实际上，若处理数据的过程需要操作游戏主线程上的对象，这里的回执包是无法正确工作的，
     // 所以，在这里你实际上只能使用 IMessage 并返回 null。
     // 参考：https://github.com/MinecraftForge/MinecraftForge/issues/4231
-    public static class MessageFooHandler implements implements IMessageHandler<MessageFoo, IMessage> {
+    public static class MessageFooHandler implements IMessageHandler<MessageFoo, IMessage> {
         @Override
         public IMessage onMessage(MessageFoo myFoo , MessageContext ctx) {
             // 此时 MessageFoo 里的数据已经经过 fromBytes 处理并展开，可以直接使用。
