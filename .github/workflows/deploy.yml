@@ -6,7 +6,7 @@ on:
       - 'preface/**'
       - 'SUMMARY.md'
       - 'README.md'
-  workflow-dispatch:
+  workflow_dispatch:
 jobs:
   deploy:
     name: Deploy
