@@ -7,6 +7,15 @@
 
 此外，参考其他 Mod 的源码之前，请务必留意你要参考的项目的许可证——如果你决定复制粘贴，这些许可证便有影响你的项目的可能！
 
+## TeaCon 2020 先锋奖前三名
+
+<!-- 说实话我觉得这个结果挺 controversial 的…… -->
+
+  - 烹饪锅（CrockPot）：https://github.com/SihenZhang/CrockPot
+  - 华夏工艺（SinoCraft）：https://github.com/SinoCraftProject/SinoSeries
+    - 旧仓库位于 https://github.com/SinoCraftProject/SinoCraft-Legacy
+  - RPGMaths：https://github.com/ChloePrime/RpgMaths
+
 ## 那些历史<!-- 相对 -->悠久的 Mod 的源码
 
   - Charset：https://github.com/CharsetMC/Charset
@@ -26,7 +35,7 @@
     - 劣势
       - 有时候方法体会非常长，导致可读性略微下降
       - 自定义授权，可能对有许可方面要求的用户不甚友好
-  - JEI（Just Enough Items)：https://github.com/mezz/JustEnoughItems
+  - JEI（Just Enough Items）：https://github.com/mezz/JustEnoughItems
     - 可参考的内容
       - 简单干净的物品管理器界面 Overlay 实现
       - API 的架构
