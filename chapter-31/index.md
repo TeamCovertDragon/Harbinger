@@ -11,6 +11,8 @@
 
 <!-- 说实话我觉得这个结果挺 controversial 的…… -->
 
+需要注意的是，这些模组的源码并不适用于 1.12.2，所以并不能直接照抄。请根据实际情况改写。
+
   - 烹饪锅（CrockPot）：https://github.com/SihenZhang/CrockPot
   - 华夏工艺（SinoCraft）：https://github.com/SinoCraftProject/SinoSeries
     - 旧仓库位于 https://github.com/SinoCraftProject/SinoCraft-Legacy
