@@ -21,6 +21,7 @@ jobs:
       - name: Build GitBook
         shell: bash
         run: |
+          npm install -g gitbook-cli
           gitbook install .
           gitbook build .
       - name: Setup Modern Node.js
