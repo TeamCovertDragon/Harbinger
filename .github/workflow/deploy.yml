@@ -1,0 +1,36 @@
+name: Deploy Pages
+on: 
+  push:
+    paths:
+      - 'chapter*/**'
+      - 'preface/**'
+      - 'SUMMARY.md'
+      - 'README.md'
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Setup Legacy Node.js
+        uses: actions/setup-node
+        with:
+          node-version: 10
+      - name: Build GitBook
+        shell: bash
+        run: |
+          gitbook install .
+          gitbook build .
+      - name: Setup Modern Node.js
+        uses: actions/setup-node
+        with:
+          node-version: current
+      - name: Get Wrangler
+        shell: bash
+        run: npm install wrangler --save-dev
+      - name: Publish
+        shell: bash
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CF_TOKEN }}
+        run: npx wrangler pages deploy _book/ --project-name tcd-harbinger
