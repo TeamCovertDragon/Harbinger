@@ -87,7 +87,7 @@
     * [14.1.1 文本输入](chapter-14/widget/text-field.md)
     * [14.1.2 按钮](chapter-14/widget/button.md)
     * [14.1.3 列表](chapter-14/widget/list.md)
-  * [14.2 游戏主界面与 HUD](chapter-14/main-screem/index.md)
+  * [14.2 游戏主界面与 HUD](chapter-14/main-screen/index.md)
   * [14.3 Toast](chapter-14/toast/index.md)
   * [14.4 `Container` 与数据同步](chapter-14/container.md)
 * [15. 音效控制](chapter-15/index.md)
