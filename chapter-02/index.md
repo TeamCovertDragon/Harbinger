@@ -26,6 +26,8 @@
     * 其他 IDE：不好意思你需要找对应的 Gradle 插件来解决问题，请查阅相关资料获得更多帮助。在这里的话就什么也不用加好了。
   6. 回车运行。若看到 `BUILD SUCCESSFUL` 字样则表示大功告成，否则重复步骤 3. 和 4.，直到看到那个 `BUILD SUCCESSFUL` 为止。
   7. 在你使用的 IDE 中以 Gradle 项目的形式导入工程目录。
+  8. 附注：
+    - 在1.12.2的新版本forge里（如`1.12.2-14.23.5.2854`） 已经不再使用 `setupDecompWorkspace` 等task构建环境。[新版构建方法](../chapter-02/newgenway.html)
 
 [ref-forge-home]: https://files.minecraftforge.net/
 
