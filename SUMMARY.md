@@ -180,7 +180,19 @@
 ### 附录
 
 * [31. 附录 I：相关开发资源](chapter-31/index.md)
-* [32. 附录 II：？？？](chapter-32/index.md)
+* [32. 附录 II：Gradle](chapter-32/index.md)
+  * [依赖管理](chapter-32/dependencies/index.md)
+    * [CurseMaven](chapter-32/dependencies/curse.md)
+    * [`mavenLocal()`](chapter-32/dependencies/local.md)
+  * 自动化
+    * 读取配置文件
+    * 自动生成 `MANIFEST.MF`
+  * 信息安全
+    * Jar 签名
+  * 构建与发布
+    * Shadow/Shade
+    * `publishToMavenLocal` 任务
+    * CurseGradle
 * [33. 附录 III：？？？](chapter-33/index.md)
 * [34. 附录 IV：？？？](chapter-34/index.md)
 * [35. 附录 V：？？？](chapter-35/index.md)
